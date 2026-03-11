@@ -1,0 +1,11 @@
+.env
+*.log
+bin/
+dist/
+coverage.out
+.vscode/
+.idea/
+.codex-temp/
+
+.cache/
+.docker-local/

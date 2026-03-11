@@ -1,0 +1,45 @@
+﻿name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+      - hotfix/**
+      - codex/**
+  pull_request:
+
+jobs:
+  api-test-build:
+    name: API Test and Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+
+      - name: Download deps
+        run: go mod download
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Build
+        run: go build ./...
+
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build api image
+        run: docker build -f apps/api/Dockerfile -t novascans-api:ci .
