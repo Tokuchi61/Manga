@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/go-chi/chi/v5"
 	chiMiddleware "github.com/go-chi/chi/v5/middleware"
@@ -13,18 +14,30 @@ import (
 	"go.uber.org/zap"
 )
 
-func newRouter(cfg config.Config, logger *zap.Logger, pool *pgxpool.Pool) http.Handler {
+func NewHTTPHandler(cfg config.Config, logger *zap.Logger, pool *pgxpool.Pool, registry *modules.Registry) http.Handler {
+	if logger == nil {
+		logger = zap.NewNop()
+	}
+	if registry == nil {
+		registry = modules.EmptyRegistry()
+	}
+
 	r := chi.NewRouter()
 	r.Use(chiMiddleware.RequestID)
 	r.Use(chiMiddleware.RealIP)
 	r.Use(chiMiddleware.Recoverer)
 	r.Use(requestLoggingMiddleware(logger))
 
+	registerCoreRoutes(r, cfg, pool)
+	registry.MountRoutes(r)
+
+	return r
+}
+
+func registerCoreRoutes(r chi.Router, cfg config.Config, pool *pgxpool.Pool) {
 	r.Get("/health", healthHandler())
 	r.Get("/ready", readyHandler(pool))
 	r.Get("/version", versionHandler(cfg.AppVersion))
-
-	return r
 }
 
 func requestLoggingMiddleware(logger *zap.Logger) func(http.Handler) http.Handler {

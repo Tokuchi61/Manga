@@ -1,14 +1,28 @@
-# NovaScans
+﻿# NovaScans
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 0 - Temel Standartlar Baslangic` kapsaminda kurulum omurgasini icerir.
+Bu repo su anda `Asama 2 - Cekirdek Urun Hazirligi` kapsaminda shared canonical sozluk ve policy omurgasini icerir.
+
+## Canonical Versiyon
+
+- Canonical versiyon kaynagi: `VERSION`
+- Runtime versiyon kaynagi: `APP_VERSION` environment variable
+- Su anki surum: `0.2.0-alpha.1`
 
 ## Dizin Yapisi
 
 ```text
 /apps/
   /api/
+    /cmd/
+    /internal/
+      /app/
+      /platform/
+      /shared/
+      /modules/
+    /migrations/
+    /tests/
   /web/
 /docs/
 /scripts/
@@ -17,6 +31,29 @@ Bu repo su anda `Asama 0 - Temel Standartlar Baslangic` kapsaminda kurulum omurg
 README.md
 Makefile
 .env.example
+VERSION
+```
+
+## API Mimari Katmanlar
+
+- `apps/api/internal/app`: bootstrap, composition root ve merkezi route mount
+- `apps/api/internal/platform`: config, db, logger ve teknik altyapi kodlari
+- `apps/api/internal/shared`: domain-agnostic ortak yapilar
+- `apps/api/internal/modules`: leaf moduller ve module registry kontrati
+
+## Asama 2 Shared Paketleri
+
+- `apps/api/internal/shared/catalog`: canonical enum ve sozluk kayitlari
+- `apps/api/internal/shared/policy`: transaction, outbox, projection, stack ve operasyon policy kayitlari
+- `apps/api/internal/shared/settings`: runtime settings sozlugu, key grameri ve yorumlama modeli
+
+## Modul Iskeleti
+
+Yeni bir leaf modul iskeleti olusturmak icin:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName auth
+powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName manga -DomainGroup content
 ```
 
 ## Dokumantasyon
@@ -49,3 +86,4 @@ go build ./...
 
 - SemVer kullanilir.
 - Runtime versiyonu `APP_VERSION` env degiskeninden okunur.
+- `APP_VERSION` degeri kod icinde hardcode edilmez.
