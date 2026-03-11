@@ -1,12 +1,22 @@
 # Setup
 
-Bu dokuman proje kurulumunu Asama 0 omurgasina gore tanimlar.
+Bu dokuman proje kurulumunu Asama 0 ve Asama 1 omurgasina gore tanimlar.
 
 ## Gereksinimler
 
 - Go 1.26
 - Docker ve Docker Compose
 - (Opsiyonel) `migrate` CLI
+
+## Versiyon Hazirligi
+
+- Canonical versiyon dosyasi: `VERSION`
+- Runtime icin `APP_VERSION` env degeri gerekir.
+- PowerShell icin ornek:
+
+```powershell
+$env:APP_VERSION = (Get-Content VERSION -Raw).Trim()
+```
 
 ## Ortam Degiskenleri
 
@@ -29,3 +39,12 @@ Bu dokuman proje kurulumunu Asama 0 omurgasina gore tanimlar.
 
 - Up: `migrate -path apps/api/migrations -database "$DB_MAIN_DSN" up`
 - Down: `migrate -path apps/api/migrations -database "$DB_MAIN_DSN" down 1`
+
+## Modul Iskeleti Uretimi (Asama 1)
+
+Yeni bir module klasor omurgasi acmak icin:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName auth
+powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName chapter -DomainGroup content
+```

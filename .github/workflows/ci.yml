@@ -1,4 +1,4 @@
-﻿name: ci
+name: ci
 
 on:
   push:
@@ -24,6 +24,9 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.26'
+
+      - name: Export APP_VERSION
+        run: echo "APP_VERSION=$(cat ../../VERSION)" >> $GITHUB_ENV
 
       - name: Download deps
         run: go mod download

@@ -12,7 +12,7 @@ import (
 type Config struct {
 	Env                 string        `env:"APP_ENV" envDefault:"local"`
 	Port                int           `env:"APP_PORT" envDefault:"8080"`
-	AppVersion          string        `env:"APP_VERSION" envDefault:"0.1.0-alpha.0"`
+	AppVersion          string        `env:"APP_VERSION,required"`
 	DBMainDSN           string        `env:"DB_MAIN_DSN,required"`
 	DBTestDSN           string        `env:"DB_TEST_DSN,required"`
 	DBMaxConns          int32         `env:"DB_MAX_CONNS" envDefault:"10"`
@@ -24,6 +24,10 @@ func Load() (Config, error) {
 	var cfg Config
 	if err := env.Parse(&cfg); err != nil {
 		return Config{}, err
+	}
+
+	if strings.TrimSpace(cfg.AppVersion) == "" {
+		return Config{}, fmt.Errorf("APP_VERSION cannot be empty")
 	}
 
 	if strings.TrimSpace(cfg.DBMainDSN) == "" {
