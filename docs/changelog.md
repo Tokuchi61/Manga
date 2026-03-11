@@ -1,12 +1,52 @@
-# Changelog
+﻿# Changelog
 
 Bu dosya yalnizca projede gercekte yapilan islemleri kaydeder.
 Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.2.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 2` kapsaminda `apps/api/internal/shared/catalog` paketi eklendi ve canonical sozlukler kod seviyesinde sabitlendi:
+  - audit event types
+  - moderation case/assignment/action durumlari
+  - notification categories
+  - policy effects
+  - purchase source ve reward source tipleri
+  - support status ve reply visibility
+  - target types
+  - visibility states
+- `apps/api/internal/shared/policy` paketi eklendi:
+  - request/correlation izleme alanlari
+  - rate-limit surface kayitlari
+  - outbox zorunlu bilesenleri ve mesaj alanlari
+  - canonical projection kayitlari
+  - technical stack, cache/queue, media/reporting/search karar kayitlari
+  - transaction boundary referans akislari
+- `apps/api/internal/shared/settings` paketi eklendi:
+  - audience/scope/disabled behavior/error/entitlement sozlukleri
+  - settings kayit semasi modeli
+  - access yorumlama sirasi ve kill-switch seviyeleri
+  - key grammar validator yardimcilari
+- Asama 2 icin yeni test katmani eklendi:
+  - unit: `internal/shared/*`
+  - contract: `apps/api/tests/contract/shared_catalog_contract_test.go`
+  - integration: `apps/api/tests/integration/shared_policy_integration_test.go`
+
 ### Changed
-- Versiyonlama akisi `VERSION` + `APP_VERSION` tek kaynak prensibi ile hizalandi.
+- `apps/api/internal/shared/README.md` Asama 2 paketlerini dokumante edecek sekilde guncellendi.
+- `README.md` proje kapsam metni Asama 2 seviyesine cekildi.
+- `docs/upgrade.md` durum tablosunda Asama 2 tamamlandi olarak isaretlendi.
+
+### Docs
+- Shared kararlarin kod karsiliklari changelog ve README uzerinden izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 2 canonical shared sozluk/policy/settings omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `shared`, `tests/contract`, `tests/integration`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: Yok.
 
 ## [0.1.0-alpha.1] - 2026-03-12
 

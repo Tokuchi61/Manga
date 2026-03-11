@@ -1,14 +1,14 @@
-# NovaScans
+﻿# NovaScans
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 1 - Mimari Omurga ve Sinirlar` kapsaminda backend katman sinirlarini netlestiren omurgayi icerir.
+Bu repo su anda `Asama 2 - Cekirdek Urun Hazirligi` kapsaminda shared canonical sozluk ve policy omurgasini icerir.
 
 ## Canonical Versiyon
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.1.0-alpha.1`
+- Su anki surum: `0.2.0-alpha.1`
 
 ## Dizin Yapisi
 
@@ -40,6 +40,12 @@ VERSION
 - `apps/api/internal/platform`: config, db, logger ve teknik altyapi kodlari
 - `apps/api/internal/shared`: domain-agnostic ortak yapilar
 - `apps/api/internal/modules`: leaf moduller ve module registry kontrati
+
+## Asama 2 Shared Paketleri
+
+- `apps/api/internal/shared/catalog`: canonical enum ve sozluk kayitlari
+- `apps/api/internal/shared/policy`: transaction, outbox, projection, stack ve operasyon policy kayitlari
+- `apps/api/internal/shared/settings`: runtime settings sozlugu, key grameri ve yorumlama modeli
 
 ## Modul Iskeleti
 
