@@ -4,6 +4,12 @@ NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
 Bu repo su anda `Asama 1 - Mimari Omurga ve Sinirlar` kapsaminda backend katman sinirlarini netlestiren omurgayi icerir.
 
+## Canonical Versiyon
+
+- Canonical versiyon kaynagi: `VERSION`
+- Runtime versiyon kaynagi: `APP_VERSION` environment variable
+- Su anki surum: `0.1.0-alpha.1`
+
 ## Dizin Yapisi
 
 ```text
@@ -25,6 +31,7 @@ Bu repo su anda `Asama 1 - Mimari Omurga ve Sinirlar` kapsaminda backend katman 
 README.md
 Makefile
 .env.example
+VERSION
 ```
 
 ## API Mimari Katmanlar
@@ -73,3 +80,4 @@ go build ./...
 
 - SemVer kullanilir.
 - Runtime versiyonu `APP_VERSION` env degiskeninden okunur.
+- `APP_VERSION` degeri kod icinde hardcode edilmez.

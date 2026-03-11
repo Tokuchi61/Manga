@@ -27,7 +27,7 @@ services:
     environment:
       APP_ENV: local
       APP_PORT: 8080
-      APP_VERSION: ${APP_VERSION:-0.1.0-alpha.0}
+      APP_VERSION: ${APP_VERSION:?APP_VERSION is required}
       DB_MAIN_DSN: postgres://postgres:postgres@db:5432/manga?sslmode=disable
       DB_TEST_DSN: postgres://postgres:postgres@db:5432/manga_test?sslmode=disable
       DB_MAX_CONNS: 10
@@ -41,4 +41,3 @@ services:
 
 volumes:
   postgres_data:
-

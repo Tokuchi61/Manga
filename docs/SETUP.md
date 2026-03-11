@@ -8,6 +8,16 @@ Bu dokuman proje kurulumunu Asama 0 ve Asama 1 omurgasina gore tanimlar.
 - Docker ve Docker Compose
 - (Opsiyonel) `migrate` CLI
 
+## Versiyon Hazirligi
+
+- Canonical versiyon dosyasi: `VERSION`
+- Runtime icin `APP_VERSION` env degeri gerekir.
+- PowerShell icin ornek:
+
+```powershell
+$env:APP_VERSION = (Get-Content VERSION -Raw).Trim()
+```
+
 ## Ortam Degiskenleri
 
 1. `cp .env.example .env`
