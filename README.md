@@ -2,13 +2,21 @@
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 0 - Temel Standartlar Baslangic` kapsaminda kurulum omurgasini icerir.
+Bu repo su anda `Asama 1 - Mimari Omurga ve Sinirlar` kapsaminda backend katman sinirlarini netlestiren omurgayi icerir.
 
 ## Dizin Yapisi
 
 ```text
 /apps/
   /api/
+    /cmd/
+    /internal/
+      /app/
+      /platform/
+      /shared/
+      /modules/
+    /migrations/
+    /tests/
   /web/
 /docs/
 /scripts/
@@ -17,6 +25,22 @@ Bu repo su anda `Asama 0 - Temel Standartlar Baslangic` kapsaminda kurulum omurg
 README.md
 Makefile
 .env.example
+```
+
+## API Mimari Katmanlar
+
+- `apps/api/internal/app`: bootstrap, composition root ve merkezi route mount
+- `apps/api/internal/platform`: config, db, logger ve teknik altyapi kodlari
+- `apps/api/internal/shared`: domain-agnostic ortak yapilar
+- `apps/api/internal/modules`: leaf moduller ve module registry kontrati
+
+## Modul Iskeleti
+
+Yeni bir leaf modul iskeleti olusturmak icin:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName auth
+powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName manga -DomainGroup content
 ```
 
 ## Dokumantasyon

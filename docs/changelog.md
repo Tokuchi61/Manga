@@ -15,6 +15,11 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Temel script seti eklendi: build, test, docker up/down, migration up/down.
 - CI workflow ve PR template omurgasi eklendi.
 - `README.md`, `Makefile`, `.env.example`, `docs/SETUP.md` ve `docs/TESTING.md` eklendi.
+- `Asama 1` kapsaminda `internal/modules` icin merkezi `Module` kontrati ve registry omurgasi eklendi.
+- App bootstrap katmaninda merkezi module route mount akisi eklendi (`NewHTTPHandler` + registry mount).
+- `apps/api/tests/contract` ve `apps/api/tests/integration` altinda Asama 1 test katmanlari eklendi.
+- Yeni module iskeleti acmak icin `scripts/scaffold_module.ps1` eklendi.
+- `internal/app`, `internal/platform`, `internal/shared`, `internal/modules` klasorleri icin katman siniri README dosyalari eklendi.
 
 ### Changed
 - Ana dokumantasyon dosyalari canonical yapiya alinip `docs/` altina tasindi:
@@ -23,6 +28,7 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
   - `docs/changelog.md`
   - `docs/modules.md`
   - `docs/shared.md`
+- `README.md`, `docs/SETUP.md` ve `docs/TESTING.md` Asama 1 mimari omurga kapsamiyla hizalandi.
 
 ### Docs
 - `docs/issues.md` ve `docs/upgrade.md` olusturuldu.

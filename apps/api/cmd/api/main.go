@@ -7,6 +7,7 @@ import (
 	"syscall"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
+	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/db"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/logger"
@@ -36,7 +37,9 @@ func main() {
 	}
 	defer pool.Close()
 
-	srv := app.New(cfg, log, pool)
+	registry := modules.EmptyRegistry()
+
+	srv := app.New(cfg, log, pool, registry)
 	if err := srv.Run(ctx); err != nil {
 		log.Fatal("server stopped with error", zap.Error(err))
 	}
