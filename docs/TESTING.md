@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-6 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-7 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -53,3 +53,14 @@ Bu dokuman test katmanlarini ve Asama 0-6 dogrulama adimlarini listeler.
 - Policy create/update davranislarinda conflict kontrolu ve precedence yorumunun dogrulanmasi
 - Guest/authenticated/vip/blocked ayrimlari ile own/any decision matrix senaryolarinin dogrulanmasi
 - Access migration smoke kontrolu (`202603120004_access_create_core_tables`)
+
+## Asama 7 Manga Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/manga/...`
+- `cd apps/api && go test ./tests/contract -run Manga`
+- `cd apps/api && go test ./tests/integration -run Manga`
+- Manga create/update/list/detail akislarinin ve search/filter/sort davranisinin dogrulanmasi
+- Publish/archive/unpublish/schedule lifecycle akislari ile visibility daraltma davranisinin dogrulanmasi
+- Discovery/editorial (featured/recommended/collection) ve counter sync (chapter/comment/view) dogrulamalarinin yapilmasi
+- Soft delete/restore davranisi ile public detail/list gorunurlugunun dogrulanmasi
+- Manga migration smoke kontrolu (`202603120005_manga_create_core_tables`)
