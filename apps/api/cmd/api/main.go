@@ -10,6 +10,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	accessmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/access"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
+	chaptermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter"
 	mangamodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/manga"
 	usermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/user"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
@@ -49,8 +50,9 @@ func main() {
 	user := usermodule.New()
 	access := accessmodule.New(accessmodule.RuntimeConfig{})
 	manga := mangamodule.New()
+	chapter := chaptermodule.New()
 
-	registry, err := modules.NewRegistry(auth, user, access, manga)
+	registry, err := modules.NewRegistry(auth, user, access, manga, chapter)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}

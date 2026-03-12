@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-7 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-8 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -64,3 +64,15 @@ Bu dokuman test katmanlarini ve Asama 0-7 dogrulama adimlarini listeler.
 - Discovery/editorial (featured/recommended/collection) ve counter sync (chapter/comment/view) dogrulamalarinin yapilmasi
 - Soft delete/restore davranisi ile public detail/list gorunurlugunun dogrulanmasi
 - Manga migration smoke kontrolu (`202603120005_manga_create_core_tables`)
+
+## Asama 8 Chapter Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/chapter/...`
+- `cd apps/api && go test ./tests/contract -run Chapter`
+- `cd apps/api && go test ./tests/integration -run Chapter`
+- Chapter create/update/list/detail/read/navigation akislarinin dogrulanmasi
+- Preview, early access penceresi ve fallback access alanlarinin dogrulanmasi
+- Media health ve integrity state guncellemelerinin dogrulanmasi
+- Soft delete/restore ve publish lifecycle gecislerinin dogrulanmasi
+- `chapter -> history` resume anchor ve read signal kontratinin dogrulanmasi
+- Chapter migration smoke kontrolu (`202603120006_chapter_create_core_tables`)
