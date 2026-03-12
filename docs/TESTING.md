@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-5 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-6 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -43,3 +43,13 @@ Bu dokuman test katmanlarini ve Asama 0-5 dogrulama adimlarini listeler.
 - History visibility preference ust sinir (global deny) davranisinin dogrulanmasi
 - Account state (deactivated/banned) ve VIP lifecycle (activate/freeze/resume/deactivate) senaryolarinin dogrulanmasi
 - User migration smoke kontrolu (`202603120003_user_create_core_tables`)
+
+## Asama 6 Access Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/access/...`
+- `cd apps/api && go test ./tests/contract -run Access`
+- `cd apps/api && go test ./tests/integration -run Access`
+- Role/permission tanimlari, role-permission baglama ve user-role assignment akislarinin dogrulanmasi
+- Policy create/update davranislarinda conflict kontrolu ve precedence yorumunun dogrulanmasi
+- Guest/authenticated/vip/blocked ayrimlari ile own/any decision matrix senaryolarinin dogrulanmasi
+- Access migration smoke kontrolu (`202603120004_access_create_core_tables`)

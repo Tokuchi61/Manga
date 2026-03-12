@@ -8,6 +8,7 @@ import (
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
+	accessmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/access"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	usermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/user"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
@@ -45,8 +46,9 @@ func main() {
 		VerificationResendCooldownSeconds: cfg.AuthEmailVerificationResendCooldownSeconds,
 	})
 	user := usermodule.New()
+	access := accessmodule.New(accessmodule.RuntimeConfig{})
 
-	registry, err := modules.NewRegistry(auth, user)
+	registry, err := modules.NewRegistry(auth, user, access)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}

@@ -5,6 +5,63 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.6.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 6` kapsaminda canonical `access` modulu eklendi: `apps/api/internal/modules/access`.
+- Access owner akis omurgasi eklendi:
+  - role create/list
+  - permission create/list
+  - role-permission assignment
+  - user-role assignment (sureli atama dahil)
+  - temporary grant create/revoke
+  - policy create/list ve conflict kontrolu
+  - evaluate endpoint'i ile final allow/deny karar katmani
+- `access` modul kontrat yuzeyi eklendi: `apps/api/internal/modules/access/contract/access_contract.go`.
+- Access event sabitleri eklendi: `apps/api/internal/modules/access/events/events.go`.
+- In-memory access repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/access/repository/memory_store.go`
+  - `apps/api/internal/modules/access/repository/access_role_repository.go`
+  - `apps/api/internal/modules/access/repository/access_permission_repository.go`
+  - `apps/api/internal/modules/access/repository/access_assignment_repository.go`
+  - `apps/api/internal/modules/access/repository/access_policy_repository.go`
+  - `apps/api/internal/modules/access/repository/memory_store_test.go`
+- Access service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/access/service/access_role_service.go`
+  - `apps/api/internal/modules/access/service/access_permission_service.go`
+  - `apps/api/internal/modules/access/service/access_assignment_service.go`
+  - `apps/api/internal/modules/access/service/access_policy_service.go`
+  - `apps/api/internal/modules/access/service/access_evaluate_service.go`
+  - `apps/api/internal/modules/access/service/service_test.go`
+- Access HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/access/handler/*`
+  - `apps/api/internal/modules/access/routes.go`
+- Access migration cifti eklendi:
+  - `apps/api/migrations/202603120004_access_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120004_access_create_core_tables.down.sql`
+- Access stage testleri eklendi:
+  - contract: `apps/api/tests/contract/access_authorization_contract_test.go`
+  - integration: `apps/api/tests/integration/access_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/access_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta access module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- `docs/modules.md` modul envanterinde `access` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 6 ile hizalandi.
+- Access modulu katmanlari coklu akis tasiyan tek dosyalari onleyecek sekilde islem bazli parcalandi (`routes.go` tek giris noktasi olarak korunarak).
+
+### Fixed
+- Yok.
+
+### Docs
+- Asama 6 access omurgasi ve versiyonlama guncellemeleri changelog ile izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 6 merkezi authorization/policy/degerlendirme omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `access`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120004_access_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.5.1-alpha.1] - 2026-03-12
 
 ### Changed
@@ -276,6 +333,10 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
+
+
+
 
 
 
