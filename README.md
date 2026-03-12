@@ -2,13 +2,13 @@
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 2 - Cekirdek Urun Hazirligi` kapsaminda shared canonical sozluk ve policy omurgasini icerir.
+Bu repo su anda `Asama 3 - Genisleme ve Olceklenme Hazirligi` kapsaminda shared olceklenme policy omurgasini icerir.
 
 ## Canonical Versiyon
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.2.0-alpha.1`
+- Su anki surum: `0.3.0-alpha.1`
 
 ## Dizin Yapisi
 
@@ -41,11 +41,15 @@ VERSION
 - `apps/api/internal/shared`: domain-agnostic ortak yapilar
 - `apps/api/internal/modules`: leaf moduller ve module registry kontrati
 
-## Asama 2 Shared Paketleri
+## Asama 2-3 Shared Paketleri
 
 - `apps/api/internal/shared/catalog`: canonical enum ve sozluk kayitlari
-- `apps/api/internal/shared/policy`: transaction, outbox, projection, stack ve operasyon policy kayitlari
 - `apps/api/internal/shared/settings`: runtime settings sozlugu, key grameri ve yorumlama modeli
+- `apps/api/internal/shared/policy`: transaction/outbox/projection policy'lerine ek olarak AÅŸama 3 olceklenme guardrail'lari:
+  - domain-group ve module envanter policy kayitlari
+  - projection/read model uygulama kurallari
+  - reporting katmanlari ve reconcile akis referanslari
+  - bakim/refactor disiplini checklisti
 
 ## Modul Iskeleti
 
