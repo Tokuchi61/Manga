@@ -15,7 +15,7 @@
 | Canonical Module | Domain Group | Status | Main Doc | Summary |
 | --- | --- | --- | --- | --- |
 | auth |  | active | docs/modules/auth.md | Kimlik dogrulama, token, session ve hesap guvenligi akislarinin aktif modulu. |
-| user |  | planned | docs/modules/user.md | KullanÄ±cÄ± hesabÄ±, profil, tercih ve Ã¼yelik verisi modÃ¼lÃ¼. |
+| user |  | active | docs/modules/user.md | Kullanici hesabi, profil, tercih ve uyelik verisi modulu. |
 | access |  | planned | docs/modules/access.md | Merkezi authorization, policy ve eriÅŸim kararÄ± modÃ¼lÃ¼. |
 | admin |  | planned | docs/modules/admin.md | YÃ¶netim, moderasyon denetimi ve operasyon use-case modÃ¼lÃ¼. |
 | manga |  | planned | docs/modules/manga.md | Ana iÃ§erik varlÄ±ÄŸÄ±, metadata ve discovery modÃ¼lÃ¼. |
@@ -1574,3 +1574,4 @@
 - public veya private response ayrÄ±mÄ± testleri
 - history visibility precedence doÄŸrulamalarÄ±
 - ban, deactivation ve VIP lifecycle doÄŸrulamalarÄ±
+
