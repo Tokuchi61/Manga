@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-9 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-10 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -88,3 +88,15 @@ Bu dokuman test katmanlarini ve Asama 0-9 dogrulama adimlarini listeler.
 - Moderation status (visible/hidden/flagged), spoiler/pin/lock ve shadowban gorunurluk kurallarinin dogrulanmasi
 - Write cooldown ve spam risk sinyali davranisinin dogrulanmasi
 - Comment migration smoke kontrolu (`202603120007_comment_create_core_tables`)
+
+## Asama 10 Support Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/support/...`
+- `cd apps/api && go test ./tests/contract -run Support`
+- `cd apps/api && go test ./tests/integration -run Support`
+- Communication/ticket/report create akislarinin ve own list/detail davranisinin dogrulanmasi
+- Duplicate/idempotency (`request_id`) ve spam risk davranislarinin dogrulanmasi
+- Public reply/internal note ayriminin ve status gecislerinin dogrulanmasi
+- Resolve ve moderation handoff akislarinin dogrulanmasi
+- `support -> moderation` ve `support -> notification` kontrat dogrulamalarinin calistirilmasi
+- Support migration smoke kontrolu (`202603120008_support_create_core_tables`)
