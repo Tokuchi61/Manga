@@ -5,6 +5,34 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.3.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 3` kapsaminda `apps/api/internal/shared/policy` altina olceklenme hazirlik policy seti eklendi:
+  - `scaling.go`: domain-group kullanim rehberi, module inventory kayit modeli, module status sozlugu
+  - `readmodel.go`: projection/read model uygulama kurallari ve eventual consistency penceresi
+  - `reporting.go`: operasyon summary, analytics aggregate ve export query layer sozlugu
+  - `reconcile.go`: reconcile guardrail kurallari ve kritik reconcile akis referanslari
+  - `maintenance.go`: bakim/refactor disiplini icin canonical guardrail seti
+- Asama 3 testleri eklendi:
+  - `apps/api/internal/shared/policy/scaling_test.go`
+  - `apps/api/tests/contract/shared_scaling_contract_test.go`
+  - `apps/api/tests/integration/shared_reconcile_integration_test.go`
+
+### Changed
+- `apps/api/internal/shared/README.md` Asama 3 policy kapsamiyla guncellendi.
+- `README.md` proje kapsam metni Asama 3 seviyesine cekildi.
+- `docs/upgrade.md` durum tablosunda Asama 3 tamamlandi olarak isaretlendi.
+
+### Docs
+- Olceklenme, reconcile ve bakim/refactor guardrail setinin kod seviyesindeki karsiliklari changelog ve README uzerinden izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 3 olceklenme hazirlik policy omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `shared/policy`, `tests/contract`, `tests/integration`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: Yok.
+
 ## [0.2.0-alpha.1] - 2026-03-12
 
 ### Added
