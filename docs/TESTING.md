@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-14 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-15 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -141,3 +141,14 @@ Bu dokuman test katmanlarini ve Asama 0-14 dogrulama adimlarini listeler.
 - Direct message thread open/send/list/read akislarinin dogrulanmasi
 - Block/mute/restrict iliski kontrolu ve runtime toggle etkilerinin dogrulanmasi
 - Social migration smoke kontrolu (`202603120012_social_create_core_tables`)
+
+
+## Asama 15 Inventory Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/inventory/...`
+- `cd apps/api && go test ./tests/contract -run Inventory`
+- `cd apps/api && go test ./tests/integration -run Inventory`
+- Item definition, own inventory list/detail, claim ve admin grant/revoke akislarinin dogrulanmasi
+- Consume/equip akislari ile stackable/non-stackable davranisinin dogrulanmasi
+- Runtime control (read/claim/consume/equip) toggle etkilerinin dogrulanmasi
+- Inventory migration smoke kontrolu (`202603120013_inventory_create_core_tables`)

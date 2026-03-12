@@ -5,6 +5,53 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.15.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 15` kapsaminda canonical `inventory` modulu eklendi: `apps/api/internal/modules/inventory`.
+- Inventory owner akis omurgasi eklendi:
+  - own inventory list/detail yuzeyleri
+  - claim ve admin grant/revoke akislar
+  - consume ve equip akislar (stackable/non-stackable ayrimi)
+  - item definition ownerligi ve admin item definition yonetimi
+  - admin runtime control (`read-state`, `claim-state`, `consume-state`, `equip-state`)
+- Inventory event sabitleri eklendi: `apps/api/internal/modules/inventory/events/events.go`.
+- In-memory inventory repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/inventory/repository/memory_store.go`
+  - `apps/api/internal/modules/inventory/repository/item_repository.go`
+  - `apps/api/internal/modules/inventory/repository/entry_repository.go`
+  - `apps/api/internal/modules/inventory/repository/runtime_repository.go`
+  - `apps/api/internal/modules/inventory/repository/snapshot_store.go`
+  - `apps/api/internal/modules/inventory/repository/memory_store_test.go`
+- Inventory service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/inventory/service/inventory_entry_service.go`
+  - `apps/api/internal/modules/inventory/service/inventory_claim_service.go`
+  - `apps/api/internal/modules/inventory/service/inventory_grant_service.go`
+  - `apps/api/internal/modules/inventory/service/inventory_admin_service.go`
+  - `apps/api/internal/modules/inventory/service/service_test.go`
+- Inventory HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/inventory/handler/*`
+  - `apps/api/internal/modules/inventory/routes.go`
+- Inventory migration cifti eklendi:
+  - `apps/api/migrations/202603120013_inventory_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120013_inventory_create_core_tables.down.sql`
+- Inventory stage testleri eklendi:
+  - contract: `apps/api/tests/contract/inventory_events_contract_test.go`
+  - integration: `apps/api/tests/integration/inventory_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/inventory_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta inventory module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `inventory` eklendi.
+- `docs/modules.md` modul envanterinde `inventory` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki inventory feature key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 15 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 15 inventory owner (definition/claim/grant/revoke/consume/equip/runtime-control) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `inventory`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120013_inventory_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
 ## [0.14.0-alpha.1] - 2026-03-12
 
 ### Added

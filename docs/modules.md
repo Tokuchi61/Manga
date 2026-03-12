@@ -25,7 +25,7 @@
 | moderation |  | active | docs/modules.md | Scoped moderasyon kuyrukları ve vaka yönetimi modülü. |
 | notification |  | active | docs/modules.md | Bildirim üretimi, teslimi ve tercih yönetimi modülü. |
 | social |  | active | docs/modules.md | Takip, arkadaşlık, duvar ve mesajlaşma modülü. |
-| inventory |  | planned | docs/modules.md | Item sahipliği, claim, consume ve equip modülü. |
+| inventory |  | active | docs/modules.md | Item sahipliği, claim, consume ve equip modülü. |
 | mission |  | planned | docs/modules.md | Görev tanımı, ilerleme ve claim eligibility modülü. |
 | royalpass |  | planned | docs/modules.md | Sezon, tier ve premium track ilerleme modülü. |
 | history |  | active | docs/modules.md | Continue reading, kütüphane ve okuma geçmişi modülü. |
