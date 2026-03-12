@@ -1,149 +1,149 @@
-# Yol HaritasÄ±
+# Yol Haritası
 
-> Bu dokÃ¼man dokÃ¼man Ã¼retim planÄ± deÄŸil, sistemin kurulma ve geniÅŸleme yol haritasÄ±dÄ±r. ModÃ¼l ve ortak sistem detaylarÄ± iÃ§in `modules.md` ve `shared.md` referans alÄ±nmalÄ±dÄ±r.
+> Bu doküman doküman üretim planı değil, sistemin kurulma ve genişleme yol haritasıdır. Modül ve ortak sistem detayları için `modules.md` ve `shared.md` referans alınmalıdır.
 
-## 1) KullanÄ±m Åekli
-- Bu dosya yalnÄ±zca aÅŸama sÄ±rasÄ±, kapsam sÄ±nÄ±rÄ±, baÄŸÄ±mlÄ±lÄ±k ve tamamlanma kriterlerini taÅŸÄ±r.
-- ModÃ¼l iÃ§eriÄŸi burada uzun uzun tekrar edilmez; ilgili modÃ¼l iÃ§in `modules.md` referans alÄ±nÄ±r.
-- Shared policy, teknik stack, settings, precedence ve operasyon kararlarÄ± iÃ§in `shared.md` referans alÄ±nÄ±r.
-- Bir aÅŸama bitmiÅŸ sayÄ±lmadan o aÅŸamanÄ±n Ã§Ä±ktÄ±, test ve dokÃ¼mantasyon karÅŸÄ±lÄ±ÄŸÄ± kapatÄ±lmÄ±ÅŸ olmalÄ±dÄ±r.
+## 1) Kullanım Şekli
+- Bu dosya yalnızca aşama sırası, kapsam sınırı, bağımlılık ve tamamlanma kriterlerini taşır.
+- Modül içeriği burada uzun uzun tekrar edilmez; ilgili modül için `modules.md` referans alınır.
+- Shared policy, teknik stack, settings, precedence ve operasyon kararları için `shared.md` referans alınır.
+- Bir aşama bitmiş sayılmadan o aşamanın çıktı, test ve dokümantasyon karşılığı kapatılmış olmalıdır.
 
-## 2) Faz MantÄ±ÄŸÄ±
-Yol haritasÄ± iki ana gruptan oluÅŸur:
-1. **Omurga fazlarÄ±:** sistemi inÅŸa etmeye baÅŸlamadan Ã¶nce repo, mimari, veri ve operasyon omurgasÄ±nÄ± kurar.
-2. **ModÃ¼l fazlarÄ±:** Ã¼rÃ¼n modÃ¼llerini ownerlÄ±k sÄ±nÄ±rlarÄ± korunarak sÄ±rayla devreye alÄ±r.
+## 2) Faz Mantığı
+Yol haritası iki ana gruptan oluşur:
+1. **Omurga fazları:** sistemi inşa etmeye başlamadan önce repo, mimari, veri ve operasyon omurgasını kurar.
+2. **Modül fazları:** ürün modüllerini ownerlık sınırları korunarak sırayla devreye alır.
 
-## 3) Omurga FazlarÄ±
+## 3) Omurga Fazları
 
-### AÅŸama 0 â€” Temel Standartlar BaÅŸlangÄ±Ã§
-**AmaÃ§:** repo, branch, versiyonlama, docker, migration, temel dokÃ¼mantasyon ve geliÅŸtirme standardÄ±nÄ± sabitlemek.  
-**Kapsam:** proje kÃ¶k yapÄ±sÄ±, CI/PR disiplini, Docker-first Ã§alÄ±ÅŸma, temel scriptler, README ve changelog omurgasÄ±.  
-**Tamamlanma:** proje build/run standardÄ±, repo iskeleti ve baÄŸlayÄ±cÄ± dokÃ¼man omurgasÄ± hazÄ±r olmalÄ±dÄ±r.  
+### Aşama 0 — Temel Standartlar Başlangıç
+**Amaç:** repo, branch, versiyonlama, docker, migration, temel dokümantasyon ve geliştirme standardını sabitlemek.  
+**Kapsam:** proje kök yapısı, CI/PR disiplini, Docker-first çalışma, temel scriptler, README ve changelog omurgası.  
+**Tamamlanma:** proje build/run standardı, repo iskeleti ve bağlayıcı doküman omurgası hazır olmalıdır.  
 **Referans:** `rules.md`, `shared.md`
 
-### AÅŸama 1 â€” Mimari Omurga ve SÄ±nÄ±rlar
-**AmaÃ§:** backend katmanlarÄ±nÄ±, modÃ¼l sÄ±nÄ±rlarÄ±nÄ±, shared/platform ayrÄ±mÄ±nÄ± ve baÄŸÄ±mlÄ±lÄ±k yÃ¶nÃ¼nÃ¼ netleÅŸtirmek.  
-**Kapsam:** `apps/api`, `internal/app`, `internal/platform`, `internal/shared`, `internal/modules` omurgasÄ±; modÃ¼l ÅŸablonu; dosya bÃ¶lme ve sorumluluk kurallarÄ±.  
-**Tamamlanma:** yeni bir modÃ¼l aÃ§Ä±ldÄ±ÄŸÄ±nda nereye yerleÅŸeceÄŸi ve hangi katmanda hangi iÅŸin yapÄ±lacaÄŸÄ± tartÄ±ÅŸmasÄ±z olmalÄ±dÄ±r.  
+### Aşama 1 — Mimari Omurga ve Sınırlar
+**Amaç:** backend katmanlarını, modül sınırlarını, shared/platform ayrımını ve bağımlılık yönünü netleştirmek.  
+**Kapsam:** `apps/api`, `internal/app`, `internal/platform`, `internal/shared`, `internal/modules` omurgası; modül şablonu; dosya bölme ve sorumluluk kuralları.  
+**Tamamlanma:** yeni bir modül açıldığında nereye yerleşeceği ve hangi katmanda hangi işin yapılacağı tartışmasız olmalıdır.  
 **Referans:** `rules.md`, `modules.md`
 
-### AÅŸama 2 â€” Ã‡ekirdek ÃœrÃ¼n HazÄ±rlÄ±ÄŸÄ±
-**AmaÃ§:** ortak sÃ¶zlÃ¼kler, transaction kurallarÄ±, audit/idempotency/outbox gibi sistem Ã§apÄ± kurallarÄ± hazÄ±r hale getirmek.  
-**Kapsam:** shared sÃ¶zlÃ¼kler, teknik stack, cache/queue, projection, media, reporting, search ve settings envanteri.  
-**Tamamlanma:** ilk iÅŸ modÃ¼lleri geliÅŸtirilmeden Ã¶nce ortak policy ve teknik kararlar yazÄ±lÄ± hale gelmiÅŸ olmalÄ±dÄ±r.  
+### Aşama 2 — Çekirdek Ürün Hazırlığı
+**Amaç:** ortak sözlükler, transaction kuralları, audit/idempotency/outbox gibi sistem çapı kuralları hazır hale getirmek.  
+**Kapsam:** shared sözlükler, teknik stack, cache/queue, projection, media, reporting, search ve settings envanteri.  
+**Tamamlanma:** ilk iş modülleri geliştirilmeden önce ortak policy ve teknik kararlar yazılı hale gelmiş olmalıdır.  
 **Referans:** `shared.md`
 
-### AÅŸama 3 â€” GeniÅŸleme ve Ã–lÃ§eklenme HazÄ±rlÄ±ÄŸÄ±
-**AmaÃ§:** sistem bÃ¼yÃ¼dÃ¼kÃ§e modÃ¼lleÅŸme, operasyon ve bakÄ±m disiplini bozulmadan ilerlemek.  
-**Kapsam:** domain-group kullanÄ±mÄ±, projection/read model stratejisi, reporting, reconcile, bakÄ±m ve refactor kurallarÄ±.  
-**Tamamlanma:** yeni modÃ¼ller ve Ã§apraz akÄ±ÅŸlar eklendiÄŸinde mevcut yapÄ± bozulmadan geniÅŸleyebilir olmalÄ±dÄ±r.  
+### Aşama 3 — Genişleme ve Ölçeklenme Hazırlığı
+**Amaç:** sistem büyüdükçe modülleşme, operasyon ve bakım disiplini bozulmadan ilerlemek.  
+**Kapsam:** domain-group kullanımı, projection/read model stratejisi, reporting, reconcile, bakım ve refactor kuralları.  
+**Tamamlanma:** yeni modüller ve çapraz akışlar eklendiğinde mevcut yapı bozulmadan genişleyebilir olmalıdır.  
 **Referans:** `rules.md`, `shared.md`, `modules.md`
 
-## 4) ModÃ¼l FazlarÄ±
+## 4) Modül Fazları
 
-AÅŸaÄŸÄ±daki sÄ±ralama sistem kurulum sÄ±rasÄ±nÄ± gÃ¶sterir. Her modÃ¼lÃ¼n detaylÄ± kapsamÄ± `modules.md` iÃ§indedir.
+Aşağıdaki sıralama sistem kurulum sırasını gösterir. Her modülün detaylı kapsamı `modules.md` içindedir.
 
-### AÅŸama 4 â€” Auth
-Kimlik doÄŸrulama, credential, session, token, verification, recovery ve auth gÃ¼venlik akÄ±ÅŸlarÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** AÅŸama 0-3  
-**Referans modÃ¼l:** `auth`
+### Aşama 4 — Auth
+Kimlik doğrulama, credential, session, token, verification, recovery ve auth güvenlik akışları.  
+**Bağımlılık:** Aşama 0-3  
+**Referans modül:** `auth`
 
-### AÅŸama 5 â€” User
-KullanÄ±cÄ± hesabÄ±, profil, gÃ¶rÃ¼nÃ¼rlÃ¼k, Ã¼yelik ve VIP state omurgasÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth  
-**Referans modÃ¼l:** `user`
+### Aşama 5 — User
+Kullanıcı hesabı, profil, görünürlük, üyelik ve VIP state omurgası.  
+**Bağımlılık:** Auth  
+**Referans modül:** `user`
 
-### AÅŸama 6 â€” Access
-Merkezi authorization, policy evaluation, feature availability ve final allow/deny katmanÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User  
-**Referans modÃ¼l:** `access`
+### Aşama 6 — Access
+Merkezi authorization, policy evaluation, feature availability ve final allow/deny katmanı.  
+**Bağımlılık:** Auth, User  
+**Referans modül:** `access`
 
-### AÅŸama 7 â€” Manga
-Ana iÃ§erik varlÄ±ÄŸÄ±, metadata, discovery ve listing omurgasÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Omurga fazlarÄ±, Access  
-**Referans modÃ¼l:** `manga`
+### Aşama 7 — Manga
+Ana içerik varlığı, metadata, discovery ve listing omurgası.  
+**Bağımlılık:** Omurga fazları, Access  
+**Referans modül:** `manga`
 
-### AÅŸama 8 â€” Chapter
-Chapter, page, release, early access ve okuma yÃ¼zeyi.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Manga, Access  
-**Referans modÃ¼l:** `chapter`
+### Aşama 8 — Chapter
+Chapter, page, release, early access ve okuma yüzeyi.  
+**Bağımlılık:** Manga, Access  
+**Referans modül:** `chapter`
 
-### AÅŸama 9 â€” Comment
-Ä°Ã§erik yorumlarÄ±, thread, etkileÅŸim ve anti-spam yazma yÃ¼zeyi.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Manga/Chapter, Access  
-**Referans modÃ¼l:** `comment`
+### Aşama 9 — Comment
+İçerik yorumları, thread, etkileşim ve anti-spam yazma yüzeyi.  
+**Bağımlılık:** Auth, User, Manga/Chapter, Access  
+**Referans modül:** `comment`
 
-### AÅŸama 10 â€” Support
-Destek talebi, report intake ve vaka aÃ§Ä±lÄ±ÅŸ yÃ¼zeyleri.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Access  
-**Referans modÃ¼l:** `support`
+### Aşama 10 — Support
+Destek talebi, report intake ve vaka açılış yüzeyleri.  
+**Bağımlılık:** Auth, User, Access  
+**Referans modül:** `support`
 
-### AÅŸama 11 â€” Moderation
-Moderation queue, case yÃ¶netimi ve karar uygulama sinyalleri.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Support, Comment, User, Admin, Access  
-**Referans modÃ¼l:** `moderation`
+### Aşama 11 — Moderation
+Moderation queue, case yönetimi ve karar uygulama sinyalleri.  
+**Bağımlılık:** Support, Comment, User, Admin, Access  
+**Referans modül:** `moderation`
 
-### AÅŸama 12 â€” Notification
-Bildirim Ã¼retimi, teslimi, kategori ve tercih yÃ¶netimi.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Support, Moderation, Social, Mission  
-**Referans modÃ¼l:** `notification`
+### Aşama 12 — Notification
+Bildirim üretimi, teslimi, kategori ve tercih yönetimi.  
+**Bağımlılık:** Auth, User, Support, Moderation, Social, Mission  
+**Referans modül:** `notification`
 
-### AÅŸama 13 â€” History
-Continue reading, kÃ¼tÃ¼phane, timeline ve bookmark yÃ¼zeyleri.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Manga, Chapter, Access  
-**Referans modÃ¼l:** `history`
+### Aşama 13 — History
+Continue reading, kütüphane, timeline ve bookmark yüzeyleri.  
+**Bağımlılık:** Auth, User, Manga, Chapter, Access  
+**Referans modül:** `history`
 
-### AÅŸama 14 â€” Social
-ArkadaÅŸlÄ±k, follow, duvar, mesajlaÅŸma, block/mute/restrict akÄ±ÅŸlarÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Access, Notification  
-**Referans modÃ¼l:** `social`
+### Aşama 14 — Social
+Arkadaşlık, follow, duvar, mesajlaşma, block/mute/restrict akışları.  
+**Bağımlılık:** Auth, User, Access, Notification  
+**Referans modül:** `social`
 
-### AÅŸama 15 â€” Inventory
-Item sahipliÄŸi, claim, consume, equip ve kullanÄ±cÄ±ya baÄŸlÄ± envanter stateâ€™i.  
-**BaÄŸÄ±mlÄ±lÄ±k:** User, Access, Notification  
-**Referans modÃ¼l:** `inventory`
+### Aşama 15 — Inventory
+Item sahipliği, claim, consume, equip ve kullanıcıya bağlı envanter state’i.  
+**Bağımlılık:** User, Access, Notification  
+**Referans modül:** `inventory`
 
-### AÅŸama 16 â€” Mission
-GÃ¶rev tanÄ±mÄ±, progress ingest, eligibility ve claim akÄ±ÅŸlarÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Inventory, Notification, History, Social  
-**Referans modÃ¼l:** `mission`
+### Aşama 16 — Mission
+Görev tanımı, progress ingest, eligibility ve claim akışları.  
+**Bağımlılık:** Auth, User, Inventory, Notification, History, Social  
+**Referans modül:** `mission`
 
-### AÅŸama 17 â€” RoyalPass
+### Aşama 17 — RoyalPass
 Sezon, tier, premium track ve reward progression.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Mission, Inventory, Payment, Access  
-**Referans modÃ¼l:** `royalpass`
+**Bağımlılık:** Mission, Inventory, Payment, Access  
+**Referans modül:** `royalpass`
 
-### AÅŸama 18 â€” Shop
-Katalog, offer, Ã¼rÃ¼n yÃ¼zeyi ve purchase orchestration.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Inventory, Payment, Access  
-**Referans modÃ¼l:** `shop`
+### Aşama 18 — Shop
+Katalog, offer, ürün yüzeyi ve purchase orchestration.  
+**Bağımlılık:** Inventory, Payment, Access  
+**Referans modül:** `shop`
 
-### AÅŸama 19 â€” Payment
-Checkout, provider session, callback, ledger ve reconcile doÄŸruluÄŸu.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Auth, User, Shop, RoyalPass, Access  
-**Referans modÃ¼l:** `payment`
+### Aşama 19 — Payment
+Checkout, provider session, callback, ledger ve reconcile doğruluğu.  
+**Bağımlılık:** Auth, User, Shop, RoyalPass, Access  
+**Referans modül:** `payment`
 
-### AÅŸama 20 â€” Ads
-Placement, campaign, delivery, impression/click intake ve Ã¶lÃ§Ã¼mleme.  
-**BaÄŸÄ±mlÄ±lÄ±k:** Manga, Chapter, Access, Reporting/Analytics  
-**Referans modÃ¼l:** `ads`
+### Aşama 20 — Ads
+Placement, campaign, delivery, impression/click intake ve ölçümleme.  
+**Bağımlılık:** Manga, Chapter, Access, Reporting/Analytics  
+**Referans modül:** `ads`
 
-### AÅŸama 21 â€” Admin
-YÃ¶netim yÃ¼zeyleri, operasyon kontrolleri, modÃ¼l bazlÄ± iÃ§ iÅŸlemler ve denetim araÃ§larÄ±.  
-**BaÄŸÄ±mlÄ±lÄ±k:** sistemdeki ilgili modÃ¼ller  
-**Referans modÃ¼l:** `admin`
+### Aşama 21 — Admin
+Yönetim yüzeyleri, operasyon kontrolleri, modül bazlı iç işlemler ve denetim araçları.  
+**Bağımlılık:** sistemdeki ilgili modüller  
+**Referans modül:** `admin`
 
-## 5) AÅŸama GeÃ§iÅŸ KurallarÄ±
-- Bir modÃ¼l aÅŸamasÄ±na geÃ§meden Ã¶nce baÄŸÄ±mlÄ± olduÄŸu Ã¶nceki modÃ¼llerin ownerlÄ±ÄŸÄ± ve kontratlarÄ± yazÄ±lÄ± olmalÄ±dÄ±r.
-- ModÃ¼l detayÄ± `modules.md` iÃ§inde tanÄ±mlanmadan modÃ¼l implementasyonuna baÅŸlanmamalÄ±dÄ±r.
-- Yeni shared enum, policy veya ayar anahtarÄ± gerekiyorsa aynÄ± deÄŸiÅŸiklikte `shared.md` gÃ¼ncellenmelidir.
-- Ã‡oklu iÅŸlem yapan dosyalar tek dosyada toplanmamalÄ±dÄ±r; handler, service, usecase, job ve benzeri alanlarda iÅŸlem bazlÄ± parÃ§alama korunmalÄ±dÄ±r.
-- Her aÅŸama iÃ§in minimum unit/integration/contract testi tanÄ±mlanmadan aÅŸama tamamlanmÄ±ÅŸ kabul edilmemelidir.
+## 5) Aşama Geçiş Kuralları
+- Bir modül aşamasına geçmeden önce bağımlı olduğu önceki modüllerin ownerlığı ve kontratları yazılı olmalıdır.
+- Modül detayı `modules.md` içinde tanımlanmadan modül implementasyonuna başlanmamalıdır.
+- Yeni shared enum, policy veya ayar anahtarı gerekiyorsa aynı değişiklikte `shared.md` güncellenmelidir.
+- Çoklu işlem yapan dosyalar tek dosyada toplanmamalıdır; handler, service, usecase, job ve benzeri alanlarda işlem bazlı parçalama korunmalıdır.
+- Her aşama için minimum unit/integration/contract testi tanımlanmadan aşama tamamlanmış kabul edilmemelidir.
 
-## 6) Bu Dosyada Neler OlmamalÄ±?
-- Uzun modÃ¼l aÃ§Ä±klamalarÄ±
-- Shared enum tablolarÄ±nÄ±n tamamÄ±
-- Settings envanterinin tÃ¼m satÄ±rlarÄ±
-- SatÄ±r satÄ±r klasÃ¶r iÃ§eriÄŸi
+## 6) Bu Dosyada Neler Olmamalı?
+- Uzun modül açıklamaları
+- Shared enum tablolarının tamamı
+- Settings envanterinin tüm satırları
+- Satır satır klasör içeriği
 
-Bu ayrÄ±ntÄ±lar ilgili referans dosyalarÄ±nda tutulmalÄ±dÄ±r.
+Bu ayrıntılar ilgili referans dosyalarında tutulmalıdır.

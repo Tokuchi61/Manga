@@ -40,6 +40,7 @@ func TestReadyEndpointWithoutDB(t *testing.T) {
 
 	handler.ServeHTTP(rec, req)
 
-	require.Equal(t, http.StatusServiceUnavailable, rec.Code)
-	require.Contains(t, rec.Body.String(), "unavailable")
+	require.Equal(t, http.StatusOK, rec.Code)
+	require.Contains(t, rec.Body.String(), "\"status\":\"ready\"")
+	require.Contains(t, rec.Body.String(), "\"mode\":\"memory\"")
 }

@@ -65,7 +65,7 @@ func healthHandler() http.HandlerFunc {
 func readyHandler(pool *pgxpool.Pool) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if pool == nil {
-			_ = writeJSON(w, http.StatusServiceUnavailable, map[string]string{"status": "unavailable"})
+			_ = writeJSON(w, http.StatusOK, map[string]string{"status": "ready", "mode": "memory"})
 			return
 		}
 
@@ -76,7 +76,7 @@ func readyHandler(pool *pgxpool.Pool) http.HandlerFunc {
 			return
 		}
 
-		_ = writeJSON(w, http.StatusOK, map[string]string{"status": "ready"})
+		_ = writeJSON(w, http.StatusOK, map[string]string{"status": "ready", "mode": "database"})
 	}
 }
 

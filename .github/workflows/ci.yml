@@ -20,6 +20,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check docs encoding
+        shell: pwsh
+        run: ../../scripts/check_utf8_no_bom.ps1
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
