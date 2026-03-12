@@ -20,7 +20,7 @@
 | admin |  | planned | docs/modules/admin.md | YÃ¶netim, moderasyon denetimi ve operasyon use-case modÃ¼lÃ¼. |
 | manga |  | active | docs/modules/manga.md | Ana iÃ§erik varlÄ±ÄŸÄ±, metadata ve discovery modÃ¼lÃ¼. |
 | chapter |  | active | docs/modules/chapter.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
-| comment |  | planned | docs/modules/comment.md | Ä°Ã§erik yorumlarÄ± ve thread etkileÅŸim modÃ¼lÃ¼. |
+| comment |  | active | docs/modules/comment.md | Icerik yorumlari ve thread etkilesim modulu. |
 | support |  | planned | docs/modules/support.md | KullanÄ±cÄ± destek kayÄ±tlarÄ±, ticket ve report intake modÃ¼lÃ¼. |
 | moderation |  | planned | docs/modules/moderation.md | Scoped moderasyon kuyruklarÄ± ve vaka yÃ¶netimi modÃ¼lÃ¼. |
 | notification |  | planned | docs/modules/notification.md | Bildirim Ã¼retimi, teslimi ve tercih yÃ¶netimi modÃ¼lÃ¼. |

@@ -5,6 +5,60 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.9.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 9` kapsaminda canonical `comment` modulu eklendi: `apps/api/internal/modules/comment`.
+- Comment owner akis omurgasi eklendi:
+  - comment create/edit/delete
+  - target bazli root listing ve detail
+  - thread/reply akisi (root + nested reply)
+  - moderation state (`visible`, `hidden`, `flagged`) + spoiler/pin/lock/shadowban alanlari
+  - soft delete gorunumu ve restore akisi
+  - write cooldown, reply depth limiti ve edit/restore window kurallari
+- `comment -> moderation/support` kontrat yuzeyi eklendi: `apps/api/internal/modules/comment/contract/comment_target_contract.go`.
+- Comment event sabitleri eklendi: `apps/api/internal/modules/comment/events/events.go`.
+- In-memory comment repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/comment/repository/memory_store.go`
+  - `apps/api/internal/modules/comment/repository/comment_repository.go`
+  - `apps/api/internal/modules/comment/repository/memory_store_test.go`
+- Comment service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/comment/service/comment_create_service.go`
+  - `apps/api/internal/modules/comment/service/comment_update_service.go`
+  - `apps/api/internal/modules/comment/service/comment_query_service.go`
+  - `apps/api/internal/modules/comment/service/comment_lifecycle_service.go`
+  - `apps/api/internal/modules/comment/service/comment_moderation_service.go`
+  - `apps/api/internal/modules/comment/service/comment_contract_service.go`
+  - `apps/api/internal/modules/comment/service/service_test.go`
+- Comment HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/comment/handler/*`
+  - `apps/api/internal/modules/comment/routes.go`
+- Comment migration cifti eklendi:
+  - `apps/api/migrations/202603120007_comment_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120007_comment_create_core_tables.down.sql`
+- Comment stage testleri eklendi:
+  - contract: `apps/api/tests/contract/comment_target_contract_test.go`
+  - integration: `apps/api/tests/integration/comment_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/comment_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta comment module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- `docs/modules.md` modul envanterinde `comment` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 9 ile hizalandi.
+- Comment modulu katmanlari coklu akis tasiyan tek dosyalari onleyecek sekilde islem bazli parcalandi (`routes.go` tek giris noktasi olarak korunarak).
+
+### Fixed
+- Yok.
+
+### Docs
+- Asama 9 comment omurgasi ve versiyonlama guncellemeleri changelog ile izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 9 comment owner (thread/reply/moderation/soft-delete) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `comment`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120007_comment_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.8.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -447,6 +501,7 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
 
 
 
