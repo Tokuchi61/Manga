@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-8 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-9 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -76,3 +76,15 @@ Bu dokuman test katmanlarini ve Asama 0-8 dogrulama adimlarini listeler.
 - Soft delete/restore ve publish lifecycle gecislerinin dogrulanmasi
 - `chapter -> history` resume anchor ve read signal kontratinin dogrulanmasi
 - Chapter migration smoke kontrolu (`202603120006_chapter_create_core_tables`)
+
+## Asama 9 Comment Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/comment/...`
+- `cd apps/api && go test ./tests/contract -run Comment`
+- `cd apps/api && go test ./tests/integration -run Comment`
+- Comment create/edit/delete/list/detail/thread akislarinin dogrulanmasi
+- Root/reply thread yapisi, reply depth limiti ve lock etkisinin dogrulanmasi
+- Soft delete gorunumu, restore window ve edit window kurallarinin dogrulanmasi
+- Moderation status (visible/hidden/flagged), spoiler/pin/lock ve shadowban gorunurluk kurallarinin dogrulanmasi
+- Write cooldown ve spam risk sinyali davranisinin dogrulanmasi
+- Comment migration smoke kontrolu (`202603120007_comment_create_core_tables`)

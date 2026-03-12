@@ -2,13 +2,13 @@
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 8 - Chapter` kapsaminda kimlik, kullanici, merkezi erisim/policy, manga icerik owner ve chapter okuma/release omurgasini icerir.
+Bu repo su anda `Asama 9 - Comment` kapsaminda kimlik, kullanici, merkezi erisim/policy, manga/chapter icerik owner ve comment thread etkilesim omurgasini icerir.
 
 ## Canonical Versiyon
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.8.0-alpha.1`
+- Su anki surum: `0.9.0-alpha.1`
 
 ## Dizin Yapisi
 
@@ -41,13 +41,14 @@ VERSION
 - `apps/api/internal/shared`: domain-agnostic ortak yapilar
 - `apps/api/internal/modules`: leaf moduller ve module registry kontrati
 
-## Asama 4-8 Omurga
+## Asama 4-9 Omurga
 
 - `apps/api/internal/modules/auth`: register/login/logout, session list/revoke, token refresh rotation, verification ve password reset/change akislari
 - `apps/api/internal/modules/user`: profil okuma/guncelleme, public-private profil ayrimi, account state gecisleri, history visibility preference ve VIP lifecycle akislari
 - `apps/api/internal/modules/access`: merkezi role/permission/policy yonetimi, temporary grant, own/any authorization ve evaluate karar katmani
 - `apps/api/internal/modules/manga`: manga CRUD/listing/detail, search/filter/sort, publish/archive lifecycle, discovery/editorial, counter sync ve soft delete/restore akislarinin owner modulu
 - `apps/api/internal/modules/chapter`: chapter CRUD/list/detail/read/navigation, preview/early access state, media/integrity sinyalleri, soft delete/restore ve history resume/read kontrat omurgasi
+- `apps/api/internal/modules/comment`: comment create/edit/delete/list/detail/thread, moderation/spoiler/pin/lock state, soft delete gorunumu, restore/edit window, write cooldown ve hedef iliski omurgasi
 - `apps/api/internal/shared/crypto/password`: canonical argon2id sifre hash/verify yardimcilari
 - `apps/api/internal/platform/validation`: canonical validator wrapper (`go-playground/validator/v10`)
 - `apps/api/migrations/202603120002_auth_create_core_tables.*`: auth migration omurgasi
@@ -55,6 +56,7 @@ VERSION
 - `apps/api/migrations/202603120004_access_create_core_tables.*`: access migration omurgasi
 - `apps/api/migrations/202603120005_manga_create_core_tables.*`: manga migration omurgasi
 - `apps/api/migrations/202603120006_chapter_create_core_tables.*`: chapter migration omurgasi
+- `apps/api/migrations/202603120007_comment_create_core_tables.*`: comment migration omurgasi
 
 ## Dokumantasyon
 
