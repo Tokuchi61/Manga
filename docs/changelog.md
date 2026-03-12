@@ -5,6 +5,53 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.16.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 16` kapsaminda canonical `mission` modulu eklendi: `apps/api/internal/modules/mission`.
+- Mission owner akis omurgasi eklendi:
+  - own mission list/detail yuzeyleri
+  - progress ingest ve period-key tabanli accumulation
+  - claim-request akis (reward metadata ile)
+  - admin mission definition yonetimi ve progress reset
+  - admin runtime control (`read-state`, `claim-state`, `progress-ingest-state`, `reset-hour`)
+- Mission event sabitleri eklendi: `apps/api/internal/modules/mission/events/events.go`.
+- In-memory mission repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/mission/repository/memory_store.go`
+  - `apps/api/internal/modules/mission/repository/definition_repository.go`
+  - `apps/api/internal/modules/mission/repository/progress_repository.go`
+  - `apps/api/internal/modules/mission/repository/runtime_repository.go`
+  - `apps/api/internal/modules/mission/repository/snapshot_store.go`
+  - `apps/api/internal/modules/mission/repository/memory_store_test.go`
+- Mission service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/mission/service/mission_entry_service.go`
+  - `apps/api/internal/modules/mission/service/mission_progress_service.go`
+  - `apps/api/internal/modules/mission/service/mission_claim_service.go`
+  - `apps/api/internal/modules/mission/service/mission_admin_service.go`
+  - `apps/api/internal/modules/mission/service/service_test.go`
+- Mission HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/mission/handler/*`
+  - `apps/api/internal/modules/mission/routes.go`
+- Mission migration cifti eklendi:
+  - `apps/api/migrations/202603120014_mission_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120014_mission_create_core_tables.down.sql`
+- Mission stage testleri eklendi:
+  - contract: `apps/api/tests/contract/mission_events_contract_test.go`
+  - integration: `apps/api/tests/integration/mission_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/mission_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta mission module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `mission` eklendi.
+- `docs/modules.md` modul envanterinde `mission` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki mission feature key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 16 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 16 mission owner (definition/progress-ingest/claim-request/reset/runtime-control) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `mission`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120014_mission_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
 ## [0.15.0-alpha.1] - 2026-03-12
 
 ### Added

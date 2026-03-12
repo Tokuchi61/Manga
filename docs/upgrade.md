@@ -20,3 +20,4 @@ Bu dokuman uygulanan, kismi kalan ve bekleyen islerin operasyonel takibini tutar
 - Asama 13: Tamamlandi.
 - Asama 14: Tamamlandi.
 - Asama 15: Tamamlandi.
+- Asama 16: Tamamlandi.

@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-15 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -152,3 +152,12 @@ Bu dokuman test katmanlarini ve Asama 0-15 dogrulama adimlarini listeler.
 - Consume/equip akislari ile stackable/non-stackable davranisinin dogrulanmasi
 - Runtime control (read/claim/consume/equip) toggle etkilerinin dogrulanmasi
 - Inventory migration smoke kontrolu (`202603120013_inventory_create_core_tables`)
+## Asama 16 Mission Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/mission/...`
+- `cd apps/api && go test ./tests/contract -run Mission`
+- `cd apps/api && go test ./tests/integration -run Mission`
+- Mission definition ownerligi, own mission list/detail ve progress ingest akislarinin dogrulanmasi
+- Completion/claim-request idempotency davranisinin ve period key yorumunun dogrulanmasi
+- Runtime control (read/claim/progress-ingest/reset-hour) toggle etkilerinin dogrulanmasi
+- Mission migration smoke kontrolu (`202603120014_mission_create_core_tables`)
