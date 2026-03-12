@@ -27,7 +27,7 @@
 | social |  | active | docs/modules.md | Takip, arkadaşlık, duvar ve mesajlaşma modülü. |
 | inventory |  | active | docs/modules.md | Item sahipliği, claim, consume ve equip modülü. |
 | mission |  | active | docs/modules.md | Görev tanımı, ilerleme ve claim eligibility modülü. |
-| royalpass |  | planned | docs/modules.md | Sezon, tier ve premium track ilerleme modülü. |
+| royalpass |  | active | docs/modules.md | Sezon, tier ve premium track ilerleme modulu. |
 | history |  | active | docs/modules.md | Continue reading, kütüphane ve okuma geçmişi modülü. |
 | ads |  | planned | docs/modules.md | Reklam placement, campaign ve ölçümleme modülü. |
 | shop |  | planned | docs/modules.md | Ürün kataloğu, offer ve purchase orchestration modülü. |

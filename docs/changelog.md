@@ -5,6 +5,55 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.17.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 17` kapsaminda canonical `royalpass` modulu eklendi: `apps/api/internal/modules/royalpass`.
+- RoyalPass owner akis omurgasi eklendi:
+  - own season overview yuzeyi
+  - progress ingest ve dedup tabanli accumulation
+  - tier claim-request akis (free/premium track ayrimi ile)
+  - premium activation intake akis
+  - admin season/tier yonetimi, progress reset ve runtime control (`season-state`, `claim-state`, `premium-state`)
+- RoyalPass event sabitleri eklendi: `apps/api/internal/modules/royalpass/events/events.go`.
+- In-memory royalpass repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/royalpass/repository/memory_store.go`
+  - `apps/api/internal/modules/royalpass/repository/season_repository.go`
+  - `apps/api/internal/modules/royalpass/repository/tier_repository.go`
+  - `apps/api/internal/modules/royalpass/repository/progress_repository.go`
+  - `apps/api/internal/modules/royalpass/repository/runtime_repository.go`
+  - `apps/api/internal/modules/royalpass/repository/snapshot_store.go`
+  - `apps/api/internal/modules/royalpass/repository/memory_store_test.go`
+- RoyalPass service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/royalpass/service/royalpass_overview_service.go`
+  - `apps/api/internal/modules/royalpass/service/royalpass_progress_service.go`
+  - `apps/api/internal/modules/royalpass/service/royalpass_claim_service.go`
+  - `apps/api/internal/modules/royalpass/service/royalpass_premium_service.go`
+  - `apps/api/internal/modules/royalpass/service/royalpass_admin_service.go`
+  - `apps/api/internal/modules/royalpass/service/service_test.go`
+- RoyalPass HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/royalpass/handler/*`
+  - `apps/api/internal/modules/royalpass/routes.go`
+- RoyalPass migration cifti eklendi:
+  - `apps/api/migrations/202603120015_royalpass_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120015_royalpass_create_core_tables.down.sql`
+- RoyalPass stage testleri eklendi:
+  - contract: `apps/api/tests/contract/royalpass_events_contract_test.go`
+  - integration: `apps/api/tests/integration/royalpass_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/royalpass_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta royalpass module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `royalpass` eklendi.
+- `docs/modules.md` modul envanterinde `royalpass` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki royalpass feature key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 17 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 17 royalpass owner (season/tier/progress/claim/premium-activation/runtime-control) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `royalpass`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120015_royalpass_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
 ## [0.16.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -901,3 +950,4 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
