@@ -2,7 +2,9 @@ package chapter
 
 import (
 	"context"
+	"errors"
 
+	chaptercontract "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter/contract"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter/handler"
 	chapterrepository "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter/repository"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter/service"
@@ -46,6 +48,28 @@ func (m Module) TargetExists(ctx context.Context, chapterID string) (bool, error
 		return false, nil
 	}
 	return m.svc.TargetExists(ctx, chapterID)
+}
+
+func (m Module) GetResumeAnchor(ctx context.Context, chapterID string, pageNumber int) (chaptercontract.ResumeAnchor, error) {
+	if m.svc == nil {
+		return chaptercontract.ResumeAnchor{}, errors.New("chapter_service_unavailable")
+	}
+	return m.svc.GetResumeAnchor(ctx, chapterID, pageNumber)
+}
+
+func (m Module) BuildReadSignal(chapterID string, mangaID string, pageNumber int, pageCount int, event string, requestID string, correlationID string) chaptercontract.ReadSignal {
+	if m.svc == nil {
+		return chaptercontract.ReadSignal{
+			Event:         event,
+			ChapterID:     chapterID,
+			MangaID:       mangaID,
+			PageNumber:    pageNumber,
+			PageCount:     pageCount,
+			RequestID:     requestID,
+			CorrelationID: correlationID,
+		}
+	}
+	return m.svc.BuildReadSignal(chapterID, mangaID, pageNumber, pageCount, event, requestID, correlationID)
 }
 
 func (m *Module) Snapshot() ([]byte, error) {

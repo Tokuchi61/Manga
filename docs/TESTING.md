@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-12 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-13 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -119,3 +119,13 @@ Bu dokuman test katmanlarini ve Asama 0-12 dogrulama adimlarini listeler.
 - Support event intake, inbox/detail/read ve preference akislarinin dogrulanmasi
 - Delivery pause/category-channel runtime control davranislarinin dogrulanmasi
 - Notification migration smoke kontrolu (`202603120010_notification_create_core_tables`)
+
+
+## Asama 13 History Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/history/...`
+- `cd apps/api && go test ./tests/contract -run History`
+- `cd apps/api && go test ./tests/integration -run History`
+- Chapter read intake, continue-reading, own/public library ve timeline akislarinin dogrulanmasi
+- Bookmark/favorite/share metadata ve runtime control davranislarinin dogrulanmasi
+- History migration smoke kontrolu (`202603120011_history_create_core_tables`)

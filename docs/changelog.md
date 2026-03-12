@@ -5,6 +5,56 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.13.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 13` kapsaminda canonical `history` modulu eklendi: `apps/api/internal/modules/history`.
+- History owner akis omurgasi eklendi:
+  - own continue-reading listeleme
+  - own library ve own timeline yuzeyleri
+  - controlled public library read yuzeyi (entry-level `share_public`)
+  - chapter read signal intake (`chapter.read.started/checkpoint/finished`)
+  - admin runtime control (`continue-reading`, `library`, `timeline`, `bookmark-write`)
+- History event sabitleri eklendi: `apps/api/internal/modules/history/events/events.go`.
+- In-memory history repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/history/repository/memory_store.go`
+  - `apps/api/internal/modules/history/repository/checkpoint_repository.go`
+  - `apps/api/internal/modules/history/repository/library_repository.go`
+  - `apps/api/internal/modules/history/repository/timeline_repository.go`
+  - `apps/api/internal/modules/history/repository/runtime_repository.go`
+  - `apps/api/internal/modules/history/repository/snapshot_store.go`
+  - `apps/api/internal/modules/history/repository/memory_store_test.go`
+- History service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/history/service/history_read_service.go`
+  - `apps/api/internal/modules/history/service/history_update_service.go`
+  - `apps/api/internal/modules/history/service/history_admin_service.go`
+  - `apps/api/internal/modules/history/service/history_intake_service.go`
+  - `apps/api/internal/modules/history/service/service_test.go`
+- History HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/history/handler/*`
+  - `apps/api/internal/modules/history/routes.go`
+- History migration cifti eklendi:
+  - `apps/api/migrations/202603120011_history_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120011_history_create_core_tables.down.sql`
+- History stage testleri eklendi:
+  - contract: `apps/api/tests/contract/history_events_contract_test.go`
+  - integration: `apps/api/tests/integration/history_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/history_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta history module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `history` eklendi.
+- Chapter modulune history icin `GetResumeAnchor` ve `BuildReadSignal` kontrat ciktilari eklendi.
+- `docs/modules.md` modul envanterinde `history` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki history feature key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 13 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 13 history owner (continue-reading/library/timeline/intake/runtime-control) omurgasi kod seviyesine tasindi ve chapter->history kontrat zinciri aktif hale getirildi.
+- Etkilenen Moduller: `history`, `chapter`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120011_history_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.12.0-alpha.1] - 2026-03-12
 
 ### Added

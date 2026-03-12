@@ -14,6 +14,7 @@ import (
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	chaptermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter"
 	commentmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/comment"
+	historymodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/history"
 	mangamodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/manga"
 	moderationmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/moderation"
 	notificationmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/notification"
@@ -69,6 +70,7 @@ func main() {
 	user := usermodule.New()
 	manga := mangamodule.New()
 	chapter := chaptermodule.New()
+	history := historymodule.New()
 	comment := commentmodule.New()
 	support := supportmodule.New()
 	moderation := moderationmodule.New()
@@ -77,6 +79,7 @@ func main() {
 
 	user.SetCredentialLookup(auth)
 	chapter.SetMangaLookup(manga)
+	history.SetChapterSignalProvider(chapter)
 	comment.SetTargetLookups(manga, chapter)
 	support.SetTargetLookups(manga, chapter, comment)
 	moderation.SetSupportContracts(support, support)
@@ -89,6 +92,7 @@ func main() {
 		{name: "access", snapshot: (&access).Snapshot, restore: (&access).RestoreSnapshot},
 		{name: "manga", snapshot: (&manga).Snapshot, restore: (&manga).RestoreSnapshot},
 		{name: "chapter", snapshot: (&chapter).Snapshot, restore: (&chapter).RestoreSnapshot},
+		{name: "history", snapshot: (&history).Snapshot, restore: (&history).RestoreSnapshot},
 		{name: "comment", snapshot: (&comment).Snapshot, restore: (&comment).RestoreSnapshot},
 		{name: "support", snapshot: (&support).Snapshot, restore: (&support).RestoreSnapshot},
 		{name: "moderation", snapshot: (&moderation).Snapshot, restore: (&moderation).RestoreSnapshot},
@@ -113,7 +117,7 @@ func main() {
 		}()
 	}
 
-	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, comment, support, moderation, notification)
+	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, history, comment, support, moderation, notification)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}
