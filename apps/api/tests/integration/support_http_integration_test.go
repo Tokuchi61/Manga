@@ -22,7 +22,6 @@ import (
 func TestSupportHTTPIntakeReviewLifecycleFlow(t *testing.T) {
 	requesterID := uuid.NewString()
 	agentID := uuid.NewString()
-	reviewerID := uuid.NewString()
 	targetID := uuid.NewString()
 
 	registry, err := modules.NewRegistry(
@@ -36,24 +35,22 @@ func TestSupportHTTPIntakeReviewLifecycleFlow(t *testing.T) {
 	handler := app.NewHTTPHandler(config.Config{AppVersion: "0.10.0-test"}, zap.NewNop(), nil, registry)
 
 	createCommunicationRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/communications", map[string]any{
-		"requester_user_id": requesterID,
-		"category":          "communication",
-		"priority":          "normal",
-		"reason_text":       "General support inquiry",
-		"request_id":        "req-support-http-1",
-	})
+		"category":    "communication",
+		"priority":    "normal",
+		"reason_text": "General support inquiry",
+		"request_id":  "req-support-http-1",
+	}, requesterID, "")
 	require.Equal(t, http.StatusCreated, createCommunicationRec.Code)
 
 	createReportRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/reports", map[string]any{
-		"requester_user_id": requesterID,
-		"category":          "content",
-		"priority":          "high",
-		"reason_code":       "abuse",
-		"reason_text":       "Reported abusive comment",
-		"target_type":       "comment",
-		"target_id":         targetID,
-		"request_id":        "req-support-http-2",
-	})
+		"category":    "content",
+		"priority":    "high",
+		"reason_code": "abuse",
+		"reason_text": "Reported abusive comment",
+		"target_type": "comment",
+		"target_id":   targetID,
+		"request_id":  "req-support-http-2",
+	}, requesterID, "")
 	require.Equal(t, http.StatusCreated, createReportRec.Code)
 
 	var reportRes struct {
@@ -62,7 +59,7 @@ func TestSupportHTTPIntakeReviewLifecycleFlow(t *testing.T) {
 	require.NoError(t, json.Unmarshal(createReportRec.Body.Bytes(), &reportRes))
 	require.NotEmpty(t, reportRes.SupportID)
 
-	listRec := performSupportRequest(t, handler, http.MethodGet, "/support/own?requester_user_id="+requesterID, nil)
+	listRec := performSupportRequest(t, handler, http.MethodGet, "/support/own", nil, requesterID, "")
 	require.Equal(t, http.StatusOK, listRec.Code)
 	var listRes struct {
 		Count int `json:"count"`
@@ -70,30 +67,27 @@ func TestSupportHTTPIntakeReviewLifecycleFlow(t *testing.T) {
 	require.NoError(t, json.Unmarshal(listRec.Body.Bytes(), &listRes))
 	require.Equal(t, 2, listRes.Count)
 
-	detailRec := performSupportRequest(t, handler, http.MethodGet, "/support/"+reportRes.SupportID+"?requester_user_id="+requesterID, nil)
+	detailRec := performSupportRequest(t, handler, http.MethodGet, "/support/"+reportRes.SupportID, nil, requesterID, "")
 	require.Equal(t, http.StatusOK, detailRec.Code)
 
 	replyRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/"+reportRes.SupportID+"/replies", map[string]any{
-		"actor_user_id": requesterID,
-		"message":       "Any update from team?",
-		"visibility":    "public_to_requester",
-	})
+		"message":    "Any update from team?",
+		"visibility": "public_to_requester",
+	}, requesterID, "")
 	require.Equal(t, http.StatusOK, replyRec.Code)
 
 	statusRec := performSupportJSONRequest(t, handler, http.MethodPatch, "/support/"+reportRes.SupportID+"/status", map[string]any{
-		"status":              "triaged",
-		"assignee_user_id":    agentID,
-		"reviewed_by_user_id": reviewerID,
-	})
+		"status":           "triaged",
+		"assignee_user_id": agentID,
+	}, agentID, "support_agent")
 	require.Equal(t, http.StatusOK, statusRec.Code)
 
 	resolveRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/"+reportRes.SupportID+"/resolve", map[string]any{
-		"reviewed_by_user_id": reviewerID,
-		"resolution_note":     "Case resolved.",
-	})
+		"resolution_note": "Case resolved.",
+	}, agentID, "support_agent")
 	require.Equal(t, http.StatusOK, resolveRec.Code)
 
-	queueRec := performSupportRequest(t, handler, http.MethodGet, "/support/review/queue?status=resolved", nil)
+	queueRec := performSupportRequest(t, handler, http.MethodGet, "/support/review/queue?status=resolved", nil, agentID, "support_agent")
 	require.Equal(t, http.StatusOK, queueRec.Code)
 	var queueRes struct {
 		Count int `json:"count"`
@@ -101,10 +95,10 @@ func TestSupportHTTPIntakeReviewLifecycleFlow(t *testing.T) {
 	require.NoError(t, json.Unmarshal(queueRec.Body.Bytes(), &queueRes))
 	require.Equal(t, 1, queueRes.Count)
 
-	handoffRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/"+reportRes.SupportID+"/handoff/moderation", map[string]any{})
+	handoffRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/"+reportRes.SupportID+"/handoff/moderation", map[string]any{}, agentID, "support_agent")
 	require.Equal(t, http.StatusOK, handoffRec.Code)
 
-	handoffAgainRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/"+reportRes.SupportID+"/handoff/moderation", map[string]any{})
+	handoffAgainRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/"+reportRes.SupportID+"/handoff/moderation", map[string]any{}, agentID, "support_agent")
 	require.Equal(t, http.StatusConflict, handoffAgainRec.Code)
 }
 
@@ -120,25 +114,24 @@ func TestSupportHTTPCreateValidationFailure(t *testing.T) {
 	handler := app.NewHTTPHandler(config.Config{AppVersion: "0.10.0-test"}, zap.NewNop(), nil, registry)
 
 	invalidCreateRec := performSupportJSONRequest(t, handler, http.MethodPost, "/support/reports", map[string]any{
-		"requester_user_id": "not-a-uuid",
-		"category":          "content",
-		"reason_text":       "invalid input",
-		"target_type":       "social",
-		"target_id":         "not-a-uuid",
-	})
+		"category":    "content",
+		"reason_text": "invalid input",
+		"target_type": "social",
+		"target_id":   "not-a-uuid",
+	}, uuid.NewString(), "")
 	require.Equal(t, http.StatusBadRequest, invalidCreateRec.Code)
 }
 
-func performSupportJSONRequest(t *testing.T, handler http.Handler, method string, path string, body any) *httptest.ResponseRecorder {
+func performSupportJSONRequest(t *testing.T, handler http.Handler, method string, path string, body any, actorUserID string, roles string) *httptest.ResponseRecorder {
 	t.Helper()
 
 	payload, err := json.Marshal(body)
 	require.NoError(t, err)
 
-	return performSupportRequest(t, handler, method, path, bytes.NewReader(payload))
+	return performSupportRequest(t, handler, method, path, bytes.NewReader(payload), actorUserID, roles)
 }
 
-func performSupportRequest(t *testing.T, handler http.Handler, method string, path string, body *bytes.Reader) *httptest.ResponseRecorder {
+func performSupportRequest(t *testing.T, handler http.Handler, method string, path string, body *bytes.Reader, actorUserID string, roles string) *httptest.ResponseRecorder {
 	t.Helper()
 
 	bodyReader := bytes.NewReader(nil)
@@ -150,6 +143,7 @@ func performSupportRequest(t *testing.T, handler http.Handler, method string, pa
 	if body != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
+	setActorHeaders(req, actorUserID, "", roles)
 	rec := httptest.NewRecorder()
 
 	handler.ServeHTTP(rec, req)

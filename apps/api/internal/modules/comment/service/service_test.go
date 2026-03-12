@@ -145,6 +145,7 @@ func TestEditDeleteRestoreModerationVisibilityFlow(t *testing.T) {
 	statusHidden := "hidden"
 	_, err = svc.UpdateModeration(ctx, dto.UpdateModerationRequest{
 		CommentID:        created.CommentID,
+		ActorUserID:      uuid.NewString(),
 		ModerationStatus: &statusHidden,
 	})
 	require.NoError(t, err)
@@ -203,8 +204,9 @@ func TestContractSurfaceAndLockedReplyFlow(t *testing.T) {
 
 	locked := true
 	_, err = svc.UpdateModeration(ctx, dto.UpdateModerationRequest{
-		CommentID: root.CommentID,
-		Locked:    &locked,
+		CommentID:   root.CommentID,
+		ActorUserID: uuid.NewString(),
+		Locked:      &locked,
 	})
 	require.NoError(t, err)
 

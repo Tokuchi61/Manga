@@ -119,6 +119,7 @@ func TestAccountStateEffects(t *testing.T) {
 
 	_, err = svc.UpdateAccountState(ctx, dto.UpdateAccountStateRequest{
 		UserID:       createRes.UserID,
+		ActorUserID:  uuid.NewString(),
 		ActorScope:   "admin",
 		AccountState: "banned",
 	})

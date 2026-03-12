@@ -20,6 +20,15 @@ func (s *UserService) CreateUser(ctx context.Context, request dto.CreateUserRequ
 	if err != nil {
 		return dto.CreateUserResponse{}, err
 	}
+	if s.credentialLookup != nil {
+		exists, lookupErr := s.credentialLookup.CredentialExists(ctx, credentialID)
+		if lookupErr != nil {
+			return dto.CreateUserResponse{}, lookupErr
+		}
+		if !exists {
+			return dto.CreateUserResponse{}, ErrCredentialNotFound
+		}
+	}
 
 	if _, err := s.store.GetUserByCredentialID(ctx, credentialID); err == nil {
 		return dto.CreateUserResponse{}, ErrUserAlreadyExists

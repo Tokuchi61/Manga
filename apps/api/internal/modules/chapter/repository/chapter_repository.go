@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"sort"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter/entity"
 )
@@ -143,4 +144,69 @@ func (s *MemoryStore) ListChaptersByManga(_ context.Context, query ListQuery) ([
 	}
 
 	return append([]entity.Chapter(nil), result[offset:end]...), nil
+}
+
+func (s *MemoryStore) ResolveNavigation(_ context.Context, mangaID string, chapterID string) (NavigationResult, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	mangaKey := normalizeValue(mangaID)
+	sequenceMap, ok := s.sequenceIndex[mangaKey]
+	if !ok || len(sequenceMap) == 0 {
+		return NavigationResult{}, nil
+	}
+
+	sequences := make([]int, 0, len(sequenceMap))
+	for sequenceNo := range sequenceMap {
+		sequences = append(sequences, sequenceNo)
+	}
+	sort.Ints(sequences)
+
+	orderedIDs := make([]string, 0, len(sequences))
+	for _, sequenceNo := range sequences {
+		id := sequenceMap[sequenceNo]
+		chapter, exists := s.chaptersByID[id]
+		if !exists {
+			continue
+		}
+		if chapter.DeletedAt != nil || chapter.PublishState != entity.PublishStatePublished {
+			continue
+		}
+		orderedIDs = append(orderedIDs, chapter.ID)
+	}
+
+	if len(orderedIDs) == 0 {
+		return NavigationResult{}, nil
+	}
+
+	result := NavigationResult{
+		FirstID: stringPtr(orderedIDs[0]),
+		LastID:  stringPtr(orderedIDs[len(orderedIDs)-1]),
+	}
+
+	currentIndex := -1
+	for i := range orderedIDs {
+		if orderedIDs[i] == chapterID {
+			currentIndex = i
+			break
+		}
+	}
+	if currentIndex == -1 {
+		return result, nil
+	}
+
+	result.FoundCurrent = true
+	if currentIndex > 0 {
+		result.PreviousID = stringPtr(orderedIDs[currentIndex-1])
+	}
+	if currentIndex+1 < len(orderedIDs) {
+		result.NextID = stringPtr(orderedIDs[currentIndex+1])
+	}
+
+	return result, nil
+}
+
+func stringPtr(value string) *string {
+	resolved := value
+	return &resolved
 }

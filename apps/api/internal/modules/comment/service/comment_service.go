@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"time"
@@ -15,6 +16,7 @@ var (
 	ErrCommentNotFound        = errors.New("comment_not_found")
 	ErrCommentAlreadyExists   = errors.New("comment_already_exists")
 	ErrCommentNotVisible      = errors.New("comment_not_visible")
+	ErrTargetNotFound         = errors.New("comment_target_not_found")
 	ErrEditWindowExpired      = errors.New("comment_edit_window_expired")
 	ErrReplyDepthExceeded     = errors.New("comment_reply_depth_exceeded")
 	ErrCommentLocked          = errors.New("comment_locked")
@@ -24,10 +26,22 @@ var (
 	ErrInvalidStateTransition = errors.New("comment_invalid_state_transition")
 )
 
+// MangaTargetLookup exposes manga target existence checks.
+type MangaTargetLookup interface {
+	TargetExists(ctx context.Context, mangaID string) (bool, error)
+}
+
+// ChapterTargetLookup exposes chapter target existence checks.
+type ChapterTargetLookup interface {
+	TargetExists(ctx context.Context, chapterID string) (bool, error)
+}
+
 // CommentService owns stage-9 comment/thread flows.
 type CommentService struct {
 	store         commentrepository.Store
 	validator     *validation.Validator
+	mangaLookup   MangaTargetLookup
+	chapterLookup ChapterTargetLookup
 	now           func() time.Time
 	writeCooldown time.Duration
 	editWindow    time.Duration
@@ -48,6 +62,11 @@ func New(store commentrepository.Store, validator *validation.Validator) *Commen
 		restoreWindow: 72 * time.Hour,
 		maxReplyDepth: 3,
 	}
+}
+
+func (s *CommentService) SetTargetLookups(mangaLookup MangaTargetLookup, chapterLookup ChapterTargetLookup) {
+	s.mangaLookup = mangaLookup
+	s.chapterLookup = chapterLookup
 }
 
 func (s *CommentService) validateInput(payload any) error {

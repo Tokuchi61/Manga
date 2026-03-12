@@ -1,4 +1,4 @@
-﻿package integration_test
+package integration_test
 
 import (
 	"bytes"
@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
-	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
+	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
@@ -58,8 +58,9 @@ func TestAuthHTTPRegisterVerifyAndLoginFlow(t *testing.T) {
 	require.NotEmpty(t, loginRes.SessionID)
 	require.NotEmpty(t, loginRes.RefreshToken)
 
-	sessionsReq, err := http.NewRequest(http.MethodGet, "/auth/sessions?credential_id="+loginRes.CredentialID, nil)
+	sessionsReq, err := http.NewRequest(http.MethodGet, "/auth/sessions", nil)
 	require.NoError(t, err)
+	setActorHeaders(sessionsReq, "", loginRes.CredentialID, "")
 	sessionsRec := httptest.NewRecorder()
 	handler.ServeHTTP(sessionsRec, sessionsReq)
 	require.Equal(t, http.StatusOK, sessionsRec.Code)

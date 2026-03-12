@@ -2,6 +2,7 @@ package access
 
 import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/access/handler"
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -14,13 +15,13 @@ func registerRoutes(router chi.Router, httpHandler *handler.HTTPHandler) {
 	}
 
 	router.Route("/access", func(r chi.Router) {
-		r.Post("/roles", httpHandler.CreateRole)
-		r.Post("/permissions", httpHandler.CreatePermission)
-		r.Post("/roles/{role_id}/permissions", httpHandler.AssignPermissionToRole)
-		r.Post("/users/{user_id}/roles", httpHandler.AssignRoleToUser)
-		r.Post("/users/{user_id}/temporary-grants", httpHandler.CreateTemporaryGrant)
-		r.Post("/policies", httpHandler.CreatePolicyRule)
-		r.Post("/evaluate", httpHandler.Evaluate)
-		r.Get("/contracts/permissions", httpHandler.ListCanonicalPermissions)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin")).Post("/roles", httpHandler.CreateRole)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin")).Post("/permissions", httpHandler.CreatePermission)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin")).Post("/roles/{role_id}/permissions", httpHandler.AssignPermissionToRole)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin")).Post("/users/{user_id}/roles", httpHandler.AssignRoleToUser)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin")).Post("/users/{user_id}/temporary-grants", httpHandler.CreateTemporaryGrant)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin")).Post("/policies", httpHandler.CreatePolicyRule)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin", "internal_service")).Post("/evaluate", httpHandler.Evaluate)
+		r.With(identity.RequireUser, identity.RequireAnyRole("admin", "internal_service")).Get("/contracts/permissions", httpHandler.ListCanonicalPermissions)
 	})
 }

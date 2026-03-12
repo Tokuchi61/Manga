@@ -36,7 +36,7 @@
 - HTTP router olarak Chi kullanÄ±lmalÄ±dÄ±r.
 - SÃ¼rÃ¼m kontrol sistemi: Git.
 - Commit mesajlarÄ± Conventional Commits standardÄ±na uymalÄ±dÄ±r.
-- Branch modeli: `main + feature/* + hotfix/*`.
+- Branch modeli: `main + feature/* + hotfix/*` (ajan calismalari icin `codex/**` gecici branch modeli desteklenebilir).
 - Migration yÃ¶netiminde `golang-migrate` kullanÄ±lmalÄ±dÄ±r.
 - YapÄ±landÄ±rma env tabanlÄ± olmalÄ±, config eriÅŸimi merkezi katmandan yapÄ±lmalÄ±dÄ±r.
 - Proje Docker iÃ§inde build alabilmelidir.
@@ -125,7 +125,7 @@ Makefile
 - AynÄ± anlama gelen birden fazla modÃ¼l adÄ± aÃ§Ä±lmamalÄ±dÄ±r.
 - ModÃ¼l adlarÄ± tekil veya Ã§oÄŸul kullanÄ±m aÃ§Ä±sÄ±ndan tutarlÄ± olmalÄ±; aynÄ± alan iÃ§in iki farklÄ± yazÄ±m standardÄ± aÃ§Ä±lmamalÄ±dÄ±r.
 - TÃ¼m aktif modÃ¼ller iÃ§in canonical modÃ¼l kaydÄ± tutulmalÄ±dÄ±r.
-- Ã–nerilen kayÄ±t dosyasÄ± `docs/modules/index.md` veya benzeri merkezi bir modÃ¼l envanteri olmalÄ±dÄ±r.
+- Ã–nerilen kayÄ±t dosyasÄ± `docs/modules.md` veya benzeri merkezi bir modÃ¼l envanteri olmalÄ±dÄ±r.
 - Bu kayÄ±t en az ÅŸu alanlarÄ± iÃ§ermelidir:
   - canonical modÃ¼l adÄ±
   - varsa domain group
@@ -280,8 +280,8 @@ dto/
 - Bir modÃ¼lÃ¼n taÅŸÄ±dÄ±ÄŸÄ± denormalize sayaÃ§, Ã¶zet veya projection alanÄ± o modÃ¼lde tutulabilir; ancak bu alanlarÄ±n canonical kaynak verisi ilgili kaynak modÃ¼lde kalmalÄ±dÄ±r.
 - Ã‡apraz modÃ¼l sayaÃ§ veya Ã¶zet gÃ¼ncellemeleri kaynak modÃ¼l tarafÄ±ndan owner modÃ¼lÃ¼n tablosuna doÄŸrudan yazÄ±larak yapÄ±lmamalÄ±dÄ±r; aÃ§Ä±k event, projection veya owner modÃ¼lÃ¼n aÃ§Ä±k counter contract yÃ¼zeyi kullanÄ±lmalÄ±dÄ±r.
 - SayaÃ§ veya Ã¶zet alanÄ± tanÄ±mlanan her yerde canonical source, gÃ¼ncelleme tetikleyicisi, kabul edilen gecikme modeli ve gerektiÄŸinde reconcile veya yeniden hesaplama yolu dokÃ¼mante edilmelidir.
-- `target_type` veya benzeri paylaÅŸÄ±lan hedef tipleri taÅŸÄ±yan modÃ¼ller canonical kayÄ±t dosyasÄ± olarak `docs/shared/target-types.md` kullanmalÄ±dÄ±r.
-- Yeni target type yalnÄ±zca ilgili modÃ¼l dokÃ¼manÄ±, consumer modÃ¼l dokÃ¼manlarÄ± ve `docs/shared/target-types.md` aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellendiÄŸinde kullanÄ±labilir hale gelmelidir.
+- `target_type` veya benzeri paylaÅŸÄ±lan hedef tipleri taÅŸÄ±yan modÃ¼ller canonical kayÄ±t dosyasÄ± olarak `docs/shared.md` kullanmalÄ±dÄ±r.
+- Yeni target type yalnÄ±zca ilgili modÃ¼l dokÃ¼manÄ±, consumer modÃ¼l dokÃ¼manlarÄ± ve `docs/shared.md` aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellendiÄŸinde kullanÄ±labilir hale gelmelidir.
 - DÃ¶ngÃ¼sel modÃ¼l baÄŸÄ±mlÄ±lÄ±ÄŸÄ± kesin olarak yasaktÄ±r.
 - Senkron baÄŸÄ±mlÄ±lÄ±k yalnÄ±zca gerÃ§ekten anlÄ±k doÄŸrulama veya kritik iÅŸlem bÃ¼tÃ¼nlÃ¼ÄŸÃ¼ gerektiÄŸinde kullanÄ±lmalÄ±dÄ±r.
 - ZayÄ±f baÄŸlÄ± entegrasyonlarda event tabanlÄ± veya asenkron akÄ±ÅŸ tercih edilmelidir.
@@ -305,8 +305,8 @@ dto/
   - dokÃ¼mantasyon dosyasÄ±
 - Bu baÅŸlÄ±klar netleÅŸmeden yeni modÃ¼l implementasyonu baÅŸlatÄ±lmamalÄ±dÄ±r.
 - Her yeni modÃ¼l iÃ§in en az bir modÃ¼l dokÃ¼manÄ± oluÅŸturulmalÄ±dÄ±r.
-- Domain group kullanÄ±lmÄ±yorsa modÃ¼l dokÃ¼manlarÄ± iÃ§in Ã¶nerilen yerleÅŸim `docs/modules/<module>.md` olmalÄ±dÄ±r.
-- Domain group kullanÄ±lÄ±yorsa modÃ¼l dokÃ¼manlarÄ± iÃ§in Ã¶nerilen yerleÅŸim `docs/modules/<domain-group>/<module>.md` olmalÄ±dÄ±r.
+- Domain group kullanÄ±lmÄ±yorsa modÃ¼l dokÃ¼manlarÄ± iÃ§in Ã¶nerilen yerleÅŸim `docs/modules.md` olmalÄ±dÄ±r.
+- Domain group kullanÄ±lÄ±yorsa modÃ¼l dokÃ¼manlarÄ± iÃ§in Ã¶nerilen yerleÅŸim `docs/modules.md` olmalÄ±dÄ±r.
 - Yeni leaf modÃ¼l aÃ§Ä±ldÄ±ÄŸÄ±nda merkezi modÃ¼l envanteri aynÄ± deÄŸiÅŸiklik seti iÃ§inde eklenmeli veya gÃ¼ncellenmelidir.
 
 ## 11) Veri, API ve State KurallarÄ±
@@ -346,7 +346,7 @@ dto/
 - EÅŸik veya deÄŸer taÅŸÄ±yan runtime ayarlarda en spesifik geÃ§erli kayÄ±t kullanÄ±lmalÄ±dÄ±r.
 - EÅŸik veya deÄŸer ayarlarÄ±nda audience Ã¶zgÃ¼llÃ¼k sÄ±rasÄ± `user/group/role` > `vip/authenticated_non_vip` > `authenticated/guest` > `all` olmalÄ±dÄ±r.
 - EÅŸik veya deÄŸer ayarlarÄ±nda scope Ã¶zgÃ¼llÃ¼k sÄ±rasÄ± `resource/context` > `feature` > `module` > `site` olmalÄ±dÄ±r.
-- Bir modÃ¼l dokÃ¼manÄ± bir yÃ¼zeyin ayrÄ± ayrÄ± runtime kontrol edilebildiÄŸini sÃ¶ylÃ¼yorsa `docs/settings/index.md` iÃ§inde o yÃ¼zey iÃ§in en az bir canonical baseline key veya bu alt yÃ¼zeyleri aÃ§Ä±kÃ§a kapsayan umbrella key kaydÄ± bulunmalÄ±dÄ±r.
+- Bir modÃ¼l dokÃ¼manÄ± bir yÃ¼zeyin ayrÄ± ayrÄ± runtime kontrol edilebildiÄŸini sÃ¶ylÃ¼yorsa `docs/shared.md` iÃ§inde o yÃ¼zey iÃ§in en az bir canonical baseline key veya bu alt yÃ¼zeyleri aÃ§Ä±kÃ§a kapsayan umbrella key kaydÄ± bulunmalÄ±dÄ±r.
 - Umbrella key kullanÄ±lan durumda kapsanan alt yÃ¼zeyler `affected_surfaces` ve `notes` alanlarÄ±nda aÃ§Ä±kÃ§a listelenmeli; yÃ¼zey dokÃ¼manda tanÄ±mlÄ± kalÄ±rken settings envanterinde tamamen isimsiz bÄ±rakÄ±lamaz.
 - Ãœcretli veya sÃ¼reli haklarÄ± etkileyen runtime kapatmalar aÃ§Ä±k bir entitlement impact policy taÅŸÄ±mak zorundadÄ±r.
 - Sistem kaynaklÄ± pasiflikte Ã¼cretli veya sÃ¼reli avantajlarÄ±n kalan sÃ¼resi sessizce tÃ¼ketilemez; varsayÄ±lan gÃ¼venli davranÄ±ÅŸ sÃ¼renin dondurulmasÄ± ve sistem tekrar aÃ§Ä±ldÄ±ÄŸÄ±nda kaldÄ±ÄŸÄ± yerden devam etmesidir.
@@ -405,7 +405,7 @@ dto/
 - `apply_mode` en az `immediate`, `cache_refresh` ve `scheduled` deÄŸerlerini destekleyecek ÅŸekilde tasarlanmalÄ±dÄ±r.
 - `cache_strategy` en az `none`, `ttl` ve `manual_invalidate` gibi aÃ§Ä±k stratejilerle tanÄ±mlanmalÄ±dÄ±r.
 - `schedule_support` en az `none`, `start_at` ve `time_window` gibi aÃ§Ä±k planlama modlarÄ± ile tanÄ±mlanmalÄ±dÄ±r.
-- Runtime ayar envanterinin canonical kayÄ±t dosyasÄ± `docs/settings/index.md` olmalÄ±; yeni ayar, toggle, kill switch veya limit eklendiÄŸinde aynÄ± deÄŸiÅŸiklik setinde bu dosya gÃ¼ncellenmelidir.
+- Runtime ayar envanterinin canonical kayÄ±t dosyasÄ± `docs/shared.md` olmalÄ±; yeni ayar, toggle, kill switch veya limit eklendiÄŸinde aynÄ± deÄŸiÅŸiklik setinde bu dosya gÃ¼ncellenmelidir.
 - Ãœcretli veya sÃ¼reli avantajÄ± etkileyen ayarlarda metadata'ya ek olarak `entitlement_impact_policy` zorunlu olmalÄ±dÄ±r.
 
 ## 14) Migration ve Ã‡alÄ±ÅŸma OrtamÄ± KurallarÄ±
@@ -430,7 +430,7 @@ dto/
 - Push iÅŸlemleri yalnÄ±zca bu repoya yapÄ±lmalÄ±dÄ±r.
 - Onay olmadan farklÄ± remote eklenmemeli ve farklÄ± repolara push yapÄ±lmamalÄ±dÄ±r.
 
-- Branch modeli `main + feature/* + hotfix/*` olmalÄ±dÄ±r.
+- Branch modeli `main + feature/* + hotfix/*` olmali; ajan tabanli akislarda `codex/**` branchleri gecici calisma dali olarak kabul edilebilir.
 - `main` daima deploy edilebilir durumda kalmalÄ±dÄ±r.
 - DoÄŸrudan `main` branch'e push yapÄ±lmamalÄ±dÄ±r.
 - TÃ¼m deÄŸiÅŸiklikler PR Ã¼zerinden ilerlemelidir.
@@ -552,14 +552,14 @@ dto/
 - ÃœrÃ¼n veya mimari kapsamÄ±nÄ± deÄŸiÅŸtiren kararlar Ã¶nce dokÃ¼mana yansÄ±tÄ±lmalÄ±dÄ±r.
 - AynÄ± anda Ã§ok fazla sorumluluk aÃ§mak yerine en kÃ¼Ã§Ã¼k sÃ¼rdÃ¼rÃ¼lebilir kapsam seÃ§ilmelidir.
 - `RULES.md`, `ROADMAP.md` ve gerekli diÄŸer dokÃ¼manlar birlikte gÃ¼ncellenmelidir.
-- `docs/settings/index.md`, `docs/shared/target-types.md` ve benzeri canonical kayÄ±t dosyalarÄ± etkilendiklerinde aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellenmelidir.
+- `docs/shared.md`, `docs/shared.md` ve benzeri canonical kayÄ±t dosyalarÄ± etkilendiklerinde aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellenmelidir.
 - AynÄ± bilgi birden fazla dosyada Ã§eliÅŸkili ÅŸekilde bÄ±rakÄ±lmamalÄ±dÄ±r.
 - `README.md` proje giriÅŸi ve ana dokÃ¼man baÄŸlantÄ±larÄ± iÃ§in gÃ¼ncel tutulmalÄ±dÄ±r.
 - SÃ¼rÃ¼m bazlÄ± deÄŸiÅŸiklikler `docs/changelog.md` iÃ§inde kayÄ±t altÄ±na alÄ±nmalÄ±dÄ±r.
 - Bilinen sorunlar ve teknik borÃ§lar `docs/issues.md` iÃ§inde tutulmalÄ±dÄ±r.
 - Repo kÃ¶k dizin yapÄ±sÄ±nÄ±, uygulama yerleÅŸimini veya deployment klasÃ¶r yapÄ±sÄ±nÄ± etkileyen deÄŸiÅŸikliklerde `RULES.md`, `README.md` ve `SETUP.md` aynÄ± deÄŸiÅŸiklik setinde birlikte gÃ¼ncellenmelidir.
 - Her yeni leaf modÃ¼l iÃ§in en az bir modÃ¼l dokÃ¼manÄ± aÃ§Ä±lmalÄ±dÄ±r.
-- Yeni runtime ayar, feature toggle, kill switch veya oran limiti eklendiÄŸinde ilgili key, scope, scope selector, audience, audience selector, varsayÄ±lan deÄŸer, disabled behavior varsa bunun tipi, error response policy varsa bunun tipi ve etkilediÄŸi modÃ¼ller dokÃ¼mana yansÄ±tÄ±lmalÄ±; `docs/settings/index.md` aynÄ± deÄŸiÅŸiklikte gÃ¼ncellenmelidir.
+- Yeni runtime ayar, feature toggle, kill switch veya oran limiti eklendiÄŸinde ilgili key, scope, scope selector, audience, audience selector, varsayÄ±lan deÄŸer, disabled behavior varsa bunun tipi, error response policy varsa bunun tipi ve etkilediÄŸi modÃ¼ller dokÃ¼mana yansÄ±tÄ±lmalÄ±; `docs/shared.md` aynÄ± deÄŸiÅŸiklikte gÃ¼ncellenmelidir.
 - ModÃ¼l dokÃ¼manlarÄ±nda en az ÅŸu baÅŸlÄ±klar yer almalÄ±dÄ±r:
   - amaÃ§
   - sorumluluk alanÄ±
@@ -598,7 +598,7 @@ dto/
 - `auth` modÃ¼lÃ¼ kullanÄ±cÄ± profil verisi, kullanÄ±cÄ± tercihleri, Ã¼yelik avantajlarÄ±, rol/permission yÃ¶netimi veya authorization kararÄ± Ã¼retmemelidir.
 - `auth` veri sahipliÄŸi; credential benzeri kimlik bilgileri, auth session kayÄ±tlarÄ±, token yaÅŸam dÃ¶ngÃ¼sÃ¼ ve auth gÃ¼venlik olaylarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `auth` modÃ¼lÃ¼nÃ¼n public surface'i, kimlik doÄŸrulama akÄ±ÅŸlarÄ± ve gÃ¼venli oturum yÃ¶netimi iÃ§in gerekli contract yÃ¼zeyi ile sÄ±nÄ±rlÄ± olmalÄ±dÄ±r.
-- `auth` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/auth.md` olmalÄ±dÄ±r.
+- `auth` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - refresh token Ã¼retimi ve yenileme akÄ±ÅŸÄ±
   - session listing, session revoke ve logout all akÄ±ÅŸlarÄ±
@@ -618,7 +618,7 @@ dto/
 - `user` modÃ¼lÃ¼ kimlik doÄŸrulama akÄ±ÅŸlarÄ±nÄ±, authorization kararlarÄ±nÄ±, role/permission yÃ¶netimini veya admin operasyon kararlarÄ±nÄ± sahiplenmemelidir.
 - `user` veri sahipliÄŸi; kullanÄ±cÄ± kimliÄŸi ile iliÅŸkili profil alanlarÄ±, hesap durum alanlarÄ±, tercih alanlarÄ± ve Ã¼yelik durum verileri ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `user` modÃ¼lÃ¼ veri taÅŸÄ±r ve yayÄ±nlar; eriÅŸim kararÄ± veya feature access kararÄ± Ã¼retmez.
-- `user` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/user.md` olmalÄ±dÄ±r.
+- `user` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - kullanÄ±cÄ± arama, kullanÄ±cÄ± listeleme ve reserved username kontrolÃ¼
   - email change, preferences update ve privacy alanlarÄ±
@@ -644,7 +644,7 @@ dto/
 - `access` veri sahipliÄŸi; authorization sÃ¶zlÃ¼ÄŸÃ¼, rol-permission iliÅŸkileri, policy yorumlarÄ± ve eriÅŸim kararÄ±na temel olan kurallarla sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `access` modÃ¼lÃ¼ kimlik doÄŸrulama yapmaz; `auth` tarafÄ±ndan doÄŸrulanan kimliÄŸi ve `user` tarafÄ±ndan taÅŸÄ±nan kullanÄ±cÄ± verisini kullanarak karar Ã¼retir.
 - `access` modÃ¼lÃ¼ yalnÄ±zca authorization, audience targeting, entitlement gating, feature availability ve kill switch kararlarÄ±nÄ± yorumlamalÄ±dÄ±r; `site` veya `communication` kategorisindeki Ã¼rÃ¼n ayarlarÄ± ile eriÅŸim dÄ±ÅŸÄ± iÅŸ kuralÄ± eÅŸikleri `access` iÃ§inde Ã§Ã¶zÃ¼lmemelidir.
-- `access` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/access.md` olmalÄ±dÄ±r.
+- `access` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - public, guest, authenticated, vip, early access ve gerektiÄŸinde restricted kararlarÄ±
   - role CRUD, permission CRUD, user-role ve role-permission iliÅŸkileri
@@ -676,7 +676,7 @@ dto/
 - `admin` veri sahipliÄŸi; yÃ¶netimsel iÅŸlem kayÄ±tlarÄ±, admin notlarÄ±, admin use-case akÄ±ÅŸlarÄ± ve operasyonel gÃ¶rÃ¼nÃ¼m alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `admin` modÃ¼lÃ¼nÃ¼n tÃ¼m kritik akÄ±ÅŸlarÄ± `access` guard veya policy kararlarÄ± ile korunmalÄ±dÄ±r.
 - Gerekli role veya permission'a sahip admin kullanÄ±cÄ±larÄ± sistemdeki yÃ¶netim ve inceleme yÃ¼zeylerine tam eriÅŸim taÅŸÄ±yabilir; bu durum gÃ¼nlÃ¼k scoped moderator use-case sahipliÄŸini `moderation` modÃ¼lÃ¼nden almaz.
-- `admin` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/admin.md` olmalÄ±dÄ±r.
+- `admin` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - admin dashboard ve dashboard veri ihtiyaÃ§larÄ±
   - kullanÄ±cÄ± yÃ¶netimi, kullanÄ±cÄ± durum mÃ¼dahaleleri, warning, restriction, suspend ve ban akÄ±ÅŸlarÄ±
@@ -706,7 +706,7 @@ dto/
 - `manga` sayaÃ§ gÃ¼ncellemeleri `chapter` veya `comment` modÃ¼lÃ¼nÃ¼n manga tablosuna doÄŸrudan yazmasÄ± ile yapÄ±lmamalÄ±; event, projection veya aÃ§Ä±k counter contract yÃ¼zeyi ile senkronize edilmelidir.
 - `manga` sayaÃ§larÄ± iÃ§in kabul edilen gecikme modeli ve gerektiÄŸinde reconcile veya yeniden hesaplama yolu dokÃ¼mante edilmelidir.
 - `manga` modÃ¼lÃ¼nÃ¼n public surface'i iÃ§erik listeleme, iÃ§erik detay, yÃ¶netimsel iÃ§erik iÅŸlemleri ve taxonomy iliÅŸkileri iÃ§in gerekli yÃ¼zey ile sÄ±nÄ±rlÄ± olmalÄ±dÄ±r.
-- `manga` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/manga.md` olmalÄ±dÄ±r.
+- `manga` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - slug ve benzersizlik kurallarÄ±
   - alternative titles, short summary, cover image, banner image ve SEO alanlarÄ±
@@ -728,7 +728,7 @@ dto/
 - `chapter` veri sahipliÄŸi; chapter metadata alanlarÄ±, page yapÄ±sÄ±, publish state, access state verisi ve navigation alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `chapter` kullanÄ±cÄ±ya ait son okuma pozisyonu, reading session progress, continue reading kaydÄ± veya bookmark-library state'i taÅŸÄ±mamalÄ±; bunlar `history` modÃ¼lÃ¼nde tutulmalÄ±dÄ±r.
 - `chapter` modÃ¼lÃ¼nÃ¼n public surface'i okuma akÄ±ÅŸÄ±, chapter detail ve yÃ¶netimsel chapter iÅŸlemleri iÃ§in gerekli contract yÃ¼zeyi ile sÄ±nÄ±rlÄ± olmalÄ±dÄ±r.
-- `chapter` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/chapter.md` olmalÄ±dÄ±r.
+- `chapter` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - latest chapter list ile previous, next, first ve last navigation akÄ±ÅŸlarÄ±
   - chapter page yapÄ±sÄ±, width veya height bilgisi ve gerekirse long strip desteÄŸi
@@ -750,10 +750,10 @@ dto/
 - `comment` modÃ¼lÃ¼ yorum gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼nÃ¼ etkileyen veri alanlarÄ±nÄ± taÅŸÄ±yabilir; ancak create/edit/delete/pin/lock gibi iÅŸlemlerin yetki kararÄ±nÄ± kendi iÃ§inde Ã¼retmemelidir.
 - `comment` modÃ¼lÃ¼ sosyal duvar post'u veya sosyal duvar reply akÄ±ÅŸÄ±nÄ± sahiplenmemeli; bunlar `social` modÃ¼lÃ¼nde kalmalÄ± ve `comment` sistemine Ã¶rtÃ¼k olarak dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lmemelidir.
 - `comment` veri sahipliÄŸi; yorum iÃ§eriÄŸi, hedef iliÅŸkisi, reply yapÄ±sÄ±, moderation/spoiler/lock verileri ve sÄ±ralama/listeleme alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
-- `comment` modÃ¼lÃ¼ndeki `target_type` deÄŸerleri canonical olarak `docs/shared/target-types.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
+- `comment` modÃ¼lÃ¼ndeki `target_type` deÄŸerleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
 - Yeni yorum hedef tipi eklendiÄŸinde `comment` modÃ¼lÃ¼, hedef modÃ¼l dokÃ¼manÄ± ve canonical target type kaydÄ± aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellenmelidir.
 - `comment` modÃ¼lÃ¼nÃ¼n public surface'i yorum listeleme, yorum detay, thread akÄ±ÅŸÄ± ve hedef iliÅŸkisi iÃ§in gerekli yÃ¼zey ile sÄ±nÄ±rlÄ± olmalÄ±dÄ±r.
-- `comment` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/comment.md` olmalÄ±dÄ±r.
+- `comment` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - root comment ve reply thread yapÄ±sÄ±
   - newest, oldest ve popular sÄ±ralama seÃ§enekleri ile pagination
@@ -777,10 +777,10 @@ dto/
 - `support` veri sahipliÄŸi; destek kaydÄ±, `support_kind`, category, isteÄŸe baÄŸlÄ± hedef iliÅŸkisi, destek durumu, mesaj veya reply zinciri, Ã§Ã¶zÃ¼m notlarÄ± ve inceleme yaÅŸam dÃ¶ngÃ¼sÃ¼ verileri ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `support` modÃ¼lÃ¼ review ve karar verisini taÅŸÄ±r; ancak yetki kararÄ±nÄ± kendi iÃ§inde Ã¼retmez, yÃ¶netimsel karar yÃ¼rÃ¼tÃ¼mÃ¼ `admin`, authorization ise `access` ile korunur.
 - `support` modÃ¼lÃ¼ndeki report kaydÄ± varsayÄ±lan olarak moderation case ile aynÄ± kayÄ±t sayÄ±lmamalÄ±dÄ±r; moderation ihtiyacÄ± oluÅŸtuÄŸunda linked case aÃ§Ä±labilir, ancak support intake kaydÄ± ve moderation case yaÅŸam dÃ¶ngÃ¼sÃ¼ ayrÄ± owner sÄ±nÄ±rlarÄ±nda kalmalÄ±dÄ±r.
-- `support` modÃ¼lÃ¼ndeki `target_type` deÄŸerleri canonical olarak `docs/shared/target-types.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
+- `support` modÃ¼lÃ¼ndeki `target_type` deÄŸerleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
 - Genel iletiÅŸim veya hedefsiz destek biletlerinde `target_type` zorunlu olmamalÄ±; bu alan yalnÄ±zca manga/chapter/comment gibi hedefe baÄŸlÄ± kayÄ±tlar iÃ§in kullanÄ±lmalÄ±dÄ±r.
 - Yeni support hedef tipi eklendiÄŸinde `support` modÃ¼lÃ¼, hedef modÃ¼l dokÃ¼manÄ± ve canonical target type kaydÄ± aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellenmelidir.
-- `support` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/support.md` olmalÄ±dÄ±r.
+- `support` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - communication, ticket ve hedefe baÄŸlÄ± report akÄ±ÅŸlarÄ±nÄ±n aynÄ± modÃ¼lde ama ayrÄ± kayÄ±t mantÄ±ÄŸÄ± ile taÅŸÄ±nmasÄ±
   - manga, chapter ve comment hedef tipleri ile isteÄŸe baÄŸlÄ± target relation yapÄ±sÄ±
@@ -803,8 +803,8 @@ dto/
 - `moderation` modÃ¼lÃ¼ authorization, role veya permission sahipliÄŸi Ã¼retmemeli; moderator scope ve yetki kararlarÄ± `access` ile korunmalÄ±dÄ±r.
 - `moderation` veri sahipliÄŸi; moderation case, assignment, moderator note, action summary ve escalation lifecycle alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `moderation` gÃ¼nlÃ¼k scoped inceleme sahibidir; ancak `admin` tarafÄ±ndan aynÄ± case Ã¼zerinde verilen override, reopen, freeze, reassignment veya final kararlar daha yÃ¼ksek precedence taÅŸÄ±r.
-- `moderation` case hedefleri canonical olarak `docs/shared/target-types.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±; alt yÃ¼zey bilgisi `target_type` iÃ§ine deÄŸil context verisine taÅŸÄ±nmalÄ±dÄ±r.
-- `moderation` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/moderation.md` olmalÄ±dÄ±r.
+- `moderation` case hedefleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±; alt yÃ¼zey bilgisi `target_type` iÃ§ine deÄŸil context verisine taÅŸÄ±nmalÄ±dÄ±r.
+- `moderation` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - yorum, chapter ve manga yÃ¼zeyleri iÃ§in scoped queue yapÄ±larÄ±
   - comment moderator, chapter moderator veya manga moderator gibi role veya kullanÄ±cÄ± bazlÄ± scope modelleri
@@ -821,7 +821,7 @@ dto/
 - `notification` modÃ¼lÃ¼ in-app inbox, read veya unread akÄ±ÅŸlarÄ±, category, channel, template, delivery attempt ve suppression yÃ¼zeylerini taÅŸÄ±malÄ±dÄ±r.
 - `notification` modÃ¼lÃ¼ business event sahipliÄŸi veya authorization kararÄ± Ã¼retmemelidir; bildirim olaylarÄ±nÄ± producer modÃ¼llerden almalÄ± ve own-surface eriÅŸimini `access` ile korumalÄ±dÄ±r.
 - `notification` veri sahipliÄŸi; notification kaydÄ±, delivery durumu, template veya category tanÄ±mÄ± ve kullanÄ±cÄ± bildirim tercihleri ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
-- `notification` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/notification.md` olmalÄ±dÄ±r.
+- `notification` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - in-app inbox ve read veya unread davranÄ±ÅŸlarÄ±
   - category, template ve channel yÃ¶netimi
@@ -838,7 +838,7 @@ dto/
 - `social` modÃ¼lÃ¼ manga veya chapter iÃ§erik yorumlarÄ±nÄ± sahiplenmemeli; bu alanlar `comment` modÃ¼lÃ¼nde kalmalÄ±dÄ±r.
 - `social` modÃ¼lÃ¼ndeki wall reply yapÄ±sÄ± social-native kabul edilmeli; `comment` thread sistemi ile Ã¶rtÃ¼k olarak birleÅŸtirilmemelidir.
 - `social` veri sahipliÄŸi; sosyal iliÅŸki kayÄ±tlarÄ±, social block veya mute iliÅŸkileri, sosyal iÃ§erik kayÄ±tlarÄ± ve sosyal privacy sinyalleri ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
-- `social` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/social.md` olmalÄ±dÄ±r.
+- `social` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - friend request, accept, reject, remove ve friend list akÄ±ÅŸlarÄ±
   - follow veya unfollow davranÄ±ÅŸlarÄ± ve takip listeleri
@@ -857,7 +857,7 @@ dto/
 - `inventory` modÃ¼lÃ¼ sellable shop product veya offer catalog sahipliÄŸi Ã¼retmemeli; `shop` ile iliÅŸkisi product-to-item mapping ve final grant kontratÄ± Ã¼zerinden kurulmalÄ±dÄ±r.
 - `inventory` modÃ¼lÃ¼ Ã¶deme, gÃ¶rev ilerlemesi veya pass season sahipliÄŸi Ã¼retmemeli; yalnÄ±zca item sahipliÄŸi ve item durumunu taÅŸÄ±malÄ±dÄ±r.
 - `inventory` veri sahipliÄŸi; ownable item tanÄ±mÄ±, quantity veya stack durumu, expiry, equip state ve source reference alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±; sellable catalog verisini iÃ§ermemelidir.
-- `inventory` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/inventory.md` olmalÄ±dÄ±r.
+- `inventory` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - stackable ve non-stackable item ayrÄ±mÄ±
   - grant, reward teslim yÃ¼rÃ¼tÃ¼mÃ¼, revoke, consume ve equip yÃ¼zeyleri
@@ -872,7 +872,7 @@ dto/
 - `mission` modÃ¼lÃ¼ mission definition, objective yapÄ±sÄ±, progress kaydÄ±, completion, claim eligibility ve reset pencerelerini taÅŸÄ±malÄ±dÄ±r.
 - `mission` modÃ¼lÃ¼ global EXP veya level sahipliÄŸini tek baÅŸÄ±na Ã¼retmemeli; `user` modÃ¼lÃ¼ndeki progression sinyallerini tÃ¼keterek gÃ¶rev deÄŸerlendirmesi yapabilmelidir.
 - `mission` veri sahipliÄŸi; gÃ¶rev tanÄ±mÄ±, gÃ¶rev kategorisi, progress state, claim eligibility state ve reward reference alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
-- `mission` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/mission.md` olmalÄ±dÄ±r.
+- `mission` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - daily, weekly, monthly, event ve level-based mission tipleri
   - recurring reset, dÃ¶nemsel yenileme ve gerektiÄŸinde streak davranÄ±ÅŸlarÄ±
@@ -889,7 +889,7 @@ dto/
 - `royalpass` modÃ¼lÃ¼ gÃ¶rev tanÄ±mÄ±, item sahipliÄŸi veya Ã¶deme sahipliÄŸi Ã¼retmemelidir; season iÃ§i progress ve claim eligibility sahipliÄŸi ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `royalpass` veri sahipliÄŸi; season tanÄ±mÄ±, track veya tier yapÄ±sÄ±, user season claim eligibility state ve premium activation referanslarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `royalpass` premium aktivasyonu Ã¼rÃ¼nleÅŸmiÅŸ satÄ±n alma akÄ±ÅŸÄ±nda canonical olarak `shop` Ã¼zerinden baÅŸlamalÄ±, gerÃ§ek para veya mana checkout veya bakiye doÄŸruluÄŸu gerekiyorsa `payment` tarafÄ±ndan tamamlanmalÄ± ve final premium activation referansÄ± `royalpass` tarafÄ±ndan tÃ¼ketilmelidir.
-- `royalpass` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/royalpass.md` olmalÄ±dÄ±r.
+- `royalpass` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - aylÄ±k season yaÅŸam dÃ¶ngÃ¼sÃ¼ ve season archive yapÄ±larÄ±
   - free track ve premium track ayrÄ±mÄ±
@@ -908,7 +908,7 @@ dto/
 - `history` veri sahipliÄŸi; kullanÄ±cÄ±ya ait library entry kayÄ±tlarÄ±, bookmark veya favorite iÅŸaretleri, son okunan chapter veya page referanslarÄ±, okuma progress snapshot'larÄ±, history timeline verileri ve entry-level share metadata alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `history` modÃ¼lÃ¼ public veya shared library gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼nÃ¼ doÄŸrudan kendi iÃ§inde karara baÄŸlamamalÄ±; global visibility default'larÄ± `user`, permission kararlarÄ± `access`, entry-level share metadata ise `history` iÃ§inde kalacak ÅŸekilde Ã§alÄ±ÅŸmalÄ±dÄ±r.
 - `history` access entegrasyonunda en az `history.continue_reading.read.own`, `history.timeline.read.own`, `history.library.read.own`, `history.bookmark.write.own` ve gerektiÄŸinde `history.library.read.public` gibi canonical permission Ã¶rnekleri dokÃ¼mante edilmelidir.
-- `history` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/history.md` olmalÄ±dÄ±r.
+- `history` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - continue reading yÃ¼zeyi
   - reading history timeline veya own reading log gÃ¶rÃ¼nÃ¼mÃ¼
@@ -924,7 +924,7 @@ dto/
 - `ads` modÃ¼lÃ¼ placement, campaign, creative, active window, priority, frequency cap, impression ve click akÄ±ÅŸlarÄ±nÄ± taÅŸÄ±malÄ±dÄ±r.
 - `ads` modÃ¼lÃ¼ VIP reklamsÄ±z deneyim veya audience eriÅŸim kararÄ±nÄ± kendi iÃ§inde Ã¼retmemelidir; bu yorumlar `access` ile yapÄ±lmalÄ±dÄ±r.
 - `ads` veri sahipliÄŸi; placement tanÄ±mlarÄ±, campaign yapÄ±landÄ±rmalarÄ±, creative kayÄ±tlarÄ±, delivery metadata, gÃ¶sterim veya tÄ±klama loglarÄ± ve reklam gÃ¶rÃ¼nÃ¼rlÃ¼k state alanlarÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
-- `ads` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/ads.md` olmalÄ±dÄ±r.
+- `ads` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - ana sayfa, listeleme, manga detay ve chapter Ã§evresi placement yapÄ±larÄ±
   - campaign aktiflik penceresi, Ã¶ncelik ve frequency cap yÃ¶netimi
@@ -940,7 +940,7 @@ dto/
 - `shop` veri sahipliÄŸi; sellable product veya offer kataloÄŸu, fiyat tanÄ±mÄ±, indirim veya kampanya metadata'sÄ±, purchase request veya order kayÄ±tlarÄ±, Ã¼rÃ¼n gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ ve kullanÄ±m kÄ±sÄ±tÄ± verileri ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
 - `shop` modÃ¼lÃ¼ `payment` Ã¶ncesi aÅŸamada yalnÄ±zca purchase eligibility iÃ§in geÃ§ici `seed_mana_allowance_snapshot` veya operasyonel allowance read modelini kullanabilir; bu kÃ¶prÃ¼ veri `payment` devreye girince kaldÄ±rÄ±lmalÄ±dÄ±r.
 - `shop` modÃ¼lÃ¼ Ã¼rÃ¼nleÅŸmiÅŸ RoyalPass veya benzeri entitlement Ã¼rÃ¼nlerinde canonical purchase intent giriÅŸ noktasÄ± olabilir; ancak entitlement sahipliÄŸi ilgili hedef modÃ¼lde, bakiye veya checkout doÄŸruluÄŸu ise `payment` iÃ§inde kalmalÄ±dÄ±r.
-- `shop` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/shop.md` olmalÄ±dÄ±r.
+- `shop` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - kozmetik Ã¼rÃ¼n kataloÄŸu, kategori ve slot uyumluluÄŸu
   - mana bazlÄ± fiyatlandÄ±rma ve kampanya gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼
@@ -957,7 +957,7 @@ dto/
 - `payment` modÃ¼lÃ¼ Ã¼rÃ¼n kataloÄŸu, item sahipliÄŸi veya authorization kararÄ± Ã¼retmemelidir; katalog `shop`, sahiplik `inventory`, eriÅŸim kararÄ± `access` modÃ¼lÃ¼nde kalmalÄ±dÄ±r.
 - `payment` modÃ¼lÃ¼ checkout, mana purchase ve finansal doÄŸruluÄŸun sahibidir; ancak Ã¼rÃ¼nleÅŸmiÅŸ RoyalPass benzeri entitlement akÄ±ÅŸlarÄ±nda final entitlement owner'lÄ±ÄŸÄ±na doÄŸrudan geÃ§mez, onaylanmÄ±ÅŸ Ã¶deme sonucunu ilgili modÃ¼le kontrollÃ¼ kontrat ile aktarÄ±r.
 - `payment` veri sahipliÄŸi; provider session kayÄ±tlarÄ±, purchase order veya transaction kayÄ±tlarÄ±, ledger hareketleri, bakiye snapshot'larÄ±, fraud review state ve finansal audit metadata'sÄ± ile sÄ±nÄ±rlÄ± kalmalÄ±dÄ±r.
-- `payment` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules/payment.md` olmalÄ±dÄ±r.
+- `payment` modÃ¼lÃ¼nÃ¼n ana referans dokÃ¼manÄ± `docs/modules.md` olmalÄ±dÄ±r.
 - GeliÅŸtirme ile gelen baÅŸlÄ±ca baÅŸlÄ±klar ÅŸunlardÄ±r:
   - mana satÄ±n alma paketleri ve provider checkout oturumlarÄ±
   - pending, success, failed, cancelled, refunded veya reversed iÅŸlem durumlarÄ±
@@ -970,19 +970,19 @@ dto/
 - Proje geneli dokÃ¼mantasyon dili TÃ¼rkÃ§e tutulmalÄ±; dosya baÅŸlÄ±klarÄ±, bÃ¶lÃ¼m adlarÄ± ve tablo kolonlarÄ± tutarlÄ± yazÄ±lmalÄ±dÄ±r.
 - ModÃ¼l dokÃ¼manlarÄ± en az `AmaÃ§`, `Sorumluluk AlanÄ±`, `Bu ModÃ¼l Neyi Yapmaz?`, `Veri SahipliÄŸi`, `Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?`, `Access KontratÄ±`, `API veya Event SÄ±nÄ±rÄ±`, `BaÄŸÄ±mlÄ±lÄ±klar`, `Settings Etkileri`, `Event AkÄ±ÅŸlarÄ±`, `Audit ve Ä°zleme`, `Ä°dempotency ve Retry`, `State YapÄ±sÄ±` ve `Test NotlarÄ±` bÃ¶lÃ¼mlerini taÅŸÄ±malÄ±dÄ±r.
 - Negatif sÄ±nÄ±r bÃ¶lÃ¼mleri boÅŸ geÃ§ilmemeli; modÃ¼lÃ¼n yapmadÄ±ÄŸÄ± iÅŸler ve sahip olmadÄ±ÄŸÄ± veriler aÃ§Ä±kÃ§a yazÄ±lmalÄ±dÄ±r.
-- Ã‡apraz kesit kararlarÄ± iÃ§in canonical shared dokÃ¼manlar `docs/shared/precedence-rules.md`, `docs/shared/projection-strategy.md`, `docs/shared/idempotency-policy.md`, `docs/shared/transaction-boundaries.md`, `docs/shared/audit-policy.md`, `docs/shared/outbox-pattern.md` ve `docs/shared/operational-standards.md` olmalÄ±dÄ±r.
-- Teknik paket, cache/queue, media, search ve reporting/analytics kararlarÄ± iÃ§in aktif referanslar `docs/shared/technical-stack.md`, `docs/shared/cache-queue-strategy.md`, `docs/shared/media-asset-strategy.md`, `docs/shared/search-strategy.md` ve `docs/shared/reporting-analytics-strategy.md` olmalÄ±dÄ±r.
+- Ã‡apraz kesit kararlarÄ± iÃ§in canonical shared dokÃ¼manlar `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md` ve `docs/shared.md` olmalÄ±dÄ±r.
+- Teknik paket, cache/queue, media, search ve reporting/analytics kararlarÄ± iÃ§in aktif referanslar `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md` ve `docs/shared.md` olmalÄ±dÄ±r.
 - Bir modÃ¼l veya feature dokÃ¼manÄ± bu yardÄ±mcÄ± altyapÄ± alanlarÄ±nda aktif sistem kararÄ± Ã¼retiyorsa ilgili shared dokÃ¼man aynÄ± deÄŸiÅŸiklik setinde gÃ¼ncellenmelidir; karar yalnÄ±zca modÃ¼l iÃ§inde not olarak bÄ±rakÄ±lamaz.
-- Enum veya karar sÃ¶zlÃ¼ÄŸÃ¼ niteliÄŸindeki paylaÅŸÄ±lan kayÄ±tlar `docs/shared/target-types.md`, `docs/shared/visibility-states.md`, `docs/shared/moderation-statuses.md`, `docs/shared/support-statuses.md`, `docs/shared/reward-source-types.md`, `docs/shared/purchase-source-types.md`, `docs/shared/audit-event-types.md`, `docs/shared/notification-categories.md` ve `docs/shared/policy-effects.md` iÃ§inde tutulmalÄ±dÄ±r.
-- Runtime ayar yorumlama sÄ±rasÄ± `global kill switch -> module/surface availability -> audience selector -> entitlement etkisi -> action policy -> rate limit` biÃ§iminde dokÃ¼mante edilmeli ve `access` tarafÄ±ndan yorumlanan yÃ¼zeyler `docs/settings/index.md` ile hizalÄ± kalmalÄ±dÄ±r.
-- `docs/settings/index.md` yaÅŸayan dokÃ¼mandÄ±r; yeni bir surface eklendiÄŸinde availability anahtarÄ± yanÄ±nda rate limit, threshold, disabled behavior veya degrade davranÄ±ÅŸÄ± da aynÄ± deÄŸiÅŸiklikte yazÄ±lmalÄ± ya da neden henÃ¼z `planned` kaldÄ±ÄŸÄ± aÃ§Ä±kÃ§a not edilmelidir.
+- Enum veya karar sÃ¶zlÃ¼ÄŸÃ¼ niteliÄŸindeki paylaÅŸÄ±lan kayÄ±tlar `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md`, `docs/shared.md` ve `docs/shared.md` iÃ§inde tutulmalÄ±dÄ±r.
+- Runtime ayar yorumlama sÄ±rasÄ± `global kill switch -> module/surface availability -> audience selector -> entitlement etkisi -> action policy -> rate limit` biÃ§iminde dokÃ¼mante edilmeli ve `access` tarafÄ±ndan yorumlanan yÃ¼zeyler `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
+- `docs/shared.md` yaÅŸayan dokÃ¼mandÄ±r; yeni bir surface eklendiÄŸinde availability anahtarÄ± yanÄ±nda rate limit, threshold, disabled behavior veya degrade davranÄ±ÅŸÄ± da aynÄ± deÄŸiÅŸiklikte yazÄ±lmalÄ± ya da neden henÃ¼z `planned` kaldÄ±ÄŸÄ± aÃ§Ä±kÃ§a not edilmelidir.
 - `docs/upgrade.md` ham Ã¶neri arÅŸivi olarak deÄŸil, uygulanan, kÄ±smi kalan ve bekleyen iÅŸlerin durumunu izleyen operasyonel takip belgesi olarak kullanÄ±lmalÄ±dÄ±r.
 - `support` intake tek baÅŸÄ±na otomatik moderation case sayÄ±lmamalÄ±; `support -> moderation` iliÅŸkisi aÃ§Ä±k handoff politikasÄ± ile tanÄ±mlanmalÄ±dÄ±r.
 - `admin` hard override kararÄ± scoped moderator aksiyonunun Ã¼zerinde precedence taÅŸÄ±r; bu kural modÃ¼l dokÃ¼manlarÄ±nda ve precedence matrisi iÃ§inde aynÄ± ÅŸekilde yazÄ±lmalÄ±dÄ±r.
-- Projection veya event tabanlÄ± read model kullanan modÃ¼ller canonical write model, rebuild yolu, replay desteÄŸi ve kabul edilen eventual consistency penceresini `docs/shared/projection-strategy.md` ile hizalÄ± yazmalÄ±dÄ±r.
+- Projection veya event tabanlÄ± read model kullanan modÃ¼ller canonical write model, rebuild yolu, replay desteÄŸi ve kabul edilen eventual consistency penceresini `docs/shared.md` ile hizalÄ± yazmalÄ±dÄ±r.
 - `payment`, `inventory`, `mission`, `royalpass`, `notification`, `support`, `moderation`, `history` ve benzeri event Ã¼reticisi modÃ¼llerde transactional outbox, retry ve dead-letter yaklaÅŸÄ±mÄ± plan dÄ±ÅŸÄ± bÄ±rakÄ±lmamalÄ±dÄ±r.
 - Audit kaydÄ± gereken modÃ¼ller actor, target, action, result, reason, `correlation_id` ve `request_id` alan setini ortak kullanmalÄ±dÄ±r.
-- Request ID, correlation ID, rate limit, secret/config ayrÄ±mÄ±, backup/restore/rollback ve PII retention kurallarÄ± `docs/shared/operational-standards.md` ile hizalÄ± kalmalÄ±dÄ±r.
+- Request ID, correlation ID, rate limit, secret/config ayrÄ±mÄ±, backup/restore/rollback ve PII retention kurallarÄ± `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
 - Test stratejisi, contract test zorunluluklarÄ± ve fixture standardÄ± `docs/TESTING.md` iÃ§inde tutulmalÄ±; modÃ¼l dokÃ¼manlarÄ± buradaki katmanlara referans vermelidir.
 
 
@@ -1020,3 +1020,6 @@ dto/
 - Mimariyi, klasÃ¶r yapÄ±sÄ±nÄ±, katman sÄ±nÄ±rlarÄ±nÄ± veya geliÅŸtirme kurallarÄ±nÄ± etkileyen deÄŸiÅŸikliklerde `rules.md` gÃ¼ncellenmelidir.
 - Proje oluÅŸturulurken veya geliÅŸtirme sÃ¼recinde gerÃ§ekten yapÄ±lan iÅŸlemler, eklenen dosyalar, Ã§Ä±karÄ±lan dosyalar ve Ã¶nemli kararlar `changelog.md` iÃ§inde kayÄ±t altÄ±na alÄ±nmalÄ±dÄ±r.
 - DokÃ¼man gÃ¼ncellemesi olmadan yapÄ±lan mimari deÄŸiÅŸiklik tamamlanmÄ±ÅŸ sayÄ±lmamalÄ±dÄ±r.
+
+
+

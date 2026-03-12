@@ -55,7 +55,9 @@ func New(store accessrepository.Store, validator *validation.Validator, cfg Conf
 		cfg:       cfg.withDefaults(),
 		now:       time.Now,
 	}
-	svc.bootstrapDefaults()
+	if err := svc.bootstrapDefaults(); err != nil {
+		panic(fmt.Sprintf("access bootstrap failed: %v", err))
+	}
 	return svc
 }
 
@@ -66,16 +68,28 @@ func (s *AccessService) validateInput(payload any) error {
 	return nil
 }
 
-func (s *AccessService) bootstrapDefaults() {
+func (s *AccessService) bootstrapDefaults() error {
 	ctx := context.Background()
 	now := s.now().UTC()
 
-	_ = s.ensureRole(ctx, now, "guest", 10, true, false)
-	_ = s.ensureRole(ctx, now, "authenticated", 20, true, false)
-	_ = s.ensureRole(ctx, now, "vip", 30, false, false)
-	_ = s.ensureRole(ctx, now, "moderator", 40, false, false)
-	_ = s.ensureRole(ctx, now, "admin", 50, false, false)
-	_ = s.ensureRole(ctx, now, "super_admin", 100, false, true)
+	if err := s.ensureRole(ctx, now, "guest", 10, true, false); err != nil {
+		return err
+	}
+	if err := s.ensureRole(ctx, now, "authenticated", 20, true, false); err != nil {
+		return err
+	}
+	if err := s.ensureRole(ctx, now, "vip", 30, false, false); err != nil {
+		return err
+	}
+	if err := s.ensureRole(ctx, now, "moderator", 40, false, false); err != nil {
+		return err
+	}
+	if err := s.ensureRole(ctx, now, "admin", 50, false, false); err != nil {
+		return err
+	}
+	if err := s.ensureRole(ctx, now, "super_admin", 100, false, true); err != nil {
+		return err
+	}
 
 	seedPermissions := []struct {
 		Name         string
@@ -106,14 +120,17 @@ func (s *AccessService) bootstrapDefaults() {
 	}
 
 	for _, permission := range seedPermissions {
-		permissionID := s.ensurePermission(ctx, now, permission.Name, permission.Module, permission.Surface, permission.Action, permission.AudienceKind)
-		if permissionID == uuid.Nil {
-			continue
+		permissionID, permErr := s.ensurePermission(ctx, now, permission.Name, permission.Module, permission.Surface, permission.Action, permission.AudienceKind)
+		if permErr != nil {
+			return permErr
 		}
 		for _, roleName := range permission.Roles {
-			_ = s.ensureRolePermission(ctx, now, roleName, permissionID)
+			if err := s.ensureRolePermission(ctx, now, roleName, permissionID); err != nil {
+				return err
+			}
 		}
 	}
+	return nil
 }
 
 func (s *AccessService) ensureRole(ctx context.Context, now time.Time, roleName string, priority int, isDefault bool, isSuperAdmin bool) error {
@@ -135,13 +152,13 @@ func (s *AccessService) ensureRole(ctx context.Context, now time.Time, roleName 
 	})
 }
 
-func (s *AccessService) ensurePermission(ctx context.Context, now time.Time, name string, module string, surface string, action string, audienceKind string) uuid.UUID {
+func (s *AccessService) ensurePermission(ctx context.Context, now time.Time, name string, module string, surface string, action string, audienceKind string) (uuid.UUID, error) {
 	permission, err := s.store.GetPermissionByName(ctx, name)
 	if err == nil {
-		return permission.ID
+		return permission.ID, nil
 	}
 	if !errors.Is(err, accessrepository.ErrNotFound) {
-		return uuid.Nil
+		return uuid.Nil, err
 	}
 
 	permission = entity.Permission{
@@ -155,9 +172,16 @@ func (s *AccessService) ensurePermission(ctx context.Context, now time.Time, nam
 		UpdatedAt:    now,
 	}
 	if createErr := s.store.CreatePermission(ctx, permission); createErr != nil {
-		return uuid.Nil
+		if errors.Is(createErr, accessrepository.ErrConflict) {
+			persisted, getErr := s.store.GetPermissionByName(ctx, name)
+			if getErr != nil {
+				return uuid.Nil, getErr
+			}
+			return persisted.ID, nil
+		}
+		return uuid.Nil, createErr
 	}
-	return permission.ID
+	return permission.ID, nil
 }
 
 func (s *AccessService) ensureRolePermission(ctx context.Context, now time.Time, roleName string, permissionID uuid.UUID) error {

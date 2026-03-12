@@ -4,10 +4,17 @@ import (
 	"net/http"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/dto"
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 )
 
 func (h *HTTPHandler) ListSessions(w http.ResponseWriter, r *http.Request) {
-	req := dto.ListSessionsRequest{CredentialID: r.URL.Query().Get("credential_id")}
+	credentialID, ok := identity.CredentialID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_credential_id")
+		return
+	}
+
+	req := dto.ListSessionsRequest{CredentialID: credentialID}
 	res, err := h.service.ListSessions(r.Context(), req)
 	if err != nil {
 		writeServiceError(w, err)
@@ -22,6 +29,13 @@ func (h *HTTPHandler) RevokeCurrentSession(w http.ResponseWriter, r *http.Reques
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	credentialID, ok := identity.CredentialID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_credential_id")
+		return
+	}
+	req.CredentialID = credentialID
+
 	res, err := h.service.RevokeCurrentSession(r.Context(), req, buildRequestMeta(r))
 	if err != nil {
 		writeServiceError(w, err)
@@ -36,6 +50,13 @@ func (h *HTTPHandler) RevokeOtherSessions(w http.ResponseWriter, r *http.Request
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	credentialID, ok := identity.CredentialID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_credential_id")
+		return
+	}
+	req.CredentialID = credentialID
+
 	res, err := h.service.RevokeOtherSessions(r.Context(), req, buildRequestMeta(r))
 	if err != nil {
 		writeServiceError(w, err)
@@ -50,6 +71,13 @@ func (h *HTTPHandler) RevokeAllSessions(w http.ResponseWriter, r *http.Request) 
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	credentialID, ok := identity.CredentialID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_credential_id")
+		return
+	}
+	req.CredentialID = credentialID
+
 	res, err := h.service.RevokeAllSessions(r.Context(), req, buildRequestMeta(r))
 	if err != nil {
 		writeServiceError(w, err)

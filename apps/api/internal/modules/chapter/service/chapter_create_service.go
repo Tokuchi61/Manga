@@ -22,6 +22,15 @@ func (s *ChapterService) CreateChapter(ctx context.Context, request dto.CreateCh
 	if err != nil {
 		return dto.CreateChapterResponse{}, err
 	}
+	if s.mangaLookup != nil {
+		exists, lookupErr := s.mangaLookup.TargetExists(ctx, mangaID)
+		if lookupErr != nil {
+			return dto.CreateChapterResponse{}, lookupErr
+		}
+		if !exists {
+			return dto.CreateChapterResponse{}, ErrMangaNotFound
+		}
+	}
 	slug, err := ensureSlug(request.Slug, request.Title, request.DisplayNumber)
 	if err != nil {
 		return dto.CreateChapterResponse{}, err

@@ -1,6 +1,6 @@
 # Shared ve Settings
 
-> Bu dosya `docs/shared/*` ve `docs/settings/index.md` iÃ§eriklerinin tek dosyada birleÅŸtirilmiÅŸ halidir. ModÃ¼ller Ã¼stÃ¼ teknik kararlar, ortak sÃ¶zlÃ¼kler, policy belgeleri ve runtime settings envanteri burada tutulur.
+> Bu dosya proje icin canonical shared kararlar ve runtime settings referansidir.
 
 ## KullanÄ±m KurallarÄ±
 - Teknik stack, enum, policy, precedence, transaction ve operasyon kurallarÄ± burada canonical referanstÄ±r.
@@ -78,8 +78,8 @@
 ## Kurallar
 - Admin, gÃ¼venlik ve finansal olaylar immutable log yaklaÅŸÄ±mÄ±yla tutulmalÄ±dÄ±r.
 - Admin note veya support internal note, audit kaydÄ±nÄ±n yerine geÃ§memelidir; ayrÄ± veri modeli olarak kalmalÄ±dÄ±r.
-- Audit export yÃ¼zeyi read-only olmalÄ± ve PII masking `docs/shared/operational-standards.md` ile hizalÄ± kalmalÄ±dÄ±r.
-- Event sÄ±nÄ±flarÄ± iÃ§in `docs/shared/audit-event-types.md` iÃ§indeki canonical sÃ¶zlÃ¼k kullanÄ±lmalÄ±dÄ±r.
+- Audit export yÃ¼zeyi read-only olmalÄ± ve PII masking `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
+- Event sÄ±nÄ±flarÄ± iÃ§in `docs/shared.md` iÃ§indeki canonical sÃ¶zlÃ¼k kullanÄ±lmalÄ±dÄ±r.
 
 
 ---
@@ -105,12 +105,12 @@
 ## Cache KurallarÄ±
 - Cache yokluÄŸu business doÄŸruluÄŸunu bozmamalÄ±dÄ±r; yalnÄ±zca performans etkisi yaratmalÄ±dÄ±r.
 - Cache key'leri subject, surface, selector ve gerekiyorsa settings sÃ¼rÃ¼mÃ¼ ile iliÅŸkilendirilmelidir.
-- TTL ve invalidation davranÄ±ÅŸÄ± modÃ¼l dokÃ¼manÄ± ile `docs/settings/index.md` notlarÄ± iÃ§inde gÃ¶rÃ¼nÃ¼r tutulmalÄ±dÄ±r.
+- TTL ve invalidation davranÄ±ÅŸÄ± modÃ¼l dokÃ¼manÄ± ile `docs/shared.md` notlarÄ± iÃ§inde gÃ¶rÃ¼nÃ¼r tutulmalÄ±dÄ±r.
 
 ## Queue / Async Ä°ÅŸleme KararÄ±
 - BugÃ¼nkÃ¼ canonical async iÅŸleme baseline'Ä± PostgreSQL-backed jobs + transactional outbox yaklaÅŸÄ±mÄ±dÄ±r.
 - Message broker baseline mimarinin parÃ§asÄ± deÄŸildir.
-- Outbox, retry, backoff ve dead-letter kurallarÄ± `docs/shared/outbox-pattern.md` ile birlikte deÄŸerlendirilmelidir.
+- Outbox, retry, backoff ve dead-letter kurallarÄ± `docs/shared.md` ile birlikte deÄŸerlendirilmelidir.
 
 ## Ä°lk Async Ä°ÅŸ YÃ¼kleri
 - notification delivery
@@ -224,9 +224,9 @@ AÅŸaÄŸÄ±daki koÅŸullarÄ±n birden fazlasÄ± oluÅŸmadan ayrÄ± leaf 
 - storage, scanning, variant generation ve signed access kurallarÄ±nÄ±n tek baÅŸÄ±na ayrÄ± ekip veya ayrÄ± servis sÄ±nÄ±rÄ± gerektirmesi
 
 ## Ä°lgili Referanslar
-- Runtime ayar envanteri: `docs/settings/index.md`
-- Operasyonel standartlar: `docs/shared/operational-standards.md`
-- Cache ve queue stratejisi: `docs/shared/cache-queue-strategy.md`
+- Runtime ayar envanteri: `docs/shared.md`
+- Operasyonel standartlar: `docs/shared.md`
+- Cache ve queue stratejisi: `docs/shared.md`
 
 
 ---
@@ -461,7 +461,7 @@ AÅŸaÄŸÄ±daki koÅŸullarÄ±n birden fazlasÄ± oluÅŸmadan ayrÄ± leaf 
 - Projection rebuild iÅŸlemi idempotent olmalÄ± ve aynÄ± veri iÃ§in tekrar Ã§alÄ±ÅŸtÄ±rÄ±ldÄ±ÄŸÄ±nda yeni yan etki Ã¼retmemelidir.
 - Replay yapÄ±lacak event payload'larÄ± ÅŸema sÃ¼rÃ¼mÃ¼, `request_id` ve `correlation_id` taÅŸÄ±malÄ±dÄ±r.
 - Counter veya summary gÃ¼ncellemeleri iÃ§in doÄŸrudan â€œowner tabloya baÅŸka modÃ¼l yazsÄ±nâ€ yaklaÅŸÄ±mÄ± kullanÄ±lmamalÄ±dÄ±r.
-- Event Ã¼reten modÃ¼ller `docs/shared/outbox-pattern.md` ile hizalÄ± transactional outbox yaklaÅŸÄ±mÄ± planlamalÄ±dÄ±r.
+- Event Ã¼reten modÃ¼ller `docs/shared.md` ile hizalÄ± transactional outbox yaklaÅŸÄ±mÄ± planlamalÄ±dÄ±r.
 
 
 ---
@@ -516,10 +516,10 @@ AÅŸaÄŸÄ±daki koÅŸullar belirginleÅŸmeden ayrÄ± analytics servisi vey
 - ayrÄ± ekip, ayrÄ± eriÅŸim politikasÄ± veya ayrÄ± veri saklama kurallarÄ± ihtiyacÄ± oluÅŸmasÄ±
 
 ## Ä°lgili Referanslar
-- Projection stratejisi: `docs/shared/projection-strategy.md`
-- Audit politikasÄ±: `docs/shared/audit-policy.md`
-- Cache ve queue stratejisi: `docs/shared/cache-queue-strategy.md`
-- Admin modÃ¼lÃ¼: `docs/modules/admin.md`
+- Projection stratejisi: `docs/shared.md`
+- Audit politikasÄ±: `docs/shared.md`
+- Cache ve queue stratejisi: `docs/shared.md`
+- Admin modÃ¼lÃ¼: `docs/modules.md`
 
 
 ---
@@ -578,12 +578,12 @@ AÅŸaÄŸÄ±daki koÅŸullar netleÅŸmeden ayrÄ± search provider'a geÃ§il
 ## Fallback DavranÄ±ÅŸÄ±
 - Search provider veya projection geÃ§ici sorun yaÅŸarsa listing fallback'i kontrollÃ¼ biÃ§imde daraltÄ±labilmelidir.
 - Hata durumunda owner iÃ§erik gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ bozulmamalÄ±; gerekirse search yÃ¼zeyi geÃ§ici olarak pasife alÄ±nmalÄ±dÄ±r.
-- Search availability kararlarÄ± `docs/settings/index.md` ile hizalÄ± anahtarlar Ã¼zerinden yÃ¶netilmelidir.
+- Search availability kararlarÄ± `docs/shared.md` ile hizalÄ± anahtarlar Ã¼zerinden yÃ¶netilmelidir.
 
 ## Ä°lgili Referanslar
-- Projection stratejisi: `docs/shared/projection-strategy.md`
-- Runtime ayar envanteri: `docs/settings/index.md`
-- Manga modÃ¼lÃ¼: `docs/modules/manga.md`
+- Projection stratejisi: `docs/shared.md`
+- Runtime ayar envanteri: `docs/shared.md`
+- Manga modÃ¼lÃ¼: `docs/modules.md`
 
 
 ---
@@ -677,8 +677,8 @@ AÅŸaÄŸÄ±daki koÅŸullar netleÅŸmeden ayrÄ± search provider'a geÃ§il
 
 ## Ä°lgili Referanslar
 - Kurulum ve komut standardÄ±: `docs/SETUP.md`
-- Cache ve queue kararÄ±: `docs/shared/cache-queue-strategy.md`
-- Operasyon ve secret/config ayrÄ±mÄ±: `docs/shared/operational-standards.md`
+- Cache ve queue kararÄ±: `docs/shared.md`
+- Operasyon ve secret/config ayrÄ±mÄ±: `docs/shared.md`
 
 
 ---
@@ -723,7 +723,7 @@ AÅŸaÄŸÄ±daki koÅŸullar netleÅŸmeden ayrÄ± search provider'a geÃ§il
 ## KullanÄ±m KurallarÄ±
 - Her modÃ¼l tÃ¼m durumlarÄ± kullanmak zorunda deÄŸildir.
 - ModÃ¼l iÃ§i Ã¶zel state alanlarÄ± bu sÃ¶zlÃ¼ÄŸe map edilebiliyorsa modÃ¼l dokÃ¼manÄ±nda aÃ§Ä±kÃ§a belirtilmelidir.
-- Final eriÅŸim kararÄ± yine `docs/shared/precedence-rules.md` ve `access` yorumu ile verilir.
+- Final eriÅŸim kararÄ± yine `docs/shared.md` ve `access` yorumu ile verilir.
 
 ## Canonical Durumlar
 | Durum | AnlamÄ± | Tipik ModÃ¼ller | Not |
@@ -837,7 +837,7 @@ AÅŸaÄŸÄ±daki koÅŸullar netleÅŸmeden ayrÄ± search provider'a geÃ§il
 
 ## Access Yorumlama Modeli
 - KullanÄ±cÄ±ya bakan availability, permission ve entitlement etkili runtime ayarlarÄ± canonical olarak `access` tarafÄ±ndan yorumlanmalÄ±dÄ±r.
-- Yorum sÄ±rasÄ± `docs/shared/precedence-rules.md` ile hizalÄ± olmalÄ±; `global -> module -> surface -> audience -> entitlement -> action -> rate limit` akÄ±ÅŸÄ± korunmalÄ±dÄ±r.
+- Yorum sÄ±rasÄ± `docs/shared.md` ile hizalÄ± olmalÄ±; `global -> module -> surface -> audience -> entitlement -> action -> rate limit` akÄ±ÅŸÄ± korunmalÄ±dÄ±r.
 - Operasyonel pause, callback intake, queue backpressure veya delivery retry benzeri kullanÄ±cÄ±ya gÃ¶rÃ¼nmeyen ayarlar ilgili `service` katmanÄ±nda yorumlanabilir; bu durum settings envanterinde `consumer_layer` ile gÃ¶rÃ¼nÃ¼r tutulmalÄ±dÄ±r.
 - AynÄ± surface iÃ§in read ve write ayrÄ±mÄ± varsa ayrÄ± anahtar veya umbrella key notu bÄ±rakÄ±lmalÄ±dÄ±r; Ã¶rtÃ¼k davranÄ±ÅŸ bÄ±rakÄ±lmamalÄ±dÄ±r.
 
@@ -932,3 +932,5 @@ AÅŸaÄŸÄ±daki koÅŸullar netleÅŸmeden ayrÄ± search provider'a geÃ§il
 | `payment.callback.intake.paused` | Payment provider callback intake yÃ¼zeyini geÃ§ici durdurma anahtarÄ± | `operations` | `payment` | `service` | `bool` | `false` | `true,false` | `feature` | `payment.callback` | `all` | `-` | `false` | `immediate` | `cache_refresh` | `time_window` | `true` | `payment.callback`,`payment.reconcile` | `intake_pause` | `temporarily_unavailable` | `none` | `planned` | Provider kaynaklÄ± geri bildirim geÃ§ici olarak durdurulabilir |
 | `feature.ads.click_intake.enabled` | Ads click intake yÃ¼zeyini aÃ§ma-kapama anahtarÄ± | `operations` | `ads` | `service` | `bool` | `true` | `true,false` | `feature` | `ads.click_intake` | `all` | `-` | `false` | `immediate` | `cache_refresh` | `time_window` | `true` | `ads.click`,`ads.aggregate` | `intake_pause` | `temporarily_unavailable` | `none` | `planned` | Invalid click korumasÄ± iÃ§in click intake ayrÄ± durdurulabilir |
 | `feature.support.internal_note.enabled` | Support internal note yazma yÃ¼zeyini aÃ§ma-kapama anahtarÄ± | `support` | `support` | `access` | `bool` | `true` | `true,false` | `feature` | `support.internal_note` | `authenticated` | `role:support_agent` | `false` | `immediate` | `cache_refresh` | `none` | `true` | `support.internal_note` | `write_off` | `forbidden` | `none` | `planned` | Internal note ile requester'a aÃ§Ä±k reply yÃ¼zeyi ayrÄ± yÃ¶netilmelidir |
+
+

@@ -26,7 +26,7 @@ func writeServiceError(w http.ResponseWriter, err error) {
 	case errors.Is(err, service.ErrAuthorizationDenied):
 		writeError(w, http.StatusForbidden, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

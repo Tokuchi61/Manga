@@ -4,29 +4,29 @@ import "time"
 
 // ListSessionsRequest represents session list input.
 type ListSessionsRequest struct {
-	CredentialID string `json:"credential_id" validate:"required,uuid4"`
+	CredentialID string `json:"-" validate:"required,uuid4"`
 }
 
 // RevokeCurrentSessionRequest revokes the active session.
 type RevokeCurrentSessionRequest struct {
-	CredentialID string `json:"credential_id" validate:"required,uuid4"`
+	CredentialID string `json:"-" validate:"required,uuid4"`
 	SessionID    string `json:"session_id" validate:"required,uuid4"`
 }
 
 // RevokeOtherSessionsRequest revokes all sessions except current.
 type RevokeOtherSessionsRequest struct {
-	CredentialID string `json:"credential_id" validate:"required,uuid4"`
+	CredentialID string `json:"-" validate:"required,uuid4"`
 	SessionID    string `json:"session_id" validate:"required,uuid4"`
 }
 
 // RevokeAllSessionsRequest revokes all sessions.
 type RevokeAllSessionsRequest struct {
-	CredentialID string `json:"credential_id" validate:"required,uuid4"`
+	CredentialID string `json:"-" validate:"required,uuid4"`
 }
 
 // LogoutRequest maps to revoke current session.
 type LogoutRequest struct {
-	CredentialID string `json:"credential_id" validate:"required,uuid4"`
+	CredentialID string `json:"-" validate:"required,uuid4"`
 	SessionID    string `json:"session_id" validate:"required,uuid4"`
 }
 

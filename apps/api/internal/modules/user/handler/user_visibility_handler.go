@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/user/dto"
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -13,8 +14,14 @@ func (h *HTTPHandler) UpdateProfileVisibility(w http.ResponseWriter, r *http.Req
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	viewerID, ok := identity.UserID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_user_id")
+		return
+	}
+
 	req.UserID = chi.URLParam(r, "user_id")
-	req.ViewerID = r.URL.Query().Get("viewer_id")
+	req.ViewerID = viewerID
 
 	res, err := h.service.UpdateProfileVisibility(r.Context(), req)
 	if err != nil {
@@ -30,8 +37,14 @@ func (h *HTTPHandler) UpdateHistoryVisibility(w http.ResponseWriter, r *http.Req
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	viewerID, ok := identity.UserID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_user_id")
+		return
+	}
+
 	req.UserID = chi.URLParam(r, "user_id")
-	req.ViewerID = r.URL.Query().Get("viewer_id")
+	req.ViewerID = viewerID
 
 	res, err := h.service.UpdateHistoryVisibility(r.Context(), req)
 	if err != nil {

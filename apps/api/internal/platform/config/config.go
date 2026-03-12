@@ -13,8 +13,8 @@ type Config struct {
 	Env                                        string        `env:"APP_ENV" envDefault:"local"`
 	Port                                       int           `env:"APP_PORT" envDefault:"8080"`
 	AppVersion                                 string        `env:"APP_VERSION,required"`
-	DBMainDSN                                  string        `env:"DB_MAIN_DSN,required"`
-	DBTestDSN                                  string        `env:"DB_TEST_DSN,required"`
+	DBMainDSN                                  string        `env:"DB_MAIN_DSN"`
+	DBTestDSN                                  string        `env:"DB_TEST_DSN"`
 	DBMaxConns                                 int32         `env:"DB_MAX_CONNS" envDefault:"10"`
 	DBConnectTimeout                           time.Duration `env:"DB_CONNECT_TIMEOUT" envDefault:"5s"`
 	HTTPShutdownTimeout                        time.Duration `env:"HTTP_SHUTDOWN_TIMEOUT" envDefault:"10s"`
@@ -31,14 +31,6 @@ func Load() (Config, error) {
 
 	if strings.TrimSpace(cfg.AppVersion) == "" {
 		return Config{}, fmt.Errorf("APP_VERSION cannot be empty")
-	}
-
-	if strings.TrimSpace(cfg.DBMainDSN) == "" {
-		return Config{}, fmt.Errorf("DB_MAIN_DSN cannot be empty")
-	}
-
-	if strings.TrimSpace(cfg.DBTestDSN) == "" {
-		return Config{}, fmt.Errorf("DB_TEST_DSN cannot be empty")
 	}
 
 	return cfg, nil

@@ -2,7 +2,7 @@ package dto
 
 // CreateCommunicationRequest creates general communication support intake.
 type CreateCommunicationRequest struct {
-	RequesterUserID string   `json:"requester_user_id" validate:"required,uuid4"`
+	RequesterUserID string   `json:"-" validate:"required,uuid4"`
 	Category        string   `json:"category" validate:"required,min=1,max=64"`
 	Priority        string   `json:"priority,omitempty" validate:"omitempty,oneof=low normal high urgent"`
 	ReasonCode      string   `json:"reason_code,omitempty" validate:"omitempty,max=64"`
@@ -13,7 +13,7 @@ type CreateCommunicationRequest struct {
 
 // CreateTicketRequest creates support ticket intake.
 type CreateTicketRequest struct {
-	RequesterUserID string   `json:"requester_user_id" validate:"required,uuid4"`
+	RequesterUserID string   `json:"-" validate:"required,uuid4"`
 	Category        string   `json:"category" validate:"required,min=1,max=64"`
 	Priority        string   `json:"priority,omitempty" validate:"omitempty,oneof=low normal high urgent"`
 	ReasonCode      string   `json:"reason_code,omitempty" validate:"omitempty,max=64"`
@@ -24,7 +24,7 @@ type CreateTicketRequest struct {
 
 // CreateReportRequest creates target-bound report intake.
 type CreateReportRequest struct {
-	RequesterUserID string   `json:"requester_user_id" validate:"required,uuid4"`
+	RequesterUserID string   `json:"-" validate:"required,uuid4"`
 	Category        string   `json:"category" validate:"required,min=1,max=64"`
 	Priority        string   `json:"priority,omitempty" validate:"omitempty,oneof=low normal high urgent"`
 	ReasonCode      string   `json:"reason_code,omitempty" validate:"omitempty,max=64"`

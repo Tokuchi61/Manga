@@ -21,12 +21,12 @@ func writeServiceError(w http.ResponseWriter, err error) {
 		writeError(w, http.StatusBadRequest, err.Error())
 	case errors.Is(err, service.ErrChapterAlreadyExists):
 		writeError(w, http.StatusConflict, err.Error())
-	case errors.Is(err, service.ErrChapterNotFound), errors.Is(err, service.ErrChapterNotVisible):
+	case errors.Is(err, service.ErrMangaNotFound), errors.Is(err, service.ErrChapterNotFound), errors.Is(err, service.ErrChapterNotVisible):
 		writeError(w, http.StatusNotFound, err.Error())
 	case errors.Is(err, service.ErrInvalidStateTransition):
 		writeError(w, http.StatusConflict, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

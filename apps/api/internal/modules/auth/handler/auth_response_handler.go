@@ -34,7 +34,7 @@ func writeServiceError(w http.ResponseWriter, err error) {
 	case errors.Is(err, service.ErrTokenInvalidOrExpired):
 		writeError(w, http.StatusBadRequest, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

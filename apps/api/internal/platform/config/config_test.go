@@ -26,17 +26,17 @@ func TestLoadSuccess(t *testing.T) {
 	require.Equal(t, 90, cfg.AuthEmailVerificationResendCooldownSeconds)
 }
 
-func TestLoadFailsWithoutMainDSN(t *testing.T) {
+func TestLoadAllowsMissingMainDSN(t *testing.T) {
 	t.Setenv("APP_VERSION", "0.1.0-test")
 	t.Setenv("DB_MAIN_DSN", "")
-	t.Setenv("DB_TEST_DSN", "postgres://test:test@localhost:5432/test?sslmode=disable")
+	t.Setenv("DB_TEST_DSN", "")
 	t.Setenv("AUTH_LOGIN_FAILED_ATTEMPT_LIMIT_PER_MINUTE", "7")
 	t.Setenv("AUTH_LOGIN_COOLDOWN_SECONDS", "420")
 	t.Setenv("AUTH_EMAIL_VERIFICATION_RESEND_COOLDOWN_SECONDS", "90")
 
-	_, err := Load()
-	require.Error(t, err)
-	require.Contains(t, err.Error(), "DB_MAIN_DSN")
+	cfg, err := Load()
+	require.NoError(t, err)
+	require.Equal(t, "", cfg.DBMainDSN)
 }
 
 func TestLoadFailsWithoutAppVersion(t *testing.T) {

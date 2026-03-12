@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"time"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/dto"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/entity"
@@ -49,15 +50,23 @@ func (s *AuthService) Login(ctx context.Context, request dto.LoginRequest, meta 
 		return dto.LoginResponse{}, err
 	}
 	if !ok {
+		if credential.FailedLoginWindowStartedAt == nil || now.Sub(*credential.FailedLoginWindowStartedAt) >= time.Minute {
+			windowStart := now
+			credential.FailedLoginWindowStartedAt = &windowStart
+			credential.FailedLoginAttempts = 0
+		}
 		credential.FailedLoginAttempts++
 		if credential.FailedLoginAttempts >= s.cfg.FailedAttemptLimit {
 			cooldownUntil := now.Add(s.cfg.LoginCooldown)
 			credential.LoginCooldownUntil = &cooldownUntil
 			credential.FailedLoginAttempts = 0
+			credential.FailedLoginWindowStartedAt = nil
 			s.appendSecurityEvent(ctx, credential.ID, events.EventSecuritySuspiciousLogin, "rejected", "failed_login_limit_reached", meta)
 		}
 		credential.UpdatedAt = now
-		_ = s.store.UpdateCredential(ctx, credential)
+		if err := s.store.UpdateCredential(ctx, credential); err != nil {
+			return dto.LoginResponse{}, err
+		}
 		s.appendSecurityEvent(ctx, credential.ID, events.EventLoginFailed, "failed", "invalid_password", meta)
 		if credential.LoginCooldownUntil != nil && now.Before(*credential.LoginCooldownUntil) {
 			return dto.LoginResponse{}, ErrLoginCooldownActive
@@ -66,6 +75,7 @@ func (s *AuthService) Login(ctx context.Context, request dto.LoginRequest, meta 
 	}
 
 	credential.FailedLoginAttempts = 0
+	credential.FailedLoginWindowStartedAt = nil
 	credential.LoginCooldownUntil = nil
 	credential.UpdatedAt = now
 	if err := s.store.UpdateCredential(ctx, credential); err != nil {

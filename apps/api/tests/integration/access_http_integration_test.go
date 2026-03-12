@@ -27,11 +27,13 @@ func TestAccessHTTPRolePermissionAndEvaluationFlow(t *testing.T) {
 	require.NoError(t, err)
 
 	handler := app.NewHTTPHandler(config.Config{AppVersion: "0.6.0-test"}, zap.NewNop(), nil, registry)
+	actorUserID := uuid.NewString()
+	actorCredentialID := uuid.NewString()
 
 	roleRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/roles", map[string]any{
 		"name":     "content_moderator",
 		"priority": 45,
-	})
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusCreated, roleRec.Code)
 
 	var roleRes struct {
@@ -46,32 +48,23 @@ func TestAccessHTTPRolePermissionAndEvaluationFlow(t *testing.T) {
 		"module":        "comment",
 		"surface":       "manage",
 		"action":        "write",
-		"audience_kind": "authenticated",
-	})
+		"audience_kind": "all",
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusCreated, permissionRec.Code)
 
 	assignPermissionRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/roles/"+roleRes.RoleID+"/permissions", map[string]any{
 		"permission_name": permissionName,
-	})
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusOK, assignPermissionRec.Code)
 
-	userID := uuid.NewString()
-	assignRoleRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/users/"+userID+"/roles", map[string]any{
+	assignRoleRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/users/"+actorUserID+"/roles", map[string]any{
 		"role_name": "content_moderator",
-	})
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusOK, assignRoleRec.Code)
 
 	evaluateAllowedRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/evaluate", map[string]any{
-		"user_id":    userID,
 		"permission": permissionName,
-		"identity": map[string]any{
-			"credential_id":  uuid.NewString(),
-			"email_verified": true,
-		},
-		"user_signal": map[string]any{
-			"account_state": "active",
-		},
-	})
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusOK, evaluateAllowedRec.Code)
 
 	var evaluateAllowedRes struct {
@@ -82,7 +75,7 @@ func TestAccessHTTPRolePermissionAndEvaluationFlow(t *testing.T) {
 
 	evaluateGuestDenyRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/evaluate", map[string]any{
 		"permission": "chapter.read.authenticated",
-	})
+	}, actorUserID, "", "admin")
 	require.Equal(t, http.StatusOK, evaluateGuestDenyRec.Code)
 
 	var evaluateGuestDenyRes struct {
@@ -103,6 +96,8 @@ func TestAccessHTTPEmergencyDenyPolicy(t *testing.T) {
 	require.NoError(t, err)
 
 	handler := app.NewHTTPHandler(config.Config{AppVersion: "0.6.0-test"}, zap.NewNop(), nil, registry)
+	actorUserID := uuid.NewString()
+	actorCredentialID := uuid.NewString()
 
 	policyRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/policies", map[string]any{
 		"key":               "feature.chapter.read.enabled",
@@ -111,22 +106,14 @@ func TestAccessHTTPEmergencyDenyPolicy(t *testing.T) {
 		"audience_selector": "-",
 		"scope_kind":        "feature",
 		"scope_selector":    "chapter.read",
-	})
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusCreated, policyRec.Code)
 
 	evaluateRec := performAccessJSONRequest(t, handler, http.MethodPost, "/access/evaluate", map[string]any{
-		"user_id":        uuid.NewString(),
 		"permission":     "chapter.read.authenticated",
 		"scope_kind":     "feature",
 		"scope_selector": "chapter.read",
-		"identity": map[string]any{
-			"credential_id":  uuid.NewString(),
-			"email_verified": true,
-		},
-		"user_signal": map[string]any{
-			"account_state": "active",
-		},
-	})
+	}, actorUserID, actorCredentialID, "admin")
 	require.Equal(t, http.StatusOK, evaluateRec.Code)
 
 	var evaluateRes struct {
@@ -138,7 +125,7 @@ func TestAccessHTTPEmergencyDenyPolicy(t *testing.T) {
 	require.Equal(t, "emergency_deny", evaluateRes.ReasonCode)
 }
 
-func performAccessJSONRequest(t *testing.T, handler http.Handler, method string, path string, body any) *httptest.ResponseRecorder {
+func performAccessJSONRequest(t *testing.T, handler http.Handler, method string, path string, body any, actorUserID string, actorCredentialID string, roles string) *httptest.ResponseRecorder {
 	t.Helper()
 
 	payload, err := json.Marshal(body)
@@ -146,6 +133,7 @@ func performAccessJSONRequest(t *testing.T, handler http.Handler, method string,
 
 	req := httptest.NewRequest(method, path, bytes.NewReader(payload))
 	req.Header.Set("Content-Type", "application/json")
+	setActorHeaders(req, actorUserID, actorCredentialID, roles)
 	rec := httptest.NewRecorder()
 
 	handler.ServeHTTP(rec, req)

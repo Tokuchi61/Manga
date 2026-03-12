@@ -39,6 +39,23 @@ func (s *ChapterService) GetResumeAnchor(ctx context.Context, chapterID string, 
 	}, nil
 }
 
+// TargetExists exposes chapter target existence checks for consumer modules.
+func (s *ChapterService) TargetExists(ctx context.Context, chapterID string) (bool, error) {
+	parsedID, err := parseID(chapterID, "chapter_id")
+	if err != nil {
+		return false, nil
+	}
+
+	_, err = s.store.GetChapterByID(ctx, parsedID)
+	if err != nil {
+		if errors.Is(err, chapterrepository.ErrNotFound) {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
+}
+
 // BuildReadSignal creates stable chapter->history signal payload.
 func (s *ChapterService) BuildReadSignal(chapterID string, mangaID string, pageNumber int, pageCount int, event string, requestID string, correlationID string) chaptercontract.ReadSignal {
 	if pageNumber < 0 {

@@ -94,44 +94,19 @@ func (s *ChapterService) GetNavigation(ctx context.Context, request dto.Navigati
 		return dto.NavigationResponse{}, err
 	}
 
-	items, err := s.store.ListChaptersByManga(ctx, chapterrepository.ListQuery{
-		MangaID:            current.MangaID,
-		SortBy:             "sequence_oldest",
-		Limit:              100000,
-		Offset:             0,
-		IncludeUnpublished: false,
-		IncludeDeleted:     false,
-	})
+	navigation, err := s.store.ResolveNavigation(ctx, current.MangaID, current.ID)
 	if err != nil {
 		return dto.NavigationResponse{}, err
 	}
-
-	index := -1
-	for i := range items {
-		if items[i].ID == current.ID {
-			index = i
-			break
-		}
-	}
-	if index == -1 {
+	if !navigation.FoundCurrent {
 		return dto.NavigationResponse{}, ErrChapterNotVisible
 	}
 
 	response := dto.NavigationResponse{CurrentChapterID: current.ID}
-	if len(items) > 0 {
-		first := items[0].ID
-		last := items[len(items)-1].ID
-		response.FirstChapterID = &first
-		response.LastChapterID = &last
-	}
-	if index > 0 {
-		previous := items[index-1].ID
-		response.PreviousChapterID = &previous
-	}
-	if index+1 < len(items) {
-		next := items[index+1].ID
-		response.NextChapterID = &next
-	}
+	response.FirstChapterID = navigation.FirstID
+	response.LastChapterID = navigation.LastID
+	response.PreviousChapterID = navigation.PreviousID
+	response.NextChapterID = navigation.NextID
 
 	return response, nil
 }

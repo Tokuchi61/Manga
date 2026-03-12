@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"time"
@@ -24,10 +25,28 @@ var (
 	ErrAlreadyHandedOff            = errors.New("support_already_handed_off")
 )
 
+// MangaTargetLookup exposes manga target existence checks.
+type MangaTargetLookup interface {
+	TargetExists(ctx context.Context, mangaID string) (bool, error)
+}
+
+// ChapterTargetLookup exposes chapter target existence checks.
+type ChapterTargetLookup interface {
+	TargetExists(ctx context.Context, chapterID string) (bool, error)
+}
+
+// CommentTargetLookup exposes comment target existence checks.
+type CommentTargetLookup interface {
+	TargetExists(ctx context.Context, commentID string) (bool, error)
+}
+
 // SupportService owns stage-10 support intake/review flows.
 type SupportService struct {
 	store           supportrepository.Store
 	validator       *validation.Validator
+	mangaLookup     MangaTargetLookup
+	chapterLookup   ChapterTargetLookup
+	commentLookup   CommentTargetLookup
 	now             func() time.Time
 	duplicateWindow time.Duration
 }
@@ -42,6 +61,12 @@ func New(store supportrepository.Store, validator *validation.Validator) *Suppor
 		now:             time.Now,
 		duplicateWindow: 10 * time.Minute,
 	}
+}
+
+func (s *SupportService) SetTargetLookups(mangaLookup MangaTargetLookup, chapterLookup ChapterTargetLookup, commentLookup CommentTargetLookup) {
+	s.mangaLookup = mangaLookup
+	s.chapterLookup = chapterLookup
+	s.commentLookup = commentLookup
 }
 
 func (s *SupportService) validateInput(payload any) error {

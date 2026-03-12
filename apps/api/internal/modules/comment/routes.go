@@ -2,6 +2,7 @@ package comment
 
 import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/comment/handler"
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -16,12 +17,12 @@ func registerRoutes(router chi.Router, httpHandler *handler.HTTPHandler) {
 	router.Get("/targets/{target_type}/{target_id}/comments", httpHandler.ListByTarget)
 
 	router.Route("/comments", func(r chi.Router) {
-		r.Post("/", httpHandler.CreateComment)
+		r.With(identity.RequireUser).Post("/", httpHandler.CreateComment)
 		r.Get("/{comment_id}", httpHandler.GetDetail)
 		r.Get("/{comment_id}/thread", httpHandler.GetThread)
-		r.Patch("/{comment_id}", httpHandler.UpdateComment)
-		r.Delete("/{comment_id}", httpHandler.DeleteComment)
-		r.Post("/{comment_id}/restore", httpHandler.RestoreComment)
-		r.Patch("/{comment_id}/moderation", httpHandler.UpdateModeration)
+		r.With(identity.RequireUser).Patch("/{comment_id}", httpHandler.UpdateComment)
+		r.With(identity.RequireUser).Delete("/{comment_id}", httpHandler.DeleteComment)
+		r.With(identity.RequireUser).Post("/{comment_id}/restore", httpHandler.RestoreComment)
+		r.With(identity.RequireUser, identity.RequireAnyRole("moderator", "admin")).Patch("/{comment_id}/moderation", httpHandler.UpdateModeration)
 	})
 }

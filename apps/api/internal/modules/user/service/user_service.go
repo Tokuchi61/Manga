@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"time"
@@ -14,17 +15,24 @@ var (
 	ErrValidation             = errors.New("user_validation_failed")
 	ErrUserNotFound           = errors.New("user_not_found")
 	ErrUserAlreadyExists      = errors.New("user_already_exists")
+	ErrCredentialNotFound     = errors.New("user_credential_not_found")
 	ErrProfileNotVisible      = errors.New("user_profile_not_visible")
 	ErrInvalidStateTransition = errors.New("user_invalid_state_transition")
 	ErrAccountDeactivated     = errors.New("user_account_deactivated")
 	ErrAccountBanned          = errors.New("user_account_banned")
 )
 
+// CredentialLookup exposes auth-owned credential existence checks.
+type CredentialLookup interface {
+	CredentialExists(ctx context.Context, credentialID string) (bool, error)
+}
+
 // UserService owns stage-5 user account/profile/membership flows.
 type UserService struct {
-	store     userrepository.Store
-	validator *validation.Validator
-	now       func() time.Time
+	store            userrepository.Store
+	validator        *validation.Validator
+	credentialLookup CredentialLookup
+	now              func() time.Time
 }
 
 func New(store userrepository.Store, validator *validation.Validator) *UserService {
@@ -36,6 +44,10 @@ func New(store userrepository.Store, validator *validation.Validator) *UserServi
 		validator: validator,
 		now:       time.Now,
 	}
+}
+
+func (s *UserService) SetCredentialLookup(lookup CredentialLookup) {
+	s.credentialLookup = lookup
 }
 
 func (s *UserService) validateInput(payload any) error {

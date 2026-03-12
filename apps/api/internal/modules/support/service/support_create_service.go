@@ -88,6 +88,9 @@ func (s *SupportService) CreateReport(ctx context.Context, request dto.CreateRep
 	if err != nil {
 		return dto.CreateSupportResponse{}, err
 	}
+	if err := s.ensureTargetExists(ctx, targetType, targetID); err != nil {
+		return dto.CreateSupportResponse{}, err
+	}
 
 	return s.createCase(ctx, createCaseInput{
 		RequesterUserID: requesterID,
@@ -207,4 +210,43 @@ func toCreateResponse(support entity.SupportCase) dto.CreateSupportResponse {
 		TargetType:           toStringPtr(support.TargetType),
 		TargetID:             support.TargetID,
 	}
+}
+
+func (s *SupportService) ensureTargetExists(ctx context.Context, targetType entity.SupportTargetType, targetID string) error {
+	switch targetType {
+	case entity.SupportTargetTypeManga:
+		if s.mangaLookup == nil {
+			return nil
+		}
+		exists, err := s.mangaLookup.TargetExists(ctx, targetID)
+		if err != nil {
+			return err
+		}
+		if !exists {
+			return ErrInvalidTarget
+		}
+	case entity.SupportTargetTypeChapter:
+		if s.chapterLookup == nil {
+			return nil
+		}
+		exists, err := s.chapterLookup.TargetExists(ctx, targetID)
+		if err != nil {
+			return err
+		}
+		if !exists {
+			return ErrInvalidTarget
+		}
+	case entity.SupportTargetTypeComment:
+		if s.commentLookup == nil {
+			return nil
+		}
+		exists, err := s.commentLookup.TargetExists(ctx, targetID)
+		if err != nil {
+			return err
+		}
+		if !exists {
+			return ErrInvalidTarget
+		}
+	}
+	return nil
 }

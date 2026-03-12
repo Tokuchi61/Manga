@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"log"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/entity"
 	"github.com/google/uuid"
@@ -23,5 +24,7 @@ func (s *AuthService) appendSecurityEvent(ctx context.Context, credentialID uuid
 		IP:            meta.IP,
 		CreatedAt:     s.now().UTC(),
 	}
-	_ = s.store.AppendSecurityEvent(ctx, event)
+	if err := s.store.AppendSecurityEvent(ctx, event); err != nil {
+		log.Printf("auth security event append failed credential_id=%s action=%s err=%v", credentialID.String(), action, err)
+	}
 }

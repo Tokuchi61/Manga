@@ -1,11 +1,11 @@
 package dto
 
-// SendVerificationRequest starts or resends verification flow.
+// SendVerificationRequest triggers verification mail for credential.
 type SendVerificationRequest struct {
-	CredentialID string `json:"credential_id" validate:"required,uuid4"`
+	CredentialID string `json:"-" validate:"required,uuid4"`
 }
 
-// ConfirmVerificationRequest verifies account email.
+// ConfirmVerificationRequest confirms email verification token.
 type ConfirmVerificationRequest struct {
-	Token string `json:"token" validate:"required,min=20"`
+	Token string `json:"token" validate:"required,min=32,max=512"`
 }

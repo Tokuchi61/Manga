@@ -21,16 +21,16 @@ func writeServiceError(w http.ResponseWriter, err error) {
 		writeError(w, http.StatusBadRequest, err.Error())
 	case errors.Is(err, service.ErrCommentAlreadyExists):
 		writeError(w, http.StatusConflict, err.Error())
-	case errors.Is(err, service.ErrCommentNotFound), errors.Is(err, service.ErrCommentNotVisible):
+	case errors.Is(err, service.ErrCommentNotFound), errors.Is(err, service.ErrCommentNotVisible), errors.Is(err, service.ErrTargetNotFound):
 		writeError(w, http.StatusNotFound, err.Error())
 	case errors.Is(err, service.ErrForbiddenAction):
 		writeError(w, http.StatusForbidden, err.Error())
 	case errors.Is(err, service.ErrRateLimited):
 		writeError(w, http.StatusTooManyRequests, err.Error())
-	case errors.Is(err, service.ErrEditWindowExpired), errors.Is(err, service.ErrReplyDepthExceeded), errors.Is(err, service.ErrCommentLocked), errors.Is(err, service.ErrRestoreWindowExpired), errors.Is(err, service.ErrInvalidStateTransition):
+	case errors.Is(err, service.ErrEditWindowExpired), errors.Is(err, service.ErrRestoreWindowExpired), errors.Is(err, service.ErrReplyDepthExceeded), errors.Is(err, service.ErrCommentLocked), errors.Is(err, service.ErrInvalidStateTransition):
 		writeError(w, http.StatusConflict, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

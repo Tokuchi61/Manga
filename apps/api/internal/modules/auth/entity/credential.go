@@ -15,6 +15,7 @@ type Credential struct {
 	Suspended                     bool
 	Banned                        bool
 	FailedLoginAttempts           int
+	FailedLoginWindowStartedAt    *time.Time
 	LoginCooldownUntil            *time.Time
 	VerificationResendAvailableAt *time.Time
 	CreatedAt                     time.Time

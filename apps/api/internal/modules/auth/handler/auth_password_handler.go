@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/dto"
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 )
 
 func (h *HTTPHandler) ForgotPassword(w http.ResponseWriter, r *http.Request) {
@@ -40,6 +41,13 @@ func (h *HTTPHandler) ChangePassword(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	credentialID, ok := identity.CredentialID(r.Context())
+	if !ok {
+		writeError(w, http.StatusUnauthorized, "missing_actor_credential_id")
+		return
+	}
+	req.CredentialID = credentialID
+
 	res, err := h.service.ChangePassword(r.Context(), req, buildRequestMeta(r))
 	if err != nil {
 		writeServiceError(w, err)

@@ -17,6 +17,9 @@ func (s *CommentService) UpdateModeration(ctx context.Context, request dto.Updat
 	if err != nil {
 		return dto.OperationResponse{}, err
 	}
+	if _, err := parseID(request.ActorUserID, "actor_user_id"); err != nil {
+		return dto.OperationResponse{}, err
+	}
 
 	comment, err := s.store.GetCommentByID(ctx, commentID)
 	if err != nil {

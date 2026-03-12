@@ -17,7 +17,7 @@ func decodeJSON(r *http.Request, out any) error {
 
 func writeServiceError(w http.ResponseWriter, err error) {
 	switch {
-	case errors.Is(err, service.ErrValidation), errors.Is(err, service.ErrInvalidCounterValue):
+	case errors.Is(err, service.ErrValidation):
 		writeError(w, http.StatusBadRequest, err.Error())
 	case errors.Is(err, service.ErrMangaAlreadyExists):
 		writeError(w, http.StatusConflict, err.Error())
@@ -26,7 +26,7 @@ func writeServiceError(w http.ResponseWriter, err error) {
 	case errors.Is(err, service.ErrInvalidStateTransition):
 		writeError(w, http.StatusConflict, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

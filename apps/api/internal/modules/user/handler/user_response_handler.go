@@ -21,14 +21,18 @@ func writeServiceError(w http.ResponseWriter, err error) {
 		writeError(w, http.StatusBadRequest, err.Error())
 	case errors.Is(err, service.ErrUserAlreadyExists):
 		writeError(w, http.StatusConflict, err.Error())
+	case errors.Is(err, service.ErrCredentialNotFound):
+		writeError(w, http.StatusNotFound, err.Error())
 	case errors.Is(err, service.ErrUserNotFound):
 		writeError(w, http.StatusNotFound, err.Error())
-	case errors.Is(err, service.ErrProfileNotVisible), errors.Is(err, service.ErrAccountDeactivated), errors.Is(err, service.ErrAccountBanned):
+	case errors.Is(err, service.ErrProfileNotVisible),
+		errors.Is(err, service.ErrAccountDeactivated),
+		errors.Is(err, service.ErrAccountBanned):
 		writeError(w, http.StatusForbidden, err.Error())
 	case errors.Is(err, service.ErrInvalidStateTransition):
 		writeError(w, http.StatusConflict, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

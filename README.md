@@ -8,7 +8,7 @@ Bu repo su anda `Asama 10 - Support` kapsaminda kimlik, kullanici, merkezi erisi
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.10.0-alpha.1`
+- Su anki surum: `0.10.0-alpha.2`
 
 ## Dizin Yapisi
 

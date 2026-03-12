@@ -28,7 +28,7 @@ func writeServiceError(w http.ResponseWriter, err error) {
 	case errors.Is(err, service.ErrInvalidStateTransition), errors.Is(err, service.ErrModerationHandoffNotAllowed), errors.Is(err, service.ErrAlreadyHandedOff):
 		writeError(w, http.StatusConflict, err.Error())
 	default:
-		writeError(w, http.StatusInternalServerError, err.Error())
+		writeError(w, http.StatusInternalServerError, "internal_error")
 	}
 }
 

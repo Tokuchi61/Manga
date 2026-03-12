@@ -29,7 +29,7 @@ func TestUserHTTPProfileAndVisibilityFlow(t *testing.T) {
 		"credential_id": uuid.NewString(),
 		"username":      "reader_http_one",
 		"display_name":  "Reader HTTP One",
-	})
+	}, "", "")
 	require.Equal(t, http.StatusCreated, createRec.Code)
 
 	var createRes struct {
@@ -38,27 +38,27 @@ func TestUserHTTPProfileAndVisibilityFlow(t *testing.T) {
 	require.NoError(t, json.Unmarshal(createRec.Body.Bytes(), &createRes))
 	require.NotEmpty(t, createRes.UserID)
 
-	publicRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID, nil)
+	publicRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID, nil, "", "")
 	require.Equal(t, http.StatusOK, publicRec.Code)
 
-	visibilityRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/visibility?viewer_id="+createRes.UserID, map[string]string{
+	visibilityRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/visibility", map[string]string{
 		"profile_visibility": "private",
-	})
+	}, createRes.UserID, "")
 	require.Equal(t, http.StatusOK, visibilityRec.Code)
 
-	publicAfterRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID, nil)
+	publicAfterRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID, nil, "", "")
 	require.Equal(t, http.StatusForbidden, publicAfterRec.Code)
 
-	ownRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID+"/self?viewer_id="+createRes.UserID, nil)
+	ownRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID+"/self", nil, createRes.UserID, "")
 	require.Equal(t, http.StatusOK, ownRec.Code)
 
-	updateProfileRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/profile?viewer_id="+createRes.UserID, map[string]string{
+	updateProfileRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/profile", map[string]string{
 		"display_name": "Reader Updated",
 		"bio":          "Profile updated over HTTP",
-	})
+	}, createRes.UserID, "")
 	require.Equal(t, http.StatusOK, updateProfileRec.Code)
 
-	ownAfterUpdateRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID+"/self?viewer_id="+createRes.UserID, nil)
+	ownAfterUpdateRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID+"/self", nil, createRes.UserID, "")
 	require.Equal(t, http.StatusOK, ownAfterUpdateRec.Code)
 
 	var ownAfterUpdateRes struct {
@@ -75,11 +75,12 @@ func TestUserHTTPAccountStateAndVIPLifecycle(t *testing.T) {
 	require.NoError(t, err)
 
 	handler := app.NewHTTPHandler(config.Config{AppVersion: "0.5.0-test"}, zap.NewNop(), nil, registry)
+	adminActorID := uuid.NewString()
 
 	createRec := performUserJSONRequest(t, handler, http.MethodPost, "/users", map[string]string{
 		"credential_id": uuid.NewString(),
 		"username":      "reader_http_two",
-	})
+	}, "", "")
 	require.Equal(t, http.StatusCreated, createRec.Code)
 
 	var createRes struct {
@@ -91,53 +92,50 @@ func TestUserHTTPAccountStateAndVIPLifecycle(t *testing.T) {
 	vipActivateRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/vip", map[string]string{
 		"action":  "activate",
 		"ends_at": time.Date(2026, 4, 11, 10, 0, 0, 0, time.UTC).Format(time.RFC3339),
-	})
+	}, adminActorID, "admin")
 	require.Equal(t, http.StatusOK, vipActivateRec.Code)
 
 	vipFreezeRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/vip", map[string]string{
 		"action":        "freeze",
 		"freeze_reason": "system_pause",
-	})
+	}, adminActorID, "admin")
 	require.Equal(t, http.StatusOK, vipFreezeRec.Code)
 
 	vipResumeRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/vip", map[string]string{
 		"action": "resume",
-	})
+	}, adminActorID, "admin")
 	require.Equal(t, http.StatusOK, vipResumeRec.Code)
 
 	deactivateRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/account/state", map[string]string{
-		"actor_scope":   "self",
-		"actor_user_id": createRes.UserID,
 		"account_state": "deactivated",
-	})
+	}, createRes.UserID, "")
 	require.Equal(t, http.StatusOK, deactivateRec.Code)
 
-	updateProfileRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/profile?viewer_id="+createRes.UserID, map[string]string{
+	updateProfileRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/profile", map[string]string{
 		"display_name": "Should Not Update",
-	})
+	}, createRes.UserID, "")
 	require.Equal(t, http.StatusForbidden, updateProfileRec.Code)
 
 	banRec := performUserJSONRequest(t, handler, http.MethodPatch, "/users/"+createRes.UserID+"/account/state", map[string]string{
-		"actor_scope":   "admin",
 		"account_state": "banned",
 		"reason":        "high_risk",
-	})
+	}, adminActorID, "admin")
 	require.Equal(t, http.StatusOK, banRec.Code)
 
-	publicRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID, nil)
+	publicRec := performUserRequest(t, handler, http.MethodGet, "/users/"+createRes.UserID, nil, "", "")
 	require.Equal(t, http.StatusForbidden, publicRec.Code)
 }
 
-func performUserJSONRequest(t *testing.T, handler http.Handler, method string, path string, body any) *httptest.ResponseRecorder {
+func performUserJSONRequest(t *testing.T, handler http.Handler, method string, path string, body any, actorUserID string, roles string) *httptest.ResponseRecorder {
 	t.Helper()
 
 	payload, err := json.Marshal(body)
 	require.NoError(t, err)
 
-	return performUserRequest(t, handler, method, path, bytes.NewReader(payload))
+	return performUserRequest(t, handler, method, path, bytes.NewReader(payload), actorUserID, roles)
 }
 
-func performUserRequest(t *testing.T, handler http.Handler, method string, path string, body *bytes.Reader) *httptest.ResponseRecorder {
+func performUserRequest(t *testing.T, handler http.Handler, method string, path string, body *bytes.Reader, actorUserID string, roles string) *httptest.ResponseRecorder {
 	t.Helper()
 
 	var bodyReader *bytes.Reader
@@ -151,6 +149,7 @@ func performUserRequest(t *testing.T, handler http.Handler, method string, path 
 	if body != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
+	setActorHeaders(req, actorUserID, "", roles)
 	rec := httptest.NewRecorder()
 
 	handler.ServeHTTP(rec, req)
@@ -162,6 +161,6 @@ func TestUserRouteExists(t *testing.T) {
 	require.NoError(t, err)
 
 	handler := app.NewHTTPHandler(config.Config{AppVersion: "0.5.0-test"}, zap.NewNop(), nil, registry)
-	rec := performUserJSONRequest(t, handler, http.MethodPost, "/users", map[string]string{"invalid": "true"})
+	rec := performUserJSONRequest(t, handler, http.MethodPost, "/users", map[string]string{"invalid": "true"}, "", "")
 	require.NotEqual(t, http.StatusNotFound, rec.Code, fmt.Sprintf("response body: %s", rec.Body.String()))
 }

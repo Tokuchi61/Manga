@@ -11,6 +11,7 @@ import (
 // Module wires user handlers to the central module registry.
 type Module struct {
 	httpHandler *handler.HTTPHandler
+	svc         *service.UserService
 }
 
 func New() Module {
@@ -18,7 +19,14 @@ func New() Module {
 	validator := validation.New()
 	svc := service.New(store, validator)
 
-	return Module{httpHandler: handler.New(svc)}
+	return Module{httpHandler: handler.New(svc), svc: svc}
+}
+
+func (m *Module) SetCredentialLookup(lookup service.CredentialLookup) {
+	if m == nil || m.svc == nil {
+		return
+	}
+	m.svc.SetCredentialLookup(lookup)
 }
 
 func (m Module) Name() string {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
@@ -18,6 +19,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/db"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/logger"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"go.uber.org/zap"
 )
 
@@ -38,11 +40,16 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	pool, err := db.New(ctx, cfg)
-	if err != nil {
-		log.Fatal("database init failed", zap.Error(err))
+	var pool *pgxpool.Pool
+	if strings.TrimSpace(cfg.DBMainDSN) != "" {
+		pool, err = db.New(ctx, cfg)
+		if err != nil {
+			log.Fatal("database init failed", zap.Error(err))
+		}
+		defer pool.Close()
+	} else {
+		log.Warn("database disabled; running in memory mode")
 	}
-	defer pool.Close()
 
 	auth := authmodule.New(authmodule.RuntimeConfig{
 		FailedAttemptLimitPerMinute:       cfg.AuthLoginFailedAttemptLimitPerMinute,
@@ -50,11 +57,16 @@ func main() {
 		VerificationResendCooldownSeconds: cfg.AuthEmailVerificationResendCooldownSeconds,
 	})
 	user := usermodule.New()
-	access := accessmodule.New(accessmodule.RuntimeConfig{})
 	manga := mangamodule.New()
 	chapter := chaptermodule.New()
 	comment := commentmodule.New()
 	support := supportmodule.New()
+	access := accessmodule.New(accessmodule.RuntimeConfig{})
+
+	user.SetCredentialLookup(auth)
+	chapter.SetMangaLookup(manga)
+	comment.SetTargetLookups(manga, chapter)
+	support.SetTargetLookups(manga, chapter, comment)
 
 	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, comment, support)
 	if err != nil {

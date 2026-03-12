@@ -5,6 +5,32 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.10.0-alpha.2] - 2026-03-12
+
+### Changed
+- HTTP actor kimligi ve rol guveni middleware/context tabanina tasindi (`X-Actor-*` basliklari) ve ilgili route guardlari aktive edildi.
+- Auth, user, comment, support ve access handlerlari istemci tarafindan gelen actor/credential alanlari yerine server-side context kaynakli alanlari kullanacak sekilde duzenlendi.
+- Moduller arasi bagimlilik yonleri netlestirildi; `auth->user`, `manga->chapter`, `manga/chapter->comment`, `manga/chapter/comment->support` dogrulama kontratlari composition root'ta baglandi.
+- Dokuman referanslari mevcut tek dosya yerlesimine hizalandi (`docs/modules.md`, `docs/shared.md`) ve branch modeli kurali CI gercegi ile uyumlu hale getirildi (`codex/**` notu).
+
+### Fixed
+- Access evaluate endpointinde guven siniri sertlestirildi; `user_id`, `identity`, `user_signal` istemciden alinmiyor.
+- 500 sinifindaki hata cevabi sizintilari `internal_error` defaultuna cekildi.
+- Kritik persistence hatasi yutma noktalarinda login/security event akislari guvenli hale getirildi.
+- Access bootstrap seed hatalari startup asamasinda fail-fast olacak sekilde duzeltildi.
+- Config yukleme zorunluluklari sadelestirildi; runtime icin `DB_MAIN_DSN`/`DB_TEST_DSN` zorunlu degil.
+- Chapter navigation akisi hard-limit tarama yerine hedefli komsu cozumu ile olceklenebilir hale getirildi.
+- Integration test helperlari yeni auth/actor kontratina gore guncellendi.
+
+### Docs
+- `docs/issues.md` temizlendi; cozulen bulgular kayittan cikarildi, acik kalanlar ayrik listelendi.
+- `docs/issue.md` kaldirildi ve tek issue kaynagi olarak `docs/issues.md` birakildi.
+
+### Release Notes
+- Degisiklik Ozeti: Guven siniri ve katman kurallari hotfix paketinde sertlestirildi; test ve docker dogrulamalariyla birlikte yayinlanabilir durum saglandi.
+- Etkilenen Moduller: `auth`, `user`, `access`, `comment`, `support`, `manga`, `chapter`, `app`, `platform/config`, `docs`, `tests`.
+- Breaking Change: HTTP actor/credential kimlik alanlari body/query yerine `X-Actor-*` headerlari ile alinmaktadir.
+- Migration Etkisi: Yok.
 ## [0.10.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -555,6 +581,9 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
+
+
 
 
 

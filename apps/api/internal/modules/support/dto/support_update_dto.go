@@ -3,7 +3,8 @@ package dto
 // AddSupportReplyRequest adds support reply/internal note.
 type AddSupportReplyRequest struct {
 	SupportID   string `json:"-" validate:"required,uuid4"`
-	ActorUserID string `json:"actor_user_id" validate:"required,uuid4"`
+	ActorUserID string `json:"-" validate:"required,uuid4"`
+	ActorIsTeam bool   `json:"-"`
 	Message     string `json:"message" validate:"required,min=1,max=5000"`
 	Visibility  string `json:"visibility" validate:"required,oneof=public_to_requester internal_only"`
 }
@@ -13,13 +14,13 @@ type UpdateSupportStatusRequest struct {
 	SupportID        string  `json:"-" validate:"required,uuid4"`
 	Status           string  `json:"status" validate:"required,oneof=open triaged waiting_user waiting_team resolved rejected closed spam"`
 	AssigneeUserID   *string `json:"assignee_user_id,omitempty" validate:"omitempty,uuid4"`
-	ReviewedByUserID *string `json:"reviewed_by_user_id,omitempty" validate:"omitempty,uuid4"`
+	ReviewedByUserID *string `json:"-" validate:"omitempty,uuid4"`
 }
 
 // ResolveSupportRequest resolves support with resolution note.
 type ResolveSupportRequest struct {
 	SupportID        string `json:"-" validate:"required,uuid4"`
-	ReviewedByUserID string `json:"reviewed_by_user_id" validate:"required,uuid4"`
+	ReviewedByUserID string `json:"-" validate:"required,uuid4"`
 	ResolutionNote   string `json:"resolution_note" validate:"required,min=1,max=5000"`
 }
 

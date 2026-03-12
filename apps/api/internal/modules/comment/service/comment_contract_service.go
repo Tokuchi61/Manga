@@ -35,6 +35,23 @@ func (s *CommentService) GetTargetRelation(ctx context.Context, commentID string
 	}, nil
 }
 
+// TargetExists exposes comment target existence checks for consumer modules.
+func (s *CommentService) TargetExists(ctx context.Context, commentID string) (bool, error) {
+	parsedID, err := parseID(commentID, "comment_id")
+	if err != nil {
+		return false, nil
+	}
+
+	_, err = s.store.GetCommentByID(ctx, parsedID)
+	if err != nil {
+		if errors.Is(err, commentrepository.ErrNotFound) {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
+}
+
 // BuildModerationSignal creates stable comment signal payload.
 func (s *CommentService) BuildModerationSignal(commentID string, targetType string, targetID string, event string, requestID string, correlationID string) commentcontract.ModerationSignal {
 	if event == "" {

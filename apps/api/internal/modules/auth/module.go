@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"context"
 	"time"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/handler"
@@ -20,6 +21,7 @@ type RuntimeConfig struct {
 // Module wires auth handlers to the central module registry.
 type Module struct {
 	httpHandler *handler.HTTPHandler
+	svc         *service.AuthService
 }
 
 func New(cfg RuntimeConfig) Module {
@@ -31,7 +33,7 @@ func New(cfg RuntimeConfig) Module {
 		VerificationResendCooldown: time.Duration(cfg.VerificationResendCooldownSeconds) * time.Second,
 	})
 
-	return Module{httpHandler: handler.New(svc)}
+	return Module{httpHandler: handler.New(svc), svc: svc}
 }
 
 func (m Module) Name() string {
@@ -40,4 +42,11 @@ func (m Module) Name() string {
 
 func (m Module) RegisterRoutes(router chi.Router) {
 	registerRoutes(router, m.httpHandler)
+}
+
+func (m Module) CredentialExists(ctx context.Context, credentialID string) (bool, error) {
+	if m.svc == nil {
+		return false, nil
+	}
+	return m.svc.CredentialExists(ctx, credentialID)
 }

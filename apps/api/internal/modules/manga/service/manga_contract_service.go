@@ -31,3 +31,20 @@ func (s *MangaService) GetChapterAccessDefaults(ctx context.Context, mangaID str
 		UpdatedAt:          manga.UpdatedAt,
 	}, nil
 }
+
+// TargetExists exposes manga target existence checks for consumer modules.
+func (s *MangaService) TargetExists(ctx context.Context, mangaID string) (bool, error) {
+	parsedID, err := parseID(mangaID, "manga_id")
+	if err != nil {
+		return false, nil
+	}
+
+	_, err = s.store.GetMangaByID(ctx, parsedID)
+	if err != nil {
+		if errors.Is(err, mangarepository.ErrNotFound) {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
+}

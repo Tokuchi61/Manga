@@ -24,6 +24,9 @@ func (s *CommentService) CreateComment(ctx context.Context, request dto.CreateCo
 	if err != nil {
 		return dto.CreateCommentResponse{}, err
 	}
+	if err := s.ensureTargetExists(ctx, targetType, targetID); err != nil {
+		return dto.CreateCommentResponse{}, err
+	}
 	authorUserID, err := parseID(request.AuthorUserID, "author_user_id")
 	if err != nil {
 		return dto.CreateCommentResponse{}, err
@@ -127,4 +130,32 @@ func (s *CommentService) CreateComment(ctx context.Context, request dto.CreateCo
 		Depth:           comment.Depth,
 		ModerationState: string(comment.ModerationStatus),
 	}, nil
+}
+
+func (s *CommentService) ensureTargetExists(ctx context.Context, targetType entity.TargetType, targetID string) error {
+	switch targetType {
+	case entity.TargetTypeManga:
+		if s.mangaLookup == nil {
+			return nil
+		}
+		exists, err := s.mangaLookup.TargetExists(ctx, targetID)
+		if err != nil {
+			return err
+		}
+		if !exists {
+			return ErrTargetNotFound
+		}
+	case entity.TargetTypeChapter:
+		if s.chapterLookup == nil {
+			return nil
+		}
+		exists, err := s.chapterLookup.TargetExists(ctx, targetID)
+		if err != nil {
+			return err
+		}
+		if !exists {
+			return ErrTargetNotFound
+		}
+	}
+	return nil
 }

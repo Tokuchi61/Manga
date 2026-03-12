@@ -151,6 +151,7 @@ func TestReplyStatusResolveAndQueueFlow(t *testing.T) {
 	_, err = svc.AddReply(ctx, dto.AddSupportReplyRequest{
 		SupportID:   ticket.SupportID,
 		ActorUserID: agentID,
+		ActorIsTeam: true,
 		Message:     "We are checking this now",
 		Visibility:  "public_to_requester",
 	})
@@ -186,6 +187,7 @@ func TestReplyStatusResolveAndQueueFlow(t *testing.T) {
 	_, err = svc.AddReply(ctx, dto.AddSupportReplyRequest{
 		SupportID:   ticket.SupportID,
 		ActorUserID: agentID,
+		ActorIsTeam: true,
 		Message:     "Internal follow-up note",
 		Visibility:  "internal_only",
 	})

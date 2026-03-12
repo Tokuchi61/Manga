@@ -11,6 +11,7 @@ import (
 // Module wires support handlers to the central module registry.
 type Module struct {
 	httpHandler *handler.HTTPHandler
+	svc         *service.SupportService
 }
 
 func New() Module {
@@ -18,7 +19,14 @@ func New() Module {
 	validator := validation.New()
 	svc := service.New(store, validator)
 
-	return Module{httpHandler: handler.New(svc)}
+	return Module{httpHandler: handler.New(svc), svc: svc}
+}
+
+func (m *Module) SetTargetLookups(mangaLookup service.MangaTargetLookup, chapterLookup service.ChapterTargetLookup, commentLookup service.CommentTargetLookup) {
+	if m == nil || m.svc == nil {
+		return
+	}
+	m.svc.SetTargetLookups(mangaLookup, chapterLookup, commentLookup)
 }
 
 func (m Module) Name() string {

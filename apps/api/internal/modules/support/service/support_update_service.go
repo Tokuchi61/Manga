@@ -44,6 +44,9 @@ func (s *SupportService) AddReply(ctx context.Context, request dto.AddSupportRep
 	if supportCase.Status == entity.SupportStatusClosed || supportCase.Status == entity.SupportStatusSpam {
 		return dto.OperationResponse{}, ErrInvalidStateTransition
 	}
+	if !request.ActorIsTeam && actorID != supportCase.RequesterUserID {
+		return dto.OperationResponse{}, ErrForbiddenAction
+	}
 	if visibility == entity.ReplyVisibilityInternalOnly && actorID == supportCase.RequesterUserID {
 		return dto.OperationResponse{}, ErrForbiddenAction
 	}

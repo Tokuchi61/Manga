@@ -31,6 +31,12 @@ func (s *UserService) UpdateVIPState(ctx context.Context, request dto.UpdateVIPS
 		}
 		return dto.VIPStateResponse{}, err
 	}
+	if user.AccountState == entity.AccountStateDeactivated {
+		return dto.VIPStateResponse{}, ErrAccountDeactivated
+	}
+	if user.AccountState == entity.AccountStateBanned {
+		return dto.VIPStateResponse{}, ErrAccountBanned
+	}
 
 	now := s.now().UTC()
 	switch action {

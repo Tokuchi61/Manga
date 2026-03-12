@@ -1,6 +1,6 @@
 # ModÃ¼ller
 
-> Bu dosya `docs/modules/*` altÄ±ndaki tÃ¼m modÃ¼l aÃ§Ä±klamalarÄ±nÄ±n tek dosyada birleÅŸtirilmiÅŸ halidir. Yol haritasÄ±ndaki modÃ¼l aÅŸamalarÄ± iÃ§in bu dosya referanstÄ±r.
+> Bu dosya proje icin canonical modul envanteri ve modul detay referansidir.
 
 ## KullanÄ±m KurallarÄ±
 - Her modÃ¼l iÃ§in canonical ad tek olmalÄ±dÄ±r.
@@ -14,24 +14,24 @@
 
 | Canonical Module | Domain Group | Status | Main Doc | Summary |
 | --- | --- | --- | --- | --- |
-| auth |  | active | docs/modules/auth.md | Kimlik dogrulama, token, session ve hesap guvenligi akislarinin aktif modulu. |
-| user |  | active | docs/modules/user.md | Kullanici hesabi, profil, tercih ve uyelik verisi modulu. |
-| access |  | active | docs/modules/access.md | Merkezi authorization, policy ve eriÅŸim kararÄ± modÃ¼lÃ¼. |
-| admin |  | planned | docs/modules/admin.md | YÃ¶netim, moderasyon denetimi ve operasyon use-case modÃ¼lÃ¼. |
-| manga |  | active | docs/modules/manga.md | Ana iÃ§erik varlÄ±ÄŸÄ±, metadata ve discovery modÃ¼lÃ¼. |
-| chapter |  | active | docs/modules/chapter.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
-| comment |  | active | docs/modules/comment.md | Icerik yorumlari ve thread etkilesim modulu. |
-| support |  | active | docs/modules/support.md | KullanÄ±cÄ± destek kayÄ±tlarÄ±, ticket ve report intake modÃ¼lÃ¼. |
-| moderation |  | planned | docs/modules/moderation.md | Scoped moderasyon kuyruklarÄ± ve vaka yÃ¶netimi modÃ¼lÃ¼. |
-| notification |  | planned | docs/modules/notification.md | Bildirim Ã¼retimi, teslimi ve tercih yÃ¶netimi modÃ¼lÃ¼. |
-| social |  | planned | docs/modules/social.md | Takip, arkadaÅŸlÄ±k, duvar ve mesajlaÅŸma modÃ¼lÃ¼. |
-| inventory |  | planned | docs/modules/inventory.md | Item sahipliÄŸi, claim, consume ve equip modÃ¼lÃ¼. |
-| mission |  | planned | docs/modules/mission.md | GÃ¶rev tanÄ±mÄ±, ilerleme ve claim eligibility modÃ¼lÃ¼. |
-| royalpass |  | planned | docs/modules/royalpass.md | Sezon, tier ve premium track ilerleme modÃ¼lÃ¼. |
-| history |  | planned | docs/modules/history.md | Continue reading, kÃ¼tÃ¼phane ve okuma geÃ§miÅŸi modÃ¼lÃ¼. |
-| ads |  | planned | docs/modules/ads.md | Reklam placement, campaign ve Ã¶lÃ§Ã¼mleme modÃ¼lÃ¼. |
-| shop |  | planned | docs/modules/shop.md | ÃœrÃ¼n kataloÄŸu, offer ve purchase orchestration modÃ¼lÃ¼. |
-| payment |  | planned | docs/modules/payment.md | Checkout, ledger ve finansal iÅŸlem doÄŸruluÄŸu modÃ¼lÃ¼. |
+| auth |  | active | docs/modules.md | Kimlik dogrulama, token, session ve hesap guvenligi akislarinin aktif modulu. |
+| user |  | active | docs/modules.md | Kullanici hesabi, profil, tercih ve uyelik verisi modulu. |
+| access |  | active | docs/modules.md | Merkezi authorization, policy ve eriÅŸim kararÄ± modÃ¼lÃ¼. |
+| admin |  | planned | docs/modules.md | YÃ¶netim, moderasyon denetimi ve operasyon use-case modÃ¼lÃ¼. |
+| manga |  | active | docs/modules.md | Ana iÃ§erik varlÄ±ÄŸÄ±, metadata ve discovery modÃ¼lÃ¼. |
+| chapter |  | active | docs/modules.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
+| comment |  | active | docs/modules.md | Icerik yorumlari ve thread etkilesim modulu. |
+| support |  | active | docs/modules.md | KullanÄ±cÄ± destek kayÄ±tlarÄ±, ticket ve report intake modÃ¼lÃ¼. |
+| moderation |  | planned | docs/modules.md | Scoped moderasyon kuyruklarÄ± ve vaka yÃ¶netimi modÃ¼lÃ¼. |
+| notification |  | planned | docs/modules.md | Bildirim Ã¼retimi, teslimi ve tercih yÃ¶netimi modÃ¼lÃ¼. |
+| social |  | planned | docs/modules.md | Takip, arkadaÅŸlÄ±k, duvar ve mesajlaÅŸma modÃ¼lÃ¼. |
+| inventory |  | planned | docs/modules.md | Item sahipliÄŸi, claim, consume ve equip modÃ¼lÃ¼. |
+| mission |  | planned | docs/modules.md | GÃ¶rev tanÄ±mÄ±, ilerleme ve claim eligibility modÃ¼lÃ¼. |
+| royalpass |  | planned | docs/modules.md | Sezon, tier ve premium track ilerleme modÃ¼lÃ¼. |
+| history |  | planned | docs/modules.md | Continue reading, kÃ¼tÃ¼phane ve okuma geÃ§miÅŸi modÃ¼lÃ¼. |
+| ads |  | planned | docs/modules.md | Reklam placement, campaign ve Ã¶lÃ§Ã¼mleme modÃ¼lÃ¼. |
+| shop |  | planned | docs/modules.md | ÃœrÃ¼n kataloÄŸu, offer ve purchase orchestration modÃ¼lÃ¼. |
+| payment |  | planned | docs/modules.md | Checkout, ledger ve finansal iÅŸlem doÄŸruluÄŸu modÃ¼lÃ¼. |
 
 
 ---
@@ -69,7 +69,7 @@
 - settings envanteri, audit log ham kaydÄ± veya modÃ¼l business verileri
 
 ## Access KontratÄ±
-`access` modÃ¼lÃ¼ access kararÄ±nÄ±n kendisidir. `auth` tarafÄ±ndan doÄŸrulanan kimliÄŸi ve `user`, `social`, `moderation` veya `admin` tarafÄ±ndan taÅŸÄ±nan sinyalleri kullanarak karar Ã¼retir; veri sahipliÄŸi o modÃ¼llerde kalÄ±r. Runtime ayar yorumlama sÄ±rasÄ± `docs/settings/index.md`, Ã§atÄ±ÅŸma Ã§Ã¶zÃ¼mÃ¼ `docs/shared/precedence-rules.md`, policy Ã§Ä±ktÄ± sÃ¶zlÃ¼ÄŸÃ¼ ise `docs/shared/policy-effects.md` ile hizalÄ± olmalÄ±dÄ±r.
+`access` modÃ¼lÃ¼ access kararÄ±nÄ±n kendisidir. `auth` tarafÄ±ndan doÄŸrulanan kimliÄŸi ve `user`, `social`, `moderation` veya `admin` tarafÄ±ndan taÅŸÄ±nan sinyalleri kullanarak karar Ã¼retir; veri sahipliÄŸi o modÃ¼llerde kalÄ±r. Runtime ayar yorumlama sÄ±rasÄ± `docs/shared.md`, Ã§atÄ±ÅŸma Ã§Ã¶zÃ¼mÃ¼ `docs/shared.md`, policy Ã§Ä±ktÄ± sÃ¶zlÃ¼ÄŸÃ¼ ise `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - guard, policy ve authorization yÃ¼zeyi dÄ±ÅŸ modÃ¼ller iÃ§in resmi giriÅŸ noktasÄ± olmalÄ±dÄ±r
@@ -81,7 +81,7 @@
 - `auth` kimlik doÄŸrulama sinyalleri
 - `user` kullanÄ±cÄ± durumu ve Ã¼yelik sinyalleri
 - `social`, `moderation`, `admin` ve diÄŸer modÃ¼llerden gelen scope veya override sinyalleri
-- cache standardÄ± iÃ§in `docs/shared/cache-queue-strategy.md`
+- cache standardÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `site.maintenance.enabled`
@@ -92,7 +92,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - tÃ¼ketir: auth identity, user visibility ve vip state, social block, moderation deny, admin override sinyalleri
 - Ã¼retir: `access.policy.changed`, `access.decision.denied` veya metrik odaklÄ± audit sinyalleri
-- event tÃ¼ketiminde replay ve duplicate handling `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- event tÃ¼ketiminde replay ve duplicate handling `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - policy override, deny reason deÄŸiÅŸimi, emergency availability yorumu ve yetki bypass giriÅŸimleri auditlenmelidir
@@ -166,7 +166,7 @@
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `auth` ile admin kimlik doÄŸrulama entegrasyonu
 - `user`, `access`, `moderation`, `support`, `payment` ve diÄŸer modÃ¼ller ile oversight entegrasyonu
-- dashboard, summary ve export tasarÄ±mÄ± iÃ§in `docs/shared/reporting-analytics-strategy.md`
+- dashboard, summary ve export tasarÄ±mÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - settings envanterindeki kategori bazlÄ± tÃ¼m admin-owned runtime ayarlar
@@ -176,11 +176,11 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `admin.setting.changed`, `admin.override.applied`, `admin.user.reviewed`
 - tÃ¼ketir: moderation escalation, support escalation, payment manual review ve operasyon sinyalleri
-- admin orkestrasyonunda publish gereken olaylar `docs/shared/outbox-pattern.md` ile hizalÄ± planlanmalÄ±dÄ±r
+- admin orkestrasyonunda publish gereken olaylar `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - settings deÄŸiÅŸikliÄŸi, override, impersonation, destructive action ve double confirmation gerektiren aksiyonlar immutable audit log Ã¼retmelidir
-- admin note ile audit kaydÄ± aynÄ± veri modeli olmamalÄ±; `docs/shared/audit-policy.md` ile ayrÄ±ÅŸtÄ±rÄ±lmalÄ±dÄ±r
+- admin note ile audit kaydÄ± aynÄ± veri modeli olmamalÄ±; `docs/shared.md` ile ayrÄ±ÅŸtÄ±rÄ±lmalÄ±dÄ±r
 
 ## Ä°dempotency ve Retry
 - destructive veya yÃ¼ksek riskli admin aksiyonlarÄ± request id ile duplicate korumasÄ± taÅŸÄ±malÄ±dÄ±r
@@ -236,7 +236,7 @@
 - finansal faturalama veya Ã¶deme kayÄ±tlarÄ±
 
 ## Access KontratÄ±
-`ads` yetki kararÄ± vermez. VIP reklamsÄ±z deneyim, audience muafiyeti ve reklam yÃ¼zeyi gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ `access` ile yorumlanÄ±r. `ads` modÃ¼lÃ¼ yalnÄ±zca reklam teslimine temel olan veri ve Ã¶lÃ§Ã¼mleme kayÄ±tlarÄ±nÄ± taÅŸÄ±r. VIP no-ads precedence kuralÄ± `docs/shared/precedence-rules.md` ile hizalÄ± kalmalÄ±dÄ±r.
+`ads` yetki kararÄ± vermez. VIP reklamsÄ±z deneyim, audience muafiyeti ve reklam yÃ¼zeyi gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ `access` ile yorumlanÄ±r. `ads` modÃ¼lÃ¼ yalnÄ±zca reklam teslimine temel olan veri ve Ã¶lÃ§Ã¼mleme kayÄ±tlarÄ±nÄ± taÅŸÄ±r. VIP no-ads precedence kuralÄ± `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - placement resolve ve aktif campaign Ã§Ã¶zÃ¼mleme yÃ¼zeyi
@@ -247,8 +247,8 @@
 ## BaÄŸÄ±mlÄ±lÄ±klar
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `access`, `admin`, `user`, `manga`, `chapter` ve reporting consumer'larÄ± ile entegrasyon
-- reporting katmanÄ± iÃ§in `docs/shared/reporting-analytics-strategy.md`
-- cache veya async kararlarÄ± iÃ§in `docs/shared/cache-queue-strategy.md`
+- reporting katmanÄ± iÃ§in `docs/shared.md`
+- cache veya async kararlarÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.ads.surface.enabled`
@@ -260,7 +260,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `ads.impression.accepted`, `ads.click.accepted`, `ads.campaign.state_changed`
 - tÃ¼ketir: user entitlement veya access availability sinyalleri
-- aggregate raporlama ve placement resolve cache'i `docs/shared/projection-strategy.md` ile hizalÄ± planlanmalÄ±dÄ±r
+- aggregate raporlama ve placement resolve cache'i `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - campaign publish veya pause, targeting override, invalid click korumasÄ± ve runtime disable aksiyonlarÄ± auditlenmelidir
@@ -314,7 +314,7 @@
 ## Bu Modul Hangi Verinin Sahibi Degildir?
 - role, permission ve access policy kayitlari
 - kullanici profili, gorunurluk tercihi ve VIP entitlement verisi
-- runtime ayar envanterinin canonical kaydi (`docs/settings/index.md`)
+- runtime ayar envanterinin canonical kaydi (`docs/shared.md`)
 
 ## Access Kontrati
 `auth` authorization karari vermez. Dogrulanmis kimlik, session ve guvenlik sinyalleri `access` modulune kontrollu kontrat yuzeyiyle aktarilir. Final allow/deny karari `access`te kalir.
@@ -334,12 +334,12 @@
 - `auth.login.failed_attempt_limit_per_minute`
 - `auth.login.cooldown_seconds`
 - `auth.email.verification_resend_cooldown_seconds`
-- Yeni auth runtime anahtari acildiginda ayni degisiklikte `docs/settings/index.md` guncellenir.
+- Yeni auth runtime anahtari acildiginda ayni degisiklikte `docs/shared.md` guncellenir.
 
 ## Event Akislari
 - Uretir: `auth.login.succeeded`, `auth.login.failed`, `auth.session.revoked`, `auth.email_verification.sent`, `auth.security.suspicious_login`
 - Tuketir: `user.account.deactivated`, `admin.password_reset.forced` ve ilgili guvenlik operasyon sinyalleri
-- Event publish akislarinda `docs/shared/outbox-pattern.md` ve idempotent consumer beklentisi zorunludur.
+- Event publish akislarinda `docs/shared.md` ve idempotent consumer beklentisi zorunludur.
 
 ## Audit ve Izleme
 - Kritik auth aksiyonlari (`login fail/success`, `revoke_all`, `password reset`, `forced reset`) auditlenir.
@@ -433,7 +433,7 @@
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `manga` ile parent iÃ§erik iliÅŸkisi
 - `access`, `admin`, `history`, `comment` ve `support` entegrasyonlarÄ±
-- media storage, attachment policy ve signed URL standardÄ± iÃ§in `docs/shared/media-asset-strategy.md`
+- media storage, attachment policy ve signed URL standardÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.chapter.preview.enabled`
@@ -504,7 +504,7 @@
 - moderation case, support ticket veya access policy owner'lÄ±ÄŸÄ±
 
 ## Hedef Tipi SÃ¶zlÃ¼ÄŸÃ¼
-- `target_type` deÄŸerleri canonical olarak `docs/shared/target-types.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
+- `target_type` deÄŸerleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
 - `comment` hedefleri bu aÅŸamada iÃ§erik odaklÄ± hedeflerdir; sosyal duvar post'u veya sosyal duvar reply zinciri `social` modÃ¼lÃ¼nde native kalmalÄ± ve Ã¶rtÃ¼k olarak comment target'Ä±na dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lmemelidir.
 - Yeni yorum hedefi eklendiÄŸinde aynÄ± deÄŸiÅŸiklik setinde hedef modÃ¼l dokÃ¼manÄ±, `comment` modÃ¼l dokÃ¼manÄ± ve canonical target type kaydÄ± gÃ¼ncellenmelidir.
 
@@ -532,7 +532,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `comment.created`, `comment.edited`, `comment.deleted`, `comment.moderated`
 - tÃ¼ketir: moderation hide veya restore kararÄ±, admin lock veya unlock kararÄ±
-- comment count ve engagement projection'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± beslenmelidir
+- comment count ve engagement projection'larÄ± `docs/shared.md` ile hizalÄ± beslenmelidir
 
 ## Audit ve Ä°zleme
 - shadowban etkisi, bulk lock veya pin deÄŸiÅŸimi ve admin/moderation kaynaklÄ± gÃ¶rÃ¼nÃ¼rlÃ¼k deÄŸiÅŸimleri auditlenmelidir
@@ -618,14 +618,14 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `history.checkpoint.updated`, `history.chapter.finished`, `history.library.changed`
 - tÃ¼ketir: `chapter.read.started`, `chapter.read.finished`, user visibility sinyalleri
-- continue reading projection ve discovery summary'leri `docs/shared/projection-strategy.md` ile hizalÄ± olmalÄ±dÄ±r
+- continue reading projection ve discovery summary'leri `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - public share metadata deÄŸiÅŸimi, admin kaynaklÄ± visibility daraltmasÄ± ve bulk cleanup aksiyonlarÄ± auditlenmelidir
 - merge conflict oranÄ±, checkpoint dedup sayÄ±sÄ± ve projection lag izlenmelidir
 
 ## Ä°dempotency ve Retry
-- checkpoint write, merge ve multi-device sync akÄ±ÅŸlarÄ± `docs/shared/idempotency-policy.md` ile hizalÄ± idempotent olmalÄ±dÄ±r
+- checkpoint write, merge ve multi-device sync akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± idempotent olmalÄ±dÄ±r
 - aynÄ± checkpoint tekrar geldiÄŸinde yeni timeline gÃ¼rÃ¼ltÃ¼sÃ¼ Ã¼retmemelidir
 - cleanup job veya rebuild retry'larÄ± veri kaybÄ± Ã¼retmeden tekrar Ã§alÄ±ÅŸabilmelidir
 
@@ -679,7 +679,7 @@
 - mission veya royalpass progression owner verisi
 
 ## Access KontratÄ±
-`inventory` yetki kararÄ± vermez. KullanÄ±cÄ±nÄ±n kendi envanterini gÃ¶rmesi, reward teslimini tamamlamasÄ±, consume etmesi veya equip etmesi `access` ile korunur. `mission`, `royalpass` veya diÄŸer producer modÃ¼ller claim uygunluÄŸu veya reward kaynaÄŸÄ± Ã¼retebilir; ancak final grant yÃ¼rÃ¼tÃ¼mÃ¼ ve item sahipliÄŸi `inventory` modÃ¼lÃ¼nde kalÄ±r. Kaynak tipleri `docs/shared/reward-source-types.md` ile hizalÄ± olmalÄ±dÄ±r.
+`inventory` yetki kararÄ± vermez. KullanÄ±cÄ±nÄ±n kendi envanterini gÃ¶rmesi, reward teslimini tamamlamasÄ±, consume etmesi veya equip etmesi `access` ile korunur. `mission`, `royalpass` veya diÄŸer producer modÃ¼ller claim uygunluÄŸu veya reward kaynaÄŸÄ± Ã¼retebilir; ancak final grant yÃ¼rÃ¼tÃ¼mÃ¼ ve item sahipliÄŸi `inventory` modÃ¼lÃ¼nde kalÄ±r. Kaynak tipleri `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - own inventory list, own item detail, own equip veya consume yÃ¼zeyi
@@ -702,14 +702,14 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `inventory.granted`, `inventory.revoked`, `inventory.consumed`, `inventory.equipped`
 - tÃ¼ketir: mission claim, royalpass claim, shop fulfillment, admin manual grant sinyalleri
-- reward projection ve grant retry davranÄ±ÅŸÄ± `docs/shared/outbox-pattern.md` ile hizalÄ± olmalÄ±dÄ±r
+- reward projection ve grant retry davranÄ±ÅŸÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - manual grant, revoke, consume, equip slot deÄŸiÅŸimi ve correction aksiyonlarÄ± auditlenmelidir
 - duplicate grant korumasÄ±, expired item cleanup ve source mismatch oranÄ± izlenmelidir
 
 ## Ä°dempotency ve Retry
-- grant akÄ±ÅŸlarÄ± source reference + request id ile `docs/shared/idempotency-policy.md` kapsamÄ±nda korunmalÄ±dÄ±r
+- grant akÄ±ÅŸlarÄ± source reference + request id ile `docs/shared.md` kapsamÄ±nda korunmalÄ±dÄ±r
 - consume ve equip tekrarlandÄ±ÄŸÄ±nda ikinci yan etki Ã¼retmemeli; mevcut final state'e baÄŸlanmalÄ±dÄ±r
 - recovery veya reconcile akÄ±ÅŸlarÄ± yeni sahiplik Ã§oÄŸaltmamalÄ±dÄ±r
 
@@ -763,7 +763,7 @@
 - search provider altyapÄ±sÄ±nÄ±n teknik config secret'larÄ±
 
 ## Access KontratÄ±
-`manga` eriÅŸim kararÄ± vermez. Public gÃ¶rÃ¼nÃ¼rlÃ¼k ve yÃ¶netimsel eriÅŸim kararlarÄ± `access` tarafÄ±ndan yorumlanÄ±r. Admin tarafÄ±ndan yÃ¶netilen runtime ayarlar manga listeleme, detay, recommendation veya editoryal gÃ¶rÃ¼nÃ¼rlÃ¼k yÃ¼zeylerini daraltabilir; veri sahipliÄŸi yine `manga` modÃ¼lÃ¼nde kalÄ±r. Visibility kavramÄ± `docs/shared/visibility-states.md` ile hizalÄ± tutulmalÄ±dÄ±r.
+`manga` eriÅŸim kararÄ± vermez. Public gÃ¶rÃ¼nÃ¼rlÃ¼k ve yÃ¶netimsel eriÅŸim kararlarÄ± `access` tarafÄ±ndan yorumlanÄ±r. Admin tarafÄ±ndan yÃ¶netilen runtime ayarlar manga listeleme, detay, recommendation veya editoryal gÃ¶rÃ¼nÃ¼rlÃ¼k yÃ¼zeylerini daraltabilir; veri sahipliÄŸi yine `manga` modÃ¼lÃ¼nde kalÄ±r. Visibility kavramÄ± `docs/shared.md` ile hizalÄ± tutulmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - public listing ve public detail yÃ¼zeyi
@@ -776,7 +776,7 @@
 ## BaÄŸÄ±mlÄ±lÄ±klar
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `access`, `admin`, `history`, `comment`, `chapter` ve discovery consumer'larÄ± ile kontrollÃ¼ entegrasyon
-- arama ve index lifecycle iÃ§in `docs/shared/search-strategy.md`
+- arama ve index lifecycle iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.manga.list.enabled`
@@ -787,7 +787,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `manga.published`, `manga.archived`, `manga.discovery.updated`
 - tÃ¼ketir: `comment.*`, `chapter.*`, `history.*` kaynaklÄ± sayaÃ§ veya engagement sinyalleri
-- search index ve recommendation projection'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± olmalÄ±dÄ±r
+- search index ve recommendation projection'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - publish, archive, visibility ve editoryal collection deÄŸiÅŸiklikleri auditlenmelidir
@@ -869,14 +869,14 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `mission.progressed`, `mission.completed`, `mission.claim.requested`, `mission.reset`
 - tÃ¼ketir: okuma, yorum, sosyal etkileÅŸim ve diÄŸer producer event'leri
-- progress projection ve season handoff'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± olmalÄ±dÄ±r
+- progress projection ve season handoff'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - manual completion, reset override, claim rejection ve admin category mÃ¼dahalesi auditlenmelidir
 - stuck progress, duplicate claim ve reset drift oranlarÄ± izlenebilir olmalÄ±dÄ±r
 
 ## Ä°dempotency ve Retry
-- progress ingest ve claim request akÄ±ÅŸlarÄ± `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- progress ingest ve claim request akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 - aynÄ± gÃ¶rev ve dÃ¶nem iÃ§in tekrar claim isteÄŸi yeni grant zinciri baÅŸlatmamalÄ±dÄ±r
 - reset job tekrarlandÄ±ÄŸÄ±nda aynÄ± dÃ¶nemi iki kez kapatmamalÄ±dÄ±r
 
@@ -930,7 +930,7 @@
 - payment, user veya inventory kaynaklÄ± business kayÄ±tlar
 
 ## Hedef Tipi SÃ¶zlÃ¼ÄŸÃ¼
-- `moderation` case hedefleri canonical olarak `docs/shared/target-types.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
+- `moderation` case hedefleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
 - Alt yÃ¼zey, ekran veya aksiyon bilgisi `target_type` iÃ§ine gÃ¶mÃ¼lmemeli; context verisi ile taÅŸÄ±nmalÄ±dÄ±r.
 - Yeni moderation hedefi eklendiÄŸinde aynÄ± deÄŸiÅŸiklik setinde hedef modÃ¼l dokÃ¼manÄ±, `moderation` modÃ¼l dokÃ¼manÄ± ve canonical target type kaydÄ± gÃ¼ncellenmelidir.
 
@@ -957,7 +957,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `moderation.case.created`, `moderation.case.assigned`, `moderation.case.escalated`, `moderation.action.applied`
 - tÃ¼ketir: `support.moderation_handoff_requested`, admin override veya reopen sinyalleri
-- queue summary ve action projection'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± planlanmalÄ±dÄ±r
+- queue summary ve action projection'larÄ± `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - case assignment, escalation, evidence snapshot eriÅŸimi ve action sonucu auditlenmelidir
@@ -969,7 +969,7 @@
 - escalation retry'larÄ± mevcut case referansÄ± Ã¼zerinden gÃ¼venli biÃ§imde yeniden denenmelidir
 
 ## State YapÄ±sÄ±
-- `docs/shared/moderation-statuses.md` ile hizalÄ± `case_status`
+- `docs/shared.md` ile hizalÄ± `case_status`
 - `assignment_status`
 - `escalation_status`
 - `action_result` ve review lifecycle alanlarÄ±
@@ -1016,7 +1016,7 @@
 - dÄ±ÅŸ provider secret veya credential kayÄ±tlarÄ±
 
 ## Access KontratÄ±
-`notification` yetki kararÄ± vermez. Kendi bildirimlerini gÃ¶rme veya yÃ¶netme kararÄ± `access` ile korunur. Hangi olayÄ±n kime bildirim Ã¼reteceÄŸi iÅŸ kuralÄ± olarak `notification` iÃ§inde yorumlanabilir; ancak bu karar authorization yerine teslim kuralÄ± niteliÄŸindedir. Kategori adlarÄ± `docs/shared/notification-categories.md` ile hizalÄ± olmalÄ±dÄ±r.
+`notification` yetki kararÄ± vermez. Kendi bildirimlerini gÃ¶rme veya yÃ¶netme kararÄ± `access` ile korunur. Hangi olayÄ±n kime bildirim Ã¼reteceÄŸi iÅŸ kuralÄ± olarak `notification` iÃ§inde yorumlanabilir; ancak bu karar authorization yerine teslim kuralÄ± niteliÄŸindedir. Kategori adlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - own inbox, own preference ve own notification detail yÃ¼zeyi
@@ -1026,7 +1026,7 @@
 ## BaÄŸÄ±mlÄ±lÄ±klar
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `auth`, `user`, `access`, `admin`, `social`, `mission`, `royalpass`, `support`, `moderation`, `shop`, `payment` ve diÄŸer producer modÃ¼ller
-- queue, retry ve delivery katmanÄ± iÃ§in `docs/shared/cache-queue-strategy.md`
+- queue, retry ve delivery katmanÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.notification.inbox.enabled`
@@ -1038,7 +1038,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - tÃ¼ketir: producer modÃ¼llerden gelen domain event'leri
 - Ã¼retir: `notification.created`, `notification.delivered`, `notification.failed`, `notification.read`
-- unread counter ve digest projection'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± olmalÄ±dÄ±r
+- unread counter ve digest projection'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - template veya category deÄŸiÅŸikliÄŸi, suppression kararÄ±, delivery failure eÅŸiÄŸi ve manual resend aksiyonlarÄ± auditlenmelidir
@@ -1046,7 +1046,7 @@
 
 ## Ä°dempotency ve Retry
 - aynÄ± producer event aynÄ± kullanÄ±cÄ± ve kategori iÃ§in duplicate notification Ã¼retmemelidir
-- delivery retry ve backoff davranÄ±ÅŸÄ± `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- delivery retry ve backoff davranÄ±ÅŸÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 - digest Ã¼retimi tekrarlandÄ±ÄŸÄ±nda aynÄ± batch iÃ§in ikinci bildirim seti oluÅŸturmamalÄ±dÄ±r
 
 ## State YapÄ±sÄ±
@@ -1098,7 +1098,7 @@
 - access policy owner verisi
 
 ## Access KontratÄ±
-`payment` yetki kararÄ± vermez. Mana satÄ±n alma ve iÅŸlem gÃ¶rÃ¼ntÃ¼leme aksiyonlarÄ± `access` ile korunur. ÃœrÃ¼n kataloÄŸu `shop`, final item sahipliÄŸi `inventory` modÃ¼lÃ¼nde kalÄ±r. `payment` devreye girdiÄŸinde `shop` iÃ§indeki geÃ§ici allowance bridge yÃ¼zeyi kaldÄ±rÄ±lmalÄ± ve canonical bakiye yalnÄ±zca `payment` iÃ§inde tutulmalÄ±dÄ±r. Finansal yÃ¼zeylerde precedence ve intake pause davranÄ±ÅŸÄ± `docs/shared/precedence-rules.md` ile hizalÄ± kalmalÄ±dÄ±r.
+`payment` yetki kararÄ± vermez. Mana satÄ±n alma ve iÅŸlem gÃ¶rÃ¼ntÃ¼leme aksiyonlarÄ± `access` ile korunur. ÃœrÃ¼n kataloÄŸu `shop`, final item sahipliÄŸi `inventory` modÃ¼lÃ¼nde kalÄ±r. `payment` devreye girdiÄŸinde `shop` iÃ§indeki geÃ§ici allowance bridge yÃ¼zeyi kaldÄ±rÄ±lmalÄ± ve canonical bakiye yalnÄ±zca `payment` iÃ§inde tutulmalÄ±dÄ±r. Finansal yÃ¼zeylerde precedence ve intake pause davranÄ±ÅŸÄ± `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - mana package listing ve checkout session baÅŸlatma yÃ¼zeyi
@@ -1122,14 +1122,14 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `payment.checkout.started`, `payment.callback.accepted`, `payment.transaction.settled`, `payment.refund.completed`
 - tÃ¼ketir: shop purchase intent, provider callback, admin manual review veya reconcile tetikleyicileri
-- ledger, reconcile ve fulfillment publish akÄ±ÅŸlarÄ± `docs/shared/outbox-pattern.md` ile hizalÄ± olmalÄ±dÄ±r
+- ledger, reconcile ve fulfillment publish akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
-- checkout, callback, refund, reversal, manual review ve reconcile aksiyonlarÄ± `docs/shared/audit-policy.md` ile auditlenmelidir
+- checkout, callback, refund, reversal, manual review ve reconcile aksiyonlarÄ± `docs/shared.md` ile auditlenmelidir
 - callback retry oranÄ±, ledger drift, snapshot mismatch ve reconcile backlog izlenmelidir
 
 ## Ä°dempotency ve Retry
-- callback veya webhook iÅŸleme, refund ve reversal akÄ±ÅŸlarÄ± `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- callback veya webhook iÅŸleme, refund ve reversal akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 - aynÄ± provider event ikinci kez finansal yan etki Ã¼retmemelidir
 - reconcile job tekrar Ã§alÄ±ÅŸtÄ±ÄŸÄ±nda ledger-first doÄŸruluÄŸu bozmadan eksik state'i toparlayabilmelidir
 
@@ -1206,14 +1206,14 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `royalpass.progressed`, `royalpass.claim.requested`, `royalpass.season.started`, `royalpass.premium.activated`
 - tÃ¼ketir: `mission.progressed`, `shop.purchase.completed`, `payment.checkout.confirmed`
-- tier snapshot projection'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± olmalÄ±dÄ±r
+- tier snapshot projection'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - premium activation, season pause, carryover override ve manual claim mÃ¼dahaleleri auditlenmelidir
 - season drift, stuck claim ve premium entitlement mismatch oranlarÄ± izlenmelidir
 
 ## Ä°dempotency ve Retry
-- tier claim ve premium activation intake akÄ±ÅŸlarÄ± `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- tier claim ve premium activation intake akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 - aynÄ± tier iÃ§in tekrar claim yeni grant Ã¼retmemelidir
 - season rollover job tekrarlandÄ±ÄŸÄ±nda aynÄ± sezonu ikinci kez arÅŸivlememeli veya yeni sezonu iki kez aÃ§mamalÄ±dÄ±r
 
@@ -1268,7 +1268,7 @@
 - royalpass veya baÅŸka entitlement modÃ¼lÃ¼nÃ¼n final activation owner verisi
 
 ## Access KontratÄ±
-`shop` yetki kararÄ± vermez. ÃœrÃ¼n gÃ¶rÃ¼ntÃ¼leme, satÄ±n alma ve yÃ¶netim aksiyonlarÄ± `access` ile korunur. Final item sahipliÄŸi ve equip state `inventory`, bakiye veya ledger doÄŸruluÄŸu ise `payment` modÃ¼lÃ¼nde kalmalÄ±dÄ±r. `shop` yalnÄ±zca purchase orkestrasyonu iÃ§in gerekli geÃ§ici doÄŸrulama kÃ¶prÃ¼lerini taÅŸÄ±yabilir. SatÄ±n alma kaynaklarÄ± `docs/shared/purchase-source-types.md` ile hizalÄ± olmalÄ±dÄ±r.
+`shop` yetki kararÄ± vermez. ÃœrÃ¼n gÃ¶rÃ¼ntÃ¼leme, satÄ±n alma ve yÃ¶netim aksiyonlarÄ± `access` ile korunur. Final item sahipliÄŸi ve equip state `inventory`, bakiye veya ledger doÄŸruluÄŸu ise `payment` modÃ¼lÃ¼nde kalmalÄ±dÄ±r. `shop` yalnÄ±zca purchase orkestrasyonu iÃ§in gerekli geÃ§ici doÄŸrulama kÃ¶prÃ¼lerini taÅŸÄ±yabilir. SatÄ±n alma kaynaklarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
 
 ## GeÃ§iÅŸ Notu
 - `payment` devreye girene kadar `shop`, yalnÄ±zca Stage 29 iÃ§in tanÄ±mlanan geÃ§ici `seed_mana_allowance_snapshot` veya operasyonel allowance okuma yÃ¼zeyi ile purchase eligibility doÄŸrulayabilir.
@@ -1296,14 +1296,14 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `shop.purchase.intent.created`, `shop.purchase.completed`, `shop.purchase.recovery_requested`
 - tÃ¼ketir: payment checkout sonucu, inventory grant sonucu, entitlement activation sonucu
-- purchase zinciri `docs/shared/transaction-boundaries.md` ve `docs/shared/outbox-pattern.md` ile hizalÄ± olmalÄ±dÄ±r
+- purchase zinciri `docs/shared.md` ve `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - eligibility override, price veya campaign deÄŸiÅŸimi, manual recovery ve duplicate purchase korumasÄ± auditlenmelidir
 - checkout handoff baÅŸarÄ±sÄ±, already-owned red oranÄ± ve recovery backlog izlenmelidir
 
 ## Ä°dempotency ve Retry
-- purchase intent, recovery replay ve fulfillment handoff akÄ±ÅŸlarÄ± `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- purchase intent, recovery replay ve fulfillment handoff akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 - aynÄ± request iÃ§in ikinci order veya ikinci fulfillment zinciri baÅŸlatÄ±lmamalÄ±dÄ±r
 - already-owned senaryosu retry sÄ±rasÄ±nda yeni order state Ã¼retmemelidir
 
@@ -1381,7 +1381,7 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `social.friendship.changed`, `social.follow.changed`, `social.message.sent`, `social.wall.posted`
 - tÃ¼ketir: user visibility veya moderation deny sinyalleri
-- unread counter ve activity projection'larÄ± `docs/shared/projection-strategy.md` ile hizalÄ± planlanmalÄ±dÄ±r
+- unread counter ve activity projection'larÄ± `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - block, restrict, messaging abuse ve admin kaynaklÄ± privacy mÃ¼dahaleleri auditlenmelidir
@@ -1441,7 +1441,7 @@
 - notification delivery state veya access policy owner'lÄ±ÄŸÄ±
 
 ## Access KontratÄ±
-`support` yetki kararÄ± vermez. OluÅŸturma, own detail, own reply, review queue ve yÃ¶netimsel karar yÃ¼zeyleri `access` ile korunur; review ve karar yÃ¼rÃ¼tÃ¼mÃ¼ `admin` ile entegre Ã§alÄ±ÅŸÄ±r. Communication kaydÄ±, ticket oluÅŸturma, report oluÅŸturma, attachment kabulÃ¼ ve intake davranÄ±ÅŸlarÄ± admin tarafÄ±ndan yÃ¶netilen runtime ayarlar ile sÄ±nÄ±rlandÄ±rÄ±labilir. Report kaydÄ± varsayÄ±lan olarak moderation case ile aynÄ± kayÄ±t sayÄ±lmaz; `docs/shared/precedence-rules.md` ile hizalÄ± aÃ§Ä±k mapping politikasÄ± gerekir.
+`support` yetki kararÄ± vermez. OluÅŸturma, own detail, own reply, review queue ve yÃ¶netimsel karar yÃ¼zeyleri `access` ile korunur; review ve karar yÃ¼rÃ¼tÃ¼mÃ¼ `admin` ile entegre Ã§alÄ±ÅŸÄ±r. Communication kaydÄ±, ticket oluÅŸturma, report oluÅŸturma, attachment kabulÃ¼ ve intake davranÄ±ÅŸlarÄ± admin tarafÄ±ndan yÃ¶netilen runtime ayarlar ile sÄ±nÄ±rlandÄ±rÄ±labilir. Report kaydÄ± varsayÄ±lan olarak moderation case ile aynÄ± kayÄ±t sayÄ±lmaz; `docs/shared.md` ile hizalÄ± aÃ§Ä±k mapping politikasÄ± gerekir.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - support create, detail, own list ve own reply yÃ¼zeyi
@@ -1452,8 +1452,8 @@
 ## BaÄŸÄ±mlÄ±lÄ±klar
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `access`, `admin`, `moderation`, `notification`, `manga`, `chapter` ve `comment` ile kontrollÃ¼ entegrasyon
-- attachment policy iÃ§in `docs/shared/media-asset-strategy.md`
-- queue summary ve export yaklaÅŸÄ±mÄ± iÃ§in `docs/shared/reporting-analytics-strategy.md`
+- attachment policy iÃ§in `docs/shared.md`
+- queue summary ve export yaklaÅŸÄ±mÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.support.communication.enabled`
@@ -1466,11 +1466,11 @@
 ## Event AkÄ±ÅŸlarÄ±
 - Ã¼retir: `support.created`, `support.replied`, `support.resolved`, `support.moderation_handoff_requested`
 - tÃ¼ketir: moderation case sonucu, admin karar sinyali, notification template veya delivery sinyali
-- linked handoff akÄ±ÅŸlarÄ± `docs/shared/transaction-boundaries.md` ve `docs/shared/idempotency-policy.md` ile hizalÄ± olmalÄ±dÄ±r
+- linked handoff akÄ±ÅŸlarÄ± `docs/shared.md` ve `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
 
 ## Audit ve Ä°zleme
 - internal note, resolution, spam iÅŸaretleme, SLA breach ve moderation handoff aksiyonlarÄ± auditlenmelidir
-- PII ve attachment riski `docs/shared/operational-standards.md` ile hizalÄ± retention notu taÅŸÄ±malÄ±dÄ±r
+- PII ve attachment riski `docs/shared.md` ile hizalÄ± retention notu taÅŸÄ±malÄ±dÄ±r
 
 ## Ä°dempotency ve Retry
 - duplicate ticket veya report create istekleri requester, target ve request id kombinasyonu ile korunmalÄ±dÄ±r
@@ -1528,7 +1528,7 @@
 - history kayÄ±tlarÄ±, entry-level share metadata'sÄ± veya inventory sahipliÄŸi
 
 ## Access KontratÄ±
-`user` veriyi taÅŸÄ±r; access kararÄ± vermez. `access` modÃ¼lÃ¼nÃ¼n yorumlayacaÄŸÄ± kullanÄ±cÄ± durumu, Ã¼yelik ve gÃ¶rÃ¼nÃ¼rlÃ¼k sinyalleri kontrollÃ¼ kontrat ile dÄ±ÅŸa aÃ§Ä±lÄ±r. `user` iÃ§indeki global visibility veya sharing preference sinyali, history veya library paylaÅŸÄ±mÄ± iÃ§in Ã¼st sÄ±nÄ±rÄ± belirler; `history` iÃ§indeki entry-level metadata bu sÄ±nÄ±rÄ± daraltabilir ama global deny kararÄ±nÄ± geniÅŸletemez. Visibility kararlarÄ±nda `docs/shared/visibility-states.md` ve `docs/shared/precedence-rules.md` ile hizalÄ± kalÄ±nmalÄ±dÄ±r.
+`user` veriyi taÅŸÄ±r; access kararÄ± vermez. `access` modÃ¼lÃ¼nÃ¼n yorumlayacaÄŸÄ± kullanÄ±cÄ± durumu, Ã¼yelik ve gÃ¶rÃ¼nÃ¼rlÃ¼k sinyalleri kontrollÃ¼ kontrat ile dÄ±ÅŸa aÃ§Ä±lÄ±r. `user` iÃ§indeki global visibility veya sharing preference sinyali, history veya library paylaÅŸÄ±mÄ± iÃ§in Ã¼st sÄ±nÄ±rÄ± belirler; `history` iÃ§indeki entry-level metadata bu sÄ±nÄ±rÄ± daraltabilir ama global deny kararÄ±nÄ± geniÅŸletemez. Visibility kararlarÄ±nda `docs/shared.md` ve `docs/shared.md` ile hizalÄ± kalÄ±nmalÄ±dÄ±r.
 
 ## API veya Event SÄ±nÄ±rÄ±
 - user okuma veya yazma yÃ¼zeyi profil ve hesap verisi ile sÄ±nÄ±rlÄ± olmalÄ±dÄ±r
@@ -1540,7 +1540,7 @@
 - proje geneli altyapÄ± aÅŸamalarÄ±
 - `auth` ile kullanÄ±cÄ± kimliÄŸi entegrasyonu
 - `access`, `admin`, `inventory`, `notification` ve `history` iÃ§in kontrollÃ¼ veri okuma yÃ¼zeyleri
-- medya ownership ve eriÅŸim politikasÄ± iÃ§in `docs/shared/media-asset-strategy.md`
+- medya ownership ve eriÅŸim politikasÄ± iÃ§in `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.user.profile.enabled`
@@ -1556,7 +1556,7 @@
 
 ## Audit ve Ä°zleme
 - VIP state deÄŸiÅŸimi, ban veya deactivation, gÃ¶rÃ¼nÃ¼rlÃ¼k tercihi deÄŸiÅŸimi ve admin kaynaklÄ± profil mÃ¼dahalesi auditlenmelidir
-- PII ve export riski taÅŸÄ±yan alanlar `docs/shared/operational-standards.md` ile hizalÄ± maskeleme notu taÅŸÄ±malÄ±dÄ±r
+- PII ve export riski taÅŸÄ±yan alanlar `docs/shared.md` ile hizalÄ± maskeleme notu taÅŸÄ±malÄ±dÄ±r
 
 ## Ä°dempotency ve Retry
 - profile update akÄ±ÅŸlarÄ± request id veya optimistic concurrency ile duplicate write Ã¼retmemelidir
@@ -1574,4 +1574,6 @@
 - public veya private response ayrÄ±mÄ± testleri
 - history visibility precedence doÄŸrulamalarÄ±
 - ban, deactivation ve VIP lifecycle doÄŸrulamalarÄ±
+
+
 
