@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-10 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-13 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -101,3 +101,31 @@ Bu dokuman test katmanlarini ve Asama 0-10 dogrulama adimlarini listeler.
 - Resolve ve moderation handoff akislarinin dogrulanmasi
 - `support -> moderation` ve `support -> notification` kontrat dogrulamalarinin calistirilmasi
 - Support migration smoke kontrolu (`202603120008_support_create_core_tables`)
+
+## Asama 11 Moderation Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/moderation/...`
+- `cd apps/api && go test ./tests/contract -run Moderation`
+- `cd apps/api && go test ./tests/integration -run Moderation`
+- Moderation queue, case detail, assignment, note, action ve escalation akislarinin dogrulanmasi
+- support report -> moderation linked case idempotency davranisinin dogrulanmasi
+- Moderation migration smoke kontrolu (`202603120009_moderation_create_core_tables`)
+
+## Asama 12 Notification Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/notification/...`
+- `cd apps/api && go test ./tests/contract -run Notification`
+- `cd apps/api && go test ./tests/integration -run Notification`
+- Support event intake, inbox/detail/read ve preference akislarinin dogrulanmasi
+- Delivery pause/category-channel runtime control davranislarinin dogrulanmasi
+- Notification migration smoke kontrolu (`202603120010_notification_create_core_tables`)
+
+
+## Asama 13 History Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/history/...`
+- `cd apps/api && go test ./tests/contract -run History`
+- `cd apps/api && go test ./tests/integration -run History`
+- Chapter read intake, continue-reading, own/public library ve timeline akislarinin dogrulanmasi
+- Bookmark/favorite/share metadata ve runtime control davranislarinin dogrulanmasi
+- History migration smoke kontrolu (`202603120011_history_create_core_tables`)
