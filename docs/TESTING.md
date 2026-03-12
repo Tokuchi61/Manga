@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-17 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -161,3 +161,13 @@ Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
 - Completion/claim-request idempotency davranisinin ve period key yorumunun dogrulanmasi
 - Runtime control (read/claim/progress-ingest/reset-hour) toggle etkilerinin dogrulanmasi
 - Mission migration smoke kontrolu (`202603120014_mission_create_core_tables`)
+
+## Asama 17 RoyalPass Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/royalpass/...`
+- `cd apps/api && go test ./tests/contract -run RoyalPass`
+- `cd apps/api && go test ./tests/integration -run RoyalPass`
+- Season/tier ownerligi, own season overview ve progress ingest akislarinin dogrulanmasi
+- Tier claim-request idempotency ve premium-activation intake davranisinin dogrulanmasi
+- Runtime control (season/claim/premium) toggle etkilerinin dogrulanmasi
+- RoyalPass migration smoke kontrolu (`202603120015_royalpass_create_core_tables`)
