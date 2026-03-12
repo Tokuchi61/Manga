@@ -86,6 +86,7 @@ func (s *AccessService) bootstrapDefaults() {
 		Roles        []string
 	}{
 		{Name: accesscontract.PermissionSiteView, Module: "site", Surface: "view", Action: "read", AudienceKind: "all", Roles: []string{"guest", "authenticated", "vip"}},
+		{Name: accesscontract.PermissionMangaListView, Module: "manga", Surface: "list", Action: "read", AudienceKind: "all", Roles: []string{"guest", "authenticated", "vip"}},
 		{Name: accesscontract.PermissionMangaDetailView, Module: "manga", Surface: "detail", Action: "read", AudienceKind: "all", Roles: []string{"guest", "authenticated", "vip"}},
 		{Name: accesscontract.PermissionMangaDiscoveryView, Module: "manga", Surface: "discovery", Action: "read", AudienceKind: "all", Roles: []string{"guest", "authenticated", "vip"}},
 		{Name: accesscontract.PermissionChapterReadAuthenticated, Module: "chapter", Surface: "read", Action: "read", AudienceKind: "authenticated", Roles: []string{"authenticated", "vip"}},

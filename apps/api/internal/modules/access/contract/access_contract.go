@@ -7,6 +7,7 @@ import (
 
 const (
 	PermissionSiteView                  = "site.view"
+	PermissionMangaListView             = "manga.list.view"
 	PermissionMangaDetailView           = "manga.detail.view"
 	PermissionMangaDiscoveryView        = "manga.discovery.view"
 	PermissionChapterReadAuthenticated  = "chapter.read.authenticated"
@@ -27,6 +28,7 @@ const (
 
 var CanonicalPermissions = []string{
 	PermissionSiteView,
+	PermissionMangaListView,
 	PermissionMangaDetailView,
 	PermissionMangaDiscoveryView,
 	PermissionChapterReadAuthenticated,

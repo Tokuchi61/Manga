@@ -45,6 +45,8 @@ func TestAccessCanonicalPermissionExamples(t *testing.T) {
 	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionHistoryLibraryReadOwn)
 	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionHistoryBookmarkWriteOwn)
 	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionHistoryLibraryReadPublic)
+	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionMangaListView)
+	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionMangaDetailView)
 	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionMangaDiscoveryView)
 	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionAdsView)
 	require.Contains(t, accesscontract.CanonicalPermissions, accesscontract.PermissionShopItemPurchase)

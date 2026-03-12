@@ -5,6 +5,62 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.7.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 7` kapsaminda canonical `manga` modulu eklendi: `apps/api/internal/modules/manga`.
+- Manga owner akis omurgasi eklendi:
+  - manga create/update
+  - public listing + detail
+  - search/filter/sort
+  - publish lifecycle (`draft`, `scheduled`, `published`, `archived`, `unpublished`)
+  - visibility (`public`, `hidden`) ve editorial/discovery (`featured`, `recommended`, `collection`)
+  - denormalize counter sync (`chapter_count`, `comment_count`, `view_count`)
+  - soft delete + restore
+- `manga -> chapter` default access kontrat yuzeyi eklendi: `apps/api/internal/modules/manga/contract/chapter_defaults_contract.go`.
+- Manga event sabitleri eklendi: `apps/api/internal/modules/manga/events/events.go`.
+- In-memory manga repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/manga/repository/memory_store.go`
+  - `apps/api/internal/modules/manga/repository/manga_repository.go`
+  - `apps/api/internal/modules/manga/repository/memory_store_test.go`
+- Manga service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/manga/service/manga_create_service.go`
+  - `apps/api/internal/modules/manga/service/manga_update_service.go`
+  - `apps/api/internal/modules/manga/service/manga_listing_service.go`
+  - `apps/api/internal/modules/manga/service/manga_publish_service.go`
+  - `apps/api/internal/modules/manga/service/manga_discovery_service.go`
+  - `apps/api/internal/modules/manga/service/manga_lifecycle_service.go`
+  - `apps/api/internal/modules/manga/service/service_test.go`
+- Manga HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/manga/handler/*`
+  - `apps/api/internal/modules/manga/routes.go`
+- Manga migration cifti eklendi:
+  - `apps/api/migrations/202603120005_manga_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120005_manga_create_core_tables.down.sql`
+- Manga stage testleri eklendi:
+  - contract: `apps/api/tests/contract/manga_access_contract_test.go`
+  - integration: `apps/api/tests/integration/manga_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/manga_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta manga module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Access canonical permission setine `manga.list.view` eklendi ve default role seed'lerine baglandi.
+- `docs/modules.md` modul envanterinde `manga` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 7 ile hizalandi.
+- Manga modulu katmanlari coklu akis tasiyan tek dosyalari onleyecek sekilde islem bazli parcalandi (`routes.go` tek giris noktasi olarak korunarak).
+
+### Fixed
+- Yok.
+
+### Docs
+- Asama 7 manga omurgasi ve versiyonlama guncellemeleri changelog ile izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 7 manga icerik owner (metadata, listing/detail, discovery, lifecycle) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `manga`, `access`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120005_manga_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.6.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -333,6 +389,9 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
+
+
 
 
 
