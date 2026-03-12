@@ -19,7 +19,7 @@ func writeServiceError(w http.ResponseWriter, err error) {
 	switch {
 	case errors.Is(err, service.ErrValidation), errors.Is(err, service.ErrTargetRequired), errors.Is(err, service.ErrInvalidTarget):
 		writeError(w, http.StatusBadRequest, err.Error())
-	case errors.Is(err, service.ErrSupportAlreadyExists), errors.Is(err, service.ErrDuplicateDetected):
+	case errors.Is(err, service.ErrSupportAlreadyExists):
 		writeError(w, http.StatusConflict, err.Error())
 	case errors.Is(err, service.ErrSupportNotFound), errors.Is(err, service.ErrSupportNotVisible):
 		writeError(w, http.StatusNotFound, err.Error())

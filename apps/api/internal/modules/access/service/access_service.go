@@ -25,22 +25,12 @@ var (
 )
 
 // Config defines access runtime settings.
-type Config struct {
-	DecisionCacheTTL time.Duration
-}
-
-func (c Config) withDefaults() Config {
-	if c.DecisionCacheTTL <= 0 {
-		c.DecisionCacheTTL = 30 * time.Second
-	}
-	return c
-}
+type Config struct{}
 
 // AccessService owns stage-6 authorization and policy flows.
 type AccessService struct {
 	store     accessrepository.Store
 	validator *validation.Validator
-	cfg       Config
 	now       func() time.Time
 }
 
@@ -49,10 +39,10 @@ func New(store accessrepository.Store, validator *validation.Validator, cfg Conf
 		store = accessrepository.NewMemoryStore()
 	}
 
+	_ = cfg
 	svc := &AccessService{
 		store:     store,
 		validator: validator,
-		cfg:       cfg.withDefaults(),
 		now:       time.Now,
 	}
 	if err := svc.bootstrapDefaults(); err != nil {
@@ -60,7 +50,6 @@ func New(store accessrepository.Store, validator *validation.Validator, cfg Conf
 	}
 	return svc
 }
-
 func (s *AccessService) validateInput(payload any) error {
 	if err := accessvalidator.ValidateStruct(s.validator, payload); err != nil {
 		return fmt.Errorf("%w: %v", ErrValidation, err)

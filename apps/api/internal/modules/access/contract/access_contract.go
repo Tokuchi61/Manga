@@ -53,6 +53,10 @@ type AuthorizationInput struct {
 	Permission          string
 	FeatureKey          string
 	ResourceOwnerUserID string
+	ScopeKind           string
+	ScopeSelector       string
+	AudienceSelector    string
+	AllowOverride       bool
 	Identity            authcontract.VerifiedIdentity
 	UserSignal          usercontract.AccessSignal
 }

@@ -1,287 +1,287 @@
-# ModÃ¼ller
+# Modüller
 
 > Bu dosya proje icin canonical modul envanteri ve modul detay referansidir.
 
-## KullanÄ±m KurallarÄ±
-- Her modÃ¼l iÃ§in canonical ad tek olmalÄ±dÄ±r.
-- ModÃ¼l ownerlÄ±ÄŸÄ±, veri sahipliÄŸi ve â€œneyi yapmaz?â€ sÄ±nÄ±rÄ± aÃ§Ä±k yazÄ±lmalÄ±dÄ±r.
-- ModÃ¼ller arasÄ± iliÅŸki yalnÄ±zca kontrollÃ¼ contract veya event yÃ¼zeyi ile kurulmalÄ±dÄ±r.
-- Final authorization kararÄ± gereken yerlerde `access` modÃ¼lÃ¼ referans alÄ±nmalÄ±dÄ±r.
-- Yeni modÃ¼l eklendiÄŸinde veya ownerlÄ±k deÄŸiÅŸtiÄŸinde bu dosya aynÄ± deÄŸiÅŸiklikte gÃ¼ncellenmelidir.
+## Kullanım Kuralları
+- Her modül için canonical ad tek olmalıdır.
+- Modül ownerlığı, veri sahipliği ve “neyi yapmaz?” sınırı açık yazılmalıdır.
+- Modüller arası ilişki yalnızca kontrollü contract veya event yüzeyi ile kurulmalıdır.
+- Final authorization kararı gereken yerlerde `access` modülü referans alınmalıdır.
+- Yeni modül eklendiğinde veya ownerlık değiştiğinde bu dosya aynı değişiklikte güncellenmelidir.
 
 
-## ModÃ¼l Envanteri
+## Modül Envanteri
 
 | Canonical Module | Domain Group | Status | Main Doc | Summary |
 | --- | --- | --- | --- | --- |
 | auth |  | active | docs/modules.md | Kimlik dogrulama, token, session ve hesap guvenligi akislarinin aktif modulu. |
 | user |  | active | docs/modules.md | Kullanici hesabi, profil, tercih ve uyelik verisi modulu. |
-| access |  | active | docs/modules.md | Merkezi authorization, policy ve eriÅŸim kararÄ± modÃ¼lÃ¼. |
-| admin |  | planned | docs/modules.md | YÃ¶netim, moderasyon denetimi ve operasyon use-case modÃ¼lÃ¼. |
-| manga |  | active | docs/modules.md | Ana iÃ§erik varlÄ±ÄŸÄ±, metadata ve discovery modÃ¼lÃ¼. |
+| access |  | active | docs/modules.md | Merkezi authorization, policy ve erişim kararı modülü. |
+| admin |  | planned | docs/modules.md | Yönetim, moderasyon denetimi ve operasyon use-case modülü. |
+| manga |  | active | docs/modules.md | Ana içerik varlığı, metadata ve discovery modülü. |
 | chapter |  | active | docs/modules.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
 | comment |  | active | docs/modules.md | Icerik yorumlari ve thread etkilesim modulu. |
-| support |  | active | docs/modules.md | KullanÄ±cÄ± destek kayÄ±tlarÄ±, ticket ve report intake modÃ¼lÃ¼. |
-| moderation |  | planned | docs/modules.md | Scoped moderasyon kuyruklarÄ± ve vaka yÃ¶netimi modÃ¼lÃ¼. |
-| notification |  | planned | docs/modules.md | Bildirim Ã¼retimi, teslimi ve tercih yÃ¶netimi modÃ¼lÃ¼. |
-| social |  | planned | docs/modules.md | Takip, arkadaÅŸlÄ±k, duvar ve mesajlaÅŸma modÃ¼lÃ¼. |
-| inventory |  | planned | docs/modules.md | Item sahipliÄŸi, claim, consume ve equip modÃ¼lÃ¼. |
-| mission |  | planned | docs/modules.md | GÃ¶rev tanÄ±mÄ±, ilerleme ve claim eligibility modÃ¼lÃ¼. |
-| royalpass |  | planned | docs/modules.md | Sezon, tier ve premium track ilerleme modÃ¼lÃ¼. |
-| history |  | planned | docs/modules.md | Continue reading, kÃ¼tÃ¼phane ve okuma geÃ§miÅŸi modÃ¼lÃ¼. |
-| ads |  | planned | docs/modules.md | Reklam placement, campaign ve Ã¶lÃ§Ã¼mleme modÃ¼lÃ¼. |
-| shop |  | planned | docs/modules.md | ÃœrÃ¼n kataloÄŸu, offer ve purchase orchestration modÃ¼lÃ¼. |
-| payment |  | planned | docs/modules.md | Checkout, ledger ve finansal iÅŸlem doÄŸruluÄŸu modÃ¼lÃ¼. |
+| support |  | active | docs/modules.md | Kullanıcı destek kayıtları, ticket ve report intake modülü. |
+| moderation |  | planned | docs/modules.md | Scoped moderasyon kuyrukları ve vaka yönetimi modülü. |
+| notification |  | planned | docs/modules.md | Bildirim üretimi, teslimi ve tercih yönetimi modülü. |
+| social |  | planned | docs/modules.md | Takip, arkadaşlık, duvar ve mesajlaşma modülü. |
+| inventory |  | planned | docs/modules.md | Item sahipliği, claim, consume ve equip modülü. |
+| mission |  | planned | docs/modules.md | Görev tanımı, ilerleme ve claim eligibility modülü. |
+| royalpass |  | planned | docs/modules.md | Sezon, tier ve premium track ilerleme modülü. |
+| history |  | planned | docs/modules.md | Continue reading, kütüphane ve okuma geçmişi modülü. |
+| ads |  | planned | docs/modules.md | Reklam placement, campaign ve ölçümleme modülü. |
+| shop |  | planned | docs/modules.md | Ürün kataloğu, offer ve purchase orchestration modülü. |
+| payment |  | planned | docs/modules.md | Checkout, ledger ve finansal işlem doğruluğu modülü. |
 
 
 ---
 
-# Access ModÃ¼lÃ¼
+# Access Modülü
 
-> Canonical modÃ¼l adÄ±: `access`
+> Canonical modül adı: `access`
 
-## AmaÃ§
-`access` modÃ¼lÃ¼nÃ¼n amacÄ±, sistemdeki tÃ¼m authorization, policy ve eriÅŸim kararlarÄ±nÄ± merkezi, tutarlÄ± ve geniÅŸletilebilir ÅŸekilde yÃ¼rÃ¼tmektir.
+## Amaç
+`access` modülünün amacı, sistemdeki tüm authorization, policy ve erişim kararlarını merkezi, tutarlı ve genişletilebilir şekilde yürütmektir.
 
-## Sorumluluk AlanÄ±
-- role ve permission yapÄ±sÄ±
-- RBAC, policy ve context-aware access kararlarÄ±
-- guest, authenticated, vip ve own/any yorumlarÄ± iÃ§in helper sÃ¶zlÃ¼ÄŸÃ¼
-- endpoint guard ve modÃ¼l bazlÄ± authorization kontratlarÄ±
-- deny reason code standardÄ± ve policy effect sÃ¶zlÃ¼ÄŸÃ¼
-- kÄ±sa Ã¶mÃ¼rlÃ¼ access decision cache planÄ± ve invalidation yaklaÅŸÄ±mÄ±
+## Sorumluluk Alanı
+- role ve permission yapısı
+- RBAC, policy ve context-aware access kararları
+- guest, authenticated, vip ve own/any yorumları için helper sözlüğü
+- endpoint guard ve modül bazlı authorization kontratları
+- deny reason code standardı ve policy effect sözlüğü
+- kısa ömürlü access decision cache planı ve invalidation yaklaşımı
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- kimlik doÄŸrulama veya credential doÄŸrulama yapmaz
-- business veri owner'lÄ±ÄŸÄ± taÅŸÄ±yan modÃ¼l tablolarÄ±nÄ± sahiplenmez
-- runtime ayar kayÄ±tlarÄ±nÄ±n canonical kaydÄ±nÄ± kendi iÃ§inde saklamaz
+## Bu Modül Neyi Yapmaz?
+- kimlik doğrulama veya credential doğrulama yapmaz
+- business veri owner'lığı taşıyan modül tablolarını sahiplenmez
+- runtime ayar kayıtlarının canonical kaydını kendi içinde saklamaz
 
-## Veri SahipliÄŸi
-- rol ve permission sÃ¶zlÃ¼ÄŸÃ¼
-- role-permission iliÅŸkileri
-- authorization policy kurallarÄ±
-- eriÅŸim kararÄ±na temel olan sÃ¶zleÅŸme yapÄ±larÄ±
-- deny reason kodlarÄ± ve policy effect sÃ¶zlÃ¼ÄŸÃ¼
+## Veri Sahipliği
+- rol ve permission sözlüğü
+- role-permission ilişkileri
+- authorization policy kuralları
+- erişim kararına temel olan sözleşme yapıları
+- deny reason kodları ve policy effect sözlüğü
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
+## Bu Modül Hangi Verinin Sahibi Değildir?
 - auth session veya verification verileri
-- user profile, VIP owner'lÄ±ÄŸÄ± veya social block iliÅŸkisinin ham kaydÄ±
-- settings envanteri, audit log ham kaydÄ± veya modÃ¼l business verileri
+- user profile, VIP owner'lığı veya social block ilişkisinin ham kaydı
+- settings envanteri, audit log ham kaydı veya modül business verileri
 
-## Access KontratÄ±
-`access` modÃ¼lÃ¼ access kararÄ±nÄ±n kendisidir. `auth` tarafÄ±ndan doÄŸrulanan kimliÄŸi ve `user`, `social`, `moderation` veya `admin` tarafÄ±ndan taÅŸÄ±nan sinyalleri kullanarak karar Ã¼retir; veri sahipliÄŸi o modÃ¼llerde kalÄ±r. Runtime ayar yorumlama sÄ±rasÄ± `docs/shared.md`, Ã§atÄ±ÅŸma Ã§Ã¶zÃ¼mÃ¼ `docs/shared.md`, policy Ã§Ä±ktÄ± sÃ¶zlÃ¼ÄŸÃ¼ ise `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
+## Access Kontratı
+`access` modülü access kararının kendisidir. `auth` tarafından doğrulanan kimliği ve `user`, `social`, `moderation` veya `admin` tarafından taşınan sinyalleri kullanarak karar üretir; veri sahipliği o modüllerde kalır. Runtime ayar yorumlama sırası `docs/shared.md`, çatışma çözümü `docs/shared.md`, policy çıktı sözlüğü ise `docs/shared.md` ile hizalı olmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- guard, policy ve authorization yÃ¼zeyi dÄ±ÅŸ modÃ¼ller iÃ§in resmi giriÅŸ noktasÄ± olmalÄ±dÄ±r
-- permission ve policy contract yÃ¼zeyi aÃ§Ä±k ve canonical isimlerle yÃ¶netilmelidir
-- denial, override veya kritik authorization olaylarÄ± gerektiÄŸinde izlenebilir yÃ¼zey Ã¼retebilir
+## API veya Event Sınırı
+- guard, policy ve authorization yüzeyi dış modüller için resmi giriş noktası olmalıdır
+- permission ve policy contract yüzeyi açık ve canonical isimlerle yönetilmelidir
+- denial, override veya kritik authorization olayları gerektiğinde izlenebilir yüzey üretebilir
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `auth` kimlik doÄŸrulama sinyalleri
-- `user` kullanÄ±cÄ± durumu ve Ã¼yelik sinyalleri
-- `social`, `moderation`, `admin` ve diÄŸer modÃ¼llerden gelen scope veya override sinyalleri
-- cache standardÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `auth` kimlik doğrulama sinyalleri
+- `user` kullanıcı durumu ve üyelik sinyalleri
+- `social`, `moderation`, `admin` ve diğer modüllerden gelen scope veya override sinyalleri
+- cache standardı için `docs/shared.md`
 
 ## Settings Etkileri
 - `site.maintenance.enabled`
-- `feature.*.enabled` biÃ§imindeki kullanÄ±cÄ±ya dÃ¶nÃ¼k availability anahtarlarÄ±
+- `feature.*.enabled` biçimindeki kullanıcıya dönük availability anahtarları
 - `feature.user.vip_benefits.enabled` gibi entitlement etkili ayarlar
-- access decision cache varsa settings sÃ¼rÃ¼mÃ¼ veya selector deÄŸiÅŸimi ile invalidation yapÄ±lmalÄ±dÄ±r
+- access decision cache varsa settings sürümü veya selector değişimi ile invalidation yapılmalıdır
 
-## Event AkÄ±ÅŸlarÄ±
-- tÃ¼ketir: auth identity, user visibility ve vip state, social block, moderation deny, admin override sinyalleri
-- Ã¼retir: `access.policy.changed`, `access.decision.denied` veya metrik odaklÄ± audit sinyalleri
-- event tÃ¼ketiminde replay ve duplicate handling `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- tüketir: auth identity, user visibility ve vip state, social block, moderation deny, admin override sinyalleri
+- üretir: `access.policy.changed`, `access.decision.denied` veya metrik odaklı audit sinyalleri
+- event tüketiminde replay ve duplicate handling `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- policy override, deny reason deÄŸiÅŸimi, emergency availability yorumu ve yetki bypass giriÅŸimleri auditlenmelidir
-- denial metrikleri, cache hit oranÄ± ve precedence kaynaklÄ± ret sayÄ±larÄ± izlenebilir olmalÄ±dÄ±r
+## Audit ve İzleme
+- policy override, deny reason değişimi, emergency availability yorumu ve yetki bypass girişimleri auditlenmelidir
+- denial metrikleri, cache hit oranı ve precedence kaynaklı ret sayıları izlenebilir olmalıdır
 
-## Ä°dempotency ve Retry
-- access kararÄ± salt deÄŸerlendirme niteliÄŸi taÅŸÄ±dÄ±ÄŸÄ± iÃ§in safe retry kabul edilir
-- cache doldurma veya invalidation tekrar Ã§alÄ±ÅŸtÄ±rÄ±ldÄ±ÄŸÄ±nda business yan etki Ã¼retmemelidir
-- distributed cache kullanÄ±lÄ±rsa key en az subject, surface, selector ve settings sÃ¼rÃ¼mÃ¼nÃ¼ kapsamalÄ±dÄ±r
+## İdempotency ve Retry
+- access kararı salt değerlendirme niteliği taşıdığı için safe retry kabul edilir
+- cache doldurma veya invalidation tekrar çalıştırıldığında business yan etki üretmemelidir
+- distributed cache kullanılırsa key en az subject, surface, selector ve settings sürümünü kapsamalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - role ve permission atama durumu
-- policy yorumlama sonucu ve policy effect alanlarÄ±
-- scope ve ownership ayrÄ±mlarÄ±
-- deny reason veya availability kararlarÄ±
+- policy yorumlama sonucu ve policy effect alanları
+- scope ve ownership ayrımları
+- deny reason veya availability kararları
 - varsa decision cache state'i
 
-## Test NotlarÄ±
+## Test Notları
 - policy ve permission testleri
-- own/any, guest/authenticated ve vip ayrÄ±mÄ± testleri
-- precedence matrix ve deny reason code doÄŸrulamalarÄ±
+- own/any, guest/authenticated ve vip ayrımı testleri
+- precedence matrix ve deny reason code doğrulamaları
 - decision cache invalidation testleri
 - `auth -> access` ve `user -> access` kontrat testleri
 
 
 ---
 
-# Admin ModÃ¼lÃ¼
+# Admin Modülü
 
-> Canonical modÃ¼l adÄ±: `admin`
+> Canonical modül adı: `admin`
 
-## AmaÃ§
-`admin` modÃ¼lÃ¼nÃ¼n amacÄ±, sistemdeki yÃ¶netim, tam yetkili inceleme, merkezi ayar ve operasyon use-case'lerini tek bir yÃ¶netim yÃ¼zeyinde toplamaktÄ±r.
+## Amaç
+`admin` modülünün amacı, sistemdeki yönetim, tam yetkili inceleme, merkezi ayar ve operasyon use-case'lerini tek bir yönetim yüzeyinde toplamaktır.
 
-## Sorumluluk AlanÄ±
-- admin dashboard ve giriÅŸ noktalarÄ±
-- kullanÄ±cÄ± yÃ¶netim akÄ±ÅŸlarÄ±
-- tam yetkili moderasyon veya support review inceleme akÄ±ÅŸlarÄ±
-- yÃ¼ksek riskli handoff, escalation ve yÃ¶netimsel inceleme akÄ±ÅŸlarÄ±
-- merkezi ayarlar, modÃ¼l aÃ§ma-kapama ve Ã¶zellik aÃ§ma-kapama yÃ¶netim yÃ¼zeyleri
-- risk seviyesi, double confirmation, impersonation ve export-friendly rapor yÃ¼zeyleri
+## Sorumluluk Alanı
+- admin dashboard ve giriş noktaları
+- kullanıcı yönetim akışları
+- tam yetkili moderasyon veya support review inceleme akışları
+- yüksek riskli handoff, escalation ve yönetimsel inceleme akışları
+- merkezi ayarlar, modül açma-kapama ve özellik açma-kapama yönetim yüzeyleri
+- risk seviyesi, double confirmation, impersonation ve export-friendly rapor yüzeyleri
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- gÃ¼nlÃ¼k scoped moderatÃ¶r akÄ±ÅŸlarÄ±nÄ±n owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- baÅŸka modÃ¼llerin business verisini kendi tablosuna taÅŸÄ±maz
-- access guard olmadan kritik aksiyon Ã§alÄ±ÅŸtÄ±rmaz
+## Bu Modül Neyi Yapmaz?
+- günlük scoped moderatör akışlarının owner'lığına dönüşmez
+- başka modüllerin business verisini kendi tablosuna taşımaz
+- access guard olmadan kritik aksiyon çalıştırmaz
 
-## Veri SahipliÄŸi
-- admin iÅŸlem kayÄ±tlarÄ±
-- admin notlarÄ± ve operasyonel gÃ¶rÃ¼nÃ¼m verileri
-- yÃ¶netim use-case akÄ±ÅŸ bilgileri
-- runtime ayar tanÄ±mlarÄ±, ayar deÄŸiÅŸiklik geÃ§miÅŸi ve operasyonel kontrol kayÄ±tlarÄ±
-- admin action risk seviyesi ve confirmation metadata'sÄ±
+## Veri Sahipliği
+- admin işlem kayıtları
+- admin notları ve operasyonel görünüm verileri
+- yönetim use-case akış bilgileri
+- runtime ayar tanımları, ayar değişiklik geçmişi ve operasyonel kontrol kayıtları
+- admin action risk seviyesi ve confirmation metadata'sı
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- moderation case'in gÃ¼nlÃ¼k karar owner'lÄ±ÄŸÄ±
-- support ticket iÃ§eriÄŸinin ana owner'lÄ±ÄŸÄ±
-- kullanÄ±cÄ± credential veya Ã¶deme ledger verisi
-- audit log'un tek baÅŸÄ±na yerine geÃ§ecek serbest metin notlar
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- moderation case'in günlük karar owner'lığı
+- support ticket içeriğinin ana owner'lığı
+- kullanıcı credential veya ödeme ledger verisi
+- audit log'un tek başına yerine geçecek serbest metin notlar
 
-## Access KontratÄ±
-`admin` modÃ¼lÃ¼ yetki kararÄ± vermez. TÃ¼m kritik admin akÄ±ÅŸlarÄ± `access` modÃ¼lÃ¼nÃ¼n guard veya policy kararlarÄ± ile korunur. Admin override, reopen, reassignment, freeze veya final karar verdiÄŸinde bu karar scoped moderatÃ¶r aksiyonunun Ã¼zerinde precedence taÅŸÄ±r; ancak gÃ¼nlÃ¼k vaka owner'lÄ±ÄŸÄ± yine ilgili modÃ¼lde kalÄ±r. Impersonation aÃ§Ä±lÄ±rsa yÃ¼ksek riskli, audit zorunlu ve zaman sÄ±nÄ±rlÄ± yÃ¼rÃ¼tÃ¼lmelidir.
+## Access Kontratı
+`admin` modülü yetki kararı vermez. Tüm kritik admin akışları `access` modülünün guard veya policy kararları ile korunur. Admin override, reopen, reassignment, freeze veya final karar verdiğinde bu karar scoped moderatör aksiyonunun üzerinde precedence taşır; ancak günlük vaka owner'lığı yine ilgili modülde kalır. Impersonation açılırsa yüksek riskli, audit zorunlu ve zaman sınırlı yürütülmelidir.
 
-## API veya Event SÄ±nÄ±rÄ±
-- admin yÃ¼zeyi tam yetkili yÃ¶netim, operasyon ve yÃ¶netimsel inceleme use-case'lerini dÄ±ÅŸa aÃ§abilir
-- scoped gÃ¼nlÃ¼k moderatÃ¶r use-case'leri `moderation` modÃ¼lÃ¼nde kalmalÄ±; admin gerektiÄŸinde aynÄ± vaka verisi Ã¼zerinde override, handoff veya denetim yÃ¼rÃ¼tmelidir
-- kritik admin aksiyonlarÄ± audit veya log yÃ¼zeyi ile izlenebilir olmalÄ±dÄ±r
-- admin modÃ¼lÃ¼ diÄŸer modÃ¼llerin veri sahipliÄŸini devralmadan orkestrasyon yapmalÄ±dÄ±r
+## API veya Event Sınırı
+- admin yüzeyi tam yetkili yönetim, operasyon ve yönetimsel inceleme use-case'lerini dışa açabilir
+- scoped günlük moderatör use-case'leri `moderation` modülünde kalmalı; admin gerektiğinde aynı vaka verisi üzerinde override, handoff veya denetim yürütmelidir
+- kritik admin aksiyonları audit veya log yüzeyi ile izlenebilir olmalıdır
+- admin modülü diğer modüllerin veri sahipliğini devralmadan orkestrasyon yapmalıdır
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `auth` ile admin kimlik doÄŸrulama entegrasyonu
-- `user`, `access`, `moderation`, `support`, `payment` ve diÄŸer modÃ¼ller ile oversight entegrasyonu
-- dashboard, summary ve export tasarÄ±mÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `auth` ile admin kimlik doğrulama entegrasyonu
+- `user`, `access`, `moderation`, `support`, `payment` ve diğer modüller ile oversight entegrasyonu
+- dashboard, summary ve export tasarımı için `docs/shared.md`
 
 ## Settings Etkileri
-- settings envanterindeki kategori bazlÄ± tÃ¼m admin-owned runtime ayarlar
-- high-risk admin action yÃ¼zeyleri future key olarak ayrÄ± dokÃ¼mante edilmelidir
-- env veya secret yÃ¶netimi gerektiren teknik config admin runtime ayarÄ± olarak sunulmamalÄ±dÄ±r
+- settings envanterindeki kategori bazlı tüm admin-owned runtime ayarlar
+- high-risk admin action yüzeyleri future key olarak ayrı dokümante edilmelidir
+- env veya secret yönetimi gerektiren teknik config admin runtime ayarı olarak sunulmamalıdır
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `admin.setting.changed`, `admin.override.applied`, `admin.user.reviewed`
-- tÃ¼ketir: moderation escalation, support escalation, payment manual review ve operasyon sinyalleri
-- admin orkestrasyonunda publish gereken olaylar `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
+## Event Akışları
+- üretir: `admin.setting.changed`, `admin.override.applied`, `admin.user.reviewed`
+- tüketir: moderation escalation, support escalation, payment manual review ve operasyon sinyalleri
+- admin orkestrasyonunda publish gereken olaylar `docs/shared.md` ile hizalı planlanmalıdır
 
-## Audit ve Ä°zleme
-- settings deÄŸiÅŸikliÄŸi, override, impersonation, destructive action ve double confirmation gerektiren aksiyonlar immutable audit log Ã¼retmelidir
-- admin note ile audit kaydÄ± aynÄ± veri modeli olmamalÄ±; `docs/shared.md` ile ayrÄ±ÅŸtÄ±rÄ±lmalÄ±dÄ±r
+## Audit ve İzleme
+- settings değişikliği, override, impersonation, destructive action ve double confirmation gerektiren aksiyonlar immutable audit log üretmelidir
+- admin note ile audit kaydı aynı veri modeli olmamalı; `docs/shared.md` ile ayrıştırılmalıdır
 
-## Ä°dempotency ve Retry
-- destructive veya yÃ¼ksek riskli admin aksiyonlarÄ± request id ile duplicate korumasÄ± taÅŸÄ±malÄ±dÄ±r
-- aynÄ± override isteÄŸi tekrarlandÄ±ÄŸÄ±nda ikinci kez yan etki Ã¼retmemeli; ilk final state'e baÄŸlanmalÄ±dÄ±r
-- batch operasyonlarda kÄ±smi baÅŸarÄ± ve recovery planÄ± aÃ§Ä±kÃ§a dokÃ¼mante edilmelidir
+## İdempotency ve Retry
+- destructive veya yüksek riskli admin aksiyonları request id ile duplicate koruması taşımalıdır
+- aynı override isteği tekrarlandığında ikinci kez yan etki üretmemeli; ilk final state'e bağlanmalıdır
+- batch operasyonlarda kısmi başarı ve recovery planı açıkça dokümante edilmelidir
 
-## State YapÄ±sÄ±
-- admin iÅŸlem durumu
-- moderasyon veya support oversight karar yaÅŸam dÃ¶ngÃ¼sÃ¼
-- risk seviyesi veya confirmation metadata'sÄ±
-- aktif runtime ayarlar, modÃ¼l durumu ve Ã¶zellik durumu gÃ¶rÃ¼nÃ¼mleri
+## State Yapısı
+- admin işlem durumu
+- moderasyon veya support oversight karar yaşam döngüsü
+- risk seviyesi veya confirmation metadata'sı
+- aktif runtime ayarlar, modül durumu ve özellik durumu görünümleri
 
-## Test NotlarÄ±
-- settings yÃ¶netimi ve runtime control testleri
-- yetkisiz eriÅŸim ve forbidden senaryolarÄ±
-- high-risk action, double confirmation ve impersonation doÄŸrulamalarÄ±
-- kritik admin aksiyonlarÄ±nda audit doÄŸrulamalarÄ±
+## Test Notları
+- settings yönetimi ve runtime control testleri
+- yetkisiz erişim ve forbidden senaryoları
+- high-risk action, double confirmation ve impersonation doğrulamaları
+- kritik admin aksiyonlarında audit doğrulamaları
 
 
 ---
 
-# Ads ModÃ¼lÃ¼
+# Ads Modülü
 
-> Canonical modÃ¼l adÄ±: `ads`
+> Canonical modül adı: `ads`
 
-## AmaÃ§
-`ads` modÃ¼lÃ¼nÃ¼n amacÄ±, reklam placement, kampanya, kreatif ve gÃ¶sterim Ã¶lÃ§Ã¼mlemesini ayrÄ± bir yaÅŸam dÃ¶ngÃ¼sÃ¼ altÄ±nda yÃ¶netmektir.
+## Amaç
+`ads` modülünün amacı, reklam placement, kampanya, kreatif ve gösterim ölçümlemesini ayrı bir yaşam döngüsü altında yönetmektir.
 
-## Sorumluluk AlanÄ±
-- placement, campaign ve creative yÃ¶netimi
-- placement taxonomy, targeting ve active window kurallarÄ±
-- priority, frequency cap ve delivery davranÄ±ÅŸlarÄ±
-- impression, click, invalid traffic korumasÄ± ve temel reklam performans Ã¶lÃ§Ã¼mlemesi
-- reporting aggregate ve dashboard veri ihtiyacÄ±
-- admin tarafÄ±ndan yÃ¶netilen surface, campaign, placement veya click intake runtime kontrolleri ile uyumlu Ã§alÄ±ÅŸma
+## Sorumluluk Alanı
+- placement, campaign ve creative yönetimi
+- placement taxonomy, targeting ve active window kuralları
+- priority, frequency cap ve delivery davranışları
+- impression, click, invalid traffic koruması ve temel reklam performans ölçümlemesi
+- reporting aggregate ve dashboard veri ihtiyacı
+- admin tarafından yönetilen surface, campaign, placement veya click intake runtime kontrolleri ile uyumlu çalışma
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- VIP reklamsÄ±z deneyim kararÄ±nÄ± kendi iÃ§inde final hale getirmez
-- kullanÄ±cÄ± profili, Ã¶deme veya inventory owner verisini sahiplenmez
-- authorization kararÄ±nÄ± veya genel Ã¼rÃ¼n visibility kuralÄ±nÄ± tek baÅŸÄ±na Ã¼retmez
+## Bu Modül Neyi Yapmaz?
+- VIP reklamsız deneyim kararını kendi içinde final hale getirmez
+- kullanıcı profili, ödeme veya inventory owner verisini sahiplenmez
+- authorization kararını veya genel ürün visibility kuralını tek başına üretmez
 
-## Veri SahipliÄŸi
-- placement tanÄ±mlarÄ±
-- campaign ve creative kayÄ±tlarÄ±
-- priority, active window ve delivery metadata alanlarÄ±
-- impression veya click loglarÄ±
-- campaign veya placement gÃ¶rÃ¼nÃ¼rlÃ¼k state alanlarÄ±
-- aggregate raporlama iÃ§in gerekli ham Ã¶lÃ§Ã¼m metadata'sÄ±
+## Veri Sahipliği
+- placement tanımları
+- campaign ve creative kayıtları
+- priority, active window ve delivery metadata alanları
+- impression veya click logları
+- campaign veya placement görünürlük state alanları
+- aggregate raporlama için gerekli ham ölçüm metadata'sı
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- kullanÄ±cÄ± VIP entitlement veya access policy owner verisi
-- manga, chapter veya diÄŸer placement hedeflerinin canonical iÃ§eriÄŸi
-- finansal faturalama veya Ã¶deme kayÄ±tlarÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- kullanıcı VIP entitlement veya access policy owner verisi
+- manga, chapter veya diğer placement hedeflerinin canonical içeriği
+- finansal faturalama veya ödeme kayıtları
 
-## Access KontratÄ±
-`ads` yetki kararÄ± vermez. VIP reklamsÄ±z deneyim, audience muafiyeti ve reklam yÃ¼zeyi gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ `access` ile yorumlanÄ±r. `ads` modÃ¼lÃ¼ yalnÄ±zca reklam teslimine temel olan veri ve Ã¶lÃ§Ã¼mleme kayÄ±tlarÄ±nÄ± taÅŸÄ±r. VIP no-ads precedence kuralÄ± `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
+## Access Kontratı
+`ads` yetki kararı vermez. VIP reklamsız deneyim, audience muafiyeti ve reklam yüzeyi görünürlüğü `access` ile yorumlanır. `ads` modülü yalnızca reklam teslimine temel olan veri ve ölçümleme kayıtlarını taşır. VIP no-ads precedence kuralı `docs/shared.md` ile hizalı kalmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- placement resolve ve aktif campaign Ã§Ã¶zÃ¼mleme yÃ¼zeyi
-- impression veya click intake yÃ¼zeyi
-- admin campaign veya placement yÃ¶netim yÃ¼zeyi
-- temel performans raporlama veya export iÃ§in kontrollÃ¼ operasyon contract yÃ¼zeyi
+## API veya Event Sınırı
+- placement resolve ve aktif campaign çözümleme yüzeyi
+- impression veya click intake yüzeyi
+- admin campaign veya placement yönetim yüzeyi
+- temel performans raporlama veya export için kontrollü operasyon contract yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `access`, `admin`, `user`, `manga`, `chapter` ve reporting consumer'larÄ± ile entegrasyon
-- reporting katmanÄ± iÃ§in `docs/shared.md`
-- cache veya async kararlarÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `access`, `admin`, `user`, `manga`, `chapter` ve reporting consumer'ları ile entegrasyon
+- reporting katmanı için `docs/shared.md`
+- cache veya async kararları için `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.ads.surface.enabled`
 - `feature.ads.placement.enabled`
 - `feature.ads.campaign.enabled`
 - `feature.ads.click_intake.enabled`
-- frequency cap metric'leri ayrÄ± key alÄ±rsa settings envanteri gÃ¼ncellenmelidir
+- frequency cap metric'leri ayrı key alırsa settings envanteri güncellenmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `ads.impression.accepted`, `ads.click.accepted`, `ads.campaign.state_changed`
-- tÃ¼ketir: user entitlement veya access availability sinyalleri
-- aggregate raporlama ve placement resolve cache'i `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
+## Event Akışları
+- üretir: `ads.impression.accepted`, `ads.click.accepted`, `ads.campaign.state_changed`
+- tüketir: user entitlement veya access availability sinyalleri
+- aggregate raporlama ve placement resolve cache'i `docs/shared.md` ile hizalı planlanmalıdır
 
-## Audit ve Ä°zleme
-- campaign publish veya pause, targeting override, invalid click korumasÄ± ve runtime disable aksiyonlarÄ± auditlenmelidir
-- fill rate, click-through rate, frequency cap hit oranÄ± ve invalid traffic oranÄ± izlenmelidir
+## Audit ve İzleme
+- campaign publish veya pause, targeting override, invalid click koruması ve runtime disable aksiyonları auditlenmelidir
+- fill rate, click-through rate, frequency cap hit oranı ve invalid traffic oranı izlenmelidir
 
-## Ä°dempotency ve Retry
-- impression veya click intake yÃ¼zeyleri tekrar iÅŸlendiÄŸinde duplicate aggregate artÄ±ÅŸÄ± Ã¼retmemelidir
-- aggregation job tekrarlandÄ±ÄŸÄ±nda sayÄ±mlar aynÄ± final sonuca gelmelidir
-- invalid traffic repair akÄ±ÅŸlarÄ± geÃ§miÅŸ loglarÄ± bozmadan telafi edebilmelidir
+## İdempotency ve Retry
+- impression veya click intake yüzeyleri tekrar işlendiğinde duplicate aggregate artışı üretmemelidir
+- aggregation job tekrarlandığında sayımlar aynı final sonuca gelmelidir
+- invalid traffic repair akışları geçmiş logları bozmadan telafi edebilmelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - draft, active, paused veya ended campaign durumu
-- placement gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ veya delivery aktifliÄŸi
-- frequency cap veya targeting metadata'sÄ±
-- campaign bazlÄ± runtime disable durumu
+- placement görünürlüğü veya delivery aktifliği
+- frequency cap veya targeting metadata'sı
+- campaign bazlı runtime disable durumu
 
-## Test NotlarÄ±
-- placement Ã§Ã¶zÃ¼mleme ve campaign Ã¶ncelik testleri
-- targeting, frequency cap ve invalid click doÄŸrulamalarÄ±
+## Test Notları
+- placement çözümleme ve campaign öncelik testleri
+- targeting, frequency cap ve invalid click doğrulamaları
 - access no-ads precedence entegrasyonu
-- aggregate rebuild ve cache davranÄ±ÅŸÄ± testleri
+- aggregate rebuild ve cache davranışı testleri
 
 
 ---
@@ -387,1073 +387,1073 @@
 
 ---
 
-# Chapter ModÃ¼lÃ¼
+# Chapter Modülü
 
-> Canonical modÃ¼l adÄ±: `chapter`
+> Canonical modül adı: `chapter`
 
-## AmaÃ§
-`chapter` modÃ¼lÃ¼nÃ¼n amacÄ±, manga iÃ§eriÄŸinin okunabilir bÃ¶lÃ¼m yapÄ±sÄ±nÄ±, bÃ¶lÃ¼m sayfalarÄ±nÄ± ve okuma akÄ±ÅŸÄ±nÄ±n veri temelini yÃ¶netmektir.
+## Amaç
+`chapter` modülünün amacı, manga içeriğinin okunabilir bölüm yapısını, bölüm sayfalarını ve okuma akışının veri temelini yönetmektir.
 
-## Sorumluluk AlanÄ±
-- chapter CRUD, detail ve listing akÄ±ÅŸlarÄ±
-- navigation ve latest chapter gÃ¶rÃ¼nÃ¼mÃ¼
-- page veya media iliÅŸkileri
-- preview, detail, tam read ve early access yÃ¼zeyleri
-- history iÃ§in gerekli read checkpoint anchor ve resume entegrasyon yÃ¼zeyleri
-- storage stratejisi ve preview page count kuralÄ±
+## Sorumluluk Alanı
+- chapter CRUD, detail ve listing akışları
+- navigation ve latest chapter görünümü
+- page veya media ilişkileri
+- preview, detail, tam read ve early access yüzeyleri
+- history için gerekli read checkpoint anchor ve resume entegrasyon yüzeyleri
+- storage stratejisi ve preview page count kuralı
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- kullanÄ±cÄ±ya ait reading progress veya bookmark owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- Ã¶deme, entitlement veya final visibility kararÄ±nÄ± tek baÅŸÄ±na Ã¼retmez
-- yorum thread owner'lÄ±ÄŸÄ± veya support kaydÄ± sahiplenmez
+## Bu Modül Neyi Yapmaz?
+- kullanıcıya ait reading progress veya bookmark owner'lığı taşımaz
+- ödeme, entitlement veya final visibility kararını tek başına üretmez
+- yorum thread owner'lığı veya support kaydı sahiplenmez
 
-## Veri SahipliÄŸi
-- chapter metadata alanlarÄ±
-- manga-chapter iliÅŸkisi
-- page_number, media referansÄ± ve page yapÄ±sÄ±
-- access state, preview ve early access veri alanlarÄ±
-- kullanÄ±cÄ±ya ait progress kaydÄ± taÅŸÄ±madan resume iÃ§in gereken canonical chapter veya page anchor bilgileri
+## Veri Sahipliği
+- chapter metadata alanları
+- manga-chapter ilişkisi
+- page_number, media referansı ve page yapısı
+- access state, preview ve early access veri alanları
+- kullanıcıya ait progress kaydı taşımadan resume için gereken canonical chapter veya page anchor bilgileri
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- history iÃ§indeki continue reading veya last read state kayÄ±tlarÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- history içindeki continue reading veya last read state kayıtları
 - payment, inventory veya access policy owner verisi
-- support veya moderation vaka owner'lÄ±ÄŸÄ±
+- support veya moderation vaka owner'lığı
 
-## Access KontratÄ±
-`chapter` eriÅŸimi etkileyen veriyi taÅŸÄ±r; eriÅŸim kararÄ±nÄ± vermez. Guest, authenticated, vip ve early access kararlarÄ± `access` tarafÄ±ndan yorumlanÄ±r. Admin tarafÄ±ndan yÃ¶netilen runtime ayarlar chapter okuma, preview veya early access alt yÃ¼zeylerini pasife alabilir; karar uygulamasÄ± yine `access` ile korunur. KullanÄ±cÄ±ya ait continue reading, reading history ve bookmark-library state'i `history` modÃ¼lÃ¼nde tutulmalÄ±dÄ±r.
+## Access Kontratı
+`chapter` erişimi etkileyen veriyi taşır; erişim kararını vermez. Guest, authenticated, vip ve early access kararları `access` tarafından yorumlanır. Admin tarafından yönetilen runtime ayarlar chapter okuma, preview veya early access alt yüzeylerini pasife alabilir; karar uygulaması yine `access` ile korunur. Kullanıcıya ait continue reading, reading history ve bookmark-library state'i `history` modülünde tutulmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- chapter detail ve read yÃ¼zeyi
-- navigation ve latest chapter yÃ¼zeyi
-- yÃ¶netimsel chapter CRUD yÃ¼zeyi
-- `history` iÃ§in read start, checkpoint, finish ve resume anchor contract yÃ¼zeyi
-- `comment` ve `support` iÃ§in raporlanabilir hedef veya target relation yÃ¼zeyi
+## API veya Event Sınırı
+- chapter detail ve read yüzeyi
+- navigation ve latest chapter yüzeyi
+- yönetimsel chapter CRUD yüzeyi
+- `history` için read start, checkpoint, finish ve resume anchor contract yüzeyi
+- `comment` ve `support` için raporlanabilir hedef veya target relation yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `manga` ile parent iÃ§erik iliÅŸkisi
-- `access`, `admin`, `history`, `comment` ve `support` entegrasyonlarÄ±
-- media storage, attachment policy ve signed URL standardÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `manga` ile parent içerik ilişkisi
+- `access`, `admin`, `history`, `comment` ve `support` entegrasyonları
+- media storage, attachment policy ve signed URL standardı için `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.chapter.preview.enabled`
 - `feature.chapter.detail.enabled`
 - `feature.chapter.read.enabled`
 - `feature.chapter.early_access.enabled`
-- preview page count gibi limitler ayrÄ± metric key olarak dokÃ¼mante edilmelidir
+- preview page count gibi limitler ayrı metric key olarak dokümante edilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `chapter.published`, `chapter.read.started`, `chapter.read.finished`, `chapter.reordered`
-- tÃ¼ketir: `manga.published_state.changed`, access veya entitlement sinyalleri
-- resume anchor ve read event'leri `history` projection'larÄ±nÄ± besler
+## Event Akışları
+- üretir: `chapter.published`, `chapter.read.started`, `chapter.read.finished`, `chapter.reordered`
+- tüketir: `manga.published_state.changed`, access veya entitlement sinyalleri
+- resume anchor ve read event'leri `history` projection'larını besler
 
-## Audit ve Ä°zleme
-- reorder, renumber, publish veya access state deÄŸiÅŸimleri auditlenmelidir
-- read surface ile early access gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ arasÄ±ndaki ayrÄ±m izlenebilir metrik taÅŸÄ±malÄ±dÄ±r
+## Audit ve İzleme
+- reorder, renumber, publish veya access state değişimleri auditlenmelidir
+- read surface ile early access görünürlüğü arasındaki ayrım izlenebilir metrik taşımalıdır
 
-## Ä°dempotency ve Retry
-- checkpoint intake contract'Ä± tekrar gÃ¶nderildiÄŸinde duplicate progress owner'lÄ±ÄŸÄ± Ã¼retmemelidir; owner yine `history` iÃ§inde kalÄ±r
-- renumber veya reorder iÅŸlemleri aynÄ± request iÃ§inde tekrarlandÄ±ÄŸÄ±nda stabil sÄ±ra Ã¼retmelidir
-- media processing retry'larÄ± yeni chapter kaydÄ± yaratmamalÄ±dÄ±r
+## İdempotency ve Retry
+- checkpoint intake contract'ı tekrar gönderildiğinde duplicate progress owner'lığı üretmemelidir; owner yine `history` içinde kalır
+- renumber veya reorder işlemleri aynı request içinde tekrarlandığında stabil sıra üretmelidir
+- media processing retry'ları yeni chapter kaydı yaratmamalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - publish durumu
 - preview veya early access state'i
-- page yapÄ±sÄ± ve media referanslarÄ±
-- resume anchor format sÃ¼rÃ¼mÃ¼
+- page yapısı ve media referansları
+- resume anchor format sürümü
 
-## Test NotlarÄ±
-- CRUD, detail ve read akÄ±ÅŸÄ± testleri
-- navigation ve latest chapter sÄ±ralama testleri
-- preview, early access ve media doÄŸrulamalarÄ±
-- `chapter -> history` kontrat ve resume anchor doÄŸrulamalarÄ±
+## Test Notları
+- CRUD, detail ve read akışı testleri
+- navigation ve latest chapter sıralama testleri
+- preview, early access ve media doğrulamaları
+- `chapter -> history` kontrat ve resume anchor doğrulamaları
 
 
 ---
 
-# Comment ModÃ¼lÃ¼
+# Comment Modülü
 
-> Canonical modÃ¼l adÄ±: `comment`
+> Canonical modül adı: `comment`
 
-## AmaÃ§
-`comment` modÃ¼lÃ¼nÃ¼n amacÄ±, hedefe baÄŸlÄ± yorum verisini, thread yapÄ±sÄ±nÄ± ve yorum yaÅŸam dÃ¶ngÃ¼sÃ¼nÃ¼ yÃ¶netmektir.
+## Amaç
+`comment` modülünün amacı, hedefe bağlı yorum verisini, thread yapısını ve yorum yaşam döngüsünü yönetmektir.
 
-## Sorumluluk AlanÄ±
-- comment create, edit, delete ve listing akÄ±ÅŸlarÄ±
-- root veya reply thread yapÄ±sÄ±
-- edit window, soft delete gÃ¶rÃ¼nÃ¼mÃ¼ ve delete behavior kurallarÄ±
-- spoiler, pin, lock ve moderation alanlarÄ±
-- nested reply depth limiti, anti-spam ve rate limit kurallarÄ±
-- author shadowban veya moderation etkilerinin yorum gÃ¶rÃ¼nÃ¼mÃ¼ne yansÄ±masÄ±
+## Sorumluluk Alanı
+- comment create, edit, delete ve listing akışları
+- root veya reply thread yapısı
+- edit window, soft delete görünümü ve delete behavior kuralları
+- spoiler, pin, lock ve moderation alanları
+- nested reply depth limiti, anti-spam ve rate limit kuralları
+- author shadowban veya moderation etkilerinin yorum görünümüne yansıması
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- social duvar post veya social-native reply owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- eriÅŸim veya yetki kararÄ±nÄ± tek baÅŸÄ±na vermez
-- support veya moderation case kayÄ±tlarÄ±nÄ± kendi iÃ§ine dÃ¶nÃ¼ÅŸtÃ¼rmez
+## Bu Modül Neyi Yapmaz?
+- social duvar post veya social-native reply owner'lığı taşımaz
+- erişim veya yetki kararını tek başına vermez
+- support veya moderation case kayıtlarını kendi içine dönüştürmez
 
-## Veri SahipliÄŸi
-- yorum iÃ§eriÄŸi
-- `target_type` ve `target_id` iliÅŸkisi
-- parent-child reply yapÄ±sÄ±
-- moderation, spoiler, pin ve lock alanlarÄ±
-- edit window ve delete gÃ¶rÃ¼nÃ¼mÃ¼ne ait metadata
+## Veri Sahipliği
+- yorum içeriği
+- `target_type` ve `target_id` ilişkisi
+- parent-child reply yapısı
+- moderation, spoiler, pin ve lock alanları
+- edit window ve delete görünümüne ait metadata
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- hedef iÃ§erik varlÄ±ÄŸÄ±nÄ±n owner verisi
-- social messaging veya wall reply native kayÄ±tlarÄ±
-- moderation case, support ticket veya access policy owner'lÄ±ÄŸÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- hedef içerik varlığının owner verisi
+- social messaging veya wall reply native kayıtları
+- moderation case, support ticket veya access policy owner'lığı
 
-## Hedef Tipi SÃ¶zlÃ¼ÄŸÃ¼
-- `target_type` deÄŸerleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
-- `comment` hedefleri bu aÅŸamada iÃ§erik odaklÄ± hedeflerdir; sosyal duvar post'u veya sosyal duvar reply zinciri `social` modÃ¼lÃ¼nde native kalmalÄ± ve Ã¶rtÃ¼k olarak comment target'Ä±na dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lmemelidir.
-- Yeni yorum hedefi eklendiÄŸinde aynÄ± deÄŸiÅŸiklik setinde hedef modÃ¼l dokÃ¼manÄ±, `comment` modÃ¼l dokÃ¼manÄ± ve canonical target type kaydÄ± gÃ¼ncellenmelidir.
+## Hedef Tipi Sözlüğü
+- `target_type` değerleri canonical olarak `docs/shared.md` dosyasındaki kayıtlarla hizalı olmalıdır.
+- `comment` hedefleri bu aşamada içerik odaklı hedeflerdir; sosyal duvar post'u veya sosyal duvar reply zinciri `social` modülünde native kalmalı ve örtük olarak comment target'ına dönüştürülmemelidir.
+- Yeni yorum hedefi eklendiğinde aynı değişiklik setinde hedef modül dokümanı, `comment` modül dokümanı ve canonical target type kaydı güncellenmelidir.
 
-## Access KontratÄ±
-`comment` yetki kararÄ± vermez. Yorum oluÅŸturma, dÃ¼zenleme, silme ve gÃ¶rÃ¼nÃ¼rlÃ¼k kararlarÄ± `access` ile korunur; gÃ¼nlÃ¼k moderasyon akÄ±ÅŸlarÄ± `moderation`, yÃ¼ksek riskli veya yÃ¶netimsel handoff akÄ±ÅŸlarÄ± `admin` tarafÄ±nda yÃ¼rÃ¼r. Site geneli, manga detayÄ± veya chapter altÄ± yorum alanlarÄ±nÄ±n aÃ§Ä±lÄ±p kapatÄ±lmasÄ± ve yorum gÃ¶nderme aralÄ±ÄŸÄ± gibi runtime ayarlar admin Ã¼zerinden yÃ¶netilebilir.
+## Access Kontratı
+`comment` yetki kararı vermez. Yorum oluşturma, düzenleme, silme ve görünürlük kararları `access` ile korunur; günlük moderasyon akışları `moderation`, yüksek riskli veya yönetimsel handoff akışları `admin` tarafında yürür. Site geneli, manga detayı veya chapter altı yorum alanlarının açılıp kapatılması ve yorum gönderme aralığı gibi runtime ayarlar admin üzerinden yönetilebilir.
 
-## API veya Event SÄ±nÄ±rÄ±
-- yorum listeleme ve thread yÃ¼zeyi
-- yorum detay ve hedef iliÅŸkisi yÃ¼zeyi
-- moderation, support veya admin odaklÄ± yorum iÅŸlemleri iÃ§in kontrollÃ¼ yÃ¼zey
-- yorum modÃ¼lÃ¼ read ve write yÃ¼zeyleri gerektiÄŸinde birbirinden baÄŸÄ±msÄ±z olarak kontrol edilebilir olmalÄ±dÄ±r
-- hedef tipi geniÅŸlemesi canonical target type sÃ¶zlÃ¼ÄŸÃ¼ ile uyumlu tutulmalÄ±dÄ±r
+## API veya Event Sınırı
+- yorum listeleme ve thread yüzeyi
+- yorum detay ve hedef ilişkisi yüzeyi
+- moderation, support veya admin odaklı yorum işlemleri için kontrollü yüzey
+- yorum modülü read ve write yüzeyleri gerektiğinde birbirinden bağımsız olarak kontrol edilebilir olmalıdır
+- hedef tipi genişlemesi canonical target type sözlüğü ile uyumlu tutulmalıdır
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `manga`, `chapter`, `user`, `access`, `admin`, `support` ve `moderation` entegrasyonlarÄ±
-- profanity filter veya anti-spam yardÄ±mcÄ±larÄ± iÃ§in ortak altyapÄ± ihtiyacÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `manga`, `chapter`, `user`, `access`, `admin`, `support` ve `moderation` entegrasyonları
+- profanity filter veya anti-spam yardımcıları için ortak altyapı ihtiyacı
 
 ## Settings Etkileri
 - `feature.comment.read.enabled`
 - `feature.comment.write.enabled`
 - `comment.write.cooldown_seconds`
-- edit window veya spoiler policy gibi ek yÃ¼zeyler eklenirse settings envanteri geniÅŸletilmelidir
+- edit window veya spoiler policy gibi ek yüzeyler eklenirse settings envanteri genişletilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `comment.created`, `comment.edited`, `comment.deleted`, `comment.moderated`
-- tÃ¼ketir: moderation hide veya restore kararÄ±, admin lock veya unlock kararÄ±
-- comment count ve engagement projection'larÄ± `docs/shared.md` ile hizalÄ± beslenmelidir
+## Event Akışları
+- üretir: `comment.created`, `comment.edited`, `comment.deleted`, `comment.moderated`
+- tüketir: moderation hide veya restore kararı, admin lock veya unlock kararı
+- comment count ve engagement projection'ları `docs/shared.md` ile hizalı beslenmelidir
 
-## Audit ve Ä°zleme
-- shadowban etkisi, bulk lock veya pin deÄŸiÅŸimi ve admin/moderation kaynaklÄ± gÃ¶rÃ¼nÃ¼rlÃ¼k deÄŸiÅŸimleri auditlenmelidir
+## Audit ve İzleme
+- shadowban etkisi, bulk lock veya pin değişimi ve admin/moderation kaynaklı görünürlük değişimleri auditlenmelidir
 - spam ve flood koruma tetiklenmeleri metrik olarak izlenmelidir
 
-## Ä°dempotency ve Retry
-- duplicate create istekleri aynÄ± request scope iÃ§inde ikinci yorum kaydÄ± oluÅŸturmamalÄ±dÄ±r
-- delete veya moderation hide aksiyonu tekrarlandÄ±ÄŸÄ±nda aynÄ± final gÃ¶rÃ¼nÃ¼rlÃ¼k state'ini korumalÄ±dÄ±r
-- pagination veya thread rebuild retry'larÄ± yeni yan etki Ã¼retmemelidir
+## İdempotency ve Retry
+- duplicate create istekleri aynı request scope içinde ikinci yorum kaydı oluşturmamalıdır
+- delete veya moderation hide aksiyonu tekrarlandığında aynı final görünürlük state'ini korumalıdır
+- pagination veya thread rebuild retry'ları yeni yan etki üretmemelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - moderation_status
 - spoiler_flag
 - pin ve lock durumu
 - visibility etkileyen alanlar
-- edit window veya soft delete gÃ¶rÃ¼nÃ¼mÃ¼ durumu
+- edit window veya soft delete görünümü durumu
 
-## Test NotlarÄ±
+## Test Notları
 - create, edit, delete ve list testleri
-- thread, reply depth ve soft delete gÃ¶rÃ¼nÃ¼mÃ¼ testleri
+- thread, reply depth ve soft delete görünümü testleri
 - target relation ve spoiler propagation testleri
-- rate limit, anti-spam ve shadowban doÄŸrulamalarÄ±
-- visibility ve access entegrasyonu doÄŸrulamalarÄ±
+- rate limit, anti-spam ve shadowban doğrulamaları
+- visibility ve access entegrasyonu doğrulamaları
 
 
 ---
 
-# History ModÃ¼lÃ¼
+# History Modülü
 
-> Canonical modÃ¼l adÄ±: `history`
+> Canonical modül adı: `history`
 
-## AmaÃ§
-`history` modÃ¼lÃ¼nÃ¼n amacÄ±, kullanÄ±cÄ±ya ait continue reading, reading history, bookmark-library ve okuma devamlÄ±lÄ±ÄŸÄ± kayÄ±tlarÄ±nÄ± tek bir yaÅŸam dÃ¶ngÃ¼sÃ¼ altÄ±nda yÃ¶netmektir.
+## Amaç
+`history` modülünün amacı, kullanıcıya ait continue reading, reading history, bookmark-library ve okuma devamlılığı kayıtlarını tek bir yaşam döngüsü altında yönetmektir.
 
-## Sorumluluk AlanÄ±
-- continue reading ve resume akÄ±ÅŸlarÄ±
-- reading history timeline ve own history yÃ¼zeyleri
-- user-manga library, bookmark veya favorite kayÄ±tlarÄ±
-- resume checkpoint formatÄ±, last read conflict Ã§Ã¶zÃ¼mÃ¼ ve multi-device merge policy
+## Sorumluluk Alanı
+- continue reading ve resume akışları
+- reading history timeline ve own history yüzeyleri
+- user-manga library, bookmark veya favorite kayıtları
+- resume checkpoint formatı, last read conflict çözümü ve multi-device merge policy
 - timeline retention, cleanup ve compact history write stratejisi
-- admin tarafÄ±ndan yÃ¶netilen continue reading, library, timeline veya bookmark write runtime kontrolleri ile uyumlu Ã§alÄ±ÅŸma
+- admin tarafından yönetilen continue reading, library, timeline veya bookmark write runtime kontrolleri ile uyumlu çalışma
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- manga veya chapter iÃ§eriÄŸinin canonical owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- global visibility default'unu tek baÅŸÄ±na belirlemez
-- access policy, social iliÅŸki veya notification preference owner'lÄ±ÄŸÄ± taÅŸÄ±maz
+## Bu Modül Neyi Yapmaz?
+- manga veya chapter içeriğinin canonical owner'lığına dönüşmez
+- global visibility default'unu tek başına belirlemez
+- access policy, social ilişki veya notification preference owner'lığı taşımaz
 
-## Veri SahipliÄŸi
-- user-manga library entry kayÄ±tlarÄ±
-- bookmark, favorite veya reading status alanlarÄ±
-- user-chapter son okuma chapter veya page referanslarÄ±
+## Veri Sahipliği
+- user-manga library entry kayıtları
+- bookmark, favorite veya reading status alanları
+- user-chapter son okuma chapter veya page referansları
 - progress snapshot, checkpoint ve history timeline verileri
-- entry-level visibility veya sharing iÃ§in gereken history tarafÄ± metadata alanlarÄ±
-- global visibility default'u deÄŸil, library entry veya history event bazlÄ± share metadata alanlarÄ±
+- entry-level visibility veya sharing için gereken history tarafı metadata alanları
+- global visibility default'u değil, library entry veya history event bazlı share metadata alanları
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- manga metadata, chapter page yapÄ±sÄ± veya kullanÄ±cÄ± profil verisi
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- manga metadata, chapter page yapısı veya kullanıcı profil verisi
 - global user visibility preference sinyali
-- access kararÄ±nÄ±n kendisi veya recommendation owner algoritmasÄ±
+- access kararının kendisi veya recommendation owner algoritması
 
-## Access KontratÄ±
-`history` yetki kararÄ± vermez. KullanÄ±cÄ±nÄ±n kendi history veya library yÃ¼zeylerini gÃ¶rmesi `access` ile korunur. `access` tarafÄ±nda en az `history.continue_reading.read.own`, `history.timeline.read.own`, `history.library.read.own`, `history.bookmark.write.own` ve gerektiÄŸinde `history.library.read.public` gibi canonical permission Ã¶rnekleri tanÄ±mlanmalÄ±dÄ±r. Public library paylaÅŸÄ±mÄ± veya reading activity gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ gerektiÄŸinde global gÃ¶rÃ¼nÃ¼rlÃ¼k default'larÄ± `user` modÃ¼lÃ¼ndeki sinyallerden, entry-level paylaÅŸÄ±m metadata'sÄ± ise `history` iÃ§indeki kayÄ±tlarÄ±ndan yorumlanmalÄ±dÄ±r. Final gÃ¶rÃ¼nÃ¼rlÃ¼kte `user` modÃ¼lÃ¼ndeki global deny veya daha dar default Ã¼st sÄ±nÄ±rdÄ±r.
+## Access Kontratı
+`history` yetki kararı vermez. Kullanıcının kendi history veya library yüzeylerini görmesi `access` ile korunur. `access` tarafında en az `history.continue_reading.read.own`, `history.timeline.read.own`, `history.library.read.own`, `history.bookmark.write.own` ve gerektiğinde `history.library.read.public` gibi canonical permission örnekleri tanımlanmalıdır. Public library paylaşımı veya reading activity görünürlüğü gerektiğinde global görünürlük default'ları `user` modülündeki sinyallerden, entry-level paylaşım metadata'sı ise `history` içindeki kayıtlarından yorumlanmalıdır. Final görünürlükte `user` modülündeki global deny veya daha dar default üst sınırdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- own continue reading, own library ve own history timeline yÃ¼zeyi
-- eriÅŸim uygunsa kontrollÃ¼ public library read yÃ¼zeyi
-- `chapter` modÃ¼lÃ¼nden read start, checkpoint, finish veya resume anchor intake kontratÄ±
-- `manga`, `mission` ve discovery tÃ¼keticileri iÃ§in kontrollÃ¼ okuma Ã¶zeti veya signal surface
-- admin tarafÄ±ndan history yÃ¼zeylerini daraltmak iÃ§in kontrollÃ¼ operasyon contract yÃ¼zeyi
+## API veya Event Sınırı
+- own continue reading, own library ve own history timeline yüzeyi
+- erişim uygunsa kontrollü public library read yüzeyi
+- `chapter` modülünden read start, checkpoint, finish veya resume anchor intake kontratı
+- `manga`, `mission` ve discovery tüketicileri için kontrollü okuma özeti veya signal surface
+- admin tarafından history yüzeylerini daraltmak için kontrollü operasyon contract yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `user`, `manga`, `chapter`, `access`, `admin`, `mission` ve discovery consumer'larÄ± ile entegrasyon
-- projection updater ve compact history writer gibi yardÄ±mcÄ± yapÄ±lar
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `user`, `manga`, `chapter`, `access`, `admin`, `mission` ve discovery consumer'ları ile entegrasyon
+- projection updater ve compact history writer gibi yardımcı yapılar
 
 ## Settings Etkileri
 - `feature.history.continue_reading.enabled`
 - `feature.history.library.enabled`
 - `feature.history.timeline.enabled`
 - `feature.history.bookmark_write.enabled`
-- retention veya cleanup metric'leri ayrÄ± key olarak eklenirse settings envanterine yazÄ±lmalÄ±dÄ±r
+- retention veya cleanup metric'leri ayrı key olarak eklenirse settings envanterine yazılmalıdır
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `history.checkpoint.updated`, `history.chapter.finished`, `history.library.changed`
-- tÃ¼ketir: `chapter.read.started`, `chapter.read.finished`, user visibility sinyalleri
-- continue reading projection ve discovery summary'leri `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `history.checkpoint.updated`, `history.chapter.finished`, `history.library.changed`
+- tüketir: `chapter.read.started`, `chapter.read.finished`, user visibility sinyalleri
+- continue reading projection ve discovery summary'leri `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- public share metadata deÄŸiÅŸimi, admin kaynaklÄ± visibility daraltmasÄ± ve bulk cleanup aksiyonlarÄ± auditlenmelidir
-- merge conflict oranÄ±, checkpoint dedup sayÄ±sÄ± ve projection lag izlenmelidir
+## Audit ve İzleme
+- public share metadata değişimi, admin kaynaklı visibility daraltması ve bulk cleanup aksiyonları auditlenmelidir
+- merge conflict oranı, checkpoint dedup sayısı ve projection lag izlenmelidir
 
-## Ä°dempotency ve Retry
-- checkpoint write, merge ve multi-device sync akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± idempotent olmalÄ±dÄ±r
-- aynÄ± checkpoint tekrar geldiÄŸinde yeni timeline gÃ¼rÃ¼ltÃ¼sÃ¼ Ã¼retmemelidir
-- cleanup job veya rebuild retry'larÄ± veri kaybÄ± Ã¼retmeden tekrar Ã§alÄ±ÅŸabilmelidir
+## İdempotency ve Retry
+- checkpoint write, merge ve multi-device sync akışları `docs/shared.md` ile hizalı idempotent olmalıdır
+- aynı checkpoint tekrar geldiğinde yeni timeline gürültüsü üretmemelidir
+- cleanup job veya rebuild retry'ları veri kaybı üretmeden tekrar çalışabilmelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - in_progress, completed veya dropped reading status
 - bookmarked veya favorited library durumu
-- last_read_at, resume snapshot ve merge conflict alanlarÄ±
+- last_read_at, resume snapshot ve merge conflict alanları
 - timeline retention veya history pause durumu
 
-## Test NotlarÄ±
-- continue reading Ã§Ã¶zÃ¼mleme ve checkpoint idempotency testleri
-- bookmark ve favorite ayrÄ±mÄ± testleri
-- duplicate history yazÄ±mÄ±, merge conflict ve cleanup pencere doÄŸrulamalarÄ±
+## Test Notları
+- continue reading çözümleme ve checkpoint idempotency testleri
+- bookmark ve favorite ayrımı testleri
+- duplicate history yazımı, merge conflict ve cleanup pencere doğrulamaları
 - own history, public library visibility ve bookmark write permission testleri
-- `chapter -> history` ve downstream signal entegrasyonu doÄŸrulamalarÄ±
+- `chapter -> history` ve downstream signal entegrasyonu doğrulamaları
 
 
 ---
 
-# Inventory ModÃ¼lÃ¼
+# Inventory Modülü
 
-> Canonical modÃ¼l adÄ±: `inventory`
+> Canonical modül adı: `inventory`
 
-## AmaÃ§
-`inventory` modÃ¼lÃ¼nÃ¼n amacÄ±, kullanÄ±cÄ±nÄ±n sahip olduÄŸu item, kozmetik, Ã¶dÃ¼l ve benzeri varlÄ±klarÄ± tek bir envanter yaÅŸam dÃ¶ngÃ¼sÃ¼ altÄ±nda yÃ¶netmek ve Ã¶dÃ¼l teslim yÃ¼rÃ¼tÃ¼mÃ¼nÃ¼ merkezi biÃ§imde sahiplenmektir.
+## Amaç
+`inventory` modülünün amacı, kullanıcının sahip olduğu item, kozmetik, ödül ve benzeri varlıkları tek bir envanter yaşam döngüsü altında yönetmek ve ödül teslim yürütümünü merkezi biçimde sahiplenmektir.
 
-## Sorumluluk AlanÄ±
-- ownable item definition ve item type ayrÄ±mlarÄ±
-- kullanÄ±cÄ± envanter kayÄ±tlarÄ± ve sahiplik durumlarÄ±
-- grant, reward teslim yÃ¼rÃ¼tÃ¼mÃ¼, revoke, consume ve equip akÄ±ÅŸlarÄ±
-- stackable veya unique item kurallarÄ±
-- expiry mantÄ±ÄŸÄ±, equip slot kurallarÄ± ve selected cosmetic referanslarÄ±
-- reward source canonical enum ve idempotent grant kontrolÃ¼
+## Sorumluluk Alanı
+- ownable item definition ve item type ayrımları
+- kullanıcı envanter kayıtları ve sahiplik durumları
+- grant, reward teslim yürütümü, revoke, consume ve equip akışları
+- stackable veya unique item kuralları
+- expiry mantığı, equip slot kuralları ve selected cosmetic referansları
+- reward source canonical enum ve idempotent grant kontrolü
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- sellable shop product veya offer catalog owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- Ã¶deme, wallet veya ledger doÄŸruluÄŸu Ã¼retmez
-- mission veya royalpass claim uygunluÄŸu kararÄ±nÄ± tek baÅŸÄ±na vermez
+## Bu Modül Neyi Yapmaz?
+- sellable shop product veya offer catalog owner'lığı taşımaz
+- ödeme, wallet veya ledger doğruluğu üretmez
+- mission veya royalpass claim uygunluğu kararını tek başına vermez
 
-## Veri SahipliÄŸi
-- ownable item definition alanlarÄ±; sellable product veya offer catalog kayÄ±tlarÄ± deÄŸil
-- user inventory entry kayÄ±tlarÄ±
+## Veri Sahipliği
+- ownable item definition alanları; sellable product veya offer catalog kayıtları değil
+- user inventory entry kayıtları
 - stack count, ownership state ve expiry bilgileri
-- equip slot veya selected cosmetic referanslarÄ±
-- grant, consume ve revoke iÅŸlem loglarÄ±
-- reward source ve source reference metadata alanlarÄ±
+- equip slot veya selected cosmetic referansları
+- grant, consume ve revoke işlem logları
+- reward source ve source reference metadata alanları
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- shop Ã¼rÃ¼n kataloÄŸu ve fiyat planÄ± verisi
-- payment checkout, callback veya ledger kayÄ±tlarÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- shop ürün kataloğu ve fiyat planı verisi
+- payment checkout, callback veya ledger kayıtları
 - mission veya royalpass progression owner verisi
 
-## Access KontratÄ±
-`inventory` yetki kararÄ± vermez. KullanÄ±cÄ±nÄ±n kendi envanterini gÃ¶rmesi, reward teslimini tamamlamasÄ±, consume etmesi veya equip etmesi `access` ile korunur. `mission`, `royalpass` veya diÄŸer producer modÃ¼ller claim uygunluÄŸu veya reward kaynaÄŸÄ± Ã¼retebilir; ancak final grant yÃ¼rÃ¼tÃ¼mÃ¼ ve item sahipliÄŸi `inventory` modÃ¼lÃ¼nde kalÄ±r. Kaynak tipleri `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
+## Access Kontratı
+`inventory` yetki kararı vermez. Kullanıcının kendi envanterini görmesi, reward teslimini tamamlaması, consume etmesi veya equip etmesi `access` ile korunur. `mission`, `royalpass` veya diğer producer modüller claim uygunluğu veya reward kaynağı üretebilir; ancak final grant yürütümü ve item sahipliği `inventory` modülünde kalır. Kaynak tipleri `docs/shared.md` ile hizalı olmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- own inventory list, own item detail, own equip veya consume yÃ¼zeyi
-- admin grant veya revoke orkestrasyonu iÃ§in kontrollÃ¼ yÃ¶netim yÃ¼zeyi
-- reward producer modÃ¼ller iÃ§in aÃ§Ä±k grant execution veya reservation contract yÃ¼zeyi
-- `shop` iÃ§in sellable product -> grantable item definition Ã§Ã¶zÃ¼mleme kontratÄ±
+## API veya Event Sınırı
+- own inventory list, own item detail, own equip veya consume yüzeyi
+- admin grant veya revoke orkestrasyonu için kontrollü yönetim yüzeyi
+- reward producer modüller için açık grant execution veya reservation contract yüzeyi
+- `shop` için sellable product -> grantable item definition çözümleme kontratı
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `user`, `access`, `admin`, `shop`, `notification`, `mission` ve `royalpass` entegrasyonlarÄ±
-- snapshot veya serializer yardÄ±mcÄ±larÄ± iÃ§in future-ready altyapÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `user`, `access`, `admin`, `shop`, `notification`, `mission` ve `royalpass` entegrasyonları
+- snapshot veya serializer yardımcıları için future-ready altyapı
 
 ## Settings Etkileri
 - `feature.inventory.read.enabled`
 - `feature.inventory.claim.enabled`
 - `feature.inventory.equip.enabled`
 - `feature.inventory.consume.enabled`
-- category bazlÄ± inventory gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ eklenirse settings envanteri geniÅŸletilmelidir
+- category bazlı inventory görünürlüğü eklenirse settings envanteri genişletilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `inventory.granted`, `inventory.revoked`, `inventory.consumed`, `inventory.equipped`
-- tÃ¼ketir: mission claim, royalpass claim, shop fulfillment, admin manual grant sinyalleri
-- reward projection ve grant retry davranÄ±ÅŸÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `inventory.granted`, `inventory.revoked`, `inventory.consumed`, `inventory.equipped`
+- tüketir: mission claim, royalpass claim, shop fulfillment, admin manual grant sinyalleri
+- reward projection ve grant retry davranışı `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- manual grant, revoke, consume, equip slot deÄŸiÅŸimi ve correction aksiyonlarÄ± auditlenmelidir
-- duplicate grant korumasÄ±, expired item cleanup ve source mismatch oranÄ± izlenmelidir
+## Audit ve İzleme
+- manual grant, revoke, consume, equip slot değişimi ve correction aksiyonları auditlenmelidir
+- duplicate grant koruması, expired item cleanup ve source mismatch oranı izlenmelidir
 
-## Ä°dempotency ve Retry
-- grant akÄ±ÅŸlarÄ± source reference + request id ile `docs/shared.md` kapsamÄ±nda korunmalÄ±dÄ±r
-- consume ve equip tekrarlandÄ±ÄŸÄ±nda ikinci yan etki Ã¼retmemeli; mevcut final state'e baÄŸlanmalÄ±dÄ±r
-- recovery veya reconcile akÄ±ÅŸlarÄ± yeni sahiplik Ã§oÄŸaltmamalÄ±dÄ±r
+## İdempotency ve Retry
+- grant akışları source reference + request id ile `docs/shared.md` kapsamında korunmalıdır
+- consume ve equip tekrarlandığında ikinci yan etki üretmemeli; mevcut final state'e bağlanmalıdır
+- recovery veya reconcile akışları yeni sahiplik çoğaltmamalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - active, consumed, expired veya revoked item durumu
 - stack balance veya quantity durumu
 - equipped veya unequipped durumu
 - claim veya grant pause durumu
-- source type ve source reference alanlarÄ±
+- source type ve source reference alanları
 
-## Test NotlarÄ±
+## Test Notları
 - grant, claim, consume ve equip testleri
-- item type, stackable veya unique ve expiry doÄŸrulamalarÄ±
+- item type, stackable veya unique ve expiry doğrulamaları
 - source idempotency ve duplicate grant testleri
-- reward producer entegrasyonu ve access doÄŸrulamalarÄ±
+- reward producer entegrasyonu ve access doğrulamaları
 - equip slot ve selected cosmetic referans testleri
 
 
 ---
 
-# Manga ModÃ¼lÃ¼
+# Manga Modülü
 
-> Canonical modÃ¼l adÄ±: `manga`
+> Canonical modül adı: `manga`
 
-## AmaÃ§
-`manga` modÃ¼lÃ¼nÃ¼n amacÄ±, ana iÃ§erik varlÄ±ÄŸÄ±nÄ±, iÃ§erik metadata yapÄ±sÄ±nÄ± ve public iÃ§erik akÄ±ÅŸÄ±nÄ±n veri temelini yÃ¶netmektir.
+## Amaç
+`manga` modülünün amacı, ana içerik varlığını, içerik metadata yapısını ve public içerik akışının veri temelini yönetmektir.
 
-## Sorumluluk AlanÄ±
-- manga CRUD, listing ve detail akÄ±ÅŸlarÄ±
-- arama, filtreleme ve sÄ±ralama
-- metadata, taxonomy ve slug iliÅŸkileri
-- publish, archive, moderation ve gÃ¶rÃ¼nÃ¼rlÃ¼k verileri
-- featured, recommendation, editoryal koleksiyon ve keÅŸif yÃ¼zeyleri
-- content versioning ve search index stratejisi iÃ§in referans alanlarÄ±
+## Sorumluluk Alanı
+- manga CRUD, listing ve detail akışları
+- arama, filtreleme ve sıralama
+- metadata, taxonomy ve slug ilişkileri
+- publish, archive, moderation ve görünürlük verileri
+- featured, recommendation, editoryal koleksiyon ve keşif yüzeyleri
+- content versioning ve search index stratejisi için referans alanları
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- chapter page iÃ§eriÄŸini veya kullanÄ±cÄ±ya ait history kaydÄ±nÄ± owner olarak taÅŸÄ±maz
-- yorum, support veya moderation vaka verisini kendi iÃ§ine kopyalamaz
-- recommendation verisini tek baÅŸÄ±na kara kutu algoritma olarak sahiplenmez; kaynak sinyal ve projection stratejisi dokÃ¼mante edilmelidir
+## Bu Modül Neyi Yapmaz?
+- chapter page içeriğini veya kullanıcıya ait history kaydını owner olarak taşımaz
+- yorum, support veya moderation vaka verisini kendi içine kopyalamaz
+- recommendation verisini tek başına kara kutu algoritma olarak sahiplenmez; kaynak sinyal ve projection stratejisi dokümante edilmelidir
 
-## Veri SahipliÄŸi
-- title, slug, summary ve gÃ¶rsel alanlarÄ±
-- taxonomy iliÅŸkileri ve iÃ§erik metadata alanlarÄ±
-- publish ve moderation state alanlarÄ±
-- view_count, comment_count, chapter_count ve benzeri denormalize sayaÃ§ alanlarÄ±
-- editoryal collection, discovery placement ve recommendation metadata alanlarÄ±
+## Veri Sahipliği
+- title, slug, summary ve görsel alanları
+- taxonomy ilişkileri ve içerik metadata alanları
+- publish ve moderation state alanları
+- view_count, comment_count, chapter_count ve benzeri denormalize sayaç alanları
+- editoryal collection, discovery placement ve recommendation metadata alanları
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
+## Bu Modül Hangi Verinin Sahibi Değildir?
 - chapter page veya page media owner verisi
-- kullanÄ±cÄ±ya ait continue reading, favorite veya bookmark kayÄ±tlarÄ±
-- search provider altyapÄ±sÄ±nÄ±n teknik config secret'larÄ±
+- kullanıcıya ait continue reading, favorite veya bookmark kayıtları
+- search provider altyapısının teknik config secret'ları
 
-## Access KontratÄ±
-`manga` eriÅŸim kararÄ± vermez. Public gÃ¶rÃ¼nÃ¼rlÃ¼k ve yÃ¶netimsel eriÅŸim kararlarÄ± `access` tarafÄ±ndan yorumlanÄ±r. Admin tarafÄ±ndan yÃ¶netilen runtime ayarlar manga listeleme, detay, recommendation veya editoryal gÃ¶rÃ¼nÃ¼rlÃ¼k yÃ¼zeylerini daraltabilir; veri sahipliÄŸi yine `manga` modÃ¼lÃ¼nde kalÄ±r. Visibility kavramÄ± `docs/shared.md` ile hizalÄ± tutulmalÄ±dÄ±r.
+## Access Kontratı
+`manga` erişim kararı vermez. Public görünürlük ve yönetimsel erişim kararları `access` tarafından yorumlanır. Admin tarafından yönetilen runtime ayarlar manga listeleme, detay, recommendation veya editoryal görünürlük yüzeylerini daraltabilir; veri sahipliği yine `manga` modülünde kalır. Visibility kavramı `docs/shared.md` ile hizalı tutulmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- public listing ve public detail yÃ¼zeyi
-- public recommendation, collection veya editoryal discovery yÃ¼zeyi
-- yÃ¶netimsel CRUD ve metadata yÃ¼zeyi
-- chapter varsayÄ±lan eriÅŸim verisi gerekiyorsa kontrollÃ¼ contract yÃ¼zeyi
-- sayaÃ§ gÃ¼ncelleme veya projection ihtiyacÄ± varsa aÃ§Ä±k event veya counter contract yÃ¼zeyi
-- `comment` ve `support` iÃ§in raporlanabilir hedef veya target relation yÃ¼zeyi
+## API veya Event Sınırı
+- public listing ve public detail yüzeyi
+- public recommendation, collection veya editoryal discovery yüzeyi
+- yönetimsel CRUD ve metadata yüzeyi
+- chapter varsayılan erişim verisi gerekiyorsa kontrollü contract yüzeyi
+- sayaç güncelleme veya projection ihtiyacı varsa açık event veya counter contract yüzeyi
+- `comment` ve `support` için raporlanabilir hedef veya target relation yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `access`, `admin`, `history`, `comment`, `chapter` ve discovery consumer'larÄ± ile kontrollÃ¼ entegrasyon
-- arama ve index lifecycle iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `access`, `admin`, `history`, `comment`, `chapter` ve discovery consumer'ları ile kontrollü entegrasyon
+- arama ve index lifecycle için `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.manga.list.enabled`
 - `feature.manga.detail.enabled`
 - `feature.manga.discovery.enabled`
-- arama veya editoryal surface iÃ§in ayrÄ± key aÃ§Ä±lÄ±rsa settings envanteri aynÄ± deÄŸiÅŸiklikte gÃ¼ncellenmelidir
+- arama veya editoryal surface için ayrı key açılırsa settings envanteri aynı değişiklikte güncellenmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `manga.published`, `manga.archived`, `manga.discovery.updated`
-- tÃ¼ketir: `comment.*`, `chapter.*`, `history.*` kaynaklÄ± sayaÃ§ veya engagement sinyalleri
-- search index ve recommendation projection'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `manga.published`, `manga.archived`, `manga.discovery.updated`
+- tüketir: `comment.*`, `chapter.*`, `history.*` kaynaklı sayaç veya engagement sinyalleri
+- search index ve recommendation projection'ları `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- publish, archive, visibility ve editoryal collection deÄŸiÅŸiklikleri auditlenmelidir
-- projection lag, search index gecikmesi ve sayaÃ§ drift farklarÄ± izlenebilir olmalÄ±dÄ±r
+## Audit ve İzleme
+- publish, archive, visibility ve editoryal collection değişiklikleri auditlenmelidir
+- projection lag, search index gecikmesi ve sayaç drift farkları izlenebilir olmalıdır
 
-## Ä°dempotency ve Retry
-- publish veya archive transition'larÄ± tekrar Ã§alÄ±ÅŸtÄ±rÄ±ldÄ±ÄŸÄ±nda Ã§eliÅŸkili state Ã¼retmemelidir
-- counter reconcile ve search reindex akÄ±ÅŸlarÄ± replay-safe olmalÄ±dÄ±r
-- discovery placement gÃ¼ncellemeleri request id veya version alanÄ± ile duplicate write Ã¼retmemelidir
+## İdempotency ve Retry
+- publish veya archive transition'ları tekrar çalıştırıldığında çelişkili state üretmemelidir
+- counter reconcile ve search reindex akışları replay-safe olmalıdır
+- discovery placement güncellemeleri request id veya version alanı ile duplicate write üretmemelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - publish veya archive durumu
-- visibility veya public gÃ¶rÃ¼nÃ¼rlÃ¼k etkileyen alanlar
-- collection veya discovery gÃ¶rÃ¼nÃ¼rlÃ¼k state alanlarÄ±
-- taxonomy ve metadata sÃ¼rÃ¼m bilgileri
+- visibility veya public görünürlük etkileyen alanlar
+- collection veya discovery görünürlük state alanları
+- taxonomy ve metadata sürüm bilgileri
 
-## Test NotlarÄ±
+## Test Notları
 - CRUD, listing ve detail testleri
-- search, filter, sort ve taxonomy doÄŸrulamalarÄ±
-- sayaÃ§ reconcile ve projection doÄŸrulamalarÄ±
-- public gÃ¶rÃ¼nÃ¼rlÃ¼k ve access entegrasyonu doÄŸrulamalarÄ±
+- search, filter, sort ve taxonomy doğrulamaları
+- sayaç reconcile ve projection doğrulamaları
+- public görünürlük ve access entegrasyonu doğrulamaları
 
 
 ---
 
-# Mission ModÃ¼lÃ¼
+# Mission Modülü
 
-> Canonical modÃ¼l adÄ±: `mission`
+> Canonical modül adı: `mission`
 
-## AmaÃ§
-`mission` modÃ¼lÃ¼nÃ¼n amacÄ±, gÃ¼nlÃ¼k, haftalÄ±k, aylÄ±k, event ve seviye bazlÄ± gÃ¶rev tanÄ±mlarÄ±nÄ±, kullanÄ±cÄ± ilerlemesini ve gÃ¶rev Ã¶dÃ¼lÃ¼ iÃ§in claim uygunluÄŸu veya claim request akÄ±ÅŸlarÄ±nÄ± yÃ¶netmektir.
+## Amaç
+`mission` modülünün amacı, günlük, haftalık, aylık, event ve seviye bazlı görev tanımlarını, kullanıcı ilerlemesini ve görev ödülü için claim uygunluğu veya claim request akışlarını yönetmektir.
 
-## Sorumluluk AlanÄ±
-- mission definition ve mission category yÃ¶netimi
-- daily, weekly, monthly, event ve level-based mission yapÄ±larÄ±
-- mission trigger source listesi ve progress accumulation kurallarÄ±
-- kullanÄ±cÄ± progress, completion, claim uygunluÄŸu ve claim request yaÅŸam dÃ¶ngÃ¼sÃ¼
-- reset window, streak veya dÃ¶nemsel yenileme kurallarÄ±
-- event mission ile season mission iliÅŸkisinin dokÃ¼mantasyonu
+## Sorumluluk Alanı
+- mission definition ve mission category yönetimi
+- daily, weekly, monthly, event ve level-based mission yapıları
+- mission trigger source listesi ve progress accumulation kuralları
+- kullanıcı progress, completion, claim uygunluğu ve claim request yaşam döngüsü
+- reset window, streak veya dönemsel yenileme kuralları
+- event mission ile season mission ilişkisinin dokümantasyonu
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- final reward sahipliÄŸini kendi iÃ§inde yazmaz
-- global EXP, level veya kullanÄ±cÄ± profil progression owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- Ã¶deme, inventory veya royalpass owner verisini kopyalamaz
+## Bu Modül Neyi Yapmaz?
+- final reward sahipliğini kendi içinde yazmaz
+- global EXP, level veya kullanıcı profil progression owner'lığına dönüşmez
+- ödeme, inventory veya royalpass owner verisini kopyalamaz
 
-## Veri SahipliÄŸi
-- mission tanÄ±mlarÄ± ve category alanlarÄ±
-- user mission progress kayÄ±tlarÄ±
+## Veri Sahipliği
+- mission tanımları ve category alanları
+- user mission progress kayıtları
 - completion, claim eligibility ve reset durum verileri
-- event mission penceresi ve schedule alanlarÄ±
+- event mission penceresi ve schedule alanları
 - reward reference ve claim source bilgileri
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- final inventory item kaydÄ± veya grant sonucu
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- final inventory item kaydı veya grant sonucu
 - payment veya shop purchase owner verisi
 - royalpass season tier owner verisi
 
-## Access KontratÄ±
-`mission` yetki kararÄ± vermez. GÃ¶rev gÃ¶rÃ¼ntÃ¼leme, claim ve yÃ¶netim yÃ¼zeyleri `access` ile korunur. Global EXP veya level sahipliÄŸi `user` modÃ¼lÃ¼nde kalabilir; `mission` bu verileri gÃ¶rev tamamlanma sinyali olarak tÃ¼ketir. Claim uygunluÄŸu ile final grant ayrÄ±mÄ± transaction boundary olarak aÃ§Ä±k tutulmalÄ±dÄ±r.
+## Access Kontratı
+`mission` yetki kararı vermez. Görev görüntüleme, claim ve yönetim yüzeyleri `access` ile korunur. Global EXP veya level sahipliği `user` modülünde kalabilir; `mission` bu verileri görev tamamlanma sinyali olarak tüketir. Claim uygunluğu ile final grant ayrımı transaction boundary olarak açık tutulmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- own mission list, own progress ve own claim-request yÃ¼zeyi
-- admin iÃ§in mission definition, reset ve period kontrol yÃ¼zeyi
-- producer modÃ¼llerden alÄ±nan progress event contract'larÄ± ve `inventory` veya `notification` iÃ§in reward event yÃ¼zeyi
-- mission read, claim ve progress ingest yÃ¼zeyleri gerektiÄŸinde birbirinden baÄŸÄ±msÄ±z runtime anahtarlarÄ± ile yÃ¶netilebilir olmalÄ±dÄ±r
+## API veya Event Sınırı
+- own mission list, own progress ve own claim-request yüzeyi
+- admin için mission definition, reset ve period kontrol yüzeyi
+- producer modüllerden alınan progress event contract'ları ve `inventory` veya `notification` için reward event yüzeyi
+- mission read, claim ve progress ingest yüzeyleri gerektiğinde birbirinden bağımsız runtime anahtarları ile yönetilebilir olmalıdır
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `user`, `access`, `admin`, `inventory`, `notification`, `royalpass` ve progress Ã¼reticisi modÃ¼ller
-- schedule evaluator, progress aggregator ve rule matcher yardÄ±mcÄ±larÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `user`, `access`, `admin`, `inventory`, `notification`, `royalpass` ve progress üreticisi modüller
+- schedule evaluator, progress aggregator ve rule matcher yardımcıları
 
 ## Settings Etkileri
 - `mission.daily.reset_hour_utc`
 - `feature.mission.read.enabled`
 - `feature.mission.claim.enabled`
 - `feature.mission.progress_ingest.enabled`
-- sezonluk veya event bazlÄ± ek reset pencereleri aÃ§Ä±lÄ±rsa settings envanterinde gÃ¶rÃ¼nÃ¼r tutulmalÄ±dÄ±r
+- sezonluk veya event bazlı ek reset pencereleri açılırsa settings envanterinde görünür tutulmalıdır
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `mission.progressed`, `mission.completed`, `mission.claim.requested`, `mission.reset`
-- tÃ¼ketir: okuma, yorum, sosyal etkileÅŸim ve diÄŸer producer event'leri
-- progress projection ve season handoff'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `mission.progressed`, `mission.completed`, `mission.claim.requested`, `mission.reset`
+- tüketir: okuma, yorum, sosyal etkileşim ve diğer producer event'leri
+- progress projection ve season handoff'ları `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- manual completion, reset override, claim rejection ve admin category mÃ¼dahalesi auditlenmelidir
-- stuck progress, duplicate claim ve reset drift oranlarÄ± izlenebilir olmalÄ±dÄ±r
+## Audit ve İzleme
+- manual completion, reset override, claim rejection ve admin category müdahalesi auditlenmelidir
+- stuck progress, duplicate claim ve reset drift oranları izlenebilir olmalıdır
 
-## Ä°dempotency ve Retry
-- progress ingest ve claim request akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
-- aynÄ± gÃ¶rev ve dÃ¶nem iÃ§in tekrar claim isteÄŸi yeni grant zinciri baÅŸlatmamalÄ±dÄ±r
-- reset job tekrarlandÄ±ÄŸÄ±nda aynÄ± dÃ¶nemi iki kez kapatmamalÄ±dÄ±r
+## İdempotency ve Retry
+- progress ingest ve claim request akışları `docs/shared.md` ile hizalı olmalıdır
+- aynı görev ve dönem için tekrar claim isteği yeni grant zinciri başlatmamalıdır
+- reset job tekrarlandığında aynı dönemi iki kez kapatmamalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - active, completed, claimed veya expired mission durumu
 - reset_pending veya recurring window durumu
-- progress snapshot ve objective state alanlarÄ±
+- progress snapshot ve objective state alanları
 - mission category veya claim surface kapanma durumu
-- streak veya period metadata alanlarÄ±
+- streak veya period metadata alanları
 
-## Test NotlarÄ±
+## Test Notları
 - progress ve completion testleri
-- trigger source ve accumulation kurallarÄ± testleri
+- trigger source ve accumulation kuralları testleri
 - reset, recurring window ve streak testleri
 - claim ve reward grant entegrasyonu testleri
-- producer event, idempotency ve season iliÅŸkisi doÄŸrulamalarÄ±
+- producer event, idempotency ve season ilişkisi doğrulamaları
 
 
 ---
 
-# Moderation ModÃ¼lÃ¼
+# Moderation Modülü
 
-> Canonical modÃ¼l adÄ±: `moderation`
+> Canonical modül adı: `moderation`
 
-## AmaÃ§
-`moderation` modÃ¼lÃ¼nÃ¼n amacÄ±, role bazlÄ± veya kullanÄ±cÄ± bazlÄ± scoped moderatÃ¶rlerin gÃ¼nlÃ¼k vaka yÃ¶netimi, inceleme ve sÄ±nÄ±rlÄ± mÃ¼dahale iÅŸ akÄ±ÅŸlarÄ±nÄ± `admin` modÃ¼lÃ¼nden ayrÄ±ÅŸtÄ±rÄ±lmÄ±ÅŸ Ã¶zel bir panel Ã¼zerinden yÃ¼rÃ¼tmektir.
+## Amaç
+`moderation` modülünün amacı, role bazlı veya kullanıcı bazlı scoped moderatörlerin günlük vaka yönetimi, inceleme ve sınırlı müdahale iş akışlarını `admin` modülünden ayrıştırılmış özel bir panel üzerinden yürütmektir.
 
-## Sorumluluk AlanÄ±
-- moderatÃ¶r paneli ve scoped queue yÃ¼zeyleri
-- role veya kullanÄ±cÄ± bazlÄ± moderatÃ¶r scope matrisi
-- vaka inceleme, assignment, case lifecycle ve stale policy akÄ±ÅŸlarÄ±
-- yorum, chapter ve manga yÃ¼zeyleri iÃ§in scoped moderasyon iÅŸ akÄ±ÅŸlarÄ±
-- moderatÃ¶r notu, karar Ã¶zeti, evidence snapshot ve escalation akÄ±ÅŸlarÄ±
-- support kaynaklÄ± report intake'lerden gerekli olduÄŸunda linked moderation case aÃ§ma entegrasyonu
+## Sorumluluk Alanı
+- moderatör paneli ve scoped queue yüzeyleri
+- role veya kullanıcı bazlı moderatör scope matrisi
+- vaka inceleme, assignment, case lifecycle ve stale policy akışları
+- yorum, chapter ve manga yüzeyleri için scoped moderasyon iş akışları
+- moderatör notu, karar özeti, evidence snapshot ve escalation akışları
+- support kaynaklı report intake'lerden gerekli olduğunda linked moderation case açma entegrasyonu
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- global authorization, role veya permission owner'lÄ±ÄŸÄ± Ã¼retmez
-- merkezi settings ve kill switch owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- admin override'Ä±n Ã¼stÃ¼ne Ã§Ä±kan final karar owner'lÄ±ÄŸÄ± taÅŸÄ±maz
+## Bu Modül Neyi Yapmaz?
+- global authorization, role veya permission owner'lığı üretmez
+- merkezi settings ve kill switch owner'lığına dönüşmez
+- admin override'ın üstüne çıkan final karar owner'lığı taşımaz
 
-## Veri SahipliÄŸi
-- moderation case veya queue kayÄ±tlarÄ±
-- moderatÃ¶r assignment bilgileri
-- moderatÃ¶r notlarÄ±, karar Ã¶zeti ve vaka timeline verisi
-- escalation, stale case ve handoff durum alanlarÄ±
-- evidence snapshot referanslarÄ±
+## Veri Sahipliği
+- moderation case veya queue kayıtları
+- moderatör assignment bilgileri
+- moderatör notları, karar özeti ve vaka timeline verisi
+- escalation, stale case ve handoff durum alanları
+- evidence snapshot referansları
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- target iÃ§eriÄŸin canonical owner verisi
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- target içeriğin canonical owner verisi
 - access policy, admin settings veya support intake owner verisi
-- payment, user veya inventory kaynaklÄ± business kayÄ±tlar
+- payment, user veya inventory kaynaklı business kayıtlar
 
-## Hedef Tipi SÃ¶zlÃ¼ÄŸÃ¼
-- `moderation` case hedefleri canonical olarak `docs/shared.md` dosyasÄ±ndaki kayÄ±tlarla hizalÄ± olmalÄ±dÄ±r.
-- Alt yÃ¼zey, ekran veya aksiyon bilgisi `target_type` iÃ§ine gÃ¶mÃ¼lmemeli; context verisi ile taÅŸÄ±nmalÄ±dÄ±r.
-- Yeni moderation hedefi eklendiÄŸinde aynÄ± deÄŸiÅŸiklik setinde hedef modÃ¼l dokÃ¼manÄ±, `moderation` modÃ¼l dokÃ¼manÄ± ve canonical target type kaydÄ± gÃ¼ncellenmelidir.
+## Hedef Tipi Sözlüğü
+- `moderation` case hedefleri canonical olarak `docs/shared.md` dosyasındaki kayıtlarla hizalı olmalıdır.
+- Alt yüzey, ekran veya aksiyon bilgisi `target_type` içine gömülmemeli; context verisi ile taşınmalıdır.
+- Yeni moderation hedefi eklendiğinde aynı değişiklik setinde hedef modül dokümanı, `moderation` modül dokümanı ve canonical target type kaydı güncellenmelidir.
 
-## Access KontratÄ±
-`moderation` yetki kararÄ± vermez. Comment moderatÃ¶rÃ¼, chapter moderatÃ¶rÃ¼ veya manga moderatÃ¶rÃ¼ gibi role bazlÄ± ya da kullanÄ±cÄ± bazlÄ± scope kararlarÄ± `access` tarafÄ±ndan yorumlanÄ±r. Admin kullanÄ±cÄ±larÄ± aynÄ± vaka verisine tam yÃ¶netim yetkisi ile eriÅŸebilir; merkezi settings, kill switch ve sistem operasyon yÃ¼zeyleri ise `admin` modÃ¼lÃ¼nde kalÄ±r. GÃ¼nlÃ¼k case sahipliÄŸi `moderation` iÃ§inde kalsa da admin override, reopen, reassignment veya freeze kararÄ± oluÅŸtuÄŸunda bu karar moderatÃ¶r aksiyonunun Ã¼zerinde precedence taÅŸÄ±r.
+## Access Kontratı
+`moderation` yetki kararı vermez. Comment moderatörü, chapter moderatörü veya manga moderatörü gibi role bazlı ya da kullanıcı bazlı scope kararları `access` tarafından yorumlanır. Admin kullanıcıları aynı vaka verisine tam yönetim yetkisi ile erişebilir; merkezi settings, kill switch ve sistem operasyon yüzeyleri ise `admin` modülünde kalır. Günlük case sahipliği `moderation` içinde kalsa da admin override, reopen, reassignment veya freeze kararı oluştuğunda bu karar moderatör aksiyonunun üzerinde precedence taşır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- moderatÃ¶r queue, case detail ve sÄ±nÄ±rlÄ± karar yÃ¼rÃ¼tme yÃ¼zeyi
-- admin ile orkestrasyon gerektiren escalation veya yÃ¼ksek riskli handoff yÃ¼zeyi
-- `support` report kaydÄ± ile linked moderation case iliÅŸki yÃ¼zeyi; support kaydÄ± ve moderation case aynÄ± kayÄ±t haline getirilmemelidir
-- moderation action olaylarÄ± gerektiÄŸinde `admin`, `notification` veya hedef modÃ¼llere kontrollÃ¼ event yÃ¼zeyi ile aktarÄ±labilir
+## API veya Event Sınırı
+- moderatör queue, case detail ve sınırlı karar yürütme yüzeyi
+- admin ile orkestrasyon gerektiren escalation veya yüksek riskli handoff yüzeyi
+- `support` report kaydı ile linked moderation case ilişki yüzeyi; support kaydı ve moderation case aynı kayıt haline getirilmemelidir
+- moderation action olayları gerektiğinde `admin`, `notification` veya hedef modüllere kontrollü event yüzeyi ile aktarılabilir
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `access`, `admin`, `support`, `comment`, `manga`, `chapter` ve `notification` entegrasyonlarÄ±
-- rule-based moderation helper veya content scoring altyapÄ±sÄ± iÃ§in geleceÄŸe dÃ¶nÃ¼k ihtiyaÃ§
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `access`, `admin`, `support`, `comment`, `manga`, `chapter` ve `notification` entegrasyonları
+- rule-based moderation helper veya content scoring altyapısı için geleceğe dönük ihtiyaç
 
 ## Settings Etkileri
 - `feature.moderation.panel.enabled`
 - `feature.moderation.queue.enabled`
 - `feature.moderation.action.enabled`
-- scope bazlÄ± queue veya action yÃ¼zeyleri ayrÄ±ÅŸtÄ±ÄŸÄ±nda settings envanteri geniÅŸletilmelidir
+- scope bazlı queue veya action yüzeyleri ayrıştığında settings envanteri genişletilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `moderation.case.created`, `moderation.case.assigned`, `moderation.case.escalated`, `moderation.action.applied`
-- tÃ¼ketir: `support.moderation_handoff_requested`, admin override veya reopen sinyalleri
-- queue summary ve action projection'larÄ± `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
+## Event Akışları
+- üretir: `moderation.case.created`, `moderation.case.assigned`, `moderation.case.escalated`, `moderation.action.applied`
+- tüketir: `support.moderation_handoff_requested`, admin override veya reopen sinyalleri
+- queue summary ve action projection'ları `docs/shared.md` ile hizalı planlanmalıdır
 
-## Audit ve Ä°zleme
-- case assignment, escalation, evidence snapshot eriÅŸimi ve action sonucu auditlenmelidir
-- stale case birikimi, queue gecikmesi ve action override oranÄ± izlenebilir olmalÄ±dÄ±r
+## Audit ve İzleme
+- case assignment, escalation, evidence snapshot erişimi ve action sonucu auditlenmelidir
+- stale case birikimi, queue gecikmesi ve action override oranı izlenebilir olmalıdır
 
-## Ä°dempotency ve Retry
-- linked case create akÄ±ÅŸÄ± aynÄ± support referansÄ± iÃ§in duplicate moderation case Ã¼retmemelidir
-- aynÄ± aksiyon tekrarlandÄ±ÄŸÄ±nda ikinci kez iÃ§erik state'i bozulmamalÄ±dÄ±r
-- escalation retry'larÄ± mevcut case referansÄ± Ã¼zerinden gÃ¼venli biÃ§imde yeniden denenmelidir
+## İdempotency ve Retry
+- linked case create akışı aynı support referansı için duplicate moderation case üretmemelidir
+- aynı aksiyon tekrarlandığında ikinci kez içerik state'i bozulmamalıdır
+- escalation retry'ları mevcut case referansı üzerinden güvenli biçimde yeniden denenmelidir
 
-## State YapÄ±sÄ±
-- `docs/shared.md` ile hizalÄ± `case_status`
+## State Yapısı
+- `docs/shared.md` ile hizalı `case_status`
 - `assignment_status`
 - `escalation_status`
-- `action_result` ve review lifecycle alanlarÄ±
-- queue veya action surface kapanma durumlarÄ±
+- `action_result` ve review lifecycle alanları
+- queue veya action surface kapanma durumları
 
-## Test NotlarÄ±
-- scoped queue gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ testleri
+## Test Notları
+- scoped queue görünürlüğü testleri
 - case transition, assignment ve stale policy testleri
-- support report'tan linked case aÃ§Ä±lÄ±ÅŸÄ± doÄŸrulamalarÄ±
+- support report'tan linked case açılışı doğrulamaları
 - action audit ve admin handoff entegrasyonu testleri
-- scope matrix ve precedence doÄŸrulamalarÄ±
+- scope matrix ve precedence doğrulamaları
 
 
 ---
 
-# Notification ModÃ¼lÃ¼
+# Notification Modülü
 
-> Canonical modÃ¼l adÄ±: `notification`
+> Canonical modül adı: `notification`
 
-## AmaÃ§
-`notification` modÃ¼lÃ¼nÃ¼n amacÄ±, sistem genelindeki olaylardan bildirim Ã¼retmek, kullanÄ±cÄ±ya uygun kanaldan teslim etmek ve bildirim tercihlerini merkezi ÅŸekilde yÃ¶netmektir.
+## Amaç
+`notification` modülünün amacı, sistem genelindeki olaylardan bildirim üretmek, kullanıcıya uygun kanaldan teslim etmek ve bildirim tercihlerini merkezi şekilde yönetmektir.
 
-## Sorumluluk AlanÄ±
-- in-app bildirim kutusu ve read/unread akÄ±ÅŸlarÄ±
-- bildirim category, template ve channel yÃ¶netimi
-- in-app, email ve gelecekteki push delivery state ayrÄ±mÄ±
+## Sorumluluk Alanı
+- in-app bildirim kutusu ve read/unread akışları
+- bildirim category, template ve channel yönetimi
+- in-app, email ve gelecekteki push delivery state ayrımı
 - digest, retry, backoff ve dedup stratejileri
-- kullanÄ±cÄ±ya ait detaylÄ± bildirim tercihleri, mute ve quiet-hour benzeri yÃ¼zeyler
+- kullanıcıya ait detaylı bildirim tercihleri, mute ve quiet-hour benzeri yüzeyler
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- business event owner'lÄ±ÄŸÄ± veya authorization kararÄ± Ã¼retmez
-- kullanÄ±cÄ± profil verisini veya sosyal iliÅŸki verisini sahiplenmez
-- producer modÃ¼l yerine onun iÅŸ kuralÄ±nÄ± kime bildirim gideceÄŸi konusunda yeniden tanÄ±mlamaz
+## Bu Modül Neyi Yapmaz?
+- business event owner'lığı veya authorization kararı üretmez
+- kullanıcı profil verisini veya sosyal ilişki verisini sahiplenmez
+- producer modül yerine onun iş kuralını kime bildirim gideceği konusunda yeniden tanımlamaz
 
-## Veri SahipliÄŸi
-- notification kaydÄ± ve delivery attempt verileri
-- notification template, category ve channel tanÄ±mlarÄ±
-- kullanÄ±cÄ± bildirim tercihleri, category mute ve quiet-hour alanlarÄ±
-- suppression, dedup ve digest batch metadata'sÄ±
+## Veri Sahipliği
+- notification kaydı ve delivery attempt verileri
+- notification template, category ve channel tanımları
+- kullanıcı bildirim tercihleri, category mute ve quiet-hour alanları
+- suppression, dedup ve digest batch metadata'sı
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- producer modÃ¼llerin kaynak event verisi
-- kullanÄ±cÄ± hesabÄ±, sosyal blok listesi veya access policy owner'lÄ±ÄŸÄ±
-- dÄ±ÅŸ provider secret veya credential kayÄ±tlarÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- producer modüllerin kaynak event verisi
+- kullanıcı hesabı, sosyal blok listesi veya access policy owner'lığı
+- dış provider secret veya credential kayıtları
 
-## Access KontratÄ±
-`notification` yetki kararÄ± vermez. Kendi bildirimlerini gÃ¶rme veya yÃ¶netme kararÄ± `access` ile korunur. Hangi olayÄ±n kime bildirim Ã¼reteceÄŸi iÅŸ kuralÄ± olarak `notification` iÃ§inde yorumlanabilir; ancak bu karar authorization yerine teslim kuralÄ± niteliÄŸindedir. Kategori adlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
+## Access Kontratı
+`notification` yetki kararı vermez. Kendi bildirimlerini görme veya yönetme kararı `access` ile korunur. Hangi olayın kime bildirim üreteceği iş kuralı olarak `notification` içinde yorumlanabilir; ancak bu karar authorization yerine teslim kuralı niteliğindedir. Kategori adları `docs/shared.md` ile hizalı olmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- own inbox, own preference ve own notification detail yÃ¼zeyi
-- diÄŸer modÃ¼llerden alÄ±nan producer event veya notification contract yÃ¼zeyi
-- admin tarafÄ±ndan category, channel, digest veya delivery pause yÃ¶netimi iÃ§in kontrollÃ¼ operasyon yÃ¼zeyi
+## API veya Event Sınırı
+- own inbox, own preference ve own notification detail yüzeyi
+- diğer modüllerden alınan producer event veya notification contract yüzeyi
+- admin tarafından category, channel, digest veya delivery pause yönetimi için kontrollü operasyon yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `auth`, `user`, `access`, `admin`, `social`, `mission`, `royalpass`, `support`, `moderation`, `shop`, `payment` ve diÄŸer producer modÃ¼ller
-- queue, retry ve delivery katmanÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `auth`, `user`, `access`, `admin`, `social`, `mission`, `royalpass`, `support`, `moderation`, `shop`, `payment` ve diğer producer modüller
+- queue, retry ve delivery katmanı için `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.notification.inbox.enabled`
 - `feature.notification.preference.enabled`
 - `feature.notification.digest.enabled`
 - `notification.delivery.paused`
-- category veya channel bazlÄ± selector geniÅŸlemeleri settings envanterinde aÃ§Ä±kÃ§a gÃ¶sterilmelidir
+- category veya channel bazlı selector genişlemeleri settings envanterinde açıkça gösterilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- tÃ¼ketir: producer modÃ¼llerden gelen domain event'leri
-- Ã¼retir: `notification.created`, `notification.delivered`, `notification.failed`, `notification.read`
-- unread counter ve digest projection'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- tüketir: producer modüllerden gelen domain event'leri
+- üretir: `notification.created`, `notification.delivered`, `notification.failed`, `notification.read`
+- unread counter ve digest projection'ları `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- template veya category deÄŸiÅŸikliÄŸi, suppression kararÄ±, delivery failure eÅŸiÄŸi ve manual resend aksiyonlarÄ± auditlenmelidir
-- queue lag, unread counter drift ve provider failure oranÄ± izlenmelidir
+## Audit ve İzleme
+- template veya category değişikliği, suppression kararı, delivery failure eşiği ve manual resend aksiyonları auditlenmelidir
+- queue lag, unread counter drift ve provider failure oranı izlenmelidir
 
-## Ä°dempotency ve Retry
-- aynÄ± producer event aynÄ± kullanÄ±cÄ± ve kategori iÃ§in duplicate notification Ã¼retmemelidir
-- delivery retry ve backoff davranÄ±ÅŸÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
-- digest Ã¼retimi tekrarlandÄ±ÄŸÄ±nda aynÄ± batch iÃ§in ikinci bildirim seti oluÅŸturmamalÄ±dÄ±r
+## İdempotency ve Retry
+- aynı producer event aynı kullanıcı ve kategori için duplicate notification üretmemelidir
+- delivery retry ve backoff davranışı `docs/shared.md` ile hizalı olmalıdır
+- digest üretimi tekrarlandığında aynı batch için ikinci bildirim seti oluşturmamalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - created, delivered, failed veya read durumu
-- channel veya provider bazlÄ± delivery state'i
-- module veya category bazlÄ± delivery pause durumu
+- channel veya provider bazlı delivery state'i
+- module veya category bazlı delivery pause durumu
 - digest eligibility veya quiet-hour bilgisi
 
-## Test NotlarÄ±
-- inbox ve preference akÄ±ÅŸlarÄ±
-- template, category ve channel Ã§Ã¶zÃ¼mleme testleri
-- delivery retry, digest ve dedup doÄŸrulamalarÄ±
+## Test Notları
+- inbox ve preference akışları
+- template, category ve channel çözümleme testleri
+- delivery retry, digest ve dedup doğrulamaları
 - producer event contract ve unread counter projection testleri
 
 
 ---
 
-# Payment ModÃ¼lÃ¼
+# Payment Modülü
 
-> Canonical modÃ¼l adÄ±: `payment`
+> Canonical modül adı: `payment`
 
-## AmaÃ§
-`payment` modÃ¼lÃ¼nÃ¼n amacÄ±, mana satÄ±n alma, Ã¶deme saÄŸlayÄ±cÄ±sÄ± entegrasyonu, ledger doÄŸruluÄŸu ve finansal iÅŸlem kayÄ±tlarÄ±nÄ± merkezi biÃ§imde yÃ¶netmektir.
+## Amaç
+`payment` modülünün amacı, mana satın alma, ödeme sağlayıcısı entegrasyonu, ledger doğruluğu ve finansal işlem kayıtlarını merkezi biçimde yönetmektir.
 
-## Sorumluluk AlanÄ±
-- mana package ve checkout session akÄ±ÅŸlarÄ±
-- provider callback veya webhook doÄŸrulamasÄ±
-- ledger-first iÅŸlem modeli, transaction, ledger entry ve balance snapshot yÃ¶netimi
-- reconciliation job, refund, reversal ve fraud hold hazÄ±rlÄ±ÄŸÄ±
-- admin tarafÄ±ndan yÃ¶netilen mana purchase, checkout, transaction read veya callback intake runtime kontrolleri ile uyumlu Ã§alÄ±ÅŸma
-- provider adapter, webhook verifier ve money value object yaklaÅŸÄ±mÄ±
+## Sorumluluk Alanı
+- mana package ve checkout session akışları
+- provider callback veya webhook doğrulaması
+- ledger-first işlem modeli, transaction, ledger entry ve balance snapshot yönetimi
+- reconciliation job, refund, reversal ve fraud hold hazırlığı
+- admin tarafından yönetilen mana purchase, checkout, transaction read veya callback intake runtime kontrolleri ile uyumlu çalışma
+- provider adapter, webhook verifier ve money value object yaklaşımı
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- Ã¼rÃ¼n kataloÄŸu, offer gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ veya inventory sahipliÄŸi owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- RoyalPass gibi entitlement Ã¼rÃ¼nlerinde final entitlement owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- authorization kararÄ±nÄ± tek baÅŸÄ±na vermez
+## Bu Modül Neyi Yapmaz?
+- ürün kataloğu, offer görünürlüğü veya inventory sahipliği owner'lığı taşımaz
+- RoyalPass gibi entitlement ürünlerinde final entitlement owner'lığına dönüşmez
+- authorization kararını tek başına vermez
 
-## Veri SahipliÄŸi
-- provider session ve checkout kayÄ±tlarÄ±
-- purchase order ve transaction kayÄ±tlarÄ±
-- ledger entry ve balance snapshot alanlarÄ±
-- provider reference, callback metadata ve audit alanlarÄ±
-- fraud review veya finansal inceleme state alanlarÄ±
-- reconciliation ve reversal metadata'sÄ±
+## Veri Sahipliği
+- provider session ve checkout kayıtları
+- purchase order ve transaction kayıtları
+- ledger entry ve balance snapshot alanları
+- provider reference, callback metadata ve audit alanları
+- fraud review veya finansal inceleme state alanları
+- reconciliation ve reversal metadata'sı
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- shop Ã¼rÃ¼n kataloÄŸu ve fiyat planÄ± verisi
-- inventory item sahipliÄŸi veya final reward grant kaydÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- shop ürün kataloğu ve fiyat planı verisi
+- inventory item sahipliği veya final reward grant kaydı
 - access policy owner verisi
 
-## Access KontratÄ±
-`payment` yetki kararÄ± vermez. Mana satÄ±n alma ve iÅŸlem gÃ¶rÃ¼ntÃ¼leme aksiyonlarÄ± `access` ile korunur. ÃœrÃ¼n kataloÄŸu `shop`, final item sahipliÄŸi `inventory` modÃ¼lÃ¼nde kalÄ±r. `payment` devreye girdiÄŸinde `shop` iÃ§indeki geÃ§ici allowance bridge yÃ¼zeyi kaldÄ±rÄ±lmalÄ± ve canonical bakiye yalnÄ±zca `payment` iÃ§inde tutulmalÄ±dÄ±r. Finansal yÃ¼zeylerde precedence ve intake pause davranÄ±ÅŸÄ± `docs/shared.md` ile hizalÄ± kalmalÄ±dÄ±r.
+## Access Kontratı
+`payment` yetki kararı vermez. Mana satın alma ve işlem görüntüleme aksiyonları `access` ile korunur. Ürün kataloğu `shop`, final item sahipliği `inventory` modülünde kalır. `payment` devreye girdiğinde `shop` içindeki geçici allowance bridge yüzeyi kaldırılmalı ve canonical bakiye yalnızca `payment` içinde tutulmalıdır. Finansal yüzeylerde precedence ve intake pause davranışı `docs/shared.md` ile hizalı kalmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- mana package listing ve checkout session baÅŸlatma yÃ¼zeyi
-- provider callback veya webhook intake yÃ¼zeyi
-- own transaction veya own wallet gÃ¶rÃ¼nÃ¼mÃ¼ iÃ§in kontrollÃ¼ okuma yÃ¼zeyi
-- `shop` ile bakiye dÃ¼ÅŸÃ¼m veya mutabakat iÃ§in kontrollÃ¼ contract yÃ¼zeyi
-- entitlement Ã¼reten modÃ¼ller iÃ§in onaylanmÄ±ÅŸ Ã¶deme veya bakiye gÃ¼ncelleme sonucunu aktaran kontrollÃ¼ fulfillment contract yÃ¼zeyi
+## API veya Event Sınırı
+- mana package listing ve checkout session başlatma yüzeyi
+- provider callback veya webhook intake yüzeyi
+- own transaction veya own wallet görünümü için kontrollü okuma yüzeyi
+- `shop` ile bakiye düşüm veya mutabakat için kontrollü contract yüzeyi
+- entitlement üreten modüller için onaylanmış ödeme veya bakiye güncelleme sonucunu aktaran kontrollü fulfillment contract yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `user`, `access`, `admin`, `shop`, `inventory`, `royalpass` ve payment provider entegrasyonlarÄ±
-- webhook verifier, provider adapter, reconcile job ve money helper altyapÄ±sÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `user`, `access`, `admin`, `shop`, `inventory`, `royalpass` ve payment provider entegrasyonları
+- webhook verifier, provider adapter, reconcile job ve money helper altyapısı
 
 ## Settings Etkileri
 - `feature.payment.mana_purchase.enabled`
 - `feature.payment.checkout.enabled`
 - `feature.payment.transaction_read.enabled`
 - `payment.callback.intake.paused`
-- provider bazlÄ± throttling veya manual review surface'i eklenirse settings envanteri geniÅŸletilmelidir
+- provider bazlı throttling veya manual review surface'i eklenirse settings envanteri genişletilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `payment.checkout.started`, `payment.callback.accepted`, `payment.transaction.settled`, `payment.refund.completed`
-- tÃ¼ketir: shop purchase intent, provider callback, admin manual review veya reconcile tetikleyicileri
-- ledger, reconcile ve fulfillment publish akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `payment.checkout.started`, `payment.callback.accepted`, `payment.transaction.settled`, `payment.refund.completed`
+- tüketir: shop purchase intent, provider callback, admin manual review veya reconcile tetikleyicileri
+- ledger, reconcile ve fulfillment publish akışları `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- checkout, callback, refund, reversal, manual review ve reconcile aksiyonlarÄ± `docs/shared.md` ile auditlenmelidir
-- callback retry oranÄ±, ledger drift, snapshot mismatch ve reconcile backlog izlenmelidir
+## Audit ve İzleme
+- checkout, callback, refund, reversal, manual review ve reconcile aksiyonları `docs/shared.md` ile auditlenmelidir
+- callback retry oranı, ledger drift, snapshot mismatch ve reconcile backlog izlenmelidir
 
-## Ä°dempotency ve Retry
-- callback veya webhook iÅŸleme, refund ve reversal akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
-- aynÄ± provider event ikinci kez finansal yan etki Ã¼retmemelidir
-- reconcile job tekrar Ã§alÄ±ÅŸtÄ±ÄŸÄ±nda ledger-first doÄŸruluÄŸu bozmadan eksik state'i toparlayabilmelidir
+## İdempotency ve Retry
+- callback veya webhook işleme, refund ve reversal akışları `docs/shared.md` ile hizalı olmalıdır
+- aynı provider event ikinci kez finansal yan etki üretmemelidir
+- reconcile job tekrar çalıştığında ledger-first doğruluğu bozmadan eksik state'i toparlayabilmelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - pending, success, failed, cancelled veya refunded transaction durumu
-- authorized veya captured Ã¶deme durumu gerekiyorsa ayrÄ± state
+- authorized veya captured ödeme durumu gerekiyorsa ayrı state
 - fraud_review, reversed veya reconciliation_required durumu
 - mana purchase surface pause veya provider outage durumu
-- balance snapshot ile ledger iliÅŸki metadata'sÄ±
+- balance snapshot ile ledger ilişki metadata'sı
 
-## Test NotlarÄ±
-- checkout session ve callback doÄŸrulama testleri
+## Test Notları
+- checkout session ve callback doğrulama testleri
 - ledger, balance snapshot ve mutabakat testleri
-- idempotency, replay ve reconcile korumasÄ± doÄŸrulamalarÄ±
-- refund, reversal ve fraud hold senaryolarÄ±
-- `shop`, `inventory` ve admin inceleme yÃ¼zeyi entegrasyon testleri
+- idempotency, replay ve reconcile koruması doğrulamaları
+- refund, reversal ve fraud hold senaryoları
+- `shop`, `inventory` ve admin inceleme yüzeyi entegrasyon testleri
 
 
 ---
 
-# RoyalPass ModÃ¼lÃ¼
+# RoyalPass Modülü
 
-> Canonical modÃ¼l adÄ±: `royalpass`
+> Canonical modül adı: `royalpass`
 
-## AmaÃ§
-`royalpass` modÃ¼lÃ¼nÃ¼n amacÄ±, aylÄ±k sezon bazlÄ± pass yapÄ±sÄ±nÄ±, free veya premium track ilerlemesini ve sezon Ã¶dÃ¼lÃ¼ iÃ§in claim uygunluÄŸu veya claim request yaÅŸam dÃ¶ngÃ¼sÃ¼nÃ¼ yÃ¶netmektir.
+## Amaç
+`royalpass` modülünün amacı, aylık sezon bazlı pass yapısını, free veya premium track ilerlemesini ve sezon ödülü için claim uygunluğu veya claim request yaşam döngüsünü yönetmektir.
 
-## Sorumluluk AlanÄ±
-- season, track ve tier yapÄ±larÄ±
-- free track ve premium track ayrÄ±mÄ±
-- season lifecycle, archive gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ ve tier unlock politikasÄ±
-- user season progress, claim eligibility ve claim request kayÄ±tlarÄ±
-- mission tabanlÄ± royalpass puanÄ± veya progress entegrasyonu
-- premium activation source, paused veya frozen progress ve unclaimed reward davranÄ±ÅŸÄ±
-- cross-season carryover olup olmadÄ±ÄŸÄ±na dair aÃ§Ä±k kural seti
+## Sorumluluk Alanı
+- season, track ve tier yapıları
+- free track ve premium track ayrımı
+- season lifecycle, archive görünürlüğü ve tier unlock politikası
+- user season progress, claim eligibility ve claim request kayıtları
+- mission tabanlı royalpass puanı veya progress entegrasyonu
+- premium activation source, paused veya frozen progress ve unclaimed reward davranışı
+- cross-season carryover olup olmadığına dair açık kural seti
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- gÃ¶rev tanÄ±mÄ± veya inventory sahipliÄŸi owner'lÄ±ÄŸÄ± Ã¼retmez
-- Ã¶deme ledger'Ä± veya shop katalog owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- entitlement satÄ±n alma akÄ±ÅŸÄ±nÄ±n tamamÄ±nÄ± kendi iÃ§inde kapatmaz
+## Bu Modül Neyi Yapmaz?
+- görev tanımı veya inventory sahipliği owner'lığı üretmez
+- ödeme ledger'ı veya shop katalog owner'lığına dönüşmez
+- entitlement satın alma akışının tamamını kendi içinde kapatmaz
 
-## Veri SahipliÄŸi
-- season tanÄ±mÄ± ve season state alanlarÄ±
-- tier reward ve track yapÄ±landÄ±rmalarÄ±
-- user season progress, claim eligibility ve premium activation referanslarÄ±
-- claim freeze veya season pause metadata alanlarÄ±
-- unclaimed reward ve carryover policy metadata'sÄ±
+## Veri Sahipliği
+- season tanımı ve season state alanları
+- tier reward ve track yapılandırmaları
+- user season progress, claim eligibility ve premium activation referansları
+- claim freeze veya season pause metadata alanları
+- unclaimed reward ve carryover policy metadata'sı
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
+## Bu Modül Hangi Verinin Sahibi Değildir?
 - shop purchase intent veya payment checkout owner verisi
-- final inventory grant kaydÄ±
+- final inventory grant kaydı
 - mission definition owner verisi
 
-## Access KontratÄ±
-`royalpass` yetki kararÄ± vermez. Season gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼, claim-request ve premium yÃ¼zey eriÅŸimi `access` ile korunur. Premium aktivasyonun satÄ±n alma kaynaÄŸÄ± farklÄ± modÃ¼llerden gelebilir; ancak Ã¼rÃ¼nleÅŸmiÅŸ satÄ±n alma akÄ±ÅŸÄ±nda canonical purchase intent `shop` Ã¼zerinden baÅŸlamalÄ±, checkout veya bakiye doÄŸruluÄŸu gerekiyorsa `payment` tarafÄ±ndan tamamlanmalÄ± ve season iÃ§i claim uygunluÄŸu ile progress sahipliÄŸi yine `royalpass` modÃ¼lÃ¼nde kalmalÄ±dÄ±r.
+## Access Kontratı
+`royalpass` yetki kararı vermez. Season görünürlüğü, claim-request ve premium yüzey erişimi `access` ile korunur. Premium aktivasyonun satın alma kaynağı farklı modüllerden gelebilir; ancak ürünleşmiş satın alma akışında canonical purchase intent `shop` üzerinden başlamalı, checkout veya bakiye doğruluğu gerekiyorsa `payment` tarafından tamamlanmalı ve season içi claim uygunluğu ile progress sahipliği yine `royalpass` modülünde kalmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- own season overview, own progress ve own reward claim-request yÃ¼zeyi
-- admin iÃ§in season yÃ¶netimi, tier yÃ¶netimi ve season pause yÃ¼zeyi
-- `mission` progress tÃ¼ketimi, `inventory` reward grant ve `notification` bildirim yÃ¼zeyleri iÃ§in kontrollÃ¼ contract veya event sÄ±nÄ±rÄ±
-- `shop`, `payment` veya admin grant akÄ±ÅŸlarÄ±ndan gelen premium activation referanslarÄ± iÃ§in kontrollÃ¼ intake contract yÃ¼zeyi
+## API veya Event Sınırı
+- own season overview, own progress ve own reward claim-request yüzeyi
+- admin için season yönetimi, tier yönetimi ve season pause yüzeyi
+- `mission` progress tüketimi, `inventory` reward grant ve `notification` bildirim yüzeyleri için kontrollü contract veya event sınırı
+- `shop`, `payment` veya admin grant akışlarından gelen premium activation referansları için kontrollü intake contract yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `user`, `access`, `admin`, `mission`, `inventory`, `notification`, `shop` ve `payment` entegrasyonlarÄ±
-- season scheduler, tier progress helper ve reward claim validator yardÄ±mcÄ±larÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `user`, `access`, `admin`, `mission`, `inventory`, `notification`, `shop` ve `payment` entegrasyonları
+- season scheduler, tier progress helper ve reward claim validator yardımcıları
 
 ## Settings Etkileri
 - `feature.royalpass.claim.enabled`
 - `feature.royalpass.season.enabled`
 - `feature.royalpass.premium.enabled`
-- pause veya carryover yÃ¼zeyi ayrÄ± bir runtime kontrol alÄ±rsa settings envanteri geniÅŸletilmelidir
+- pause veya carryover yüzeyi ayrı bir runtime kontrol alırsa settings envanteri genişletilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `royalpass.progressed`, `royalpass.claim.requested`, `royalpass.season.started`, `royalpass.premium.activated`
-- tÃ¼ketir: `mission.progressed`, `shop.purchase.completed`, `payment.checkout.confirmed`
-- tier snapshot projection'larÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `royalpass.progressed`, `royalpass.claim.requested`, `royalpass.season.started`, `royalpass.premium.activated`
+- tüketir: `mission.progressed`, `shop.purchase.completed`, `payment.checkout.confirmed`
+- tier snapshot projection'ları `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- premium activation, season pause, carryover override ve manual claim mÃ¼dahaleleri auditlenmelidir
-- season drift, stuck claim ve premium entitlement mismatch oranlarÄ± izlenmelidir
+## Audit ve İzleme
+- premium activation, season pause, carryover override ve manual claim müdahaleleri auditlenmelidir
+- season drift, stuck claim ve premium entitlement mismatch oranları izlenmelidir
 
-## Ä°dempotency ve Retry
-- tier claim ve premium activation intake akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
-- aynÄ± tier iÃ§in tekrar claim yeni grant Ã¼retmemelidir
-- season rollover job tekrarlandÄ±ÄŸÄ±nda aynÄ± sezonu ikinci kez arÅŸivlememeli veya yeni sezonu iki kez aÃ§mamalÄ±dÄ±r
+## İdempotency ve Retry
+- tier claim ve premium activation intake akışları `docs/shared.md` ile hizalı olmalıdır
+- aynı tier için tekrar claim yeni grant üretmemelidir
+- season rollover job tekrarlandığında aynı sezonu ikinci kez arşivlememeli veya yeni sezonu iki kez açmamalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - draft, active, paused, ended veya archived season durumu
-- free veya premium track eriÅŸim durumu
+- free veya premium track erişim durumu
 - tier claim durumu
 - season veya claim surface kapanma durumu
-- frozen progress veya carryover policy alanlarÄ±
+- frozen progress veya carryover policy alanları
 
-## Test NotlarÄ±
-- season ve track Ã§Ã¶zÃ¼mleme testleri
+## Test Notları
+- season ve track çözümleme testleri
 - progress, tier unlock ve claim testleri
-- premium activation source ve carryover kurallarÄ± testleri
+- premium activation source ve carryover kuralları testleri
 - mission, inventory, shop, payment ve notification entegrasyonu testleri
-- pause, freeze ve claim recovery doÄŸrulamalarÄ±
+- pause, freeze ve claim recovery doğrulamaları
 
 
 ---
 
-# Shop ModÃ¼lÃ¼
+# Shop Modülü
 
-> Canonical modÃ¼l adÄ±: `shop`
+> Canonical modül adı: `shop`
 
-## AmaÃ§
-`shop` modÃ¼lÃ¼nÃ¼n amacÄ±, Ã¼rÃ¼n kataloÄŸu, teklif gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼, fiyatlandÄ±rma ve satÄ±n alma orkestrasyonunu tek bir maÄŸaza yaÅŸam dÃ¶ngÃ¼sÃ¼ altÄ±nda yÃ¶netmektir.
+## Amaç
+`shop` modülünün amacı, ürün kataloğu, teklif görünürlüğü, fiyatlandırma ve satın alma orkestrasyonunu tek bir mağaza yaşam döngüsü altında yönetmektir.
 
-## Sorumluluk AlanÄ±
-- sellable product, offer ve kategori yapÄ±larÄ±
-- product veya offer ayrÄ±mÄ± ve time-limited offer kurallarÄ±
-- mana bazlÄ± fiyatlandÄ±rma, kampanya gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ ve discount evaluatÃ¶r ihtiyacÄ±
-- purchase intent, eligibility, checkout handoff, fulfillment ve purchase recovery akÄ±ÅŸlarÄ±
-- already-owned item davranÄ±ÅŸÄ± ve fail veya retry politikalarÄ±
-- Ã¼rÃ¼n kullanÄ±m kurallarÄ±, slot uyumluluÄŸu, katalog gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ ve inventory item mapping
+## Sorumluluk Alanı
+- sellable product, offer ve kategori yapıları
+- product veya offer ayrımı ve time-limited offer kuralları
+- mana bazlı fiyatlandırma, kampanya görünürlüğü ve discount evaluatör ihtiyacı
+- purchase intent, eligibility, checkout handoff, fulfillment ve purchase recovery akışları
+- already-owned item davranışı ve fail veya retry politikaları
+- ürün kullanım kuralları, slot uyumluluğu, katalog görünürlüğü ve inventory item mapping
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- final item sahipliÄŸi, equip state veya inventory ledger owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- Ã¶deme ledger'Ä± veya provider callback owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- entitlement owner modÃ¼lÃ¼nÃ¼n final state'ini kendi tablosunda canonical hale getirmez
+## Bu Modül Neyi Yapmaz?
+- final item sahipliği, equip state veya inventory ledger owner'lığı taşımaz
+- ödeme ledger'ı veya provider callback owner'lığına dönüşmez
+- entitlement owner modülünün final state'ini kendi tablosunda canonical hale getirmez
 
-## Veri SahipliÄŸi
-- sellable product, offer ve kategori kayÄ±tlarÄ±; ownable inventory item definition alanlarÄ± deÄŸil
-- fiyat planÄ±, indirim veya kampanya metadata alanlarÄ±
-- purchase request veya order kayÄ±tlarÄ±
-- VIP, level veya unlock gereksinimi gibi Ã¼rÃ¼n uygunluk kurallarÄ±
-- Ã¼rÃ¼n gÃ¶rÃ¼nÃ¼rlÃ¼k ve kullanÄ±labilirlik state alanlarÄ±
-- purchase recovery ve orchestration metadata alanlarÄ±
+## Veri Sahipliği
+- sellable product, offer ve kategori kayıtları; ownable inventory item definition alanları değil
+- fiyat planı, indirim veya kampanya metadata alanları
+- purchase request veya order kayıtları
+- VIP, level veya unlock gereksinimi gibi ürün uygunluk kuralları
+- ürün görünürlük ve kullanılabilirlik state alanları
+- purchase recovery ve orchestration metadata alanları
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- inventory item sahipliÄŸi veya grant sonucu
-- payment wallet, ledger, checkout ve callback kayÄ±tlarÄ±
-- royalpass veya baÅŸka entitlement modÃ¼lÃ¼nÃ¼n final activation owner verisi
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- inventory item sahipliği veya grant sonucu
+- payment wallet, ledger, checkout ve callback kayıtları
+- royalpass veya başka entitlement modülünün final activation owner verisi
 
-## Access KontratÄ±
-`shop` yetki kararÄ± vermez. ÃœrÃ¼n gÃ¶rÃ¼ntÃ¼leme, satÄ±n alma ve yÃ¶netim aksiyonlarÄ± `access` ile korunur. Final item sahipliÄŸi ve equip state `inventory`, bakiye veya ledger doÄŸruluÄŸu ise `payment` modÃ¼lÃ¼nde kalmalÄ±dÄ±r. `shop` yalnÄ±zca purchase orkestrasyonu iÃ§in gerekli geÃ§ici doÄŸrulama kÃ¶prÃ¼lerini taÅŸÄ±yabilir. SatÄ±n alma kaynaklarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r.
+## Access Kontratı
+`shop` yetki kararı vermez. Ürün görüntüleme, satın alma ve yönetim aksiyonları `access` ile korunur. Final item sahipliği ve equip state `inventory`, bakiye veya ledger doğruluğu ise `payment` modülünde kalmalıdır. `shop` yalnızca purchase orkestrasyonu için gerekli geçici doğrulama köprülerini taşıyabilir. Satın alma kaynakları `docs/shared.md` ile hizalı olmalıdır.
 
-## GeÃ§iÅŸ Notu
-- `payment` devreye girene kadar `shop`, yalnÄ±zca Stage 29 iÃ§in tanÄ±mlanan geÃ§ici `seed_mana_allowance_snapshot` veya operasyonel allowance okuma yÃ¼zeyi ile purchase eligibility doÄŸrulayabilir.
-- Bu kÃ¶prÃ¼ veri canonical wallet, ledger veya gerÃ§ek bakiye owner'lÄ±ÄŸÄ± sayÄ±lmaz; `payment` modÃ¼lÃ¼ aÃ§Ä±ldÄ±ÄŸÄ±nda kaldÄ±rÄ±lmalÄ± ve yerini `payment` kontratÄ±na bÄ±rakmalÄ±dÄ±r.
+## Geçiş Notu
+- `payment` devreye girene kadar `shop`, yalnızca Stage 29 için tanımlanan geçici `seed_mana_allowance_snapshot` veya operasyonel allowance okuma yüzeyi ile purchase eligibility doğrulayabilir.
+- Bu köprü veri canonical wallet, ledger veya gerçek bakiye owner'lığı sayılmaz; `payment` modülü açıldığında kaldırılmalı ve yerini `payment` kontratına bırakmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- katalog listing, item detail ve purchase request yÃ¼zeyi
-- admin katalog, fiyat ve gÃ¶rÃ¼nÃ¼rlÃ¼k yÃ¶netim yÃ¼zeyi
-- `inventory` iÃ§in final grant veya teslim talep kontratÄ±
-- `payment` iÃ§in bakiye dÃ¼ÅŸÃ¼m, reserve veya mutabakat kontratÄ±
-- payment Ã¶ncesi aÅŸamada geÃ§ici `seed_mana_allowance_snapshot` okuma kontratÄ±
-- `royalpass` gibi entitlement modÃ¼lleri iÃ§in Ã¼rÃ¼n bazlÄ± premium activation veya fulfillment handoff kontratÄ±
+## API veya Event Sınırı
+- katalog listing, item detail ve purchase request yüzeyi
+- admin katalog, fiyat ve görünürlük yönetim yüzeyi
+- `inventory` için final grant veya teslim talep kontratı
+- `payment` için bakiye düşüm, reserve veya mutabakat kontratı
+- payment öncesi aşamada geçici `seed_mana_allowance_snapshot` okuma kontratı
+- `royalpass` gibi entitlement modülleri için ürün bazlı premium activation veya fulfillment handoff kontratı
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `user`, `access`, `admin`, `inventory`, `payment`, `royalpass`, `mission` ve `notification` entegrasyonlarÄ±
-- pricing calculator, discount evaluator ve purchase orchestration helper ihtiyacÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `user`, `access`, `admin`, `inventory`, `payment`, `royalpass`, `mission` ve `notification` entegrasyonları
+- pricing calculator, discount evaluator ve purchase orchestration helper ihtiyacı
 
 ## Settings Etkileri
 - `feature.shop.catalog.enabled`
 - `feature.shop.purchase.enabled`
 - `feature.shop.campaign.enabled`
-- recovery veya checkout handoff yÃ¼zeyi ayrÄ± kontrol alÄ±rsa settings envanterine eklenmelidir
+- recovery veya checkout handoff yüzeyi ayrı kontrol alırsa settings envanterine eklenmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `shop.purchase.intent.created`, `shop.purchase.completed`, `shop.purchase.recovery_requested`
-- tÃ¼ketir: payment checkout sonucu, inventory grant sonucu, entitlement activation sonucu
-- purchase zinciri `docs/shared.md` ve `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `shop.purchase.intent.created`, `shop.purchase.completed`, `shop.purchase.recovery_requested`
+- tüketir: payment checkout sonucu, inventory grant sonucu, entitlement activation sonucu
+- purchase zinciri `docs/shared.md` ve `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- eligibility override, price veya campaign deÄŸiÅŸimi, manual recovery ve duplicate purchase korumasÄ± auditlenmelidir
-- checkout handoff baÅŸarÄ±sÄ±, already-owned red oranÄ± ve recovery backlog izlenmelidir
+## Audit ve İzleme
+- eligibility override, price veya campaign değişimi, manual recovery ve duplicate purchase koruması auditlenmelidir
+- checkout handoff başarısı, already-owned red oranı ve recovery backlog izlenmelidir
 
-## Ä°dempotency ve Retry
-- purchase intent, recovery replay ve fulfillment handoff akÄ±ÅŸlarÄ± `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
-- aynÄ± request iÃ§in ikinci order veya ikinci fulfillment zinciri baÅŸlatÄ±lmamalÄ±dÄ±r
-- already-owned senaryosu retry sÄ±rasÄ±nda yeni order state Ã¼retmemelidir
+## İdempotency ve Retry
+- purchase intent, recovery replay ve fulfillment handoff akışları `docs/shared.md` ile hizalı olmalıdır
+- aynı request için ikinci order veya ikinci fulfillment zinciri başlatılmamalıdır
+- already-owned senaryosu retry sırasında yeni order state üretmemelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - draft, active veya archived product durumu
 - visible, hidden veya campaign_only offer durumu
-- purchasable, blocked veya sold_out benzeri purchase state alanlarÄ±
-- delivery_pending veya recovery_required satÄ±n alma durumu
-- checkout handoff ve fulfillment sonuÃ§ durumu
+- purchasable, blocked veya sold_out benzeri purchase state alanları
+- delivery_pending veya recovery_required satın alma durumu
+- checkout handoff ve fulfillment sonuç durumu
 
-## Test NotlarÄ±
-- katalog, product veya offer ayrÄ±mÄ± ve fiyat Ã§Ã¶zÃ¼mleme testleri
-- purchase idempotency ve duplicate request doÄŸrulamalarÄ±
-- already-owned ve eligibility kurallarÄ± testleri
-- `inventory`, geÃ§ici allowance bridge ve `payment` entegrasyon testleri
-- recovery akÄ±ÅŸÄ± ve runtime control doÄŸrulamalarÄ±
+## Test Notları
+- katalog, product veya offer ayrımı ve fiyat çözümleme testleri
+- purchase idempotency ve duplicate request doğrulamaları
+- already-owned ve eligibility kuralları testleri
+- `inventory`, geçici allowance bridge ve `payment` entegrasyon testleri
+- recovery akışı ve runtime control doğrulamaları
 
 
 ---
 
-# Social ModÃ¼lÃ¼
+# Social Modülü
 
-> Canonical modÃ¼l adÄ±: `social`
+> Canonical modül adı: `social`
 
-## AmaÃ§
-`social` modÃ¼lÃ¼nÃ¼n amacÄ±, kullanÄ±cÄ±lar arasÄ± sosyal iliÅŸki, sosyal duvar ve mesajlaÅŸma yÃ¼zeylerini ayrÄ± bir iÅŸ alanÄ± olarak yÃ¶netmektir.
+## Amaç
+`social` modülünün amacı, kullanıcılar arası sosyal ilişki, sosyal duvar ve mesajlaşma yüzeylerini ayrı bir iş alanı olarak yönetmektir.
 
-## Sorumluluk AlanÄ±
-- arkadaÅŸlÄ±k isteÄŸi, kabul, reddetme ve arkadaÅŸ listesi
-- follow veya unfollow iliÅŸkileri
-- friend ve follow farkÄ±nÄ± Ã¼rÃ¼n yÃ¼zeyinde koruyan kullanÄ±m kurallarÄ±
-- sosyal duvar post ve duvar altÄ± reply akÄ±ÅŸlarÄ±
-- direct message thread, unread state ve mesaj akÄ±ÅŸlarÄ±
-- sosyal privacy, block, mute veya restrict gibi iliÅŸki kontrol alanlarÄ±
-- online state veya last active ihtiyacÄ± iÃ§in future-ready alanlar
+## Sorumluluk Alanı
+- arkadaşlık isteği, kabul, reddetme ve arkadaş listesi
+- follow veya unfollow ilişkileri
+- friend ve follow farkını ürün yüzeyinde koruyan kullanım kuralları
+- sosyal duvar post ve duvar altı reply akışları
+- direct message thread, unread state ve mesaj akışları
+- sosyal privacy, block, mute veya restrict gibi ilişki kontrol alanları
+- online state veya last active ihtiyacı için future-ready alanlar
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- manga veya chapter yorum thread owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- global authorization kararÄ± Ã¼retmez
-- notification delivery veya inventory ownership alanÄ±na girmez
+## Bu Modül Neyi Yapmaz?
+- manga veya chapter yorum thread owner'lığı taşımaz
+- global authorization kararı üretmez
+- notification delivery veya inventory ownership alanına girmez
 
-## Veri SahipliÄŸi
+## Veri Sahipliği
 - friendship request ve friendship state verileri
-- follow relation kayÄ±tlarÄ±
-- social block, mute veya restrict iliÅŸkileri
-- wall post, wall reply, message thread ve message kayÄ±tlarÄ±
-- sosyal gÃ¶rÃ¼nÃ¼rlÃ¼k ve iliÅŸki bazlÄ± eriÅŸim sinyalleri
+- follow relation kayıtları
+- social block, mute veya restrict ilişkileri
+- wall post, wall reply, message thread ve message kayıtları
+- sosyal görünürlük ve ilişki bazlı erişim sinyalleri
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- comment modÃ¼lÃ¼ndeki iÃ§erik yorumlarÄ±
-- access policy, user profile owner verisi veya notification preference detaylarÄ±
-- history, support veya moderation case kayÄ±tlarÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- comment modülündeki içerik yorumları
+- access policy, user profile owner verisi veya notification preference detayları
+- history, support veya moderation case kayıtları
 
-## Access KontratÄ±
-`social` yetki kararÄ±nÄ± kendi iÃ§inde Ã¼retmez. Profil duvarÄ±nÄ± kim gÃ¶rebilir, kimin kime mesaj atabileceÄŸi veya arkadaÅŸlÄ±k yÃ¼zeyine eriÅŸim gibi kararlar `social` tarafÄ±ndan Ã¼retilen iliÅŸki veya privacy sinyalleri kullanÄ±larak `access` ile korunur. Block veya aÃ§Ä±k privacy deny sinyali oluÅŸtuÄŸunda final sonuÃ§ `access` tarafÄ±ndan deny olarak yorumlanmalÄ±dÄ±r. `mute` sinyali ise ayrÄ±ca dokÃ¼mante edilmedikÃ§e tek baÅŸÄ±na genel authorization deny sayÄ±lmamalÄ±; teslim, gÃ¶rÃ¼nÃ¼rlÃ¼k veya etkileÅŸim azaltma sinyali olarak kalmalÄ±dÄ±r.
+## Access Kontratı
+`social` yetki kararını kendi içinde üretmez. Profil duvarını kim görebilir, kimin kime mesaj atabileceği veya arkadaşlık yüzeyine erişim gibi kararlar `social` tarafından üretilen ilişki veya privacy sinyalleri kullanılarak `access` ile korunur. Block veya açık privacy deny sinyali oluştuğunda final sonuç `access` tarafından deny olarak yorumlanmalıdır. `mute` sinyali ise ayrıca dokümante edilmedikçe tek başına genel authorization deny sayılmamalı; teslim, görünürlük veya etkileşim azaltma sinyali olarak kalmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- friendship, follow, wall ve direct message yÃ¼zeyleri
-- sosyal duvar reply yapÄ±sÄ± `social`-native kabul edilmeli; `comment` thread sistemine Ã¶rtÃ¼k olarak dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lmemelidir
-- `notification` ve `mission` iÃ§in producer event yÃ¼zeyi
-- admin tarafÄ±ndan ayrÄ± ayrÄ± aÃ§Ä±lÄ±p kapatÄ±labilen social alt yÃ¼zeyler iÃ§in kontrollÃ¼ contract
+## API veya Event Sınırı
+- friendship, follow, wall ve direct message yüzeyleri
+- sosyal duvar reply yapısı `social`-native kabul edilmeli; `comment` thread sistemine örtük olarak dönüştürülmemelidir
+- `notification` ve `mission` için producer event yüzeyi
+- admin tarafından ayrı ayrı açılıp kapatılabilen social alt yüzeyler için kontrollü contract
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `auth`, `user`, `access`, `notification`, `admin` ve gerektiÄŸinde `mission` entegrasyonlarÄ±
-- anti-abuse rate limit ve unread counter projection yardÄ±mcÄ±larÄ±
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `auth`, `user`, `access`, `notification`, `admin` ve gerektiğinde `mission` entegrasyonları
+- anti-abuse rate limit ve unread counter projection yardımcıları
 
 ## Settings Etkileri
 - `feature.social.friendship.enabled`
 - `feature.social.follow.enabled`
 - `feature.social.messaging.enabled`
 - `feature.social.wall.enabled`
-- restrict veya online presence yÃ¼zeyleri eklenirse settings envanteri geniÅŸletilmelidir
+- restrict veya online presence yüzeyleri eklenirse settings envanteri genişletilmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `social.friendship.changed`, `social.follow.changed`, `social.message.sent`, `social.wall.posted`
-- tÃ¼ketir: user visibility veya moderation deny sinyalleri
-- unread counter ve activity projection'larÄ± `docs/shared.md` ile hizalÄ± planlanmalÄ±dÄ±r
+## Event Akışları
+- üretir: `social.friendship.changed`, `social.follow.changed`, `social.message.sent`, `social.wall.posted`
+- tüketir: user visibility veya moderation deny sinyalleri
+- unread counter ve activity projection'ları `docs/shared.md` ile hizalı planlanmalıdır
 
-## Audit ve Ä°zleme
-- block, restrict, messaging abuse ve admin kaynaklÄ± privacy mÃ¼dahaleleri auditlenmelidir
-- spam, burst message ve block override denemeleri izlenebilir olmalÄ±dÄ±r
+## Audit ve İzleme
+- block, restrict, messaging abuse ve admin kaynaklı privacy müdahaleleri auditlenmelidir
+- spam, burst message ve block override denemeleri izlenebilir olmalıdır
 
-## Ä°dempotency ve Retry
-- friendship request, follow veya direct message create akÄ±ÅŸlarÄ± duplicate kayÄ±t Ã¼retmemelidir
-- message send retry'Ä± aynÄ± message reference iÃ§in ikinci kayÄ±t oluÅŸturmamalÄ±dÄ±r
-- block ve mute transition'larÄ± tekrarlandÄ±ÄŸÄ±nda aynÄ± final state korunmalÄ±dÄ±r
+## İdempotency ve Retry
+- friendship request, follow veya direct message create akışları duplicate kayıt üretmemelidir
+- message send retry'ı aynı message reference için ikinci kayıt oluşturmamalıdır
+- block ve mute transition'ları tekrarlandığında aynı final state korunmalıdır
 
-## State YapÄ±sÄ±
+## State Yapısı
 - friendship_status
-- follow veya unfollow iliÅŸkisi durumu
+- follow veya unfollow ilişkisi durumu
 - wall visibility veya message availability durumu
-- block, mute veya restrict iliÅŸkisi durumu
+- block, mute veya restrict ilişkisi durumu
 - messaging, wall, friendship veya follow surface kapanma durumu
 
-## Test NotlarÄ±
-- friendship ve follow akÄ±ÅŸ testleri
-- friend ve follow davranÄ±ÅŸ ayrÄ±mÄ± testleri
-- wall post veya reply gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ testleri
+## Test Notları
+- friendship ve follow akış testleri
+- friend ve follow davranış ayrımı testleri
+- wall post veya reply görünürlüğü testleri
 - message thread, unread ve own-surface testleri
-- block, mute, restrict ve runtime control entegrasyonu doÄŸrulamalarÄ±
+- block, mute, restrict ve runtime control entegrasyonu doğrulamaları
 
 
 ---
 
-# Support ModÃ¼lÃ¼
+# Support Modülü
 
-> Canonical modÃ¼l adÄ±: `support`
+> Canonical modül adı: `support`
 
-## AmaÃ§
-`support` modÃ¼lÃ¼nÃ¼n amacÄ±, kullanÄ±cÄ± iletiÅŸim taleplerini, destek biletlerini ve `manga`, `chapter`, `comment` hedefleri iÃ§in iÃ§erik bildirimlerini tek bir yaÅŸam dÃ¶ngÃ¼sÃ¼ altÄ±nda yÃ¶netmektir.
+## Amaç
+`support` modülünün amacı, kullanıcı iletişim taleplerini, destek biletlerini ve `manga`, `chapter`, `comment` hedefleri için içerik bildirimlerini tek bir yaşam döngüsü altında yönetmektir.
 
-## Sorumluluk AlanÄ±
-- `communication` kaydÄ± veya genel destek bileti oluÅŸturma akÄ±ÅŸlarÄ±
-- `manga`, `chapter` ve `comment` iÃ§in hedefe baÄŸlÄ± iÃ§erik bildirimi oluÅŸturma akÄ±ÅŸlarÄ±
-- own support list, support detail ve support reply akÄ±ÅŸlarÄ±
-- `support_kind`, `category`, `priority`, `reason_code` ve isteÄŸe baÄŸlÄ± hedef iliÅŸkisi
-- SLA, duplicate detection, attachment kurallarÄ± ve queue Ã¶nceliklendirme ihtiyaÃ§larÄ±
-- internal note ile public reply ayrÄ±mÄ±
+## Sorumluluk Alanı
+- `communication` kaydı veya genel destek bileti oluşturma akışları
+- `manga`, `chapter` ve `comment` için hedefe bağlı içerik bildirimi oluşturma akışları
+- own support list, support detail ve support reply akışları
+- `support_kind`, `category`, `priority`, `reason_code` ve isteğe bağlı hedef ilişkisi
+- SLA, duplicate detection, attachment kuralları ve queue önceliklendirme ihtiyaçları
+- internal note ile public reply ayrımı
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- report intake'i otomatik olarak moderation case'e dÃ¶nÃ¼ÅŸtÃ¼rmez
-- moderation kararÄ±nÄ±n veya admin final override'Ä±nÄ±n owner'lÄ±ÄŸÄ±na dÃ¶nÃ¼ÅŸmez
-- hedef iÃ§erik veya kullanÄ±cÄ± profil verisinin ana owner'lÄ±ÄŸÄ±na girmez
+## Bu Modül Neyi Yapmaz?
+- report intake'i otomatik olarak moderation case'e dönüştürmez
+- moderation kararının veya admin final override'ının owner'lığına dönüşmez
+- hedef içerik veya kullanıcı profil verisinin ana owner'lığına girmez
 
-## Veri SahipliÄŸi
-- `support_kind=communication`, `support_kind=ticket` veya `support_kind=report` ile taÅŸÄ±nan support kaydÄ±
-- `category`, `priority`, `reason_code`, `reason_text` ve isteÄŸe baÄŸlÄ± hedef iliÅŸkisi
-- hedefe baÄŸlÄ± kayÄ±tlar iÃ§in `target_type` ve `target_id`; hedefsiz iletiÅŸim veya ticket kayÄ±tlarÄ±nda boÅŸ hedef alanlarÄ±
-- internal note, requester reply ve Ã§Ã¶zÃ¼m metadata'sÄ±
+## Veri Sahipliği
+- `support_kind=communication`, `support_kind=ticket` veya `support_kind=report` ile taşınan support kaydı
+- `category`, `priority`, `reason_code`, `reason_text` ve isteğe bağlı hedef ilişkisi
+- hedefe bağlı kayıtlar için `target_type` ve `target_id`; hedefsiz iletişim veya ticket kayıtlarında boş hedef alanları
+- internal note, requester reply ve çözüm metadata'sı
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
-- moderation case karar akÄ±ÅŸÄ±
-- hedef iÃ§erik varlÄ±ÄŸÄ±nÄ±n veya yorum kaydÄ±nÄ±n owner verisi
-- notification delivery state veya access policy owner'lÄ±ÄŸÄ±
+## Bu Modül Hangi Verinin Sahibi Değildir?
+- moderation case karar akışı
+- hedef içerik varlığının veya yorum kaydının owner verisi
+- notification delivery state veya access policy owner'lığı
 
-## Access KontratÄ±
-`support` yetki kararÄ± vermez. OluÅŸturma, own detail, own reply, review queue ve yÃ¶netimsel karar yÃ¼zeyleri `access` ile korunur; review ve karar yÃ¼rÃ¼tÃ¼mÃ¼ `admin` ile entegre Ã§alÄ±ÅŸÄ±r. Communication kaydÄ±, ticket oluÅŸturma, report oluÅŸturma, attachment kabulÃ¼ ve intake davranÄ±ÅŸlarÄ± admin tarafÄ±ndan yÃ¶netilen runtime ayarlar ile sÄ±nÄ±rlandÄ±rÄ±labilir. Report kaydÄ± varsayÄ±lan olarak moderation case ile aynÄ± kayÄ±t sayÄ±lmaz; `docs/shared.md` ile hizalÄ± aÃ§Ä±k mapping politikasÄ± gerekir.
+## Access Kontratı
+`support` yetki kararı vermez. Oluşturma, own detail, own reply, review queue ve yönetimsel karar yüzeyleri `access` ile korunur; review ve karar yürütümü `admin` ile entegre çalışır. Communication kaydı, ticket oluşturma, report oluşturma, attachment kabulü ve intake davranışları admin tarafından yönetilen runtime ayarlar ile sınırlandırılabilir. Report kaydı varsayılan olarak moderation case ile aynı kayıt sayılmaz; `docs/shared.md` ile hizalı açık mapping politikası gerekir.
 
-## API veya Event SÄ±nÄ±rÄ±
-- support create, detail, own list ve own reply yÃ¼zeyi
-- communication, ticket ve report create yÃ¼zeyleri iÃ§in veri kontratÄ±
-- support review queue ve ticket yÃ¶netimi iÃ§in veri yÃ¼zeyi
-- linked moderation case aÃ§Ä±lÄ±ÅŸÄ± iÃ§in kontrollÃ¼ handoff veya reference yÃ¼zeyi
+## API veya Event Sınırı
+- support create, detail, own list ve own reply yüzeyi
+- communication, ticket ve report create yüzeyleri için veri kontratı
+- support review queue ve ticket yönetimi için veri yüzeyi
+- linked moderation case açılışı için kontrollü handoff veya reference yüzeyi
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `access`, `admin`, `moderation`, `notification`, `manga`, `chapter` ve `comment` ile kontrollÃ¼ entegrasyon
-- attachment policy iÃ§in `docs/shared.md`
-- queue summary ve export yaklaÅŸÄ±mÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `access`, `admin`, `moderation`, `notification`, `manga`, `chapter` ve `comment` ile kontrollü entegrasyon
+- attachment policy için `docs/shared.md`
+- queue summary ve export yaklaşımı için `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.support.communication.enabled`
@@ -1463,117 +1463,117 @@
 - `feature.support.internal_note.enabled`
 - `support.intake.paused`
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `support.created`, `support.replied`, `support.resolved`, `support.moderation_handoff_requested`
-- tÃ¼ketir: moderation case sonucu, admin karar sinyali, notification template veya delivery sinyali
-- linked handoff akÄ±ÅŸlarÄ± `docs/shared.md` ve `docs/shared.md` ile hizalÄ± olmalÄ±dÄ±r
+## Event Akışları
+- üretir: `support.created`, `support.replied`, `support.resolved`, `support.moderation_handoff_requested`
+- tüketir: moderation case sonucu, admin karar sinyali, notification template veya delivery sinyali
+- linked handoff akışları `docs/shared.md` ve `docs/shared.md` ile hizalı olmalıdır
 
-## Audit ve Ä°zleme
-- internal note, resolution, spam iÅŸaretleme, SLA breach ve moderation handoff aksiyonlarÄ± auditlenmelidir
-- PII ve attachment riski `docs/shared.md` ile hizalÄ± retention notu taÅŸÄ±malÄ±dÄ±r
+## Audit ve İzleme
+- internal note, resolution, spam işaretleme, SLA breach ve moderation handoff aksiyonları auditlenmelidir
+- PII ve attachment riski `docs/shared.md` ile hizalı retention notu taşımalıdır
 
-## Ä°dempotency ve Retry
-- duplicate ticket veya report create istekleri requester, target ve request id kombinasyonu ile korunmalÄ±dÄ±r
-- moderation handoff tekrarlandÄ±ÄŸÄ±nda ikinci vaka aÃ§Ä±lmamalÄ±; linked case referansÄ±na baÄŸlanmalÄ±dÄ±r
-- attachment processing retry'larÄ± yeni support kaydÄ± Ã¼retmemelidir
+## İdempotency ve Retry
+- duplicate ticket veya report create istekleri requester, target ve request id kombinasyonu ile korunmalıdır
+- moderation handoff tekrarlandığında ikinci vaka açılmamalı; linked case referansına bağlanmalıdır
+- attachment processing retry'ları yeni support kaydı üretmemelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - open, pending, resolved veya spam durumu
-- duplicate veya spam kontrolÃ¼ne temel alanlar
-- Ã§Ã¶zÃ¼m, reply ve inceleme yaÅŸam dÃ¶ngÃ¼sÃ¼ alanlarÄ±
-- intake pause veya create yÃ¼zeyi kapatma durumlarÄ±
+- duplicate veya spam kontrolüne temel alanlar
+- çözüm, reply ve inceleme yaşam döngüsü alanları
+- intake pause veya create yüzeyi kapatma durumları
 
-## Test NotlarÄ±
-- communication, ticket ve report ayrÄ±mÄ± testleri
-- target relation ve handoff doÄŸrulamalarÄ±
-- duplicate, spam, attachment ve SLA doÄŸrulamalarÄ±
+## Test Notları
+- communication, ticket ve report ayrımı testleri
+- target relation ve handoff doğrulamaları
+- duplicate, spam, attachment ve SLA doğrulamaları
 - `support -> moderation` ve `support -> notification` kontrat testleri
 
 
 ---
 
-# User ModÃ¼lÃ¼
+# User Modülü
 
-> Canonical modÃ¼l adÄ±: `user`
+> Canonical modül adı: `user`
 
-## AmaÃ§
-`user` modÃ¼lÃ¼nÃ¼n amacÄ±, kullanÄ±cÄ± hesabÄ±, profil, tercih, gÃ¶rÃ¼nÃ¼m ve Ã¼yelik verisini taÅŸÄ±yan merkezi kullanÄ±cÄ± alanÄ±nÄ± oluÅŸturmaktÄ±r.
+## Amaç
+`user` modülünün amacı, kullanıcı hesabı, profil, tercih, görünüm ve üyelik verisini taşıyan merkezi kullanıcı alanını oluşturmaktır.
 
-## Sorumluluk AlanÄ±
-- kullanÄ±cÄ± hesabÄ± ve profil alanlarÄ±
-- public veya private profil ayrÄ±mÄ± ve profile visibility matrix
+## Sorumluluk Alanı
+- kullanıcı hesabı ve profil alanları
+- public veya private profil ayrımı ve profile visibility matrix
 - hesap durumu, soft delete, deactivation ve ban etkileri
-- Ã¼yelik, VIP lifecycle ve benefit freeze sinyalleri
-- avatar, banner ve benzeri medya alanlarÄ±nda ownership veya storage referans kurallarÄ±
-- global user preference ile module-specific preference ayrÄ±mÄ±nÄ± korumak
+- üyelik, VIP lifecycle ve benefit freeze sinyalleri
+- avatar, banner ve benzeri medya alanlarında ownership veya storage referans kuralları
+- global user preference ile module-specific preference ayrımını korumak
 
-## Bu ModÃ¼l Neyi Yapmaz?
-- credential, session veya password lifecycle owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- detaylÄ± notification preference, social block veya mute listesi owner'lÄ±ÄŸÄ± taÅŸÄ±maz
-- continue reading, history timeline veya inventory sahipliÄŸi Ã¼retmez
+## Bu Modül Neyi Yapmaz?
+- credential, session veya password lifecycle owner'lığı taşımaz
+- detaylı notification preference, social block veya mute listesi owner'lığı taşımaz
+- continue reading, history timeline veya inventory sahipliği üretmez
 
-## Veri SahipliÄŸi
-- username ve profil alanlarÄ±
-- hesap durumu alanlarÄ±
-- tercih ve gÃ¶rÃ¼nÃ¼m alanlarÄ±
-- Ã¼yelik ve kullanÄ±cÄ±ya ait hesap verileri
-- VIP entitlement sÃ¼resi ve dondurma veya devam bilgisi
-- avatar, banner veya profil kozmetiÄŸi iÃ§in metadata veya referans alanlarÄ±
-- public library veya reading activity gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼nÃ¼ etkileyen global preference sinyalleri
+## Veri Sahipliği
+- username ve profil alanları
+- hesap durumu alanları
+- tercih ve görünüm alanları
+- üyelik ve kullanıcıya ait hesap verileri
+- VIP entitlement süresi ve dondurma veya devam bilgisi
+- avatar, banner veya profil kozmetiği için metadata veya referans alanları
+- public library veya reading activity görünürlüğünü etkileyen global preference sinyalleri
 
-## Bu ModÃ¼l Hangi Verinin Sahibi DeÄŸildir?
+## Bu Modül Hangi Verinin Sahibi Değildir?
 - auth credential, session ve verification token verileri
-- social iliÅŸki kayÄ±tlarÄ±, block veya mute listeleri
-- notification category preference detaylarÄ±
-- history kayÄ±tlarÄ±, entry-level share metadata'sÄ± veya inventory sahipliÄŸi
+- social ilişki kayıtları, block veya mute listeleri
+- notification category preference detayları
+- history kayıtları, entry-level share metadata'sı veya inventory sahipliği
 
-## Access KontratÄ±
-`user` veriyi taÅŸÄ±r; access kararÄ± vermez. `access` modÃ¼lÃ¼nÃ¼n yorumlayacaÄŸÄ± kullanÄ±cÄ± durumu, Ã¼yelik ve gÃ¶rÃ¼nÃ¼rlÃ¼k sinyalleri kontrollÃ¼ kontrat ile dÄ±ÅŸa aÃ§Ä±lÄ±r. `user` iÃ§indeki global visibility veya sharing preference sinyali, history veya library paylaÅŸÄ±mÄ± iÃ§in Ã¼st sÄ±nÄ±rÄ± belirler; `history` iÃ§indeki entry-level metadata bu sÄ±nÄ±rÄ± daraltabilir ama global deny kararÄ±nÄ± geniÅŸletemez. Visibility kararlarÄ±nda `docs/shared.md` ve `docs/shared.md` ile hizalÄ± kalÄ±nmalÄ±dÄ±r.
+## Access Kontratı
+`user` veriyi taşır; access kararı vermez. `access` modülünün yorumlayacağı kullanıcı durumu, üyelik ve görünürlük sinyalleri kontrollü kontrat ile dışa açılır. `user` içindeki global visibility veya sharing preference sinyali, history veya library paylaşımı için üst sınırı belirler; `history` içindeki entry-level metadata bu sınırı daraltabilir ama global deny kararını genişletemez. Visibility kararlarında `docs/shared.md` ve `docs/shared.md` ile hizalı kalınmalıdır.
 
-## API veya Event SÄ±nÄ±rÄ±
-- user okuma veya yazma yÃ¼zeyi profil ve hesap verisi ile sÄ±nÄ±rlÄ± olmalÄ±dÄ±r
-- public ve private response yÃ¼zeyleri aÃ§Ä±kÃ§a ayrÄ±lmalÄ±dÄ±r
-- kullanÄ±cÄ±ya ait deÄŸiÅŸiklik olaylarÄ± gerektiÄŸinde diÄŸer modÃ¼llere kontrollÃ¼ yÃ¼zey ile aktarÄ±labilir
-- `history` iÃ§in profile baÄŸlÄ± global visibility veya sharing default preference sinyalleri kontrollÃ¼ contract ile dÄ±ÅŸa aÃ§Ä±labilir
+## API veya Event Sınırı
+- user okuma veya yazma yüzeyi profil ve hesap verisi ile sınırlı olmalıdır
+- public ve private response yüzeyleri açıkça ayrılmalıdır
+- kullanıcıya ait değişiklik olayları gerektiğinde diğer modüllere kontrollü yüzey ile aktarılabilir
+- `history` için profile bağlı global visibility veya sharing default preference sinyalleri kontrollü contract ile dışa açılabilir
 
-## BaÄŸÄ±mlÄ±lÄ±klar
-- proje geneli altyapÄ± aÅŸamalarÄ±
-- `auth` ile kullanÄ±cÄ± kimliÄŸi entegrasyonu
-- `access`, `admin`, `inventory`, `notification` ve `history` iÃ§in kontrollÃ¼ veri okuma yÃ¼zeyleri
-- medya ownership ve eriÅŸim politikasÄ± iÃ§in `docs/shared.md`
+## Bağımlılıklar
+- proje geneli altyapı aşamaları
+- `auth` ile kullanıcı kimliği entegrasyonu
+- `access`, `admin`, `inventory`, `notification` ve `history` için kontrollü veri okuma yüzeyleri
+- medya ownership ve erişim politikası için `docs/shared.md`
 
 ## Settings Etkileri
 - `feature.user.profile.enabled`
 - `feature.user.vip_benefits.enabled`
 - `feature.user.vip_badge.enabled`
 - `feature.user.history_visibility_preference.enabled`
-- yeni media veya moderation gÃ¶rÃ¼nÃ¼rlÃ¼k yÃ¼zeyleri eklendiÄŸinde settings envanteri aynÄ± deÄŸiÅŸiklikte gÃ¼ncellenmelidir
+- yeni media veya moderation görünürlük yüzeyleri eklendiğinde settings envanteri aynı değişiklikte güncellenmelidir
 
-## Event AkÄ±ÅŸlarÄ±
-- Ã¼retir: `user.profile.updated`, `user.visibility.changed`, `user.vip.changed`, `user.account.deactivated`
-- tÃ¼ketir: `auth.identity.created`, `inventory.cosmetic.selected`, `admin.user_state.changed`
-- VIP veya profile gÃ¶rÃ¼nÃ¼rlÃ¼k deÄŸiÅŸimleri `access` ve ilgili consumer modÃ¼llere kontrollÃ¼ event veya contract ile aktarÄ±lmalÄ±dÄ±r
+## Event Akışları
+- üretir: `user.profile.updated`, `user.visibility.changed`, `user.vip.changed`, `user.account.deactivated`
+- tüketir: `auth.identity.created`, `inventory.cosmetic.selected`, `admin.user_state.changed`
+- VIP veya profile görünürlük değişimleri `access` ve ilgili consumer modüllere kontrollü event veya contract ile aktarılmalıdır
 
-## Audit ve Ä°zleme
-- VIP state deÄŸiÅŸimi, ban veya deactivation, gÃ¶rÃ¼nÃ¼rlÃ¼k tercihi deÄŸiÅŸimi ve admin kaynaklÄ± profil mÃ¼dahalesi auditlenmelidir
-- PII ve export riski taÅŸÄ±yan alanlar `docs/shared.md` ile hizalÄ± maskeleme notu taÅŸÄ±malÄ±dÄ±r
+## Audit ve İzleme
+- VIP state değişimi, ban veya deactivation, görünürlük tercihi değişimi ve admin kaynaklı profil müdahalesi auditlenmelidir
+- PII ve export riski taşıyan alanlar `docs/shared.md` ile hizalı maskeleme notu taşımalıdır
 
-## Ä°dempotency ve Retry
-- profile update akÄ±ÅŸlarÄ± request id veya optimistic concurrency ile duplicate write Ã¼retmemelidir
-- VIP activation veya freeze akÄ±ÅŸlarÄ± satÄ±n alma veya subscription referansÄ± ile deduplicate edilmelidir
-- kullanÄ±cÄ± state transition'larÄ± tekrar Ã§alÄ±ÅŸtÄ±rÄ±ldÄ±ÄŸÄ±nda Ã§eliÅŸkili son durum Ã¼retmemelidir
+## İdempotency ve Retry
+- profile update akışları request id veya optimistic concurrency ile duplicate write üretmemelidir
+- VIP activation veya freeze akışları satın alma veya subscription referansı ile deduplicate edilmelidir
+- kullanıcı state transition'ları tekrar çalıştırıldığında çelişkili son durum üretmemelidir
 
-## State YapÄ±sÄ±
+## State Yapısı
 - hesap durumu
-- profil gÃ¶rÃ¼nÃ¼rlÃ¼ÄŸÃ¼ ve privacy katmanlarÄ±
-- Ã¼yelik veya VIP durum alanlarÄ±
-- sistem kaynaklÄ± VIP pasifliÄŸinde sÃ¼renin dondurulmasÄ±na iliÅŸkin Ã¼yelik durumu
+- profil görünürlüğü ve privacy katmanları
+- üyelik veya VIP durum alanları
+- sistem kaynaklı VIP pasifliğinde sürenin dondurulmasına ilişkin üyelik durumu
 
-## Test NotlarÄ±
-- profil okuma ve gÃ¼ncelleme testleri
-- public veya private response ayrÄ±mÄ± testleri
-- history visibility precedence doÄŸrulamalarÄ±
-- ban, deactivation ve VIP lifecycle doÄŸrulamalarÄ±
+## Test Notları
+- profil okuma ve güncelleme testleri
+- public veya private response ayrımı testleri
+- history visibility precedence doğrulamaları
+- ban, deactivation ve VIP lifecycle doğrulamaları
 
 
 

@@ -12,12 +12,12 @@ import (
 )
 
 var (
-	ErrValidation                  = errors.New("support_validation_failed")
-	ErrSupportNotFound             = errors.New("support_not_found")
-	ErrSupportAlreadyExists        = errors.New("support_already_exists")
-	ErrSupportNotVisible           = errors.New("support_not_visible")
-	ErrForbiddenAction             = errors.New("support_forbidden_action")
-	ErrDuplicateDetected           = errors.New("support_duplicate_detected")
+	ErrValidation           = errors.New("support_validation_failed")
+	ErrSupportNotFound      = errors.New("support_not_found")
+	ErrSupportAlreadyExists = errors.New("support_already_exists")
+	ErrSupportNotVisible    = errors.New("support_not_visible")
+	ErrForbiddenAction      = errors.New("support_forbidden_action")
+
 	ErrInvalidStateTransition      = errors.New("support_invalid_state_transition")
 	ErrTargetRequired              = errors.New("support_target_required")
 	ErrInvalidTarget               = errors.New("support_invalid_target")

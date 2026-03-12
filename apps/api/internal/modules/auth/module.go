@@ -7,6 +7,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/handler"
 	authrepository "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/repository"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/service"
+	"github.com/Tokuchi61/Manga/apps/api/internal/platform/snapshot"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/validation"
 	"github.com/go-chi/chi/v5"
 )
@@ -22,6 +23,7 @@ type RuntimeConfig struct {
 type Module struct {
 	httpHandler *handler.HTTPHandler
 	svc         *service.AuthService
+	snapshotter snapshot.Snapshotter
 }
 
 func New(cfg RuntimeConfig) Module {
@@ -33,7 +35,7 @@ func New(cfg RuntimeConfig) Module {
 		VerificationResendCooldown: time.Duration(cfg.VerificationResendCooldownSeconds) * time.Second,
 	})
 
-	return Module{httpHandler: handler.New(svc), svc: svc}
+	return Module{httpHandler: handler.New(svc), svc: svc, snapshotter: store}
 }
 
 func (m Module) Name() string {
@@ -49,4 +51,18 @@ func (m Module) CredentialExists(ctx context.Context, credentialID string) (bool
 		return false, nil
 	}
 	return m.svc.CredentialExists(ctx, credentialID)
+}
+
+func (m *Module) Snapshot() ([]byte, error) {
+	if m == nil || m.snapshotter == nil {
+		return nil, nil
+	}
+	return m.snapshotter.Snapshot()
+}
+
+func (m *Module) RestoreSnapshot(data []byte) error {
+	if m == nil || m.snapshotter == nil {
+		return nil
+	}
+	return m.snapshotter.RestoreSnapshot(data)
 }

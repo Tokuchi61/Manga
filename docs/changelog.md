@@ -5,6 +5,28 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.10.0-alpha.3] - 2026-03-12
+
+### Changed
+- Memory tabanli modul state'i icin kalici snapshot altyapisi eklendi; uygulama acilisinda restore, calisma sirasinda periyodik persist ve kapanista son persist akisi bootstrap'e baglandi.
+- Access evaluate HTTP contract'i actor-context guven modelini koruyacak sekilde geriye uyumlu policy alanlariyla (`scope_kind`, `scope_selector`, `audience_selector`, `allow_override`) guncellendi.
+- CI akisina dokuman encoding kontrol adimi eklendi (`scripts/check_utf8_no_bom.ps1`).
+
+### Fixed
+- ISS-004: Mimari persistence uyumsuzlugu snapshot store katmani ile kapatildi (Postgres ve file fallback).
+- ISS-011: Access/support tarafindaki yari kalmis tekrarli yapilar sadelelestirildi; kullanilmayan `errors.go` dosyalari kaldirildi.
+- ISS-013: Eksik e2e katmani tamamlandi (`apps/api/tests/e2e/critical_flow_e2e_test.go`).
+- ISS-016: `normalize_utf8_no_bom.ps1` script hatasi giderildi ve dokumanlar UTF-8/BOM-suz normalize edildi.
+
+### Docs
+- `docs/issues.md` icindeki kalan acik bulgular temizlenerek acik bulgu sayisi sifira indirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Kalan denetim bulgulari (ISS-004, ISS-011, ISS-013, ISS-016) kapatildi; test, CI ve docker dogrulama adimlariyla hotfix paketi yayina hazirlandi.
+- Etkilenen Moduller: `app`, `platform/config`, `platform/snapshot`, `auth`, `user`, `access`, `manga`, `chapter`, `comment`, `support`, `tests`, `docs`, `ci`.
+- Breaking Change: Yok.
+- Migration Etkisi: Yok.
+
 ## [0.10.0-alpha.2] - 2026-03-12
 
 ### Changed
@@ -581,6 +603,8 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
+
 
 
 

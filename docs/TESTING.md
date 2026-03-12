@@ -22,6 +22,7 @@ Bu dokuman test katmanlarini ve Asama 0-10 dogrulama adimlarini listeler.
 - `cd apps/api && go test ./internal/modules/...`
 - `cd apps/api && go test ./tests/contract/...`
 - `cd apps/api && go test ./tests/integration/...`
+- `cd apps/api && go test ./tests/e2e/...`
 - Module registry duplicate-name ve canonical-name kurallarinin test edilmesi
 - App bootstrap katmaninda module route mount davranisinin test edilmesi
 
