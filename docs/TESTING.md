@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-11 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-12 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -110,3 +110,12 @@ Bu dokuman test katmanlarini ve Asama 0-11 dogrulama adimlarini listeler.
 - Moderation queue, case detail, assignment, note, action ve escalation akislarinin dogrulanmasi
 - support report -> moderation linked case idempotency davranisinin dogrulanmasi
 - Moderation migration smoke kontrolu (`202603120009_moderation_create_core_tables`)
+
+## Asama 12 Notification Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/notification/...`
+- `cd apps/api && go test ./tests/contract -run Notification`
+- `cd apps/api && go test ./tests/integration -run Notification`
+- Support event intake, inbox/detail/read ve preference akislarinin dogrulanmasi
+- Delivery pause/category-channel runtime control davranislarinin dogrulanmasi
+- Notification migration smoke kontrolu (`202603120010_notification_create_core_tables`)

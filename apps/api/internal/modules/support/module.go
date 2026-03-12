@@ -49,6 +49,13 @@ func (m Module) LinkModerationCase(ctx context.Context, supportID string, modera
 	return m.svc.LinkModerationCase(ctx, supportID, moderationCaseID)
 }
 
+func (m Module) BuildNotificationSignal(ctx context.Context, supportID string, event string, requestID string, correlationID string) (supportcontract.NotificationSignal, error) {
+	if m.svc == nil {
+		return supportcontract.NotificationSignal{}, errors.New("support_service_unavailable")
+	}
+	return m.svc.BuildNotificationSignal(ctx, supportID, event, requestID, correlationID)
+}
+
 func (m Module) Name() string {
 	return "support"
 }

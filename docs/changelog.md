@@ -5,6 +5,55 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.12.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 12` kapsaminda canonical `notification` modulu eklendi: `apps/api/internal/modules/notification`.
+- Notification owner akis omurgasi eklendi:
+  - own inbox listeleme + detail
+  - read/unread lifecycle (`read` islemi)
+  - own preference guncelleme (mute, quiet-hour, channel, digest)
+  - support event intake ile bildirim olusturma
+  - admin runtime control (`category-state`, `channel-state`, `digest-state`, `delivery-pause`)
+- Notification event sabitleri eklendi: `apps/api/internal/modules/notification/events/events.go`.
+- In-memory notification repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/notification/repository/memory_store.go`
+  - `apps/api/internal/modules/notification/repository/notification_repository.go`
+  - `apps/api/internal/modules/notification/repository/preference_repository.go`
+  - `apps/api/internal/modules/notification/repository/admin_repository.go`
+  - `apps/api/internal/modules/notification/repository/snapshot_store.go`
+  - `apps/api/internal/modules/notification/repository/memory_store_test.go`
+- Notification service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/notification/service/notification_inbox_service.go`
+  - `apps/api/internal/modules/notification/service/notification_preference_service.go`
+  - `apps/api/internal/modules/notification/service/notification_admin_service.go`
+  - `apps/api/internal/modules/notification/service/notification_intake_service.go`
+  - `apps/api/internal/modules/notification/service/service_test.go`
+- Notification HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/notification/handler/*`
+  - `apps/api/internal/modules/notification/routes.go`
+- Notification migration cifti eklendi:
+  - `apps/api/migrations/202603120010_notification_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120010_notification_create_core_tables.down.sql`
+- Notification stage testleri eklendi:
+  - contract: `apps/api/tests/contract/notification_events_contract_test.go`
+  - integration: `apps/api/tests/integration/notification_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/notification_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta notification module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `notification` eklendi.
+- Support modulune `BuildNotificationSignal` kontrat ciktisi eklendi ve `notification` ile composition root'ta baglandi.
+- `docs/modules.md` modul envanterinde `notification` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki notification feature/runtime key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 12 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 12 notification owner (inbox/preference/intake/runtime-control) omurgasi kod seviyesine tasindi ve support->notification kontrat zinciri aktif hale getirildi.
+- Etkilenen Moduller: `notification`, `support`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120010_notification_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.11.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -654,25 +703,3 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
