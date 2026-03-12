@@ -5,6 +5,60 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.10.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 10` kapsaminda canonical `support` modulu eklendi: `apps/api/internal/modules/support`.
+- Support owner akis omurgasi eklendi:
+  - communication/ticket/report create
+  - own support list + detail
+  - public reply ve internal note ayrimi
+  - review queue, status update ve resolve akislari
+  - duplicate/idempotency (`request_id`) ve spam risk sinyali
+  - report -> moderation handoff istegi
+- `support -> moderation` ve `support -> notification` kontrat yuzeyleri eklendi:
+  - `apps/api/internal/modules/support/contract/moderation_handoff_contract.go`
+  - `apps/api/internal/modules/support/contract/notification_contract.go`
+- Support event sabitleri eklendi: `apps/api/internal/modules/support/events/events.go`.
+- In-memory support repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/support/repository/memory_store.go`
+  - `apps/api/internal/modules/support/repository/support_repository.go`
+  - `apps/api/internal/modules/support/repository/memory_store_test.go`
+- Support service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/support/service/support_create_service.go`
+  - `apps/api/internal/modules/support/service/support_query_service.go`
+  - `apps/api/internal/modules/support/service/support_update_service.go`
+  - `apps/api/internal/modules/support/service/support_contract_service.go`
+  - `apps/api/internal/modules/support/service/service_test.go`
+- Support HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/support/handler/*`
+  - `apps/api/internal/modules/support/routes.go`
+- Support migration cifti eklendi:
+  - `apps/api/migrations/202603120008_support_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120008_support_create_core_tables.down.sql`
+- Support stage testleri eklendi:
+  - contract: `apps/api/tests/contract/support_moderation_contract_test.go`, `apps/api/tests/contract/support_notification_contract_test.go`
+  - integration: `apps/api/tests/integration/support_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/support_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta support module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- `docs/modules.md` modul envanterinde `support` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 10 ile hizalandi.
+- Support modulu katmanlari coklu akis tasiyan tek dosyalari onleyecek sekilde islem bazli parcalandi (`routes.go` tek giris noktasi olarak korunarak).
+
+### Fixed
+- Yok.
+
+### Docs
+- Asama 10 support omurgasi ve versiyonlama guncellemeleri changelog ile izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 10 support owner (intake/review/reply/resolve/handoff) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `support`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120008_support_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.9.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -501,6 +555,7 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
 
 
 
