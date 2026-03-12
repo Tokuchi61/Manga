@@ -1,6 +1,10 @@
 package support
 
 import (
+	"context"
+	"errors"
+
+	supportcontract "github.com/Tokuchi61/Manga/apps/api/internal/modules/support/contract"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/support/handler"
 	supportrepository "github.com/Tokuchi61/Manga/apps/api/internal/modules/support/repository"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/support/service"
@@ -29,6 +33,27 @@ func (m *Module) SetTargetLookups(mangaLookup service.MangaTargetLookup, chapter
 		return
 	}
 	m.svc.SetTargetLookups(mangaLookup, chapterLookup, commentLookup)
+}
+
+func (m Module) GetModerationHandoffReference(ctx context.Context, supportID string, requestID string, correlationID string) (supportcontract.ModerationHandoffReference, error) {
+	if m.svc == nil {
+		return supportcontract.ModerationHandoffReference{}, errors.New("support_service_unavailable")
+	}
+	return m.svc.GetModerationHandoffReference(ctx, supportID, requestID, correlationID)
+}
+
+func (m Module) LinkModerationCase(ctx context.Context, supportID string, moderationCaseID string) error {
+	if m.svc == nil {
+		return errors.New("support_service_unavailable")
+	}
+	return m.svc.LinkModerationCase(ctx, supportID, moderationCaseID)
+}
+
+func (m Module) BuildNotificationSignal(ctx context.Context, supportID string, event string, requestID string, correlationID string) (supportcontract.NotificationSignal, error) {
+	if m.svc == nil {
+		return supportcontract.NotificationSignal{}, errors.New("support_service_unavailable")
+	}
+	return m.svc.BuildNotificationSignal(ctx, supportID, event, requestID, correlationID)
 }
 
 func (m Module) Name() string {
