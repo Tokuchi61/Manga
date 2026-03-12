@@ -22,7 +22,7 @@
 | chapter |  | active | docs/modules.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
 | comment |  | active | docs/modules.md | Icerik yorumlari ve thread etkilesim modulu. |
 | support |  | active | docs/modules.md | Kullanıcı destek kayıtları, ticket ve report intake modülü. |
-| moderation |  | planned | docs/modules.md | Scoped moderasyon kuyrukları ve vaka yönetimi modülü. |
+| moderation |  | active | docs/modules.md | Scoped moderasyon kuyrukları ve vaka yönetimi modülü. |
 | notification |  | planned | docs/modules.md | Bildirim üretimi, teslimi ve tercih yönetimi modülü. |
 | social |  | planned | docs/modules.md | Takip, arkadaşlık, duvar ve mesajlaşma modülü. |
 | inventory |  | planned | docs/modules.md | Item sahipliği, claim, consume ve equip modülü. |

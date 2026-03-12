@@ -5,6 +5,57 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.11.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 11` kapsaminda canonical `moderation` modulu eklendi: `apps/api/internal/modules/moderation`.
+- Moderation owner akis omurgasi eklendi:
+  - support handoff'tan linked case olusturma
+  - scoped queue listeleme ve case detail
+  - moderator assignment/release
+  - moderator note timeline
+  - sinirli aksiyon uygulama (`hide`, `unhide`, `lock`, `unlock`, `warning`, `review_complete`)
+  - admin handoff/escalation
+- Moderation event sabitleri eklendi: `apps/api/internal/modules/moderation/events/events.go`.
+- In-memory moderation repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/moderation/repository/memory_store.go`
+  - `apps/api/internal/modules/moderation/repository/case_repository.go`
+  - `apps/api/internal/modules/moderation/repository/memory_store_test.go`
+- Moderation service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/moderation/service/moderation_create_service.go`
+  - `apps/api/internal/modules/moderation/service/moderation_query_service.go`
+  - `apps/api/internal/modules/moderation/service/moderation_assignment_service.go`
+  - `apps/api/internal/modules/moderation/service/moderation_note_service.go`
+  - `apps/api/internal/modules/moderation/service/moderation_action_service.go`
+  - `apps/api/internal/modules/moderation/service/moderation_escalation_service.go`
+  - `apps/api/internal/modules/moderation/service/service_test.go`
+- Moderation HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/moderation/handler/*`
+  - `apps/api/internal/modules/moderation/routes.go`
+- Moderation migration cifti eklendi:
+  - `apps/api/migrations/202603120009_moderation_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120009_moderation_create_core_tables.down.sql`
+- Moderation stage testleri eklendi:
+  - contract: `apps/api/tests/contract/moderation_events_contract_test.go`
+  - integration: `apps/api/tests/integration/moderation_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/moderation_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta moderation module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Support modulu `GetModerationHandoffReference` yaninda linked-case baglama kontrati (`LinkModerationCase`) saglayacak sekilde genisletildi.
+- `docs/modules.md` modul envanterinde `moderation` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 11 ile hizalandi.
+
+### Docs
+- `docs/shared.md` moderation lifecycle sozlugune `escalation_status` bolumu eklendi.
+- `docs/shared.md` icindeki moderation feature key kayitlari `active` duruma cekildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 11 moderation owner (queue/case/assignment/action/escalation) omurgasi kod seviyesine tasindi ve support->moderation linked-case akisi aktif hale getirildi.
+- Etkilenen Moduller: `moderation`, `support`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120009_moderation_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.10.0-alpha.3] - 2026-03-12
 
 ### Changed
@@ -603,6 +654,7 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
 
 
 
