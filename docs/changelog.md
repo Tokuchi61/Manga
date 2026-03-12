@@ -5,6 +5,60 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.14.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 14` kapsaminda canonical `social` modulu eklendi: `apps/api/internal/modules/social`.
+- Social owner akis omurgasi eklendi:
+  - friendship request/accept/reject/remove ve friend list yuzeyleri
+  - follow/unfollow ve followers/following listeleme
+  - social wall post/reply/list akislar
+  - direct message thread open/send/list/read akislar
+  - block/mute/restrict iliski kontrol yuzeyleri
+  - admin runtime control (`friendship-state`, `follow-state`, `wall-state`, `messaging-state`)
+- Social event sabitleri eklendi: `apps/api/internal/modules/social/events/events.go`.
+- In-memory social repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/social/repository/memory_store.go`
+  - `apps/api/internal/modules/social/repository/friendship_repository.go`
+  - `apps/api/internal/modules/social/repository/follow_repository.go`
+  - `apps/api/internal/modules/social/repository/wall_repository.go`
+  - `apps/api/internal/modules/social/repository/message_repository.go`
+  - `apps/api/internal/modules/social/repository/relation_repository.go`
+  - `apps/api/internal/modules/social/repository/runtime_repository.go`
+  - `apps/api/internal/modules/social/repository/snapshot_store.go`
+  - `apps/api/internal/modules/social/repository/memory_store_test.go`
+- Social service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/social/service/social_friendship_service.go`
+  - `apps/api/internal/modules/social/service/social_follow_service.go`
+  - `apps/api/internal/modules/social/service/social_wall_service.go`
+  - `apps/api/internal/modules/social/service/social_message_service.go`
+  - `apps/api/internal/modules/social/service/social_relation_service.go`
+  - `apps/api/internal/modules/social/service/social_admin_service.go`
+  - `apps/api/internal/modules/social/service/service_test.go`
+- Social HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/social/handler/*`
+  - `apps/api/internal/modules/social/routes.go`
+- Social migration cifti eklendi:
+  - `apps/api/migrations/202603120012_social_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120012_social_create_core_tables.down.sql`
+- Social stage testleri eklendi:
+  - contract: `apps/api/tests/contract/social_events_contract_test.go`
+  - integration: `apps/api/tests/integration/social_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/social_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta social module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `social` eklendi.
+- `docs/modules.md` modul envanterinde `social` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki social feature key ve target kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 14 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 14 social owner (friendship/follow/wall/messaging/relation/runtime-control) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `social`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120012_social_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.13.0-alpha.1] - 2026-03-12
 
 ### Added

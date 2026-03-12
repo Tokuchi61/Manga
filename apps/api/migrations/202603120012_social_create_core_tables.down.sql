@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS social_runtime_controls;
+DROP TABLE IF EXISTS social_relationship_edges;
+DROP TABLE IF EXISTS social_messages;
+DROP TABLE IF EXISTS social_message_threads;
+DROP TABLE IF EXISTS social_wall_replies;
+DROP TABLE IF EXISTS social_wall_posts;
+DROP TABLE IF EXISTS social_follows;
+DROP TABLE IF EXISTS social_friendships;
+DROP TABLE IF EXISTS social_friendship_requests;

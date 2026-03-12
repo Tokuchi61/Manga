@@ -2,13 +2,13 @@
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 13 - History` kapsaminda kimlik, kullanici, merkezi erisim/policy, manga/chapter icerik owner, comment thread etkilesim, support intake/review, moderation queue/case, notification inbox/preference/runtime control ve history continue-reading/library/timeline omurgasini icerir.
+Bu repo su anda `Asama 14 - Social` kapsaminda kimlik, kullanici, merkezi erisim/policy, manga/chapter icerik owner, comment thread etkilesim, support intake/review, moderation queue/case, notification inbox/preference/runtime control, history continue-reading/library/timeline ve social friendship/follow/wall/messaging omurgasini icerir.
 
 ## Canonical Versiyon
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.13.0-alpha.1`
+- Su anki surum: `0.14.0-alpha.1`
 
 ## Dizin Yapisi
 
@@ -41,7 +41,7 @@ VERSION
 - `apps/api/internal/shared`: domain-agnostic ortak yapilar
 - `apps/api/internal/modules`: leaf moduller ve module registry kontrati
 
-## Asama 4-13 Omurga
+## Asama 4-14 Omurga
 
 - `apps/api/internal/modules/auth`: register/login/logout, session list/revoke, token refresh rotation, verification ve password reset/change akislari
 - `apps/api/internal/modules/user`: profil okuma/guncelleme, public-private profil ayrimi, account state gecisleri, history visibility preference ve VIP lifecycle akislari
@@ -53,6 +53,7 @@ VERSION
 - `apps/api/internal/modules/moderation`: moderation queue, case detail, assignment, moderator note, limited action ve escalation omurgasi
 - `apps/api/internal/modules/notification`: own inbox/detail/read, preference yonetimi, support event intake ve admin runtime control omurgasi
 - `apps/api/internal/modules/history`: own continue-reading/library/timeline, chapter read intake ve admin runtime control omurgasi
+- `apps/api/internal/modules/social`: friendship request/accept/reject/remove, follow/unfollow, social wall post/reply, direct message thread/message, block-mute-restrict ve admin runtime control omurgasi
 - `apps/api/internal/shared/crypto/password`: canonical argon2id sifre hash/verify yardimcilari
 - `apps/api/internal/platform/validation`: canonical validator wrapper (`go-playground/validator/v10`)
 - `apps/api/migrations/202603120002_auth_create_core_tables.*`: auth migration omurgasi
@@ -65,6 +66,7 @@ VERSION
 - `apps/api/migrations/202603120009_moderation_create_core_tables.*`: moderation migration omurgasi
 - `apps/api/migrations/202603120010_notification_create_core_tables.*`: notification migration omurgasi
 - `apps/api/migrations/202603120011_history_create_core_tables.*`: history migration omurgasi
+- `apps/api/migrations/202603120012_social_create_core_tables.*`: social migration omurgasi
 
 ## Dokumantasyon
 

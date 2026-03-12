@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-13 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-14 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -129,3 +129,15 @@ Bu dokuman test katmanlarini ve Asama 0-13 dogrulama adimlarini listeler.
 - Chapter read intake, continue-reading, own/public library ve timeline akislarinin dogrulanmasi
 - Bookmark/favorite/share metadata ve runtime control davranislarinin dogrulanmasi
 - History migration smoke kontrolu (`202603120011_history_create_core_tables`)
+
+## Asama 14 Social Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/social/...`
+- `cd apps/api && go test ./tests/contract -run Social`
+- `cd apps/api && go test ./tests/integration -run Social`
+- Friendship request/accept/reject/remove ve friend list akislarinin dogrulanmasi
+- Follow/unfollow ve followers/following liste akislarinin dogrulanmasi
+- Wall post/reply/list ve include-replies davranisinin dogrulanmasi
+- Direct message thread open/send/list/read akislarinin dogrulanmasi
+- Block/mute/restrict iliski kontrolu ve runtime toggle etkilerinin dogrulanmasi
+- Social migration smoke kontrolu (`202603120012_social_create_core_tables`)
