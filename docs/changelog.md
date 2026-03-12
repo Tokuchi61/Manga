@@ -5,6 +5,38 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.5.1-alpha.1] - 2026-03-12
+
+### Changed
+- `auth` modulu route kayitlari tek dosya ilkesine uygun olacak sekilde modul kokundeki `apps/api/internal/modules/auth/routes.go` icine toplandi.
+- `user` modulu route kayitlari tek dosya ilkesine uygun olacak sekilde modul kokundeki `apps/api/internal/modules/user/routes.go` icine toplandi.
+- Route kayit katmaninda bagimlilik kontrolu fail-fast olacak sekilde guncellendi (`router` veya `httpHandler` nil ise panic).
+
+### Fixed
+- Kural 7 uyumsuzlugu giderildi: route kayitlarinin harici `routes/` klasorunde parcalanmasi kaldirildi, modul kok `routes.go` standardina donuldu.
+- Wiring hatalarinda endpointlerin sessizce mount edilmemesi (no-op) sorunu giderildi.
+
+### Removed
+- Asagidaki parcali route dosyalari kaldirildi:
+  - `apps/api/internal/modules/auth/routes/auth_identity_routes.go`
+  - `apps/api/internal/modules/auth/routes/auth_password_routes.go`
+  - `apps/api/internal/modules/auth/routes/auth_session_routes.go`
+  - `apps/api/internal/modules/auth/routes/auth_verification_routes.go`
+  - `apps/api/internal/modules/auth/routes/register_routes.go`
+  - `apps/api/internal/modules/user/routes/register_routes.go`
+  - `apps/api/internal/modules/user/routes/user_account_routes.go`
+  - `apps/api/internal/modules/user/routes/user_profile_routes.go`
+
+### Docs
+- `VERSION`, `.env.example` ve `README.md` dosyalari yeni canonical surum `0.5.1-alpha.1` ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 4-5 route katmani modul kok `routes.go` standardina cekildi ve fail-fast guard'lar eklendi.
+- Etkilenen Moduller: `auth`, `user`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: Yok.
+- Operasyon Notu: Runtime versiyonu icin `APP_VERSION=0.5.1-alpha.1` kullanilmalidir.
+
 ## [0.5.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -244,6 +276,7 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
 
 
 

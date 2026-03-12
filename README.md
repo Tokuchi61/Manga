@@ -8,7 +8,7 @@ Bu repo su anda `Asama 5 - User` kapsaminda kullanici hesabi, profil, gorunurluk
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.5.0-alpha.1`
+- Su anki surum: `0.5.1-alpha.1`
 
 ## Dizin Yapisi
 
@@ -81,3 +81,4 @@ go build ./...
 - SemVer kullanilir.
 - Runtime versiyonu `APP_VERSION` env degiskeninden okunur.
 - `APP_VERSION` degeri kod icinde hardcode edilmez.
+
