@@ -1,6 +1,6 @@
-# platform Katmani
+﻿# platform Katmani
 
-`apps/api/internal/platform/` teknik altyapi kodlarinin sahibidir.
+`apps/api/internal/platform/` teknik altyapi kodlari icindir.
 
-- config, db, logger, middleware, queue, cache ve benzeri teknik alanlar burada tutulur
-- is kurali ve domain owner kararlar bu katmanda yazilmaz
+- config, db, logger, validation ve benzeri teknik sorumluluklar burada yer alir
+- business ownerligi veya modul use-case'i bu katmanda tutulmaz

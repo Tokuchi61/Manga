@@ -1,6 +1,6 @@
-# TESTING
+﻿# TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-1 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-4 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -24,3 +24,12 @@ Bu dokuman test katmanlarini ve Asama 0-1 dogrulama adimlarini listeler.
 - `cd apps/api && go test ./tests/integration/...`
 - Module registry duplicate-name ve canonical-name kurallarinin test edilmesi
 - App bootstrap katmaninda module route mount davranisinin test edilmesi
+
+## Asama 4 Auth Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/auth/...`
+- `cd apps/api && go test ./tests/contract -run Auth`
+- `cd apps/api && go test ./tests/integration -run Auth`
+- Register/login/logout/session revoke ve token rotation akislarinin dogrulanmasi
+- Forgot/reset/change password ile verification/resend cooldown senaryolarinin dogrulanmasi
+- Auth migration smoke kontrolu (`202603120002_auth_create_core_tables`)
