@@ -5,6 +5,64 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.8.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 8` kapsaminda canonical `chapter` modulu eklendi: `apps/api/internal/modules/chapter`.
+- Chapter owner akis omurgasi eklendi:
+  - chapter create/update
+  - manga bazli chapter listing + detail
+  - read (`preview`, `full`) ve navigation (`previous`, `next`, `first`, `last`)
+  - publish lifecycle (`draft`, `scheduled`, `published`, `archived`, `unpublished`)
+  - read/early-access state (`read_access_level`, `vip_only`, `early_access_*`, fallback access)
+  - media health ve integrity state guncellemeleri
+  - soft delete + restore
+- `chapter -> history` kontrat yuzeyi eklendi: `apps/api/internal/modules/chapter/contract/history_contract.go`.
+- Chapter event sabitleri eklendi: `apps/api/internal/modules/chapter/events/events.go`.
+- In-memory chapter repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/chapter/repository/memory_store.go`
+  - `apps/api/internal/modules/chapter/repository/chapter_repository.go`
+  - `apps/api/internal/modules/chapter/repository/memory_store_test.go`
+- Chapter service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/chapter/service/chapter_create_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_update_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_query_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_read_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_publish_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_access_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_media_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_lifecycle_service.go`
+  - `apps/api/internal/modules/chapter/service/chapter_contract_service.go`
+  - `apps/api/internal/modules/chapter/service/service_test.go`
+- Chapter HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/chapter/handler/*`
+  - `apps/api/internal/modules/chapter/routes.go`
+- Chapter migration cifti eklendi:
+  - `apps/api/migrations/202603120006_chapter_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120006_chapter_create_core_tables.down.sql`
+- Chapter stage testleri eklendi:
+  - contract: `apps/api/tests/contract/chapter_history_contract_test.go`
+  - integration: `apps/api/tests/integration/chapter_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/chapter_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta chapter module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- `docs/modules.md` modul envanterinde `chapter` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 8 ile hizalandi.
+- Chapter modulu katmanlari coklu akis tasiyan tek dosyalari onleyecek sekilde islem bazli parcalandi (`routes.go` tek giris noktasi olarak korunarak).
+
+### Fixed
+- `apps/api/internal/modules/chapter/module_test.go` route mount testi `/manga/{manga_id}/chapters` yuzeyini dogrulayacak sekilde duzeltildi.
+
+### Docs
+- Asama 8 chapter omurgasi ve versiyonlama guncellemeleri changelog ile izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 8 chapter owner (chapter/page/read/navigation/release/early-access) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `chapter`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120006_chapter_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.7.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -389,6 +447,7 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
 
 
 

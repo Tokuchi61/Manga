@@ -19,7 +19,7 @@
 | access |  | active | docs/modules/access.md | Merkezi authorization, policy ve eriÅŸim kararÄ± modÃ¼lÃ¼. |
 | admin |  | planned | docs/modules/admin.md | YÃ¶netim, moderasyon denetimi ve operasyon use-case modÃ¼lÃ¼. |
 | manga |  | active | docs/modules/manga.md | Ana iÃ§erik varlÄ±ÄŸÄ±, metadata ve discovery modÃ¼lÃ¼. |
-| chapter |  | planned | docs/modules/chapter.md | BÃ¶lÃ¼m, sayfa ve okuma yÃ¼zeyi veri modÃ¼lÃ¼. |
+| chapter |  | active | docs/modules/chapter.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
 | comment |  | planned | docs/modules/comment.md | Ä°Ã§erik yorumlarÄ± ve thread etkileÅŸim modÃ¼lÃ¼. |
 | support |  | planned | docs/modules/support.md | KullanÄ±cÄ± destek kayÄ±tlarÄ±, ticket ve report intake modÃ¼lÃ¼. |
 | moderation |  | planned | docs/modules/moderation.md | Scoped moderasyon kuyruklarÄ± ve vaka yÃ¶netimi modÃ¼lÃ¼. |
