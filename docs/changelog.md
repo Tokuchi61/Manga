@@ -5,6 +5,58 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.5.0-alpha.1] - 2026-03-12
+
+### Added
+- `Asama 5` kapsaminda canonical `user` modulu eklendi: `apps/api/internal/modules/user`.
+- User owner akis omurgasi eklendi:
+  - user create ve profile read/update
+  - public/private profile response ayrimi
+  - profile visibility ve history visibility preference guncelleme
+  - account state gecisleri (`active`, `deactivated`, `banned`)
+  - VIP lifecycle (`activate`, `freeze`, `resume`, `deactivate`)
+- `user -> access` kontrat yuzeyi eklendi: `apps/api/internal/modules/user/contract/access_contract.go`.
+- User event sabitleri eklendi: `apps/api/internal/modules/user/events/events.go`.
+- In-memory user repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/user/repository/memory_store.go`
+  - `apps/api/internal/modules/user/repository/user_account_repository.go`
+  - `apps/api/internal/modules/user/repository/memory_store_test.go`
+- User service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/user/service/user_create_service.go`
+  - `apps/api/internal/modules/user/service/user_profile_service.go`
+  - `apps/api/internal/modules/user/service/user_visibility_service.go`
+  - `apps/api/internal/modules/user/service/user_account_service.go`
+  - `apps/api/internal/modules/user/service/user_vip_service.go`
+  - `apps/api/internal/modules/user/service/service_test.go`
+- User HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/user/handler/*`
+  - `apps/api/internal/modules/user/routes/*`
+- User migration cifti eklendi:
+  - `apps/api/migrations/202603120003_user_create_core_tables.up.sql`
+  - `apps/api/migrations/202603120003_user_create_core_tables.down.sql`
+- User stage testleri eklendi:
+  - contract: `apps/api/tests/contract/user_access_contract_test.go`
+  - integration: `apps/api/tests/integration/user_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/user_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta user module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- `docs/modules.md` modul envanterinde `user` status'u `active` olarak guncellendi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 5 ile hizalandi.
+- User modulu katmanlari coklu akislari tek dosyada toplamayacak sekilde islem bazli parcalandi.
+
+### Fixed
+- Yok.
+
+### Docs
+- Asama 5 user omurgasi ve versiyonlama guncellemeleri changelog ile izlenebilir hale getirildi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 5 user owner omurgasi (account/profile/visibility/membership/vip) kod seviyesine tasindi.
+- Etkilenen Moduller: `user`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603120003_user_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.4.0-alpha.1] - 2026-03-12
 
 ### Added
@@ -192,6 +244,8 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
+
 
 
 

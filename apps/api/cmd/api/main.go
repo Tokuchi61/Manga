@@ -9,6 +9,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
+	usermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/user"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/db"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/logger"
@@ -43,8 +44,9 @@ func main() {
 		LoginCooldownSeconds:              cfg.AuthLoginCooldownSeconds,
 		VerificationResendCooldownSeconds: cfg.AuthEmailVerificationResendCooldownSeconds,
 	})
+	user := usermodule.New()
 
-	registry, err := modules.NewRegistry(auth)
+	registry, err := modules.NewRegistry(auth, user)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}

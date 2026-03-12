@@ -1,6 +1,6 @@
-﻿# Setup
+# Setup
 
-Bu dokuman proje kurulumunu Asama 0 ve Asama 1 omurgasina gore tanimlar.
+Bu dokuman proje kurulumunu Asama 0-5 omurgasina gore tanimlar.
 
 ## Gereksinimler
 
@@ -52,4 +52,5 @@ Yeni bir module klasor omurgasi acmak icin:
 powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName auth
 powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName chapter -DomainGroup content
 ```
+
 
