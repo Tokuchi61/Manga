@@ -8,6 +8,7 @@ import (
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
+	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/db"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/logger"
@@ -37,7 +38,16 @@ func main() {
 	}
 	defer pool.Close()
 
-	registry := modules.EmptyRegistry()
+	auth := authmodule.New(authmodule.RuntimeConfig{
+		FailedAttemptLimitPerMinute:       cfg.AuthLoginFailedAttemptLimitPerMinute,
+		LoginCooldownSeconds:              cfg.AuthLoginCooldownSeconds,
+		VerificationResendCooldownSeconds: cfg.AuthEmailVerificationResendCooldownSeconds,
+	})
+
+	registry, err := modules.NewRegistry(auth)
+	if err != nil {
+		log.Fatal("module registry init failed", zap.Error(err))
+	}
 
 	srv := app.New(cfg, log, pool, registry)
 	if err := srv.Run(ctx); err != nil {

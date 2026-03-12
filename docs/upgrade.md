@@ -8,4 +8,5 @@ Bu dokuman uygulanan, kismi kalan ve bekleyen islerin operasyonel takibini tutar
 - Asama 1: Tamamlandi.
 - Asama 2: Tamamlandi.
 - Asama 3: Tamamlandi.
-- Asama 4: Beklemede.
+- Asama 4: Tamamlandi.
+- Asama 5: Beklemede.

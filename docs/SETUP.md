@@ -1,4 +1,4 @@
-# Setup
+﻿# Setup
 
 Bu dokuman proje kurulumunu Asama 0 ve Asama 1 omurgasina gore tanimlar.
 
@@ -22,6 +22,10 @@ $env:APP_VERSION = (Get-Content VERSION -Raw).Trim()
 
 1. `cp .env.example .env`
 2. Gerekirse DSN ve port degerlerini guncelle.
+3. Auth guvenlik esikleri icin opsiyonel env degerleri:
+   - `AUTH_LOGIN_FAILED_ATTEMPT_LIMIT_PER_MINUTE`
+   - `AUTH_LOGIN_COOLDOWN_SECONDS`
+   - `AUTH_EMAIL_VERIFICATION_RESEND_COOLDOWN_SECONDS`
 
 ## Docker ile Calistirma
 
@@ -48,3 +52,4 @@ Yeni bir module klasor omurgasi acmak icin:
 powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName auth
 powershell -ExecutionPolicy Bypass -File scripts/scaffold_module.ps1 -ModuleName chapter -DomainGroup content
 ```
+
