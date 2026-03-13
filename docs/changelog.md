@@ -4,6 +4,56 @@ Bu dosya yalnizca projede gercekte yapilan islemleri kaydeder.
 Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
+## [0.20.0-alpha.1] - 2026-03-13
+
+### Added
+- `Asama 20` kapsaminda canonical `ads` modulu eklendi: `apps/api/internal/modules/ads`.
+- Ads owner akis omurgasi eklendi:
+  - placement resolve (surface/target/frequency cap)
+  - impression intake ve request-id tabanli idempotency
+  - click intake, request-id tabanli idempotency ve invalid-traffic korumasi
+  - campaign aggregate (impression/click/CTR) gorunumu
+  - admin runtime control (`surface-state`, `placement-state`, `campaign-state`, `click-intake-state`)
+  - admin placement/campaign yonetimi
+- Ads event sabitleri eklendi: `apps/api/internal/modules/ads/events/events.go`.
+- In-memory ads repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/ads/repository/memory_store.go`
+  - `apps/api/internal/modules/ads/repository/placement_repository.go`
+  - `apps/api/internal/modules/ads/repository/campaign_repository.go`
+  - `apps/api/internal/modules/ads/repository/intake_repository.go`
+  - `apps/api/internal/modules/ads/repository/aggregate_repository.go`
+  - `apps/api/internal/modules/ads/repository/runtime_repository.go`
+  - `apps/api/internal/modules/ads/repository/snapshot_store.go`
+  - `apps/api/internal/modules/ads/repository/memory_store_test.go`
+- Ads service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/ads/service/ads_resolve_service.go`
+  - `apps/api/internal/modules/ads/service/ads_impression_service.go`
+  - `apps/api/internal/modules/ads/service/ads_click_service.go`
+  - `apps/api/internal/modules/ads/service/ads_admin_service.go`
+  - `apps/api/internal/modules/ads/service/service_test.go`
+- Ads HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/ads/handler/*`
+  - `apps/api/internal/modules/ads/routes.go`
+- Ads migration cifti eklendi:
+  - `apps/api/migrations/202603130018_ads_create_core_tables.up.sql`
+  - `apps/api/migrations/202603130018_ads_create_core_tables.down.sql`
+- Ads stage testleri eklendi:
+  - contract: `apps/api/tests/contract/ads_events_contract_test.go`
+  - integration: `apps/api/tests/integration/ads_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/ads_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta ads module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `ads` eklendi.
+- `docs/modules.md` modul envanterinde `ads` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki ads feature key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 20 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 20 ads owner (placement/campaign/resolve/intake/aggregate/runtime-control) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `ads`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603130018_ads_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
 
 ## [0.19.0-alpha.1] - 2026-03-13
 
@@ -1049,6 +1099,4 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
-
-
 

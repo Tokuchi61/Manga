@@ -11,6 +11,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	accessmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/access"
+	adsmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/ads"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	chaptermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter"
 	commentmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/comment"
@@ -87,6 +88,7 @@ func main() {
 	royalpass := royalpassmodule.New()
 	shop := shopmodule.New()
 	payment := paymentmodule.New()
+	ads := adsmodule.New()
 	access := accessmodule.New(accessmodule.RuntimeConfig{})
 
 	user.SetCredentialLookup(auth)
@@ -115,6 +117,7 @@ func main() {
 		{name: "royalpass", snapshot: (&royalpass).Snapshot, restore: (&royalpass).RestoreSnapshot},
 		{name: "shop", snapshot: (&shop).Snapshot, restore: (&shop).RestoreSnapshot},
 		{name: "payment", snapshot: (&payment).Snapshot, restore: (&payment).RestoreSnapshot},
+		{name: "ads", snapshot: (&ads).Snapshot, restore: (&ads).RestoreSnapshot},
 	}
 	restoreSnapshots(ctx, log, snapshotStore, targets)
 	persistSnapshots(context.Background(), log, snapshotStore, targets, cfg.HTTPShutdownTimeout)
@@ -135,7 +138,7 @@ func main() {
 		}()
 	}
 
-	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission, royalpass, shop, payment)
+	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission, royalpass, shop, payment, ads)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}

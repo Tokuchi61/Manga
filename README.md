@@ -2,13 +2,13 @@
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
-Bu repo su anda `Asama 19 - Payment` kapsaminda kimlik, kullanici, merkezi erisim/policy, manga/chapter icerik owner, comment thread etkilesim, support intake/review, moderation queue/case, notification inbox/preference/runtime control, history continue-reading/library/timeline ve social friendship/follow/wall/messaging ile inventory definition/claim/grant/revoke/consume/equip, mission definition/progress ingest/claim/reset/runtime-control ve royalpass season/tier/progress/claim/premium-activation/runtime-control ve shop catalog/offer/purchase-intent/recovery/runtime-control ile payment package/checkout/callback/ledger/reconcile/runtime-control omurgasini icerir.
+Bu repo su anda `Asama 20 - Ads` kapsaminda kimlik, kullanici, merkezi erisim/policy, manga/chapter icerik owner, comment thread etkilesim, support intake/review, moderation queue/case, notification inbox/preference/runtime control, history continue-reading/library/timeline ve social friendship/follow/wall/messaging ile inventory definition/claim/grant/revoke/consume/equip, mission definition/progress ingest/claim/reset/runtime-control ve royalpass season/tier/progress/claim/premium-activation/runtime-control ve shop catalog/offer/purchase-intent/recovery/runtime-control ile payment package/checkout/callback/ledger/reconcile/runtime-control ve ads placement/campaign/delivery/impression-click intake/aggregate/runtime-control omurgasini icerir.
 
 ## Canonical Versiyon
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.19.0-alpha.1`
+- Su anki surum: `0.20.0-alpha.1`
 
 ## Dizin Yapisi
 
@@ -41,7 +41,7 @@ VERSION
 - `apps/api/internal/shared`: domain-agnostic ortak yapilar
 - `apps/api/internal/modules`: leaf moduller ve module registry kontrati
 
-## Asama 4-19 Omurga
+## Asama 4-20 Omurga
 
 - `apps/api/internal/modules/auth`: register/login/logout, session list/revoke, token refresh rotation, verification ve password reset/change akislari
 - `apps/api/internal/modules/user`: profil okuma/guncelleme, public-private profil ayrimi, account state gecisleri, history visibility preference ve VIP lifecycle akislari
@@ -59,6 +59,7 @@ VERSION
 - `apps/api/internal/modules/royalpass`: season/tier ownerligi, own season overview, progress ingest, tier claim-request, premium activation intake, admin season-tier yonetimi ve runtime control omurgasi
 - `apps/api/internal/modules/shop`: product/offer catalog ownerligi, own catalog/detail, purchase intent, purchase recovery, admin product-offer yonetimi ve runtime control omurgasi
 - `apps/api/internal/modules/payment`: mana package ownerligi, checkout session, callback intake, wallet/transaction read, refund-reversal ve runtime control omurgasi
+- `apps/api/internal/modules/ads`: placement/campaign ownerligi, placement resolve, impression-click intake, aggregate ve runtime control omurgasi
 - `apps/api/internal/shared/crypto/password`: canonical argon2id sifre hash/verify yardimcilari
 - `apps/api/internal/platform/validation`: canonical validator wrapper (`go-playground/validator/v10`)
 - `apps/api/migrations/202603120002_auth_create_core_tables.*`: auth migration omurgasi
@@ -77,6 +78,7 @@ VERSION
 - `apps/api/migrations/202603120015_royalpass_create_core_tables.*`: royalpass migration omurgasi
 - `apps/api/migrations/202603130016_shop_create_core_tables.*`: shop migration omurgasi
 - `apps/api/migrations/202603130017_payment_create_core_tables.*`: payment migration omurgasi
+- `apps/api/migrations/202603130018_ads_create_core_tables.*`: ads migration omurgasi
 
 ## Dokumantasyon
 
@@ -109,7 +111,4 @@ go build ./...
 - SemVer kullanilir.
 - Runtime versiyonu `APP_VERSION` env degiskeninden okunur.
 - `APP_VERSION` degeri kod icinde hardcode edilmez.
-
-
-
 

@@ -29,7 +29,7 @@
 | mission |  | active | docs/modules.md | Görev tanımı, ilerleme ve claim eligibility modülü. |
 | royalpass |  | active | docs/modules.md | Sezon, tier ve premium track ilerleme modulu. |
 | history |  | active | docs/modules.md | Continue reading, kütüphane ve okuma geçmişi modülü. |
-| ads |  | planned | docs/modules.md | Reklam placement, campaign ve ölçümleme modülü. |
+| ads |  | active | docs/modules.md | Reklam placement, campaign ve ölçümleme modülü. |
 | shop |  | active | docs/modules.md | Urun katalogu, offer ve purchase orchestration modulu. |
 | payment |  | active | docs/modules.md | Checkout, ledger ve finansal işlem doğruluğu modülü. |
 

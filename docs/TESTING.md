@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-19 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-20 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -191,3 +191,14 @@ Bu dokuman test katmanlarini ve Asama 0-19 dogrulama adimlarini listeler.
 - Ledger/balance snapshot dogrulugu, callback idempotency ve reconcile davranisinin dogrulanmasi
 - Runtime control (mana-purchase/checkout/transaction-read/callback-intake) toggle etkilerinin dogrulanmasi
 - Payment migration smoke kontrolu (`202603130017_payment_create_core_tables`)
+
+## Asama 20 Ads Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/ads/...`
+- `cd apps/api && go test ./tests/contract -run Ads`
+- `cd apps/api && go test ./tests/integration -run Ads`
+- Placement resolve, campaign serve ve frequency cap davranisinin dogrulanmasi
+- Impression/click intake idempotency ve invalid-traffic korumasinin dogrulanmasi
+- Runtime control (surface/placement/campaign/click-intake) toggle etkilerinin dogrulanmasi
+- Ads migration smoke kontrolu (`202603130018_ads_create_core_tables`)
+
