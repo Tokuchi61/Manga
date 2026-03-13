@@ -5,6 +5,57 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
 
+## [0.19.0-alpha.1] - 2026-03-13
+
+### Added
+- `Asama 19` kapsaminda canonical `payment` modulu eklendi: `apps/api/internal/modules/payment`.
+- Payment owner akis omurgasi eklendi:
+  - mana package listing ve admin package yonetimi
+  - checkout session baslatma ve request-id tabanli idempotency
+  - provider callback intake ve provider-event idempotency
+  - transaction/wallet own-read yuzeyleri
+  - refund, reversal ve reconcile akislari
+  - admin runtime control (`mana-purchase-state`, `checkout-state`, `transaction-read-state`, `callback-intake-state`)
+- Payment event sabitleri eklendi: `apps/api/internal/modules/payment/events/events.go`.
+- In-memory payment repository omurgasi ve testi eklendi:
+  - `apps/api/internal/modules/payment/repository/memory_store.go`
+  - `apps/api/internal/modules/payment/repository/package_repository.go`
+  - `apps/api/internal/modules/payment/repository/session_repository.go`
+  - `apps/api/internal/modules/payment/repository/transaction_repository.go`
+  - `apps/api/internal/modules/payment/repository/ledger_repository.go`
+  - `apps/api/internal/modules/payment/repository/runtime_repository.go`
+  - `apps/api/internal/modules/payment/repository/snapshot_store.go`
+  - `apps/api/internal/modules/payment/repository/memory_store_test.go`
+- Payment service use-case omurgasi ve kapsam testleri eklendi:
+  - `apps/api/internal/modules/payment/service/payment_package_service.go`
+  - `apps/api/internal/modules/payment/service/payment_checkout_service.go`
+  - `apps/api/internal/modules/payment/service/payment_callback_service.go`
+  - `apps/api/internal/modules/payment/service/payment_wallet_service.go`
+  - `apps/api/internal/modules/payment/service/payment_admin_service.go`
+  - `apps/api/internal/modules/payment/service/service_test.go`
+- Payment HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/payment/handler/*`
+  - `apps/api/internal/modules/payment/routes.go`
+- Payment migration cifti eklendi:
+  - `apps/api/migrations/202603130017_payment_create_core_tables.up.sql`
+  - `apps/api/migrations/202603130017_payment_create_core_tables.down.sql`
+- Payment stage testleri eklendi:
+  - contract: `apps/api/tests/contract/payment_events_contract_test.go`
+  - integration: `apps/api/tests/integration/payment_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/payment_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta payment module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `payment` eklendi.
+- `docs/modules.md` modul envanterinde `payment` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki payment feature key kayitlari `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 19 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 19 payment owner (package/checkout/callback/wallet-ledger/reconcile/runtime-control) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `payment`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603130017_payment_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
 ## [0.18.0-alpha.1] - 2026-03-13
 
 ### Added
@@ -998,5 +1049,6 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
 
 
