@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-17 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-18 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -171,3 +171,13 @@ Bu dokuman test katmanlarini ve Asama 0-17 dogrulama adimlarini listeler.
 - Tier claim-request idempotency ve premium-activation intake davranisinin dogrulanmasi
 - Runtime control (season/claim/premium) toggle etkilerinin dogrulanmasi
 - RoyalPass migration smoke kontrolu (`202603120015_royalpass_create_core_tables`)
+
+## Asama 18 Shop Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/shop/...`
+- `cd apps/api && go test ./tests/contract -run Shop`
+- `cd apps/api && go test ./tests/integration -run Shop`
+- Product/offer catalog ownerligi, own catalog/detail ve purchase intent akislarinin dogrulanmasi
+- Purchase idempotency, already-owned korumasi ve recovery request davranisinin dogrulanmasi
+- Runtime control (catalog/purchase/campaign) toggle etkilerinin dogrulanmasi
+- Shop migration smoke kontrolu (`202603130016_shop_create_core_tables`)
