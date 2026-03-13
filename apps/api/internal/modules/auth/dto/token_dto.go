@@ -9,6 +9,7 @@ type RefreshTokenRequest struct {
 
 // RefreshTokenResponse represents refresh token rotation output.
 type RefreshTokenResponse struct {
+	UserID               string    `json:"user_id,omitempty"`
 	SessionID            string    `json:"session_id"`
 	AccessToken          string    `json:"access_token"`
 	RefreshToken         string    `json:"refresh_token"`

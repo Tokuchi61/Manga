@@ -32,7 +32,11 @@ func (s *AuthService) ForgotPassword(ctx context.Context, request dto.ForgotPass
 
 	meta = normalizeMeta(meta)
 	s.appendSecurityEvent(ctx, credential.ID, "auth.password_reset.requested", "success", "password_reset_requested", meta)
-	return dto.TokenDispatchResponse{Status: "requested", Token: token}, nil
+	response := dto.TokenDispatchResponse{Status: "requested"}
+	if s.shouldExposeSensitiveTokens() {
+		response.Token = token
+	}
+	return response, nil
 }
 
 func (s *AuthService) ResetPassword(ctx context.Context, request dto.ResetPasswordRequest, meta RequestMeta) (dto.OperationResponse, error) {

@@ -17,7 +17,7 @@
 | auth |  | active | docs/modules.md | Kimlik dogrulama, token, session ve hesap guvenligi akislarinin aktif modulu. |
 | user |  | active | docs/modules.md | Kullanici hesabi, profil, tercih ve uyelik verisi modulu. |
 | access |  | active | docs/modules.md | Merkezi authorization, policy ve erişim kararı modülü. |
-| admin |  | planned | docs/modules.md | Yönetim, moderasyon denetimi ve operasyon use-case modülü. |
+| admin |  | active | docs/modules.md | Yönetim, moderasyon denetimi ve operasyon use-case modülü. |
 | manga |  | active | docs/modules.md | Ana içerik varlığı, metadata ve discovery modülü. |
 | chapter |  | active | docs/modules.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
 | comment |  | active | docs/modules.md | Icerik yorumlari ve thread etkilesim modulu. |
@@ -27,11 +27,11 @@
 | social |  | active | docs/modules.md | Takip, arkadaşlık, duvar ve mesajlaşma modülü. |
 | inventory |  | active | docs/modules.md | Item sahipliği, claim, consume ve equip modülü. |
 | mission |  | active | docs/modules.md | Görev tanımı, ilerleme ve claim eligibility modülü. |
-| royalpass |  | planned | docs/modules.md | Sezon, tier ve premium track ilerleme modülü. |
+| royalpass |  | active | docs/modules.md | Sezon, tier ve premium track ilerleme modulu. |
 | history |  | active | docs/modules.md | Continue reading, kütüphane ve okuma geçmişi modülü. |
-| ads |  | planned | docs/modules.md | Reklam placement, campaign ve ölçümleme modülü. |
-| shop |  | planned | docs/modules.md | Ürün kataloğu, offer ve purchase orchestration modülü. |
-| payment |  | planned | docs/modules.md | Checkout, ledger ve finansal işlem doğruluğu modülü. |
+| ads |  | active | docs/modules.md | Reklam placement, campaign ve ölçümleme modülü. |
+| shop |  | active | docs/modules.md | Urun katalogu, offer ve purchase orchestration modulu. |
+| payment |  | active | docs/modules.md | Checkout, ledger ve finansal işlem doğruluğu modülü. |
 
 
 ---
@@ -1098,7 +1098,7 @@
 - access policy owner verisi
 
 ## Access Kontratı
-`payment` yetki kararı vermez. Mana satın alma ve işlem görüntüleme aksiyonları `access` ile korunur. Ürün kataloğu `shop`, final item sahipliği `inventory` modülünde kalır. `payment` devreye girdiğinde `shop` içindeki geçici allowance bridge yüzeyi kaldırılmalı ve canonical bakiye yalnızca `payment` içinde tutulmalıdır. Finansal yüzeylerde precedence ve intake pause davranışı `docs/shared.md` ile hizalı kalmalıdır.
+- `inventory` ve `payment` entegrasyon testleri
 
 ## API veya Event Sınırı
 - mana package listing ve checkout session başlatma yüzeyi
@@ -1270,16 +1270,16 @@
 ## Access Kontratı
 `shop` yetki kararı vermez. Ürün görüntüleme, satın alma ve yönetim aksiyonları `access` ile korunur. Final item sahipliği ve equip state `inventory`, bakiye veya ledger doğruluğu ise `payment` modülünde kalmalıdır. `shop` yalnızca purchase orkestrasyonu için gerekli geçici doğrulama köprülerini taşıyabilir. Satın alma kaynakları `docs/shared.md` ile hizalı olmalıdır.
 
-## Geçiş Notu
-- `payment` devreye girene kadar `shop`, yalnızca Stage 29 için tanımlanan geçici `seed_mana_allowance_snapshot` veya operasyonel allowance okuma yüzeyi ile purchase eligibility doğrulayabilir.
-- Bu köprü veri canonical wallet, ledger veya gerçek bakiye owner'lığı sayılmaz; `payment` modülü açıldığında kaldırılmalı ve yerini `payment` kontratına bırakmalıdır.
+## Ge�i� Notu
+- Stage 19 ile `payment` modulu aktif edildi; `shop` satin alma orkestrasyonunda canonical bakiye ve checkout dogrulamasini `payment` kontrati uzerinden yurutmelidir.
+- Gecici `seed_mana_allowance_snapshot` koprusu legacy not olarak korunur; canonical bakiye akisi `payment` kontratindadir.
 
 ## API veya Event Sınırı
 - katalog listing, item detail ve purchase request yüzeyi
 - admin katalog, fiyat ve görünürlük yönetim yüzeyi
 - `inventory` için final grant veya teslim talep kontratı
 - `payment` için bakiye düşüm, reserve veya mutabakat kontratı
-- payment öncesi aşamada geçici `seed_mana_allowance_snapshot` okuma kontratı
+- payment aktif oldugu icin gecici allowance bridge kontrati yeni gelistirmelerde kullanilmamalidir.
 - `royalpass` gibi entitlement modülleri için ürün bazlı premium activation veya fulfillment handoff kontratı
 
 ## Bağımlılıklar
@@ -1318,7 +1318,7 @@
 - katalog, product veya offer ayrımı ve fiyat çözümleme testleri
 - purchase idempotency ve duplicate request doğrulamaları
 - already-owned ve eligibility kuralları testleri
-- `inventory`, geçici allowance bridge ve `payment` entegrasyon testleri
+- `inventory` ve `payment` entegrasyon testleri
 - recovery akışı ve runtime control doğrulamaları
 
 
@@ -1574,3 +1574,4 @@
 - public veya private response ayrımı testleri
 - history visibility precedence doğrulamaları
 - ban, deactivation ve VIP lifecycle doğrulamaları
+

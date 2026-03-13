@@ -52,7 +52,11 @@ func (s *AuthService) SendEmailVerification(ctx context.Context, request dto.Sen
 
 	meta = normalizeMeta(meta)
 	s.appendSecurityEvent(ctx, credential.ID, events.EventEmailVerificationSent, "success", "verification_resend", meta)
-	return dto.TokenDispatchResponse{Status: "sent", Token: token}, nil
+	response := dto.TokenDispatchResponse{Status: "sent"}
+	if s.shouldExposeSensitiveTokens() {
+		response.Token = token
+	}
+	return response, nil
 }
 
 func (s *AuthService) ConfirmEmailVerification(ctx context.Context, request dto.ConfirmVerificationRequest, meta RequestMeta) (dto.OperationResponse, error) {

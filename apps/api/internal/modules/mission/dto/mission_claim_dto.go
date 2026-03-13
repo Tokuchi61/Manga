@@ -4,7 +4,7 @@ package dto
 type ClaimMissionRequest struct {
 	ActorUserID   string `json:"-" validate:"required,uuid4"`
 	MissionID     string `json:"-" validate:"required,max=128"`
-	RequestID     string `json:"request_id,omitempty" validate:"omitempty,max=128"`
+	RequestID     string `json:"request_id" validate:"required,max=128"`
 	CorrelationID string `json:"correlation_id,omitempty" validate:"omitempty,max=128"`
 }
 

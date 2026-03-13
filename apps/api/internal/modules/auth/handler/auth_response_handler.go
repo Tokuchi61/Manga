@@ -3,16 +3,14 @@ package handler
 import (
 	"encoding/json"
 	"errors"
+	"github.com/Tokuchi61/Manga/apps/api/internal/platform/httpx"
 	"net/http"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/service"
 )
 
 func decodeJSON(r *http.Request, out any) error {
-	defer r.Body.Close()
-	decoder := json.NewDecoder(r.Body)
-	decoder.DisallowUnknownFields()
-	return decoder.Decode(out)
+	return httpx.DecodeJSON(r, out)
 }
 
 func writeServiceError(w http.ResponseWriter, err error) {

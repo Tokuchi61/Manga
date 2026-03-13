@@ -1,10 +1,12 @@
-﻿package history
+package history
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
@@ -21,7 +23,9 @@ func TestModuleMountsHistoryRoutes(t *testing.T) {
 	module.RegisterRoutes(router)
 
 	req := httptest.NewRequest(http.MethodGet, "/history/continue-reading", nil)
-	req.Header.Set("X-Actor-User-ID", uuid.NewString())
+	token, err := identity.IssueAccessToken(identity.TokenClaims{UserID: uuid.NewString(), ExpiresAt: time.Now().UTC().Add(time.Minute)})
+	require.NoError(t, err)
+	req.Header.Set(identity.HeaderAuthorization, "Bearer "+token)
 	rec := httptest.NewRecorder()
 
 	router.ServeHTTP(rec, req)

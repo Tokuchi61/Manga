@@ -1,4 +1,4 @@
-﻿# shared Katmani
+# shared Katmani
 
 `apps/api/internal/shared/` sadece domain-agnostic ortak yapilar icindir.
 

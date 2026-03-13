@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-21 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -161,3 +161,64 @@ Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
 - Completion/claim-request idempotency davranisinin ve period key yorumunun dogrulanmasi
 - Runtime control (read/claim/progress-ingest/reset-hour) toggle etkilerinin dogrulanmasi
 - Mission migration smoke kontrolu (`202603120014_mission_create_core_tables`)
+
+## Asama 17 RoyalPass Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/royalpass/...`
+- `cd apps/api && go test ./tests/contract -run RoyalPass`
+- `cd apps/api && go test ./tests/integration -run RoyalPass`
+- Season/tier ownerligi, own season overview ve progress ingest akislarinin dogrulanmasi
+- Tier claim-request idempotency ve premium-activation intake davranisinin dogrulanmasi
+- Runtime control (season/claim/premium) toggle etkilerinin dogrulanmasi
+- RoyalPass migration smoke kontrolu (`202603120015_royalpass_create_core_tables`)
+
+## Asama 18 Shop Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/shop/...`
+- `cd apps/api && go test ./tests/contract -run Shop`
+- `cd apps/api && go test ./tests/integration -run Shop`
+- Product/offer catalog ownerligi, own catalog/detail ve purchase intent akislarinin dogrulanmasi
+- Purchase idempotency, already-owned korumasi ve recovery request davranisinin dogrulanmasi
+- Runtime control (catalog/purchase/campaign) toggle etkilerinin dogrulanmasi
+- Shop migration smoke kontrolu (`202603130016_shop_create_core_tables`)
+
+## Asama 19 Payment Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/payment/...`
+- `cd apps/api && go test ./tests/contract -run Payment`
+- `cd apps/api && go test ./tests/integration -run Payment`
+- Mana package ownerligi, checkout session ve callback intake akislarinin dogrulanmasi
+- Ledger/balance snapshot dogrulugu, callback idempotency ve reconcile davranisinin dogrulanmasi
+- Runtime control (mana-purchase/checkout/transaction-read/callback-intake) toggle etkilerinin dogrulanmasi
+- Payment migration smoke kontrolu (`202603130017_payment_create_core_tables`)
+
+## Asama 20 Ads Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/ads/...`
+- `cd apps/api && go test ./tests/contract -run Ads`
+- `cd apps/api && go test ./tests/integration -run Ads`
+- Placement resolve, campaign serve ve frequency cap davranisinin dogrulanmasi
+- Impression/click intake idempotency ve invalid-traffic korumasinin dogrulanmasi
+- Runtime control (surface/placement/campaign/click-intake) toggle etkilerinin dogrulanmasi
+- Ads migration smoke kontrolu (`202603130018_ads_create_core_tables`)
+
+## Asama 21 Admin Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/admin/...`
+- `cd apps/api && go test ./tests/contract -run Admin`
+- `cd apps/api && go test ./tests/integration -run Admin`
+- Dashboard, runtime maintenance ve audit akislarinin dogrulanmasi
+- Override, user-review ve high-risk double-confirmation davranisinin dogrulanmasi
+- Impersonation start/stop lifecycle ve idempotency davranisinin dogrulanmasi
+- Admin migration smoke kontrolu (`202603130019_admin_create_core_tables`)
+
+## Hotfix 0.21.1 Kontrolleri
+
+- `cd apps/api && go test -count=1 ./...`
+- `cd apps/api && go test -cover ./...`
+- `powershell -ExecutionPolicy Bypass -File scripts/check_utf8_no_bom.ps1 -RepoRoot .`
+- `cd apps/api && go test ./tests/integration -run Maintenance`
+- `cd apps/api && go test ./tests/integration -run Payment`
+- `cd apps/api && go test ./tests/integration -run MigrationsApply` (`DB_TEST_DSN` tanimliysa)
+- `docker build -f apps/api/Dockerfile -t novascans-api:local .`
+- `docker compose -f deploy/docker-compose.yml up -d --build`

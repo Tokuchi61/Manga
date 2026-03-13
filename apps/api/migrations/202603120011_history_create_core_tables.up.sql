@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS history_library_entries (
+CREATE TABLE IF NOT EXISTS history_library_entries (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES user_accounts(id) ON DELETE CASCADE,
     manga_id UUID NOT NULL REFERENCES manga_entries(id) ON DELETE CASCADE,

@@ -68,6 +68,7 @@ func TestMissionServiceProgressClaimAndListFlow(t *testing.T) {
 	_, err = svc.ClaimMission(context.Background(), dto.ClaimMissionRequest{
 		ActorUserID: actorID,
 		MissionID:   "daily_read_3",
+		RequestID:   "req-mission-claim-2",
 	})
 	require.True(t, errors.Is(err, ErrAlreadyClaimed))
 
@@ -95,7 +96,7 @@ func TestMissionServiceRuntimeTogglesAffectOperations(t *testing.T) {
 
 	_, err = svc.UpdateProgressIngestState(context.Background(), dto.UpdateProgressIngestStateRequest{Enabled: false})
 	require.NoError(t, err)
-	_, err = svc.IngestMissionProgress(context.Background(), dto.IngestMissionProgressRequest{ActorUserID: actorID, MissionID: "daily_comment_2", Delta: 1, SourceType: "comment"})
+	_, err = svc.IngestMissionProgress(context.Background(), dto.IngestMissionProgressRequest{ActorUserID: actorID, MissionID: "daily_comment_2", Delta: 1, SourceType: "comment", RequestID: "req-disabled-ingest"})
 	require.True(t, errors.Is(err, ErrProgressIngestDisabled))
 
 	_, err = svc.UpdateProgressIngestState(context.Background(), dto.UpdateProgressIngestStateRequest{Enabled: true})
@@ -105,7 +106,7 @@ func TestMissionServiceRuntimeTogglesAffectOperations(t *testing.T) {
 
 	_, err = svc.UpdateClaimState(context.Background(), dto.UpdateClaimStateRequest{Enabled: false})
 	require.NoError(t, err)
-	_, err = svc.ClaimMission(context.Background(), dto.ClaimMissionRequest{ActorUserID: actorID, MissionID: "daily_comment_2"})
+	_, err = svc.ClaimMission(context.Background(), dto.ClaimMissionRequest{ActorUserID: actorID, MissionID: "daily_comment_2", RequestID: "req-disabled-claim"})
 	require.True(t, errors.Is(err, ErrClaimDisabled))
 
 	_, err = svc.UpdateReadState(context.Background(), dto.UpdateReadStateRequest{Enabled: false})
@@ -135,6 +136,7 @@ func TestMissionServiceResetMissionProgress(t *testing.T) {
 		MissionID:   "weekly_social_4",
 		Delta:       3,
 		SourceType:  "social",
+		RequestID:   "req-weekly-social-progress",
 	})
 	require.NoError(t, err)
 

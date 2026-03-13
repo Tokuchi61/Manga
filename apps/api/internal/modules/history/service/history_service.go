@@ -1,4 +1,4 @@
-﻿package service
+package service
 
 import (
 	"context"
@@ -13,15 +13,15 @@ import (
 )
 
 var (
-	ErrValidation             = errors.New("history_validation_failed")
-	ErrNotFound               = errors.New("history_not_found")
-	ErrForbiddenAction        = errors.New("history_forbidden_action")
-	ErrContinueReadingDisabled = errors.New("history_continue_reading_disabled")
-	ErrLibraryDisabled        = errors.New("history_library_disabled")
-	ErrTimelineDisabled       = errors.New("history_timeline_disabled")
-	ErrBookmarkWriteDisabled  = errors.New("history_bookmark_write_disabled")
+	ErrValidation               = errors.New("history_validation_failed")
+	ErrNotFound                 = errors.New("history_not_found")
+	ErrForbiddenAction          = errors.New("history_forbidden_action")
+	ErrContinueReadingDisabled  = errors.New("history_continue_reading_disabled")
+	ErrLibraryDisabled          = errors.New("history_library_disabled")
+	ErrTimelineDisabled         = errors.New("history_timeline_disabled")
+	ErrBookmarkWriteDisabled    = errors.New("history_bookmark_write_disabled")
 	ErrChapterSignalUnavailable = errors.New("history_chapter_signal_unavailable")
-	ErrChapterSignalInvalid   = errors.New("history_chapter_signal_invalid")
+	ErrChapterSignalInvalid     = errors.New("history_chapter_signal_invalid")
 )
 
 // ChapterSignalProvider exposes chapter->history signal build boundary.
@@ -32,9 +32,9 @@ type ChapterSignalProvider interface {
 
 // HistoryService owns stage-13 history flows.
 type HistoryService struct {
-	store               repository.Store
-	validator           *validation.Validator
-	now                 func() time.Time
+	store                 repository.Store
+	validator             *validation.Validator
+	now                   func() time.Time
 	chapterSignalProvider ChapterSignalProvider
 }
 

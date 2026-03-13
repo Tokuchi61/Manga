@@ -38,16 +38,23 @@ func (s *FileStore) Save(_ context.Context, module string, payload []byte) error
 	if s == nil {
 		return nil
 	}
-	if err := os.MkdirAll(s.dir, 0o755); err != nil {
+	if err := os.MkdirAll(s.dir, 0o700); err != nil {
 		return fmt.Errorf("file snapshot ensure dir failed: %w", err)
 	}
+	if err := os.Chmod(s.dir, 0o700); err != nil {
+		return fmt.Errorf("file snapshot chmod dir failed: %w", err)
+	}
+
 	path := filepath.Join(s.dir, module+".snapshot")
 	tmpPath := path + ".tmp"
-	if err := os.WriteFile(tmpPath, payload, 0o644); err != nil {
+	if err := os.WriteFile(tmpPath, payload, 0o600); err != nil {
 		return fmt.Errorf("file snapshot temp write failed for %s: %w", module, err)
 	}
 	if err := os.Rename(tmpPath, path); err != nil {
 		return fmt.Errorf("file snapshot rename failed for %s: %w", module, err)
+	}
+	if err := os.Chmod(path, 0o600); err != nil {
+		return fmt.Errorf("file snapshot chmod file failed for %s: %w", module, err)
 	}
 	return nil
 }

@@ -1,4 +1,4 @@
-﻿## Ne degisti?
+## Ne degisti?
 -
 
 ## Neden degisti?

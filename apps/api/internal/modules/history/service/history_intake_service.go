@@ -1,4 +1,4 @@
-﻿package service
+package service
 
 import (
 	"context"
@@ -63,12 +63,12 @@ func (s *HistoryService) IngestChapterSignal(ctx context.Context, request dto.In
 	}
 
 	return dto.IngestChapterSignalResponse{
-		LibraryEntryID: entry.ID,
+		LibraryEntryID:  entry.ID,
 		TimelineEventID: timelineEventID,
-		MangaID:        entry.MangaID,
-		ChapterID:      entry.LastChapterID,
-		Event:          signal.Event,
-		Status:         string(entry.Status),
-		Created:        created,
+		MangaID:         entry.MangaID,
+		ChapterID:       entry.LastChapterID,
+		Event:           signal.Event,
+		Status:          string(entry.Status),
+		Created:         created,
 	}, nil
 }

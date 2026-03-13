@@ -20,9 +20,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check docs encoding
+      - name: Check docs and source encoding
         shell: pwsh
-        run: ../../scripts/check_utf8_no_bom.ps1
+        run: ../../scripts/check_utf8_no_bom.ps1 -RepoRoot ../..
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -37,6 +37,9 @@ jobs:
 
       - name: Run tests
         run: go test ./...
+
+      - name: Run tests with coverage
+        run: go test -cover ./...
 
       - name: Build
         run: go build ./...

@@ -1,4 +1,4 @@
-﻿package history
+package history
 
 import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/history/handler"

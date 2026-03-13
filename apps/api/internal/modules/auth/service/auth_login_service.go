@@ -99,17 +99,20 @@ func (s *AuthService) Login(ctx context.Context, request dto.LoginRequest, meta 
 		return dto.LoginResponse{}, err
 	}
 
-	accessToken, err := generateOpaqueToken(32)
+	accessTokenExpiresAt := now.Add(s.cfg.AccessTokenTTL)
+	accessToken, userID, err := s.issueAccessToken(ctx, credential.ID.String(), accessTokenExpiresAt)
 	if err != nil {
 		return dto.LoginResponse{}, err
 	}
+
 	s.appendSecurityEvent(ctx, credential.ID, events.EventLoginSucceeded, "success", "login_succeeded", meta)
 
 	return dto.LoginResponse{
+		UserID:               userID,
 		CredentialID:         credential.ID.String(),
 		SessionID:            session.ID.String(),
 		AccessToken:          accessToken,
 		RefreshToken:         refreshToken,
-		AccessTokenExpiresAt: now.Add(s.cfg.AccessTokenTTL),
+		AccessTokenExpiresAt: accessTokenExpiresAt,
 	}, nil
 }

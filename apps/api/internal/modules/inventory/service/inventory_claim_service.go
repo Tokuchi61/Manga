@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"strings"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/inventory/dto"
 )
@@ -12,6 +13,10 @@ func (s *InventoryService) ClaimInventoryItem(ctx context.Context, request dto.C
 	}
 	if err := validateQuantity(request.Quantity); err != nil {
 		return dto.ClaimInventoryItemResponse{}, err
+	}
+	request.RequestID = strings.TrimSpace(request.RequestID)
+	if request.RequestID == "" {
+		return dto.ClaimInventoryItemResponse{}, ErrValidation
 	}
 
 	cfg, err := s.store.GetRuntimeConfig(ctx)

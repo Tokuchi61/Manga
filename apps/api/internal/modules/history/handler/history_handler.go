@@ -1,4 +1,4 @@
-﻿package handler
+package handler
 
 import "github.com/Tokuchi61/Manga/apps/api/internal/modules/history/service"
 

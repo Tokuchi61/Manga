@@ -11,6 +11,8 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	accessmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/access"
+	adminmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/admin"
+	adsmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/ads"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	chaptermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter"
 	commentmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/comment"
@@ -20,12 +22,16 @@ import (
 	missionmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/mission"
 	moderationmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/moderation"
 	notificationmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/notification"
+	paymentmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/payment"
+	royalpassmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/royalpass"
+	shopmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/shop"
 	socialmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/social"
 	supportmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/support"
 	usermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/user"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/db"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/logger"
+	"github.com/Tokuchi61/Manga/apps/api/internal/platform/outbox"
 	snapshotplatform "github.com/Tokuchi61/Manga/apps/api/internal/platform/snapshot"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"go.uber.org/zap"
@@ -61,14 +67,30 @@ func main() {
 			log.Fatal("database init failed", zap.Error(err))
 		}
 		defer pool.Close()
+		log.Info("runtime mode selected", zap.String("mode", "database"))
 	} else {
-		log.Warn("database disabled; running in memory mode")
+		log.Warn("database disabled; running in memory mode", zap.String("mode", "memory"))
+	}
+
+	var outboxStore outbox.Store
+	if pool != nil {
+		postgresOutbox := outbox.NewPostgresStore(pool)
+		if err := postgresOutbox.EnsureSchema(ctx); err != nil {
+			log.Fatal("outbox schema init failed", zap.Error(err))
+		}
+		outboxStore = postgresOutbox
+		relay := outbox.NewRelay(outboxStore, outboxLogPublisher{logger: log})
+		go relay.Run(ctx, 2*time.Second)
+		log.Info("outbox relay enabled", zap.String("backend", "postgres"))
 	}
 
 	auth := authmodule.New(authmodule.RuntimeConfig{
 		FailedAttemptLimitPerMinute:       cfg.AuthLoginFailedAttemptLimitPerMinute,
 		LoginCooldownSeconds:              cfg.AuthLoginCooldownSeconds,
 		VerificationResendCooldownSeconds: cfg.AuthEmailVerificationResendCooldownSeconds,
+		AccessTokenSecret:                 cfg.AuthAccessTokenSecret,
+		AccessTokenIssuer:                 cfg.AuthAccessTokenIssuer,
+		ExposeSensitiveTokens:             cfg.AuthExposeSensitiveTokens,
 	})
 	user := usermodule.New()
 	manga := mangamodule.New()
@@ -81,9 +103,19 @@ func main() {
 	social := socialmodule.New()
 	inventory := inventorymodule.New()
 	mission := missionmodule.New()
+	royalpass := royalpassmodule.New()
+	shop := shopmodule.New()
+	payment := paymentmodule.New(paymentmodule.RuntimeConfig{
+		CallbackSigningSecret:  cfg.PaymentCallbackSigningSecret,
+		CallbackTimestampSkew:  cfg.PaymentCallbackTimestampSkew,
+		CallbackEventPublisher: paymentCallbackOutboxPublisher{store: outboxStore},
+	})
+	ads := adsmodule.New()
+	admin := adminmodule.New()
 	access := accessmodule.New(accessmodule.RuntimeConfig{})
 
 	user.SetCredentialLookup(auth)
+	auth.SetUserLookup(user)
 	chapter.SetMangaLookup(manga)
 	history.SetChapterSignalProvider(chapter)
 	comment.SetTargetLookups(manga, chapter)
@@ -96,6 +128,7 @@ func main() {
 		{name: "auth", snapshot: (&auth).Snapshot, restore: (&auth).RestoreSnapshot},
 		{name: "user", snapshot: (&user).Snapshot, restore: (&user).RestoreSnapshot},
 		{name: "access", snapshot: (&access).Snapshot, restore: (&access).RestoreSnapshot},
+		{name: "admin", snapshot: (&admin).Snapshot, restore: (&admin).RestoreSnapshot},
 		{name: "manga", snapshot: (&manga).Snapshot, restore: (&manga).RestoreSnapshot},
 		{name: "chapter", snapshot: (&chapter).Snapshot, restore: (&chapter).RestoreSnapshot},
 		{name: "history", snapshot: (&history).Snapshot, restore: (&history).RestoreSnapshot},
@@ -106,9 +139,24 @@ func main() {
 		{name: "social", snapshot: (&social).Snapshot, restore: (&social).RestoreSnapshot},
 		{name: "inventory", snapshot: (&inventory).Snapshot, restore: (&inventory).RestoreSnapshot},
 		{name: "mission", snapshot: (&mission).Snapshot, restore: (&mission).RestoreSnapshot},
+		{name: "royalpass", snapshot: (&royalpass).Snapshot, restore: (&royalpass).RestoreSnapshot},
+		{name: "shop", snapshot: (&shop).Snapshot, restore: (&shop).RestoreSnapshot},
+		{name: "payment", snapshot: (&payment).Snapshot, restore: (&payment).RestoreSnapshot},
+		{name: "ads", snapshot: (&ads).Snapshot, restore: (&ads).RestoreSnapshot},
 	}
+
 	restoreSnapshots(ctx, log, snapshotStore, targets)
 	persistSnapshots(context.Background(), log, snapshotStore, targets, cfg.HTTPShutdownTimeout)
+
+	if cfg.StateSnapshotWriteThrough {
+		log.Info("snapshot write-through enabled")
+		app.SetPostWriteHook(func(_ context.Context) {
+			persistSnapshots(context.Background(), log, snapshotStore, targets, cfg.HTTPShutdownTimeout)
+		})
+	} else {
+		app.SetPostWriteHook(nil)
+		log.Info("snapshot write-through disabled")
+	}
 
 	if cfg.StateSnapshotInterval > 0 {
 		ticker := time.NewTicker(cfg.StateSnapshotInterval)
@@ -124,9 +172,11 @@ func main() {
 				}
 			}
 		}()
+	} else {
+		log.Info("snapshot interval persistence disabled")
 	}
 
-	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission)
+	registry, err := modules.NewRegistry(auth, user, access, admin, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission, royalpass, shop, payment, ads)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}

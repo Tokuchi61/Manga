@@ -9,7 +9,7 @@ type ClaimInventoryItemRequest struct {
 	Quantity      int        `json:"quantity" validate:"required,min=1,max=10000"`
 	SourceType    string     `json:"source_type" validate:"required,max=64"`
 	SourceRef     string     `json:"source_ref,omitempty" validate:"omitempty,max=128"`
-	RequestID     string     `json:"request_id,omitempty" validate:"omitempty,max=128"`
+	RequestID     string     `json:"request_id" validate:"required,max=128"`
 	CorrelationID string     `json:"correlation_id,omitempty" validate:"omitempty,max=128"`
 	ExpiresAt     *time.Time `json:"expires_at,omitempty"`
 }

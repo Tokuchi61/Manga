@@ -1,4 +1,4 @@
-﻿package repository
+package repository
 
 import (
 	"context"
@@ -59,18 +59,18 @@ func TestMemoryStoreLibraryFiltersAndRuntimeConfig(t *testing.T) {
 	now := time.Date(2026, 3, 12, 23, 40, 0, 0, time.UTC)
 
 	_, err := store.UpsertLibraryEntry(context.Background(), entity.LibraryEntry{
-		ID:            uuid.NewString(),
-		UserID:        userID,
-		MangaID:       mangaID,
-		Status:        entity.ReadingStatusCompleted,
-		Bookmarked:    true,
-		Favorited:     true,
-		SharePublic:   true,
-		LastReadAt:    now,
-		CreatedAt:     now,
-		UpdatedAt:     now,
-		LastChapterID: uuid.NewString(),
-		PageCount:     20,
+		ID:             uuid.NewString(),
+		UserID:         userID,
+		MangaID:        mangaID,
+		Status:         entity.ReadingStatusCompleted,
+		Bookmarked:     true,
+		Favorited:      true,
+		SharePublic:    true,
+		LastReadAt:     now,
+		CreatedAt:      now,
+		UpdatedAt:      now,
+		LastChapterID:  uuid.NewString(),
+		PageCount:      20,
 		LastPageNumber: 20,
 	})
 	require.NoError(t, err)

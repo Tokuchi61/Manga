@@ -2,18 +2,25 @@
 
 Bu dosya proje genel denetim bulgularinin acik kalanlarini izler.
 
-Son denetim tarihi: 2026-03-12
-Durum: Tamamlandi
+Son denetim tarihi: 2026-03-13
+Durum: Acik Bulgu Yok
 
 ## Ozet
 
 - Toplam acik bulgu: 0
-- Kritiklik dagilimi: `P1=0`, `P2=0`
-- Acik bulgu yok.
+- Kritiklik dagilimi: `kritik=0`, `yuksek=0`, `orta=0`, `dusuk=0`
+- 2026-03-13 tarihli denetimde acik olan `ISS-001` ... `ISS-014` bulgulari `0.21.1-alpha.1` hotfix paketi ile kapatildi ve kayittan cikarildi.
 
-## Son Kapatilan Basliklar (2026-03-12)
+## Acik Bulgular
 
-- `ISS-004`: Runtime persistence katmani kalici snapshot store (Postgres/file fallback) ile hizalandi.
-- `ISS-011`: Access ve support tarafindaki yari kalmis/tekrarli yapilar sadelelestirildi, kullanilmayan hata namespace dosyalari kaldirildi.
-- `ISS-013`: `apps/api/tests/e2e` katmani eklendi ve kritik auth-user-access uc-tan-uca akis testi uygulandi.
-- `ISS-016`: Dokumanlar UTF-8/BOM-suz normalize edildi, encoding kontrol scriptleri ve CI adimi eklendi.
+- Yok.
+
+## Incelenen Basliklar
+
+- Mimari ve katmanlama: Acik bulgu yok.
+- Modulerlik ve bagimlilik yonleri: Acik bulgu yok.
+- Veri akisi ve is kurallari: Acik bulgu yok.
+- Test, CI ve dogrulama sureci: Acik bulgu yok.
+- Guvenlik ve hata yonetimi: Acik bulgu yok.
+- Performans ve olceklenebilirlik: Acik bulgu yok.
+- Dokuman, roadmap, changelog ve surec uyumu: Acik bulgu yok.

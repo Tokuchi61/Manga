@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/support/dto"
@@ -26,6 +27,11 @@ func (s *SupportService) CreateCommunication(ctx context.Context, request dto.Cr
 		return dto.CreateSupportResponse{}, err
 	}
 
+	requestID, err := requiredRequestID(request.RequestID)
+	if err != nil {
+		return dto.CreateSupportResponse{}, err
+	}
+
 	return s.createCase(ctx, createCaseInput{
 		RequesterUserID: requesterID,
 		Kind:            entity.SupportKindCommunication,
@@ -34,7 +40,7 @@ func (s *SupportService) CreateCommunication(ctx context.Context, request dto.Cr
 		ReasonCode:      normalizeValue(request.ReasonCode),
 		ReasonText:      request.ReasonText,
 		Attachments:     request.Attachments,
-		RequestID:       strings.TrimSpace(request.RequestID),
+		RequestID:       requestID,
 	})
 }
 
@@ -53,6 +59,11 @@ func (s *SupportService) CreateTicket(ctx context.Context, request dto.CreateTic
 		return dto.CreateSupportResponse{}, err
 	}
 
+	requestID, err := requiredRequestID(request.RequestID)
+	if err != nil {
+		return dto.CreateSupportResponse{}, err
+	}
+
 	return s.createCase(ctx, createCaseInput{
 		RequesterUserID: requesterID,
 		Kind:            entity.SupportKindTicket,
@@ -61,7 +72,7 @@ func (s *SupportService) CreateTicket(ctx context.Context, request dto.CreateTic
 		ReasonCode:      normalizeValue(request.ReasonCode),
 		ReasonText:      request.ReasonText,
 		Attachments:     request.Attachments,
-		RequestID:       strings.TrimSpace(request.RequestID),
+		RequestID:       requestID,
 	})
 }
 
@@ -92,6 +103,11 @@ func (s *SupportService) CreateReport(ctx context.Context, request dto.CreateRep
 		return dto.CreateSupportResponse{}, err
 	}
 
+	requestID, err := requiredRequestID(request.RequestID)
+	if err != nil {
+		return dto.CreateSupportResponse{}, err
+	}
+
 	return s.createCase(ctx, createCaseInput{
 		RequesterUserID: requesterID,
 		Kind:            entity.SupportKindReport,
@@ -102,7 +118,7 @@ func (s *SupportService) CreateReport(ctx context.Context, request dto.CreateRep
 		TargetType:      &targetType,
 		TargetID:        &targetID,
 		Attachments:     request.Attachments,
-		RequestID:       strings.TrimSpace(request.RequestID),
+		RequestID:       requestID,
 	})
 }
 
@@ -132,14 +148,12 @@ func (s *SupportService) createCase(ctx context.Context, input createCaseInput) 
 	}
 	attachments := normalizeAttachments(input.Attachments)
 
-	if input.RequestID != "" {
-		existing, lookupErr := s.store.FindCaseByRequesterRequestID(ctx, input.RequesterUserID, input.RequestID)
-		if lookupErr == nil {
-			return toCreateResponse(existing), nil
-		}
-		if !errors.Is(lookupErr, supportrepository.ErrNotFound) {
-			return dto.CreateSupportResponse{}, lookupErr
-		}
+	existing, lookupErr := s.store.FindCaseByRequesterRequestID(ctx, input.RequesterUserID, input.RequestID)
+	if lookupErr == nil {
+		return toCreateResponse(existing), nil
+	}
+	if !errors.Is(lookupErr, supportrepository.ErrNotFound) {
+		return dto.CreateSupportResponse{}, lookupErr
 	}
 
 	now := s.now().UTC()
@@ -187,11 +201,9 @@ func (s *SupportService) createCase(ctx context.Context, input createCaseInput) 
 
 	if err := s.store.CreateCase(ctx, supportCase); err != nil {
 		if errors.Is(err, supportrepository.ErrConflict) {
-			if input.RequestID != "" {
-				existing, lookupErr := s.store.FindCaseByRequesterRequestID(ctx, input.RequesterUserID, input.RequestID)
-				if lookupErr == nil {
-					return toCreateResponse(existing), nil
-				}
+			existing, lookupErr := s.store.FindCaseByRequesterRequestID(ctx, input.RequesterUserID, input.RequestID)
+			if lookupErr == nil {
+				return toCreateResponse(existing), nil
 			}
 			return dto.CreateSupportResponse{}, ErrSupportAlreadyExists
 		}
@@ -249,4 +261,12 @@ func (s *SupportService) ensureTargetExists(ctx context.Context, targetType enti
 		}
 	}
 	return nil
+}
+
+func requiredRequestID(raw string) (string, error) {
+	requestID := strings.TrimSpace(raw)
+	if requestID == "" {
+		return "", fmt.Errorf("%w: request_id is required", ErrValidation)
+	}
+	return requestID, nil
 }
