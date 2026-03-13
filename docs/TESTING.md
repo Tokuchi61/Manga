@@ -1,6 +1,6 @@
 # TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-19 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -161,3 +161,33 @@ Bu dokuman test katmanlarini ve Asama 0-16 dogrulama adimlarini listeler.
 - Completion/claim-request idempotency davranisinin ve period key yorumunun dogrulanmasi
 - Runtime control (read/claim/progress-ingest/reset-hour) toggle etkilerinin dogrulanmasi
 - Mission migration smoke kontrolu (`202603120014_mission_create_core_tables`)
+
+## Asama 17 RoyalPass Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/royalpass/...`
+- `cd apps/api && go test ./tests/contract -run RoyalPass`
+- `cd apps/api && go test ./tests/integration -run RoyalPass`
+- Season/tier ownerligi, own season overview ve progress ingest akislarinin dogrulanmasi
+- Tier claim-request idempotency ve premium-activation intake davranisinin dogrulanmasi
+- Runtime control (season/claim/premium) toggle etkilerinin dogrulanmasi
+- RoyalPass migration smoke kontrolu (`202603120015_royalpass_create_core_tables`)
+
+## Asama 18 Shop Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/shop/...`
+- `cd apps/api && go test ./tests/contract -run Shop`
+- `cd apps/api && go test ./tests/integration -run Shop`
+- Product/offer catalog ownerligi, own catalog/detail ve purchase intent akislarinin dogrulanmasi
+- Purchase idempotency, already-owned korumasi ve recovery request davranisinin dogrulanmasi
+- Runtime control (catalog/purchase/campaign) toggle etkilerinin dogrulanmasi
+- Shop migration smoke kontrolu (`202603130016_shop_create_core_tables`)
+
+## Asama 19 Payment Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/payment/...`
+- `cd apps/api && go test ./tests/contract -run Payment`
+- `cd apps/api && go test ./tests/integration -run Payment`
+- Mana package ownerligi, checkout session ve callback intake akislarinin dogrulanmasi
+- Ledger/balance snapshot dogrulugu, callback idempotency ve reconcile davranisinin dogrulanmasi
+- Runtime control (mana-purchase/checkout/transaction-read/callback-intake) toggle etkilerinin dogrulanmasi
+- Payment migration smoke kontrolu (`202603130017_payment_create_core_tables`)
