@@ -17,7 +17,7 @@
 | auth |  | active | docs/modules.md | Kimlik dogrulama, token, session ve hesap guvenligi akislarinin aktif modulu. |
 | user |  | active | docs/modules.md | Kullanici hesabi, profil, tercih ve uyelik verisi modulu. |
 | access |  | active | docs/modules.md | Merkezi authorization, policy ve erişim kararı modülü. |
-| admin |  | planned | docs/modules.md | Yönetim, moderasyon denetimi ve operasyon use-case modülü. |
+| admin |  | active | docs/modules.md | Yönetim, moderasyon denetimi ve operasyon use-case modülü. |
 | manga |  | active | docs/modules.md | Ana içerik varlığı, metadata ve discovery modülü. |
 | chapter |  | active | docs/modules.md | Bolum, sayfa ve okuma yuzeyi veri modulu. |
 | comment |  | active | docs/modules.md | Icerik yorumlari ve thread etkilesim modulu. |
@@ -1270,7 +1270,7 @@
 ## Access Kontratı
 `shop` yetki kararı vermez. Ürün görüntüleme, satın alma ve yönetim aksiyonları `access` ile korunur. Final item sahipliği ve equip state `inventory`, bakiye veya ledger doğruluğu ise `payment` modülünde kalmalıdır. `shop` yalnızca purchase orkestrasyonu için gerekli geçici doğrulama köprülerini taşıyabilir. Satın alma kaynakları `docs/shared.md` ile hizalı olmalıdır.
 
-## Ge�i� Notu
+## Ge�i� Notu
 - Stage 19 ile `payment` modulu aktif edildi; `shop` satin alma orkestrasyonunda canonical bakiye ve checkout dogrulamasini `payment` kontrati uzerinden yurutmelidir.
 - Gecici `seed_mana_allowance_snapshot` koprusu legacy not olarak korunur; canonical bakiye akisi `payment` kontratindadir.
 

@@ -1,6 +1,6 @@
-# TESTING
+﻿# TESTING
 
-Bu dokuman test katmanlarini ve Asama 0-20 dogrulama adimlarini listeler.
+Bu dokuman test katmanlarini ve Asama 0-21 dogrulama adimlarini listeler.
 
 ## Katmanlar
 
@@ -202,3 +202,12 @@ Bu dokuman test katmanlarini ve Asama 0-20 dogrulama adimlarini listeler.
 - Runtime control (surface/placement/campaign/click-intake) toggle etkilerinin dogrulanmasi
 - Ads migration smoke kontrolu (`202603130018_ads_create_core_tables`)
 
+## Asama 21 Admin Kontrolleri
+
+- `cd apps/api && go test ./internal/modules/admin/...`
+- `cd apps/api && go test ./tests/contract -run Admin`
+- `cd apps/api && go test ./tests/integration -run Admin`
+- Dashboard, runtime maintenance ve audit akislarinin dogrulanmasi
+- Override, user-review ve high-risk double-confirmation davranisinin dogrulanmasi
+- Impersonation start/stop lifecycle ve idempotency davranisinin dogrulanmasi
+- Admin migration smoke kontrolu (`202603130019_admin_create_core_tables`)

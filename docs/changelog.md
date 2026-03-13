@@ -1,9 +1,47 @@
-# Changelog
+﻿# Changelog
 
 Bu dosya yalnizca projede gercekte yapilan islemleri kaydeder.
 Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
+## [0.21.0-alpha.1] - 2026-03-13
+
+### Added
+- `Asama 21` kapsaminda canonical `admin` modulu eklendi: `apps/api/internal/modules/admin`.
+- Admin owner akis omurgasi eklendi:
+  - dashboard summary ve audit trail gorunumu
+  - `site.maintenance.enabled` runtime kontrolu
+  - high-risk hard override ve user-review akislarinda double-confirmation kontrolu
+  - impersonation start/stop lifecycle ve request-id tabanli idempotency
+- Admin event sabitleri eklendi: `apps/api/internal/modules/admin/events/events.go`.
+- In-memory admin repository omurgasi ve snapshot destegi eklendi: `apps/api/internal/modules/admin/repository/*`.
+- Admin service/use-case ve modul testleri eklendi:
+  - `apps/api/internal/modules/admin/service/*`
+  - `apps/api/internal/modules/admin/module_test.go`
+- Admin HTTP handler ve route omurgasi eklendi:
+  - `apps/api/internal/modules/admin/handler/*`
+  - `apps/api/internal/modules/admin/routes.go`
+- Admin migration cifti eklendi:
+  - `apps/api/migrations/202603130019_admin_create_core_tables.up.sql`
+  - `apps/api/migrations/202603130019_admin_create_core_tables.down.sql`
+- Admin stage testleri eklendi:
+  - contract: `apps/api/tests/contract/admin_events_contract_test.go`
+  - integration: `apps/api/tests/integration/admin_http_integration_test.go`
+  - migration smoke: `apps/api/tests/integration/admin_migration_integration_test.go`
+
+### Changed
+- API bootstrap'ta admin module registry'ye baglandi: `apps/api/cmd/api/main.go`.
+- Snapshot persistence hedeflerine `admin` eklendi.
+- `docs/modules.md` modul envanterinde `admin` status'u `active` olarak guncellendi.
+- `docs/shared.md` icindeki `site.maintenance.enabled` kaydi `active` duruma cekildi.
+- `VERSION`, `.env.example`, `README.md`, `docs/TESTING.md` ve `docs/upgrade.md` Asama 21 ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: Asama 21 admin owner (dashboard/runtime-control/override/user-review/impersonation/audit) omurgasi kod seviyesine tasindi.
+- Etkilenen Moduller: `admin`, `app`, `migrations`, `tests`, `docs`.
+- Breaking Change: Yok.
+- Migration Etkisi: `202603130019_admin_create_core_tables` migration cifti eklendi (uyumlu schema genislemesi).
+
 ## [0.20.0-alpha.1] - 2026-03-13
 
 ### Added
@@ -1099,4 +1137,6 @@ Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 - Etkilenen Moduller: `app`, `platform/config`, `modules`, `deploy`, `scripts`, `docs`.
 - Breaking Change: Yok.
 - Migration Etkisi: `202603120001_core_bootstrap` migration cifti eklendi (uyumlu bootstrap kurulumu).
+
+
 

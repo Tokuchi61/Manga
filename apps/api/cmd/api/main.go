@@ -11,6 +11,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	accessmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/access"
+	adminmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/admin"
 	adsmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/ads"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	chaptermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/chapter"
@@ -89,6 +90,7 @@ func main() {
 	shop := shopmodule.New()
 	payment := paymentmodule.New()
 	ads := adsmodule.New()
+	admin := adminmodule.New()
 	access := accessmodule.New(accessmodule.RuntimeConfig{})
 
 	user.SetCredentialLookup(auth)
@@ -104,6 +106,7 @@ func main() {
 		{name: "auth", snapshot: (&auth).Snapshot, restore: (&auth).RestoreSnapshot},
 		{name: "user", snapshot: (&user).Snapshot, restore: (&user).RestoreSnapshot},
 		{name: "access", snapshot: (&access).Snapshot, restore: (&access).RestoreSnapshot},
+		{name: "admin", snapshot: (&admin).Snapshot, restore: (&admin).RestoreSnapshot},
 		{name: "manga", snapshot: (&manga).Snapshot, restore: (&manga).RestoreSnapshot},
 		{name: "chapter", snapshot: (&chapter).Snapshot, restore: (&chapter).RestoreSnapshot},
 		{name: "history", snapshot: (&history).Snapshot, restore: (&history).RestoreSnapshot},
@@ -138,7 +141,7 @@ func main() {
 		}()
 	}
 
-	registry, err := modules.NewRegistry(auth, user, access, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission, royalpass, shop, payment, ads)
+	registry, err := modules.NewRegistry(auth, user, access, admin, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission, royalpass, shop, payment, ads)
 	if err != nil {
 		log.Fatal("module registry init failed", zap.Error(err))
 	}

@@ -1,4 +1,4 @@
-# Upgrade
+﻿# Upgrade
 
 Bu dokuman uygulanan, kismi kalan ve bekleyen islerin operasyonel takibini tutar.
 
@@ -25,4 +25,5 @@ Bu dokuman uygulanan, kismi kalan ve bekleyen islerin operasyonel takibini tutar
 - Asama 18: Tamamlandi.
 - Asama 19: Tamamlandi.
 - Asama 20: Tamamlandi.
+- Asama 21: Tamamlandi.
 
