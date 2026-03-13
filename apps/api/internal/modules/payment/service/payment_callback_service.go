@@ -108,6 +108,9 @@ func (s *PaymentService) ProcessProviderCallback(ctx context.Context, request dt
 	if err := s.store.PutCallbackDedup(ctx, request.ProviderEventID, tx); err != nil {
 		return dto.ProcessProviderCallbackResponse{}, err
 	}
+	if err := s.publishCallbackEvent(ctx, request, tx, now); err != nil {
+		return dto.ProcessProviderCallbackResponse{}, err
+	}
 
 	return dto.ProcessProviderCallbackResponse{
 		Status:            "callback_accepted",

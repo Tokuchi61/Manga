@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"strconv"
 	"testing"
 	"time"
 
@@ -107,6 +108,23 @@ func TestPaymentServiceRuntimeTogglesAffectFlows(t *testing.T) {
 		Status:          "success",
 	})
 	require.True(t, errors.Is(err, ErrCallbackIntakePaused))
+}
+
+func TestVerifyProviderCallbackSignature(t *testing.T) {
+	timestampNow := time.Date(2026, 3, 20, 14, 0, 0, 0, time.UTC)
+	svc := New(paymentrepository.NewMemoryStore(), validation.New(), Config{
+		CallbackSigningSecret: "test-callback-secret",
+		CallbackTimestampSkew: 5 * time.Minute,
+	})
+	svc.now = func() time.Time { return timestampNow }
+
+	payload := []byte(`{"provider_event_id":"evt-1","status":"success"}`)
+	timestamp := strconv.FormatInt(timestampNow.Unix(), 10)
+	signature := SignProviderCallback("test-callback-secret", timestamp, payload)
+
+	require.NoError(t, svc.VerifyProviderCallbackSignature(payload, signature, timestamp))
+	require.ErrorIs(t, svc.VerifyProviderCallbackSignature(payload, "bad-signature", timestamp), ErrCallbackSignature)
+	require.ErrorIs(t, svc.VerifyProviderCallbackSignature(payload, signature, strconv.FormatInt(timestampNow.Add(-10*time.Minute).Unix(), 10)), ErrCallbackTimestamp)
 }
 
 func setupActivePackage(t *testing.T, svc *PaymentService) {

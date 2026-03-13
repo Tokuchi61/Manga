@@ -20,6 +20,7 @@ func newTestService(nowRef *time.Time) *AuthService {
 		RefreshTokenTTL:            time.Hour,
 		PasswordResetTokenTTL:      time.Hour,
 		EmailVerificationTokenTTL:  time.Hour,
+		ExposeSensitiveTokens:      true,
 	})
 	svc.now = func() time.Time { return nowRef.UTC() }
 	return svc

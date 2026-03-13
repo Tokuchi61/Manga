@@ -1,15 +1,15 @@
-﻿package dto
+package dto
 
 // ListLibraryRequest resolves own library surface.
 type ListLibraryRequest struct {
-	UserID       string `json:"-" validate:"required,uuid4"`
-	Status       string `json:"-" validate:"omitempty,oneof=in_progress completed dropped"`
-	Bookmarked   *bool  `json:"-"`
-	Favorited    *bool  `json:"-"`
-	SharedOnly   bool   `json:"-"`
-	Limit        int    `json:"-" validate:"omitempty,min=1,max=200"`
-	Offset       int    `json:"-" validate:"omitempty,min=0"`
-	SortBy       string `json:"-" validate:"omitempty,oneof=newest oldest"`
+	UserID     string `json:"-" validate:"required,uuid4"`
+	Status     string `json:"-" validate:"omitempty,oneof=in_progress completed dropped"`
+	Bookmarked *bool  `json:"-"`
+	Favorited  *bool  `json:"-"`
+	SharedOnly bool   `json:"-"`
+	Limit      int    `json:"-" validate:"omitempty,min=1,max=200"`
+	Offset     int    `json:"-" validate:"omitempty,min=0"`
+	SortBy     string `json:"-" validate:"omitempty,oneof=newest oldest"`
 }
 
 // ListPublicLibraryRequest resolves public library surface.

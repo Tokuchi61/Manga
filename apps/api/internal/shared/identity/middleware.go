@@ -1,30 +1,25 @@
-﻿package identity
+package identity
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strings"
-
-	"github.com/google/uuid"
 )
 
 const (
-	HeaderActorUserID       = "X-Actor-User-ID"
-	HeaderActorCredentialID = "X-Actor-Credential-ID"
-	HeaderActorRoles        = "X-Actor-Roles"
+	HeaderAuthorization = "Authorization"
 )
 
 func RequireUser(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		userID := strings.TrimSpace(r.Header.Get(HeaderActorUserID))
-		if _, err := uuid.Parse(userID); err != nil {
-			writeError(w, http.StatusUnauthorized, "missing_or_invalid_actor_user_id")
+		ctx, ok := ensureIdentityContext(w, r)
+		if !ok {
 			return
 		}
-
-		ctx := withUserID(r.Context(), userID)
-		if roles := parseRoles(r.Header.Get(HeaderActorRoles)); len(roles) > 0 {
-			ctx = withRoles(ctx, roles)
+		if _, hasUser := UserID(ctx); !hasUser {
+			writeError(w, http.StatusUnauthorized, "missing_or_invalid_actor_user_id")
+			return
 		}
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
@@ -32,22 +27,14 @@ func RequireUser(next http.Handler) http.Handler {
 
 func RequireCredential(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		credentialID := strings.TrimSpace(r.Header.Get(HeaderActorCredentialID))
-		if _, err := uuid.Parse(credentialID); err != nil {
+		ctx, ok := ensureIdentityContext(w, r)
+		if !ok {
+			return
+		}
+		if _, hasCredential := CredentialID(ctx); !hasCredential {
 			writeError(w, http.StatusUnauthorized, "missing_or_invalid_actor_credential_id")
 			return
 		}
-
-		ctx := withCredentialID(r.Context(), credentialID)
-		if userID := strings.TrimSpace(r.Header.Get(HeaderActorUserID)); userID != "" {
-			if _, err := uuid.Parse(userID); err == nil {
-				ctx = withUserID(ctx, userID)
-			}
-		}
-		if roles := parseRoles(r.Header.Get(HeaderActorRoles)); len(roles) > 0 {
-			ctx = withRoles(ctx, roles)
-		}
-
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
@@ -64,16 +51,20 @@ func RequireAnyRole(requiredRoles ...string) func(http.Handler) http.Handler {
 
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			roles := parseRoles(r.Header.Get(HeaderActorRoles))
+			ctx, ok := ensureIdentityContext(w, r)
+			if !ok {
+				return
+			}
+
+			roles := rolesFromContext(ctx)
 			if len(roles) == 0 {
 				writeError(w, http.StatusForbidden, "missing_actor_roles")
 				return
 			}
 
-			ctx := withRoles(r.Context(), roles)
 			allowed := false
 			for _, role := range normalized {
-				if _, ok := roles[role]; ok {
+				if _, exists := roles[role]; exists {
 					allowed = true
 					break
 				}
@@ -86,6 +77,76 @@ func RequireAnyRole(requiredRoles ...string) func(http.Handler) http.Handler {
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
+}
+
+func ensureIdentityContext(w http.ResponseWriter, r *http.Request) (context.Context, bool) {
+	ctx := r.Context()
+	if hasIdentityContext(ctx) {
+		return ctx, true
+	}
+
+	token, parseErr := bearerToken(r.Header.Get(HeaderAuthorization))
+	if parseErr != "" {
+		writeError(w, http.StatusUnauthorized, parseErr)
+		return nil, false
+	}
+
+	claims, err := ParseAccessToken(token)
+	if err != nil {
+		writeError(w, http.StatusUnauthorized, "invalid_access_token")
+		return nil, false
+	}
+
+	if claims.UserID != "" {
+		ctx = withUserID(ctx, claims.UserID)
+	}
+	if claims.CredentialID != "" {
+		ctx = withCredentialID(ctx, claims.CredentialID)
+	}
+	if roles := parseRoles(strings.Join(claims.Roles, ",")); len(roles) > 0 {
+		ctx = withRoles(ctx, roles)
+	}
+	return ctx, true
+}
+
+func hasIdentityContext(ctx context.Context) bool {
+	if ctx == nil {
+		return false
+	}
+	if value, exists := ctx.Value(userIDKey).(string); exists && value != "" {
+		return true
+	}
+	if value, exists := ctx.Value(credentialIDKey).(string); exists && value != "" {
+		return true
+	}
+	if roles, exists := ctx.Value(rolesKey).(map[string]struct{}); exists && len(roles) > 0 {
+		return true
+	}
+	return false
+}
+
+func rolesFromContext(ctx context.Context) map[string]struct{} {
+	if ctx == nil {
+		return nil
+	}
+	roles, _ := ctx.Value(rolesKey).(map[string]struct{})
+	return roles
+}
+
+func bearerToken(value string) (string, string) {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return "", "missing_authorization_header"
+	}
+	parts := strings.SplitN(value, " ", 2)
+	if len(parts) != 2 || !strings.EqualFold(strings.TrimSpace(parts[0]), "Bearer") {
+		return "", "invalid_authorization_header"
+	}
+	token := strings.TrimSpace(parts[1])
+	if token == "" {
+		return "", "invalid_authorization_header"
+	}
+	return token, ""
 }
 
 func parseRoles(raw string) map[string]struct{} {

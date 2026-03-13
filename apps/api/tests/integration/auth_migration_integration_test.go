@@ -1,4 +1,4 @@
-﻿package integration_test
+package integration_test
 
 import (
 	"os"
@@ -30,4 +30,3 @@ func TestAuthMigrationFilesExistAndContainCoreTables(t *testing.T) {
 	require.Contains(t, downSQL, "DROP TABLE IF EXISTS auth_sessions")
 	require.Contains(t, downSQL, "DROP TABLE IF EXISTS auth_credentials")
 }
-

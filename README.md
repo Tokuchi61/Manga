@@ -1,4 +1,4 @@
-﻿# NovaScans
+# NovaScans
 
 NovaScans, oyunlastirilmis manga/manhwa/manhua okuma platformudur.
 
@@ -8,7 +8,7 @@ Bu repo su anda `Asama 21 - Admin` kapsaminda kimlik, kullanici, merkezi erisim/
 
 - Canonical versiyon kaynagi: `VERSION`
 - Runtime versiyon kaynagi: `APP_VERSION` environment variable
-- Su anki surum: `0.21.0-alpha.1`
+- Su anki surum: `0.21.1-alpha.1`
 
 ## Dizin Yapisi
 

@@ -8,6 +8,7 @@ import (
 	authrepository "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/repository"
 	authvalidator "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth/validator"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/validation"
+	"github.com/Tokuchi61/Manga/apps/api/internal/shared/identity"
 )
 
 var (
@@ -37,9 +38,12 @@ type Config struct {
 	LoginCooldown              time.Duration
 	VerificationResendCooldown time.Duration
 	AccessTokenTTL             time.Duration
+	AccessTokenSecret          string
+	AccessTokenIssuer          string
 	RefreshTokenTTL            time.Duration
 	PasswordResetTokenTTL      time.Duration
 	EmailVerificationTokenTTL  time.Duration
+	ExposeSensitiveTokens      bool
 }
 
 func (c Config) withDefaults() Config {
@@ -55,6 +59,12 @@ func (c Config) withDefaults() Config {
 	if c.AccessTokenTTL <= 0 {
 		c.AccessTokenTTL = 15 * time.Minute
 	}
+	if c.AccessTokenSecret == "" {
+		c.AccessTokenSecret = identity.AccessTokenSecret()
+	}
+	if c.AccessTokenIssuer == "" {
+		c.AccessTokenIssuer = "novascans-api"
+	}
 	if c.RefreshTokenTTL <= 0 {
 		c.RefreshTokenTTL = 30 * 24 * time.Hour
 	}
@@ -69,10 +79,11 @@ func (c Config) withDefaults() Config {
 
 // AuthService owns auth flows for stage-4 bootstrap.
 type AuthService struct {
-	store     authrepository.Store
-	validator *validation.Validator
-	cfg       Config
-	now       func() time.Time
+	store      authrepository.Store
+	validator  *validation.Validator
+	cfg        Config
+	now        func() time.Time
+	userLookup UserLookup
 }
 
 func New(store authrepository.Store, validator *validation.Validator, cfg Config) *AuthService {
@@ -92,4 +103,11 @@ func (s *AuthService) validateInput(payload any) error {
 		return fmt.Errorf("%w: %v", ErrValidation, err)
 	}
 	return nil
+}
+
+func (s *AuthService) shouldExposeSensitiveTokens() bool {
+	if s == nil {
+		return false
+	}
+	return s.cfg.ExposeSensitiveTokens
 }

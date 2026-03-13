@@ -11,7 +11,8 @@ import (
 
 // MemoryStore is stage-21 bootstrap persistence for admin flows.
 type MemoryStore struct {
-	mu sync.RWMutex
+	mu  sync.RWMutex
+	now func() time.Time
 
 	runtimeConfig entity.RuntimeConfig
 
@@ -25,6 +26,7 @@ type MemoryStore struct {
 func NewMemoryStore() *MemoryStore {
 	now := time.Now().UTC()
 	return &MemoryStore{
+		now: time.Now,
 		runtimeConfig: entity.RuntimeConfig{
 			MaintenanceEnabled: false,
 			UpdatedAt:          now,

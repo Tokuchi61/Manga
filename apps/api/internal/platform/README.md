@@ -1,4 +1,4 @@
-﻿# platform Katmani
+# platform Katmani
 
 `apps/api/internal/platform/` teknik altyapi kodlari icindir.
 

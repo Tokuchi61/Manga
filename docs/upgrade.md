@@ -1,4 +1,4 @@
-﻿# Upgrade
+# Upgrade
 
 Bu dokuman uygulanan, kismi kalan ve bekleyen islerin operasyonel takibini tutar.
 

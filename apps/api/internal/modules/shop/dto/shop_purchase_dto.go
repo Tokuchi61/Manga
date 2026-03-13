@@ -7,7 +7,7 @@ type CreatePurchaseIntentRequest struct {
 	OfferID       string `json:"offer_id,omitempty" validate:"omitempty,max=64"`
 	ActorLevel    int    `json:"actor_level,omitempty" validate:"omitempty,min=0,max=1000"`
 	ActorVIP      bool   `json:"actor_vip,omitempty"`
-	RequestID     string `json:"request_id,omitempty" validate:"omitempty,max=128"`
+	RequestID     string `json:"request_id" validate:"required,max=128"`
 	CorrelationID string `json:"correlation_id,omitempty" validate:"omitempty,max=128"`
 }
 

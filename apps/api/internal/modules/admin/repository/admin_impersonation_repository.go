@@ -42,6 +42,9 @@ func (s *MemoryStore) FindActiveImpersonation(ctx context.Context, actorUserID s
 	defer s.mu.RUnlock()
 
 	now := time.Now().UTC()
+	if s.now != nil {
+		now = s.now().UTC()
+	}
 	for _, session := range s.impersonationByID {
 		if !session.Active {
 			continue
@@ -66,6 +69,9 @@ func (s *MemoryStore) ListImpersonationSessions(ctx context.Context, activeOnly 
 	defer s.mu.RUnlock()
 
 	now := time.Now().UTC()
+	if s.now != nil {
+		now = s.now().UTC()
+	}
 	filtered := make([]entity.ImpersonationSession, 0, len(s.impersonationByID))
 	for _, session := range s.impersonationByID {
 		if activeOnly {

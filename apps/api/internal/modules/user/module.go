@@ -1,6 +1,8 @@
 package user
 
 import (
+	"context"
+
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/user/handler"
 	userrepository "github.com/Tokuchi61/Manga/apps/api/internal/modules/user/repository"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/user/service"
@@ -29,6 +31,13 @@ func (m *Module) SetCredentialLookup(lookup service.CredentialLookup) {
 		return
 	}
 	m.svc.SetCredentialLookup(lookup)
+}
+
+func (m Module) ResolveUserIDByCredentialID(ctx context.Context, credentialID string) (string, error) {
+	if m.svc == nil {
+		return "", nil
+	}
+	return m.svc.ResolveUserIDByCredentialID(ctx, credentialID)
 }
 
 func (m Module) Name() string {

@@ -118,7 +118,7 @@ func TestInventoryServiceRuntimeTogglesAffectOperations(t *testing.T) {
 
 	_, err = svc.UpdateClaimState(context.Background(), dto.UpdateClaimStateRequest{Enabled: false})
 	require.NoError(t, err)
-	_, err = svc.ClaimInventoryItem(context.Background(), dto.ClaimInventoryItemRequest{ActorUserID: actorID, ItemID: "ticket_epic", Quantity: 1, SourceType: "mission"})
+	_, err = svc.ClaimInventoryItem(context.Background(), dto.ClaimInventoryItemRequest{ActorUserID: actorID, ItemID: "ticket_epic", Quantity: 1, SourceType: "mission", RequestID: "req-claim-disabled"})
 	require.True(t, errors.Is(err, ErrClaimDisabled))
 
 	_, err = svc.UpdateClaimState(context.Background(), dto.UpdateClaimStateRequest{Enabled: true})

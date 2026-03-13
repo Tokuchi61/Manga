@@ -1,16 +1,24 @@
 param(
-    [string[]]$Paths = @('README.md', 'docs/*.md')
+    [string]$RepoRoot = ".",
+    [string[]]$Paths = @('README.md', 'docs/*.md', '.env.example', 'VERSION', 'apps/api/**/*.go', 'apps/api/**/*.sql', '.github/**/*.yml', '.github/**/*.md')
 )
 
 $ErrorActionPreference = 'Stop'
 $utf8Strict = New-Object System.Text.UTF8Encoding($false, $true)
 $failed = @()
 
+$repoRootFull = (Resolve-Path -Path $RepoRoot).Path
 $files = @()
 foreach ($pattern in $Paths) {
-    $files += Get-ChildItem -Path $pattern -File -ErrorAction SilentlyContinue
+    $absolutePattern = Join-Path $repoRootFull $pattern
+    $files += Get-ChildItem -Path $absolutePattern -File -Recurse -ErrorAction SilentlyContinue
 }
 $files = $files | Sort-Object -Property FullName -Unique
+
+if ($files.Count -eq 0) {
+    Write-Error "UTF-8 no-BOM kontrolu hatasi: 0 dosya tarandi"
+    exit 1
+}
 
 foreach ($file in $files) {
     $bytes = [System.IO.File]::ReadAllBytes($file.FullName)

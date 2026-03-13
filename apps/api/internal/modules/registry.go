@@ -61,6 +61,15 @@ func (r *Registry) Names() []string {
 	return names
 }
 
+func (r *Registry) Modules() []Module {
+	if r == nil {
+		return nil
+	}
+	items := make([]Module, 0, len(r.items))
+	items = append(items, r.items...)
+	return items
+}
+
 func (r *Registry) MountRoutes(router chi.Router) {
 	if r == nil {
 		return

@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
@@ -125,14 +127,24 @@ func performJSONRequest(t *testing.T, handler http.Handler, method string, path 
 	if body != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
-	if actorUserID != "" {
-		req.Header.Set(identity.HeaderActorUserID, actorUserID)
-	}
-	if actorCredentialID != "" {
-		req.Header.Set(identity.HeaderActorCredentialID, actorCredentialID)
-	}
-	if roles != "" {
-		req.Header.Set(identity.HeaderActorRoles, roles)
+	if actorUserID != "" || actorCredentialID != "" {
+		roleItems := make([]string, 0)
+		for _, role := range strings.Split(strings.TrimSpace(roles), ",") {
+			role = strings.TrimSpace(role)
+			if role == "" {
+				continue
+			}
+			roleItems = append(roleItems, role)
+		}
+
+		token, err := identity.IssueAccessToken(identity.TokenClaims{
+			UserID:       actorUserID,
+			CredentialID: actorCredentialID,
+			Roles:        roleItems,
+			ExpiresAt:    time.Now().UTC().Add(time.Hour),
+		})
+		require.NoError(t, err)
+		req.Header.Set(identity.HeaderAuthorization, "Bearer "+token)
 	}
 
 	rec := httptest.NewRecorder()

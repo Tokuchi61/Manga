@@ -1,4 +1,4 @@
-﻿package dto
+package dto
 
 // IngestChapterSignalRequest ingests chapter->history signal.
 type IngestChapterSignalRequest struct {
@@ -12,11 +12,11 @@ type IngestChapterSignalRequest struct {
 
 // IngestChapterSignalResponse is intake result payload.
 type IngestChapterSignalResponse struct {
-	LibraryEntryID string `json:"library_entry_id"`
+	LibraryEntryID  string `json:"library_entry_id"`
 	TimelineEventID string `json:"timeline_event_id,omitempty"`
-	MangaID        string `json:"manga_id"`
-	ChapterID      string `json:"chapter_id"`
-	Event          string `json:"event"`
-	Status         string `json:"status"`
-	Created        bool   `json:"created"`
+	MangaID         string `json:"manga_id"`
+	ChapterID       string `json:"chapter_id"`
+	Event           string `json:"event"`
+	Status          string `json:"status"`
+	Created         bool   `json:"created"`
 }

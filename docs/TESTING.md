@@ -1,4 +1,4 @@
-﻿# TESTING
+# TESTING
 
 Bu dokuman test katmanlarini ve Asama 0-21 dogrulama adimlarini listeler.
 
@@ -211,3 +211,14 @@ Bu dokuman test katmanlarini ve Asama 0-21 dogrulama adimlarini listeler.
 - Override, user-review ve high-risk double-confirmation davranisinin dogrulanmasi
 - Impersonation start/stop lifecycle ve idempotency davranisinin dogrulanmasi
 - Admin migration smoke kontrolu (`202603130019_admin_create_core_tables`)
+
+## Hotfix 0.21.1 Kontrolleri
+
+- `cd apps/api && go test -count=1 ./...`
+- `cd apps/api && go test -cover ./...`
+- `powershell -ExecutionPolicy Bypass -File scripts/check_utf8_no_bom.ps1 -RepoRoot .`
+- `cd apps/api && go test ./tests/integration -run Maintenance`
+- `cd apps/api && go test ./tests/integration -run Payment`
+- `cd apps/api && go test ./tests/integration -run MigrationsApply` (`DB_TEST_DSN` tanimliysa)
+- `docker build -f apps/api/Dockerfile -t novascans-api:local .`
+- `docker compose -f deploy/docker-compose.yml up -d --build`

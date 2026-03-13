@@ -1,9 +1,69 @@
-﻿# Changelog
+# Changelog
 
 Bu dosya yalnizca projede gercekte yapilan islemleri kaydeder.
 Bu proje SemVer (`MAJOR.MINOR.PATCH`) standardini takip eder.
 
 ## [Unreleased]
+## [0.21.1-alpha.1] - 2026-03-13
+
+### Added
+- Bearer token dogrulama katmani icin signed token issue/parse altyapisi eklendi: `apps/api/internal/shared/identity/token.go`.
+- Payment callback icin imza/zaman damgasi dogrulama ve replay tolerans ayarlari eklendi.
+- Transactional outbox runtime omurgasi eklendi (`store`, `publisher`, `relay`) ve yeni migration cifti tanimlandi:
+  - `apps/api/migrations/202603130020_outbox_create_core_tables.up.sql`
+  - `apps/api/migrations/202603130020_outbox_create_core_tables.down.sql`
+- Gercek DB uzerinde migration apply/rollback dogrulamasi yapan integration test eklendi: `apps/api/tests/integration/migrations_apply_integration_test.go`.
+- Global maintenance gate davranisini dogrulayan integration test eklendi: `apps/api/tests/integration/maintenance_http_integration_test.go`.
+- Modullerdeki tekrarli JSON decode davranisini merkezilesitiren helper eklendi: `apps/api/internal/platform/httpx/json.go`.
+
+### Changed
+- Public auth trust boundary guncellendi; `X-Actor-*` header tabanli kimlik modeli kaldirildi, kimlik yalnizca dogrulanmis bearer token claim'lerinden uretilir hale getirildi.
+- Auth password reset ve email verification tokenlarinin response ile donulmesi varsayilan olarak kapatildi; sadece kontrollu dev/test senaryolari icin `AUTH_EXPOSE_SENSITIVE_TOKENS` eklendi.
+- Config fail-fast kurallari sertlestirildi:
+  - `APP_ENV=prod` icin `DB_MAIN_DSN`, `AUTH_ACCESS_TOKEN_SECRET`, `PAYMENT_CALLBACK_SIGNING_SECRET` zorunlu.
+  - Memory mode sadece explicit `APP_ALLOW_MEMORY_MODE=true` ile acilabilir.
+- Kritik write endpointlerinde `request_id` zorunlu hale getirildi (shop purchase, mission claim, inventory claim, support create).
+- Snapshot guvenlik/perf ayarlari guncellendi:
+  - file izinleri `0700/0600`
+  - varsayilan `STATE_SNAPSHOT_INTERVAL=30s`
+  - write-through persist davranisi eklendi
+  - auth snapshot kapsamindan hassas token/security-event setleri cikarildi
+- CI encoding dogrulamasi repo root kapsami ve minimum dosya asserti ile sertlestirildi; `go test -cover ./...` adimi CI'ya eklendi.
+
+### Fixed
+- `ISS-001`, `ISS-002`: Header spoofing ile yetki devralma/access-token verify boslugu kapatildi.
+- `ISS-003`: Payment callback imza dogrulamasi olmadan finansal yan etki uretme riski kapatildi.
+- `ISS-004`: Hassas auth tokenlarinin public response ile sizdirilmasi kapatildi.
+- `ISS-005`: `site.maintenance.enabled` global app gate olarak enforce edilmeyen davranis kapatildi.
+- `ISS-006`: Production ortamda DB/secret eksigiyle memory mode fallback riski kapatildi.
+- `ISS-007`: Snapshot persistence write-through ile DB kaynagiyla drift penceresi azaltildi.
+- `ISS-008`: Transactional outbox runtime implementasyonu eksigi kapatildi.
+- `ISS-009`: Kritik write akislarinda optional `request_id` kaynakli idempotency boslugu kapatildi.
+- `ISS-010`: Snapshot permission ve hassas veri kapsam riskleri kapatildi.
+- `ISS-011`, `ISS-012`: BOM/encoding drift ve etkisiz CI kontrolu kapatildi.
+- `ISS-013`: Migration testlerinin SQL metin kontrolu ile sinirli kalmasi kapatildi.
+- `ISS-014`: Modullerde tekrar eden `decodeJSON` kopyalari merkezilestirilerek kapatildi.
+
+### Security
+- Public API auth zincirinde bearer token zorunlulugu getirildi; istemci kaynakli actor header guveni kaldirildi.
+- Payment callback endpointi icin imza + zaman damgasi dogrulamasi zorunlu hale getirildi.
+- Auth recovery/verification token maruziyeti varsayilan olarak kapatildi.
+
+### Docs
+- `docs/issues.md` acik bulgu kalmayacak sekilde guncellendi.
+- `README.md` canonical surum bilgisi `0.21.1-alpha.1` ile hizalandi.
+
+### Release Notes
+- Degisiklik Ozeti: 2026-03-13 denetiminde acik kalan `ISS-001` ... `ISS-014` bulgulari guvenlik, mimari ve surec boyutlarinda kalici duzeltmelerle kapatildi.
+- Etkilenen Moduller: `app`, `platform/config`, `platform/snapshot`, `platform/outbox`, `platform/httpx`, `shared/identity`, `auth`, `payment`, `shop`, `mission`, `inventory`, `support`, `admin`, `tests`, `ci`, `docs`.
+- Breaking Change: Var.
+  - Public endpointlerde `X-Actor-*` ile kimlik gecirme modeli kaldirildi; `Authorization: Bearer <token>` zorunludur.
+  - `shop/mission/inventory/support` write endpointlerinde `request_id` zorunludur.
+  - Payment callback cagrilarinda `X-Payment-Signature` ve `X-Payment-Timestamp` zorunludur.
+- Migration Etkisi: `202603130020_outbox_create_core_tables` migration cifti eklendi (geriye uyumlu schema genislemesi).
+- Operasyon Aksiyonu:
+  - Production ortaminda `DB_MAIN_DSN`, `AUTH_ACCESS_TOKEN_SECRET`, `PAYMENT_CALLBACK_SIGNING_SECRET` ayarlari zorunlu olarak tanimlanmalidir.
+  - Gerekliyse `AUTH_EXPOSE_SENSITIVE_TOKENS=false` degeri korunmalidir (sadece kontrollu test ortamlarinda acilmalidir).
 ## [0.21.0-alpha.1] - 2026-03-13
 
 ### Added

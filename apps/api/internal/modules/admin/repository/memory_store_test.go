@@ -12,7 +12,8 @@ import (
 
 func TestMemoryStoreRuntimeActionAndSnapshot(t *testing.T) {
 	store := NewMemoryStore()
-	now := time.Date(2026, 3, 13, 9, 0, 0, 0, time.UTC)
+	now := time.Now().UTC()
+	store.now = func() time.Time { return now }
 
 	err := store.UpdateRuntimeConfig(context.Background(), entity.RuntimeConfig{MaintenanceEnabled: true, UpdatedAt: now})
 	require.NoError(t, err)
@@ -84,6 +85,7 @@ func TestMemoryStoreRuntimeActionAndSnapshot(t *testing.T) {
 	require.NotEmpty(t, payload)
 
 	restored := NewMemoryStore()
+	restored.now = func() time.Time { return now }
 	require.NoError(t, restored.RestoreSnapshot(payload))
 
 	cfg, err := restored.GetRuntimeConfig(context.Background())

@@ -15,6 +15,10 @@ func (s *ShopService) CreatePurchaseIntent(ctx context.Context, request dto.Crea
 	if err := s.validateInput(request); err != nil {
 		return dto.CreatePurchaseIntentResponse{}, err
 	}
+	request.RequestID = strings.TrimSpace(request.RequestID)
+	if request.RequestID == "" {
+		return dto.CreatePurchaseIntentResponse{}, ErrValidation
+	}
 
 	cfg, err := s.store.GetRuntimeConfig(ctx)
 	if err != nil {
@@ -43,23 +47,21 @@ func (s *ShopService) CreatePurchaseIntent(ctx context.Context, request dto.Crea
 		return dto.CreatePurchaseIntentResponse{}, ErrEligibilityFailed
 	}
 
-	if strings.TrimSpace(request.RequestID) != "" {
-		dedupKey := buildPurchaseDedupKey(request.ActorUserID, offer.OfferID, request.RequestID)
-		existingIntent, dedupErr := s.store.GetPurchaseDedup(ctx, dedupKey)
-		if dedupErr == nil {
-			return dto.CreatePurchaseIntentResponse{
-				Status:         "idempotent",
-				IntentID:       existingIntent.IntentID,
-				ProductID:      existingIntent.ProductID,
-				OfferID:        existingIntent.OfferID,
-				FinalPriceMana: existingIntent.FinalPriceMana,
-				Currency:       existingIntent.Currency,
-				PurchaseStatus: existingIntent.Status,
-			}, nil
-		}
-		if dedupErr != nil && !errors.Is(dedupErr, shoprepository.ErrNotFound) {
-			return dto.CreatePurchaseIntentResponse{}, dedupErr
-		}
+	dedupKey := buildPurchaseDedupKey(request.ActorUserID, offer.OfferID, request.RequestID)
+	existingIntent, dedupErr := s.store.GetPurchaseDedup(ctx, dedupKey)
+	if dedupErr == nil {
+		return dto.CreatePurchaseIntentResponse{
+			Status:         "idempotent",
+			IntentID:       existingIntent.IntentID,
+			ProductID:      existingIntent.ProductID,
+			OfferID:        existingIntent.OfferID,
+			FinalPriceMana: existingIntent.FinalPriceMana,
+			Currency:       existingIntent.Currency,
+			PurchaseStatus: existingIntent.Status,
+		}, nil
+	}
+	if dedupErr != nil && !errors.Is(dedupErr, shoprepository.ErrNotFound) {
+		return dto.CreatePurchaseIntentResponse{}, dedupErr
 	}
 
 	if product.SinglePurchase {
@@ -92,11 +94,8 @@ func (s *ShopService) CreatePurchaseIntent(ctx context.Context, request dto.Crea
 		return dto.CreatePurchaseIntentResponse{}, err
 	}
 
-	if strings.TrimSpace(request.RequestID) != "" {
-		dedupKey := buildPurchaseDedupKey(request.ActorUserID, offer.OfferID, request.RequestID)
-		if err := s.store.PutPurchaseDedup(ctx, dedupKey, intent); err != nil {
-			return dto.CreatePurchaseIntentResponse{}, err
-		}
+	if err := s.store.PutPurchaseDedup(ctx, dedupKey, intent); err != nil {
+		return dto.CreatePurchaseIntentResponse{}, err
 	}
 
 	return dto.CreatePurchaseIntentResponse{

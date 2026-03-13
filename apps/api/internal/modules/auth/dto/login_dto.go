@@ -12,6 +12,7 @@ type LoginRequest struct {
 
 // LoginResponse represents login output.
 type LoginResponse struct {
+	UserID               string    `json:"user_id,omitempty"`
 	CredentialID         string    `json:"credential_id"`
 	SessionID            string    `json:"session_id"`
 	AccessToken          string    `json:"access_token"`

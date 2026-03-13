@@ -5,13 +5,17 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/app"
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules"
 	accessmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/access"
 	authmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/auth"
 	paymentmodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/payment"
+	paymenthandler "github.com/Tokuchi61/Manga/apps/api/internal/modules/payment/handler"
+	paymentservice "github.com/Tokuchi61/Manga/apps/api/internal/modules/payment/service"
 	usermodule "github.com/Tokuchi61/Manga/apps/api/internal/modules/user"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/google/uuid"
@@ -23,7 +27,7 @@ func TestPaymentHTTPCheckoutCallbackWalletAndRuntimeFlow(t *testing.T) {
 	actorID := uuid.NewString()
 	adminID := uuid.NewString()
 
-	payment := paymentmodule.New()
+	payment := paymentmodule.New(paymentmodule.RuntimeConfig{})
 	registry, err := modules.NewRegistry(
 		authmodule.New(authmodule.RuntimeConfig{}),
 		usermodule.New(),
@@ -48,7 +52,7 @@ func TestPaymentHTTPCheckoutCallbackWalletAndRuntimeFlow(t *testing.T) {
 	}, adminID, "admin")
 	require.Equal(t, http.StatusOK, upsertPackageReq.Code)
 
-	listPackagesReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/packages", nil, actorID, "")
+	listPackagesReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/packages", nil, actorID, "", nil)
 	require.Equal(t, http.StatusOK, listPackagesReq.Code)
 	var listPackagesRes struct {
 		Count int `json:"count"`
@@ -86,7 +90,7 @@ func TestPaymentHTTPCheckoutCallbackWalletAndRuntimeFlow(t *testing.T) {
 	}, "", "")
 	require.Equal(t, http.StatusOK, callbackIdempotentReq.Code)
 
-	walletReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/wallet", nil, actorID, "")
+	walletReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/wallet", nil, actorID, "", nil)
 	require.Equal(t, http.StatusOK, walletReq.Code)
 	var walletRes struct {
 		BalanceMana int `json:"balance_mana"`
@@ -94,7 +98,7 @@ func TestPaymentHTTPCheckoutCallbackWalletAndRuntimeFlow(t *testing.T) {
 	require.NoError(t, json.Unmarshal(walletReq.Body.Bytes(), &walletRes))
 	require.Equal(t, 500, walletRes.BalanceMana)
 
-	transactionsReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/transactions", nil, actorID, "")
+	transactionsReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/transactions", nil, actorID, "", nil)
 	require.Equal(t, http.StatusOK, transactionsReq.Code)
 	var transactionsRes struct {
 		Count int `json:"count"`
@@ -111,7 +115,7 @@ func TestPaymentHTTPCheckoutCallbackWalletAndRuntimeFlow(t *testing.T) {
 	}, adminID, "admin")
 	require.Equal(t, http.StatusOK, disableReadReq.Code)
 
-	walletWhenDisabledReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/wallet", nil, actorID, "")
+	walletWhenDisabledReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/wallet", nil, actorID, "", nil)
 	require.Equal(t, http.StatusNotFound, walletWhenDisabledReq.Code)
 
 	enableReadReq := performPaymentJSONRequest(t, handler, http.MethodPost, "/payment/admin/transaction-read-state", map[string]any{
@@ -125,7 +129,7 @@ func TestPaymentHTTPCheckoutCallbackWalletAndRuntimeFlow(t *testing.T) {
 	}, adminID, "admin")
 	require.Equal(t, http.StatusOK, refundReq.Code)
 
-	walletAfterRefundReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/wallet", nil, actorID, "")
+	walletAfterRefundReq := performPaymentRequest(t, handler, http.MethodGet, "/payment/wallet", nil, actorID, "", nil)
 	require.Equal(t, http.StatusOK, walletAfterRefundReq.Code)
 	var walletAfterRefundRes struct {
 		BalanceMana int `json:"balance_mana"`
@@ -151,10 +155,18 @@ func performPaymentJSONRequest(t *testing.T, handler http.Handler, method string
 	payload, err := json.Marshal(body)
 	require.NoError(t, err)
 
-	return performPaymentRequest(t, handler, method, path, bytes.NewReader(payload), actorUserID, roles)
+	extraHeaders := map[string]string{}
+	if path == "/payment/callback" {
+		timestamp := strconv.FormatInt(time.Now().UTC().Unix(), 10)
+		signature := paymentservice.SignProviderCallback(paymentservice.DefaultNonProdCallbackSigningSecret(), timestamp, payload)
+		extraHeaders[paymenthandler.HeaderPaymentCallbackSignature] = signature
+		extraHeaders[paymenthandler.HeaderPaymentCallbackTimestamp] = timestamp
+	}
+
+	return performPaymentRequest(t, handler, method, path, bytes.NewReader(payload), actorUserID, roles, extraHeaders)
 }
 
-func performPaymentRequest(t *testing.T, handler http.Handler, method string, path string, body *bytes.Reader, actorUserID string, roles string) *httptest.ResponseRecorder {
+func performPaymentRequest(t *testing.T, handler http.Handler, method string, path string, body *bytes.Reader, actorUserID string, roles string, extraHeaders map[string]string) *httptest.ResponseRecorder {
 	t.Helper()
 
 	bodyReader := bytes.NewReader(nil)
@@ -165,6 +177,9 @@ func performPaymentRequest(t *testing.T, handler http.Handler, method string, pa
 	req := httptest.NewRequest(method, path, bodyReader)
 	if body != nil {
 		req.Header.Set("Content-Type", "application/json")
+	}
+	for key, value := range extraHeaders {
+		req.Header.Set(key, value)
 	}
 	if actorUserID != "" || roles != "" {
 		setActorHeaders(req, actorUserID, "", roles)

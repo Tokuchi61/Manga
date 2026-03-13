@@ -17,6 +17,9 @@ type RuntimeConfig struct {
 	FailedAttemptLimitPerMinute       int
 	LoginCooldownSeconds              int
 	VerificationResendCooldownSeconds int
+	AccessTokenSecret                 string
+	AccessTokenIssuer                 string
+	ExposeSensitiveTokens             bool
 }
 
 // Module wires auth handlers to the central module registry.
@@ -33,6 +36,9 @@ func New(cfg RuntimeConfig) Module {
 		FailedAttemptLimit:         cfg.FailedAttemptLimitPerMinute,
 		LoginCooldown:              time.Duration(cfg.LoginCooldownSeconds) * time.Second,
 		VerificationResendCooldown: time.Duration(cfg.VerificationResendCooldownSeconds) * time.Second,
+		AccessTokenSecret:          cfg.AccessTokenSecret,
+		AccessTokenIssuer:          cfg.AccessTokenIssuer,
+		ExposeSensitiveTokens:      cfg.ExposeSensitiveTokens,
 	})
 
 	return Module{httpHandler: handler.New(svc), svc: svc, snapshotter: store}
@@ -51,6 +57,13 @@ func (m Module) CredentialExists(ctx context.Context, credentialID string) (bool
 		return false, nil
 	}
 	return m.svc.CredentialExists(ctx, credentialID)
+}
+
+func (m *Module) SetUserLookup(lookup service.UserLookup) {
+	if m == nil || m.svc == nil {
+		return
+	}
+	m.svc.SetUserLookup(lookup)
 }
 
 func (m *Module) Snapshot() ([]byte, error) {

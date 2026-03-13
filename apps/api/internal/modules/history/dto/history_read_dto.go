@@ -1,4 +1,4 @@
-﻿package dto
+package dto
 
 import "time"
 
@@ -21,19 +21,19 @@ type ListTimelineRequest struct {
 
 // HistoryEntryResponse is library/continue-reading payload item.
 type HistoryEntryResponse struct {
-	LibraryEntryID  string    `json:"library_entry_id"`
-	UserID          string    `json:"user_id,omitempty"`
-	MangaID         string    `json:"manga_id"`
-	LastChapterID   string    `json:"last_chapter_id,omitempty"`
-	LastPageNumber  int       `json:"last_page_number"`
-	PageCount       int       `json:"page_count"`
-	Status          string    `json:"status"`
-	Bookmarked      bool      `json:"bookmarked"`
-	Favorited       bool      `json:"favorited"`
-	SharePublic     bool      `json:"share_public"`
-	LastReadAt      time.Time `json:"last_read_at"`
-	CreatedAt       time.Time `json:"created_at"`
-	UpdatedAt       time.Time `json:"updated_at"`
+	LibraryEntryID string    `json:"library_entry_id"`
+	UserID         string    `json:"user_id,omitempty"`
+	MangaID        string    `json:"manga_id"`
+	LastChapterID  string    `json:"last_chapter_id,omitempty"`
+	LastPageNumber int       `json:"last_page_number"`
+	PageCount      int       `json:"page_count"`
+	Status         string    `json:"status"`
+	Bookmarked     bool      `json:"bookmarked"`
+	Favorited      bool      `json:"favorited"`
+	SharePublic    bool      `json:"share_public"`
+	LastReadAt     time.Time `json:"last_read_at"`
+	CreatedAt      time.Time `json:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at"`
 }
 
 // ListContinueReadingResponse wraps continue-reading payload.

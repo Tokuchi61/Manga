@@ -31,6 +31,7 @@ import (
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/config"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/db"
 	"github.com/Tokuchi61/Manga/apps/api/internal/platform/logger"
+	"github.com/Tokuchi61/Manga/apps/api/internal/platform/outbox"
 	snapshotplatform "github.com/Tokuchi61/Manga/apps/api/internal/platform/snapshot"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"go.uber.org/zap"
@@ -66,14 +67,30 @@ func main() {
 			log.Fatal("database init failed", zap.Error(err))
 		}
 		defer pool.Close()
+		log.Info("runtime mode selected", zap.String("mode", "database"))
 	} else {
-		log.Warn("database disabled; running in memory mode")
+		log.Warn("database disabled; running in memory mode", zap.String("mode", "memory"))
+	}
+
+	var outboxStore outbox.Store
+	if pool != nil {
+		postgresOutbox := outbox.NewPostgresStore(pool)
+		if err := postgresOutbox.EnsureSchema(ctx); err != nil {
+			log.Fatal("outbox schema init failed", zap.Error(err))
+		}
+		outboxStore = postgresOutbox
+		relay := outbox.NewRelay(outboxStore, outboxLogPublisher{logger: log})
+		go relay.Run(ctx, 2*time.Second)
+		log.Info("outbox relay enabled", zap.String("backend", "postgres"))
 	}
 
 	auth := authmodule.New(authmodule.RuntimeConfig{
 		FailedAttemptLimitPerMinute:       cfg.AuthLoginFailedAttemptLimitPerMinute,
 		LoginCooldownSeconds:              cfg.AuthLoginCooldownSeconds,
 		VerificationResendCooldownSeconds: cfg.AuthEmailVerificationResendCooldownSeconds,
+		AccessTokenSecret:                 cfg.AuthAccessTokenSecret,
+		AccessTokenIssuer:                 cfg.AuthAccessTokenIssuer,
+		ExposeSensitiveTokens:             cfg.AuthExposeSensitiveTokens,
 	})
 	user := usermodule.New()
 	manga := mangamodule.New()
@@ -88,12 +105,17 @@ func main() {
 	mission := missionmodule.New()
 	royalpass := royalpassmodule.New()
 	shop := shopmodule.New()
-	payment := paymentmodule.New()
+	payment := paymentmodule.New(paymentmodule.RuntimeConfig{
+		CallbackSigningSecret:  cfg.PaymentCallbackSigningSecret,
+		CallbackTimestampSkew:  cfg.PaymentCallbackTimestampSkew,
+		CallbackEventPublisher: paymentCallbackOutboxPublisher{store: outboxStore},
+	})
 	ads := adsmodule.New()
 	admin := adminmodule.New()
 	access := accessmodule.New(accessmodule.RuntimeConfig{})
 
 	user.SetCredentialLookup(auth)
+	auth.SetUserLookup(user)
 	chapter.SetMangaLookup(manga)
 	history.SetChapterSignalProvider(chapter)
 	comment.SetTargetLookups(manga, chapter)
@@ -122,8 +144,19 @@ func main() {
 		{name: "payment", snapshot: (&payment).Snapshot, restore: (&payment).RestoreSnapshot},
 		{name: "ads", snapshot: (&ads).Snapshot, restore: (&ads).RestoreSnapshot},
 	}
+
 	restoreSnapshots(ctx, log, snapshotStore, targets)
 	persistSnapshots(context.Background(), log, snapshotStore, targets, cfg.HTTPShutdownTimeout)
+
+	if cfg.StateSnapshotWriteThrough {
+		log.Info("snapshot write-through enabled")
+		app.SetPostWriteHook(func(_ context.Context) {
+			persistSnapshots(context.Background(), log, snapshotStore, targets, cfg.HTTPShutdownTimeout)
+		})
+	} else {
+		app.SetPostWriteHook(nil)
+		log.Info("snapshot write-through disabled")
+	}
 
 	if cfg.StateSnapshotInterval > 0 {
 		ticker := time.NewTicker(cfg.StateSnapshotInterval)
@@ -139,6 +172,8 @@ func main() {
 				}
 			}
 		}()
+	} else {
+		log.Info("snapshot interval persistence disabled")
 	}
 
 	registry, err := modules.NewRegistry(auth, user, access, admin, manga, chapter, history, comment, support, moderation, notification, social, inventory, mission, royalpass, shop, payment, ads)

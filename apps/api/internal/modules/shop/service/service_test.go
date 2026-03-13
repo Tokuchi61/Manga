@@ -74,7 +74,7 @@ func TestShopServiceRuntimeTogglesAffectFlows(t *testing.T) {
 	require.NoError(t, err)
 	_, err = svc.UpdatePurchaseState(context.Background(), dto.UpdatePurchaseStateRequest{Enabled: false})
 	require.NoError(t, err)
-	_, err = svc.CreatePurchaseIntent(context.Background(), dto.CreatePurchaseIntentRequest{ActorUserID: actorID, ProductID: "product_avatar_01"})
+	_, err = svc.CreatePurchaseIntent(context.Background(), dto.CreatePurchaseIntentRequest{ActorUserID: actorID, ProductID: "product_avatar_01", RequestID: "req-disabled-purchase"})
 	require.True(t, errors.Is(err, ErrPurchaseDisabled))
 }
 

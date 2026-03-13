@@ -6,13 +6,11 @@ import (
 	"net/http"
 
 	"github.com/Tokuchi61/Manga/apps/api/internal/modules/payment/service"
+	"github.com/Tokuchi61/Manga/apps/api/internal/platform/httpx"
 )
 
 func decodeJSON(r *http.Request, out any) error {
-	defer r.Body.Close()
-	decoder := json.NewDecoder(r.Body)
-	decoder.DisallowUnknownFields()
-	return decoder.Decode(out)
+	return httpx.DecodeJSON(r, out)
 }
 
 func writeServiceError(w http.ResponseWriter, err error) {
@@ -23,6 +21,8 @@ func writeServiceError(w http.ResponseWriter, err error) {
 		writeError(w, http.StatusNotFound, err.Error())
 	case errors.Is(err, service.ErrCheckoutDisabled), errors.Is(err, service.ErrCallbackIntakePaused):
 		writeError(w, http.StatusServiceUnavailable, err.Error())
+	case errors.Is(err, service.ErrCallbackSignature), errors.Is(err, service.ErrCallbackTimestamp):
+		writeError(w, http.StatusUnauthorized, err.Error())
 	case errors.Is(err, service.ErrConflict), errors.Is(err, service.ErrForbiddenAction):
 		writeError(w, http.StatusConflict, err.Error())
 	default:

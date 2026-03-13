@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS admin_runtime_controls (
+CREATE TABLE IF NOT EXISTS admin_runtime_controls (
     id SMALLINT PRIMARY KEY,
     maintenance_enabled BOOLEAN NOT NULL DEFAULT FALSE,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

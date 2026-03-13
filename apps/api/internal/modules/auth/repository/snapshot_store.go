@@ -13,9 +13,6 @@ type authSnapshotState struct {
 	CredentialEmailIdx   map[string]uuid.UUID
 	SessionsByID         map[uuid.UUID]entity.Session
 	SessionCredentialIdx map[uuid.UUID]map[uuid.UUID]struct{}
-	TokensByID           map[uuid.UUID]entity.Token
-	TokenHashTypeIndex   map[string]uuid.UUID
-	SecurityEvents       []entity.SecurityEvent
 }
 
 func (s *MemoryStore) Snapshot() ([]byte, error) {
@@ -27,9 +24,6 @@ func (s *MemoryStore) Snapshot() ([]byte, error) {
 		CredentialEmailIdx:   s.credentialEmailIdx,
 		SessionsByID:         s.sessionsByID,
 		SessionCredentialIdx: s.sessionCredentialIdx,
-		TokensByID:           s.tokensByID,
-		TokenHashTypeIndex:   s.tokenHashTypeIndex,
-		SecurityEvents:       s.securityEvents,
 	}
 
 	var buf bytes.Buffer
@@ -64,23 +58,16 @@ func (s *MemoryStore) RestoreSnapshot(data []byte) error {
 	if state.SessionCredentialIdx == nil {
 		state.SessionCredentialIdx = make(map[uuid.UUID]map[uuid.UUID]struct{})
 	}
-	if state.TokensByID == nil {
-		state.TokensByID = make(map[uuid.UUID]entity.Token)
-	}
-	if state.TokenHashTypeIndex == nil {
-		state.TokenHashTypeIndex = make(map[string]uuid.UUID)
-	}
-	if state.SecurityEvents == nil {
-		state.SecurityEvents = make([]entity.SecurityEvent, 0)
-	}
 
 	s.credentialsByID = state.CredentialsByID
 	s.credentialEmailIdx = state.CredentialEmailIdx
 	s.sessionsByID = state.SessionsByID
 	s.sessionCredentialIdx = state.SessionCredentialIdx
-	s.tokensByID = state.TokensByID
-	s.tokenHashTypeIndex = state.TokenHashTypeIndex
-	s.securityEvents = state.SecurityEvents
+
+	// Sensitive token and security-event datasets are intentionally rebuilt in-memory only.
+	s.tokensByID = make(map[uuid.UUID]entity.Token)
+	s.tokenHashTypeIndex = make(map[string]uuid.UUID)
+	s.securityEvents = make([]entity.SecurityEvent, 0)
 
 	return nil
 }

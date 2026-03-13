@@ -8,7 +8,7 @@ type CreateCommunicationRequest struct {
 	ReasonCode      string   `json:"reason_code,omitempty" validate:"omitempty,max=64"`
 	ReasonText      string   `json:"reason_text" validate:"required,min=1,max=5000"`
 	Attachments     []string `json:"attachments,omitempty" validate:"omitempty,max=10,dive,url,max=1500"`
-	RequestID       string   `json:"request_id,omitempty" validate:"omitempty,max=128"`
+	RequestID       string   `json:"request_id" validate:"required,max=128"`
 }
 
 // CreateTicketRequest creates support ticket intake.
@@ -19,7 +19,7 @@ type CreateTicketRequest struct {
 	ReasonCode      string   `json:"reason_code,omitempty" validate:"omitempty,max=64"`
 	ReasonText      string   `json:"reason_text" validate:"required,min=1,max=5000"`
 	Attachments     []string `json:"attachments,omitempty" validate:"omitempty,max=10,dive,url,max=1500"`
-	RequestID       string   `json:"request_id,omitempty" validate:"omitempty,max=128"`
+	RequestID       string   `json:"request_id" validate:"required,max=128"`
 }
 
 // CreateReportRequest creates target-bound report intake.
@@ -32,7 +32,7 @@ type CreateReportRequest struct {
 	TargetType      string   `json:"target_type" validate:"required,oneof=manga chapter comment"`
 	TargetID        string   `json:"target_id" validate:"required,uuid4"`
 	Attachments     []string `json:"attachments,omitempty" validate:"omitempty,max=10,dive,url,max=1500"`
-	RequestID       string   `json:"request_id,omitempty" validate:"omitempty,max=128"`
+	RequestID       string   `json:"request_id" validate:"required,max=128"`
 }
 
 // CreateSupportResponse returns stable create fields.
